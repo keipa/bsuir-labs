@@ -1,0 +1,6 @@
+D:\LABS\2 cem\C SHARP\lab 2\Triple_program\Triple_program\bin\Debug\Triple_program.exe.config
+D:\LABS\2 cem\C SHARP\lab 2\Triple_program\Triple_program\bin\Debug\Triple_program.exe
+D:\LABS\2 cem\C SHARP\lab 2\Triple_program\Triple_program\bin\Debug\Triple_program.pdb
+D:\LABS\2 cem\C SHARP\lab 2\Triple_program\Triple_program\obj\Debug\Triple_program.exe
+D:\LABS\2 cem\C SHARP\lab 2\Triple_program\Triple_program\obj\Debug\Triple_program.pdb
+D:\LABS\2 cem\C SHARP\lab 2\Triple_program\Triple_program\obj\Debug\Triple_program.csprojResolveAssemblyReference.cache
