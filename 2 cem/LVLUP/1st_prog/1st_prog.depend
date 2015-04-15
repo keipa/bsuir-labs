@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1429017915 source:d:\labs\2 cem\lvlup\1st_prog\main.c
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+	<shellapi.h>
+
