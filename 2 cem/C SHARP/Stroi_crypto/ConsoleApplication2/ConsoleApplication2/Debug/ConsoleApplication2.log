@@ -1,0 +1,11 @@
+﻿Сборка начата 20.04.2015 22:57:24.
+     1>Проект "D:\LABS\BSUIR_labs\2 cem\C SHARP\Stroi_crypto\ConsoleApplication2\ConsoleApplication2\ConsoleApplication2.vcxproj" в узле 2 (целевые объекты Build).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"stdafx.h" /Fp"Debug\ConsoleApplication2.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt stdafx.cpp
+         stdafx.cpp
+     1>d:\labs\bsuir_labs\2 cem\c sharp\stroi_crypto\consoleapplication2\consoleapplication2\targetver.h(8): fatal error C1083: Не удается открыть файл включение: SDKDDKVer.h: No such file or directory
+     1>Сборка проекта "D:\LABS\BSUIR_labs\2 cem\C SHARP\Stroi_crypto\ConsoleApplication2\ConsoleApplication2\ConsoleApplication2.vcxproj" завершена (целевые объекты Build) с ошибкой.
+
+Ошибка сборки.
+
+Затраченное время: 00:00:06.75
