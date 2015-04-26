@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1425219005 source:d:\labs\2 cem\ci - c++\lab1\squareroot\main.c
+	<stdio.h>
+	<stdlib.h>
+

@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1429559949 source:d:\labs\2 cem\ci - c++\stroi_task\en_de_cryption\main.c
+	<stdio.h>
+	<ctype.h>
+
