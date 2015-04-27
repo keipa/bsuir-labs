@@ -15,7 +15,6 @@ type
     Button7: TButton;
     Button8: TButton;
     Edit1: TEdit;
-    BitBtn1: TBitBtn;
     Button9: TButton;
     procedure FormCreate(Sender: TObject);
     procedure Button1Click(Sender: TObject);

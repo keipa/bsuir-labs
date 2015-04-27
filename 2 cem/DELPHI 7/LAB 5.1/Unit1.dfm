@@ -1,8 +1,8 @@
 object Form1: TForm1
-  Left = 255
-  Top = 117
-  Width = 289
-  Height = 338
+  Left = 328
+  Top = 136
+  Width = 183
+  Height = 469
   Caption = 'Form1'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -15,9 +15,9 @@ object Form1: TForm1
   PixelsPerInch = 96
   TextHeight = 13
   object ListBox1: TListBox
-    Left = 96
-    Top = 40
-    Width = 81
+    Left = 8
+    Top = 208
+    Width = 153
     Height = 217
     ItemHeight = 13
     TabOrder = 0
@@ -33,7 +33,7 @@ object Form1: TForm1
   end
   object Button2: TButton
     Left = 8
-    Top = 104
+    Top = 80
     Width = 75
     Height = 25
     Caption = 'Read'
@@ -42,7 +42,7 @@ object Form1: TForm1
   end
   object Button3: TButton
     Left = 8
-    Top = 160
+    Top = 112
     Width = 75
     Height = 25
     Caption = 'Add After'
@@ -51,7 +51,7 @@ object Form1: TForm1
   end
   object Button4: TButton
     Left = 8
-    Top = 216
+    Top = 144
     Width = 75
     Height = 25
     Caption = 'Read After'
@@ -59,7 +59,7 @@ object Form1: TForm1
     OnClick = Button4Click
   end
   object Button5: TButton
-    Left = 192
+    Left = 88
     Top = 48
     Width = 75
     Height = 25
@@ -68,8 +68,8 @@ object Form1: TForm1
     OnClick = Button5Click
   end
   object Button6: TButton
-    Left = 192
-    Top = 104
+    Left = 88
+    Top = 80
     Width = 75
     Height = 25
     Caption = 'Search After'
@@ -77,8 +77,8 @@ object Form1: TForm1
     OnClick = Button6Click
   end
   object Button7: TButton
-    Left = 192
-    Top = 160
+    Left = 88
+    Top = 112
     Width = 75
     Height = 25
     Caption = 'Sort Inf'
@@ -86,8 +86,8 @@ object Form1: TForm1
     OnClick = Button7Click
   end
   object Button8: TButton
-    Left = 192
-    Top = 216
+    Left = 88
+    Top = 144
     Width = 75
     Height = 25
     Caption = 'Sort After'
@@ -95,28 +95,19 @@ object Form1: TForm1
     OnClick = Button8Click
   end
   object Edit1: TEdit
-    Left = 104
-    Top = 8
-    Width = 65
+    Left = 8
+    Top = 24
+    Width = 153
     Height = 21
     TabOrder = 9
   end
-  object BitBtn1: TBitBtn
-    Left = 192
-    Top = 264
-    Width = 81
-    Height = 25
-    Caption = 'Close'
-    TabOrder = 10
-    Kind = bkClose
-  end
   object Button9: TButton
     Left = 8
-    Top = 264
-    Width = 75
+    Top = 176
+    Width = 153
     Height = 25
     Caption = 'Task'
-    TabOrder = 11
+    TabOrder = 10
     OnClick = Button9Click
   end
 end
