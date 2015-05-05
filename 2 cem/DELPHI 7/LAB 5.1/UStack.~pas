@@ -9,7 +9,6 @@ type
  TSel = record
   Inf: TInf;
   A: Sel;
-  
  end;
  TLists = class
   sp: Sel;
@@ -46,7 +45,7 @@ procedure TLists.Adds(Inf: TInf);
 var tmp: Sel;
 begin
  New(tmp);
- tmp.Inf:= Inf;
+ tmp^.Inf:= Inf;
  tmp^.A:= sp;
  sp:= tmp;
 end;

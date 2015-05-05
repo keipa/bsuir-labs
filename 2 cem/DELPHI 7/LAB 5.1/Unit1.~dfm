@@ -101,22 +101,13 @@ object Form1: TForm1
     Height = 21
     TabOrder = 9
   end
-  object BitBtn1: TBitBtn
-    Left = 88
-    Top = 176
-    Width = 73
-    Height = 25
-    Caption = 'Close'
-    TabOrder = 10
-    Kind = bkClose
-  end
   object Button9: TButton
     Left = 8
     Top = 176
-    Width = 75
+    Width = 153
     Height = 25
     Caption = 'Task'
-    TabOrder = 11
+    TabOrder = 10
     OnClick = Button9Click
   end
 end

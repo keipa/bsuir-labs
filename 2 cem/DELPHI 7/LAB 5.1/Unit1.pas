@@ -120,7 +120,7 @@ var i: integer;
 begin
  i:= Zad.Task;
  Zad.Print(ListBox1);
- ListBox1.ItemIndex:= i;
+ //ListBox1.ItemIndex:= i;
  Edit1.Text:= IntToStr(i);
 end;
 end.
