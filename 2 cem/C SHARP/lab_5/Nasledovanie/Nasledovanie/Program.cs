@@ -133,13 +133,13 @@ class Lab5
 
         Student Kirill = new FKSIS(18, "Kirill");
         Kirill.Work_hard();
-
+        
         Student Alex = new IEF(20, "Alex", "Alekseev");
         Alex.Work_hard();
 
         Student Tolik = new BSU_PED(22, "Tolik", "Mirski");
         Tolik.Work_hard();
-
+        
         Console.WriteLine("\n" + Kirill.name + " is doing something right now");
         Kirill.Some_intellect_activity();
         Console.WriteLine("\n" + Alex.name + ", is doing something right now");
