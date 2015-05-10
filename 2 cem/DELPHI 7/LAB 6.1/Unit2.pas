@@ -19,19 +19,20 @@ type
   procedure addafter(p:ppt; newint:Integer);
   procedure bubblesort(var p:ppt);
   procedure shows(p:ppt; lb1:TListBox);
-  procedure showsVAR(p:ppt; lb1:TListBox);
+ // procedure showsVAR(p:ppt; lb1:TListBox);
 
   Procedure Dell(var p:ppt; s:integer);
-
+    Procedure minup(var p:ppt ;  lb1:TListBox);
   end;
 var
 
-  p,tmp:ppt;
+  p,tmp:ppt; first:ppt;   min: Integer;
 implementation
 
 procedure TLists.init(var p:ppt; newint:integer);
 begin
   new(p);
+  first:=p;
   p^.inf:=newint;
   p^.next:=nil;
   p^.pred:=nil;
@@ -78,18 +79,18 @@ begin
     end;
   end;
 
-procedure TLists.showsVAR(p:ppt;lb1:TListBox);
+{procedure TLists.showsVAR(p:ppt;lb1:TListBox);
 var i :integer;
 begin
 
-  i = lb1.Items.
+  i := lb1.Items.
 
    while p<>nil do
     begin
     lb1.Items.Add(IntToStr(p^.inf));
     p:=p^.next;
     end;
-end;
+end;  }
 
 procedure TLists.bubblesort(var p:ppt);
 var b:integer;
@@ -131,7 +132,7 @@ p:=p^.next;
 end else p:=nil;
 dispose(pt);
 s:=-1;
-End else If p^.next=nil then Begin 
+End else If p^.next=nil then Begin
 P^.pred^.next:=nil;
 
 Dispose(P);
@@ -152,6 +153,26 @@ If s=-1 then exit;
 P:=p^.next;
 End;
 End;
+
+procedure Tlists.minup(var p:ppt ;  lb1:TListBox);
+var first:ppt; src:ppt;
+begin
+  first:=p;
+  min:=p.inf;
+  while (p.next <> nil) do
+  begin
+    if  p.inf < min then min:=p.inf;
+    p:=p.next;
+  end;
+  lb1.Clear;
+  lb1.Items.Add(IntToStr(min));
+     p:=first;
+  while (p <> nil) do
+  begin
+    if  p.inf <> min then lb1.Items.Add(IntToStr(p.inf));
+    p:=p.next;
+  end;
+end;
 
 
 end.

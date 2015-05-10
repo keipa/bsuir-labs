@@ -71,8 +71,11 @@ end;
 
 procedure TForm1.Button5Click(Sender: TObject);
 begin
-  lists.bubblesort(p);
-  lists.shows(p,Form1.ListBox1);
+//  lists.bubblesort(p);
+   ListBox1.Clear;
+   lists.minup(p,Form1.ListBox1);
+ //lists.shows(p,Form1.ListBox1);
+  //  lists.shows(p,Form1.ListBox1);
 end;
 
 
@@ -82,9 +85,10 @@ begin
 end;
 procedure TForm1.Button3Click(Sender: TObject);
 begin
- lists.Dell(p,StrToInt(Edit1.Text));
+  lists.Dell(p,StrToInt(Edit1.Text));
   lists.shows(p,Form1.ListBox1);
   Edit1.Text:='';
+
 end;
 
 procedure TForm1.Button4Click(Sender: TObject);

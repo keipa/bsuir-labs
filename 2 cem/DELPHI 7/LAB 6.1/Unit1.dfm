@@ -1,10 +1,10 @@
 object Form1: TForm1
-  Left = 301
-  Top = 118
+  Left = 256
+  Top = 284
   BorderStyle = bsToolWindow
   Caption = #1056#1086#1074#1076#1086' '#1053#1080#1082#1086#1083#1072#1081' 453504'
   ClientHeight = 342
-  ClientWidth = 408
+  ClientWidth = 410
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -39,7 +39,7 @@ object Form1: TForm1
     Top = 248
     Width = 289
     Height = 89
-    Caption = #1057#1086#1088#1090#1080#1088#1086#1074#1082#1072' '#1084#1077#1090#1086#1076#1086#1084' '#1087#1091#1079#1099#1088#1100#1082#1072
+    Caption = 'Task'
     TabOrder = 2
     OnClick = Button5Click
   end

@@ -16,5 +16,15 @@ namespace WindowsFormsApplication1
         {
             InitializeComponent();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+        private void Form1_Print(object sender, PaintEventArgs e)
+        {
+            Line line = new Line(e, 50, 50, 100, 100);
+            line.Draw();
+        }
     }
 }

@@ -17,9 +17,7 @@ namespace WindowsFormsApplication1
         {
             g = e.Graphics;            
         }
-        public void Draw()
-        {
-
-        }
+        public abstract void Draw();
+        
     }
 }

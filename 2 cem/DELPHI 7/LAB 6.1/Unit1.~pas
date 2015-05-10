@@ -15,6 +15,7 @@ type
     Button2: TButton;
     Button5: TButton;
     Button3: TButton;
+    Button4: TButton;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
 
@@ -23,6 +24,7 @@ type
    
     procedure FormCreate(Sender: TObject);
     procedure Button3Click(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
 
   private
     { Private declarations }
@@ -48,9 +50,12 @@ begin
   randomize;
   k:=Random(100);
   lists.init(p,k);
+  lists.init(tmp,k);
   for i:=1 to 9 do begin
     k:=Random(100);
     lists.add(p,k);
+    lists.add(tmp,k);
+
   end;
   lists.shows(p,Form1.ListBox1);
 end;
@@ -61,7 +66,7 @@ begin
     then Edit1.Text:=IntToStr(0);
   lists.add(p,StrToInt(Edit1.Text));
   lists.shows(p,Form1.ListBox1);
-  Edit1.Text:='';
+  Edit1.Clear;
 end;
 
 procedure TForm1.Button5Click(Sender: TObject);
@@ -82,4 +87,15 @@ begin
   Edit1.Text:='';
 end;
 
+procedure TForm1.Button4Click(Sender: TObject);
+begin
+if Edit1.Text=''
+    then Edit1.Text:=IntToStr(0);
+  lists.addafter(p,StrToInt(Edit1.Text));
+  lists.shows(p,Form1.ListBox1);
+  Edit1.Clear;
+end;
+
 end.
+
+
