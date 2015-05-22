@@ -1,7 +1,7 @@
 #include<stdio.h>
 
 extern "C" {
-  __declspec(dllexport) int Add(double a, double b)
+  __declspec(dllexport) int Add(int a, int b)
   {
     return a + b;
   }

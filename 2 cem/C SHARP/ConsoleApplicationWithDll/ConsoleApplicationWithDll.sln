@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual C# Express 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplicationWithDll", "ConsoleApplicationWithDll\ConsoleApplicationWithDll.csproj", "{64645B56-56FE-4B09-9B44-2EEA28D5EF6B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{64645B56-56FE-4B09-9B44-2EEA28D5EF6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64645B56-56FE-4B09-9B44-2EEA28D5EF6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64645B56-56FE-4B09-9B44-2EEA28D5EF6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64645B56-56FE-4B09-9B44-2EEA28D5EF6B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

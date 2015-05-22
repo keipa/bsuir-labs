@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1432318444 source:d:\labs\bsuir_labs\2 cem\c sharp\lab_4\lib2\lib2\main.cpp
+	"main.h"
+	<stdexcept>
+
+1385316878 d:\labs\bsuir_labs\2 cem\c sharp\lab_4\lib2\lib2\main.h
+	<windows.h>
+
