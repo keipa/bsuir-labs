@@ -9,7 +9,6 @@ public struct Temperature
     public int Tsummer;
     public int Tautamn;
 
-    
 }
 
 public interface tourist_actions
@@ -160,7 +159,7 @@ class Program
         Console.WriteLine("Belarus & Latvia " + Belarus.CompareTo(Latvia));
         Console.WriteLine("Belarus & Chilie " + Belarus.CompareTo(Chilie));
         Console.WriteLine("Latvia & Chilie " + Latvia.CompareTo(Chilie));
-
+        
         Console.ReadKey();
         
     }

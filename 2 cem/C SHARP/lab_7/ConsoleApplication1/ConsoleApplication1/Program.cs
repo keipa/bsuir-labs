@@ -4,81 +4,81 @@ using System.Collections.Generic;
 
 namespace Program
 {
-    class Rnumber : IEquatable<Rnumber>, IComparable<Rnumber>
+    class Ratio : IEquatable<Ratio>, IComparable<Ratio>
     {
-        private int dividend;
-        private int denominator;
+        private int upnum;
+        private int downnum;
 
-        public Rnumber(int a, int b)
+        public Ratio(int a, int b)
         {
-            dividend = a;
-            denominator = b;
+            upnum = a;
+            downnum = b;
         }
 
-        public Rnumber()
+        public Ratio()
         {
-            dividend = 0;
-            denominator = 1;
+            upnum = 0;
+            downnum = 1;
         }
 
-        public int Dividend
+        public int Up
         {
             get
             {
-                return dividend;
+                return upnum;
             }
             set
             {
-                dividend = value;
+                upnum = value;
             }
         }
 
-        public int Denominator
+        public int Down
         {
             get
             {
-                return denominator;
+                return downnum;
             }
             set
             {
                 if (value != 0)
-                    denominator = value;
+                    downnum = value;
             }
         }
 
-        public static Rnumber operator +(Rnumber c1, Rnumber c2)
+        public static Ratio operator +(Ratio c1, Ratio c2)
         {
-            Rnumber temp = new Rnumber();
-            temp.dividend = c1.dividend * c2.denominator + c2.dividend * c1.denominator;
-            temp.denominator = c1.denominator * c2.denominator;
+            Ratio temp = new Ratio();
+            temp.upnum = c1.upnum * c2.downnum + c2.upnum * c1.downnum;
+            temp.downnum = c1.downnum * c2.downnum;
             return temp;
         }
 
-        public static Rnumber operator -(Rnumber c1, Rnumber c2)
+        public static Ratio operator -(Ratio c1, Ratio c2)
         {
-            Rnumber temp = new Rnumber();
-            temp.dividend = c1.dividend * c2.denominator - c2.dividend * c1.denominator;
-            temp.denominator = c1.denominator * c2.denominator;
+            Ratio temp = new Ratio();
+            temp.upnum = c1.upnum * c2.downnum - c2.upnum * c1.downnum;
+            temp.downnum = c1.downnum * c2.downnum;
             return temp;
         }
 
-        public static Rnumber operator *(Rnumber c1, Rnumber c2)
+        public static Ratio operator *(Ratio c1, Ratio c2)
         {
-            Rnumber temp = new Rnumber();
-            temp.dividend = c1.dividend * c2.dividend;
-            temp.denominator = c1.denominator * c2.denominator;
+            Ratio temp = new Ratio();
+            temp.upnum = c1.upnum * c2.upnum;
+            temp.downnum = c1.downnum * c2.downnum;
             return temp;
         }
 
-        public static Rnumber operator /(Rnumber c1, Rnumber c2)
+        public static Ratio operator /(Ratio c1, Ratio c2)
         {
-            Rnumber temp = new Rnumber();
-            temp.dividend = c1.dividend * c2.denominator;
-            temp.denominator = c1.denominator * c2.dividend;
+            Ratio temp = new Ratio();
+            temp.upnum = c1.upnum * c2.downnum;
+            temp.downnum = c1.downnum * c2.upnum;
             return temp;
         }
 
-        public static bool operator ==(Rnumber c1, Rnumber c2)
+        public static bool operator ==(Ratio c1, Ratio c2)
         {
             if (c1.Equals(c2))
                 return true;
@@ -86,7 +86,7 @@ namespace Program
                 return false;
         }
 
-        public static bool operator !=(Rnumber c1, Rnumber c2)
+        public static bool operator !=(Ratio c1, Ratio c2)
         {
             if (c1.Equals(c2))
                 return false;
@@ -94,7 +94,7 @@ namespace Program
                 return true;
         }
 
-        public static bool operator >(Rnumber c1, Rnumber c2)
+        public static bool operator >(Ratio c1, Ratio c2)
         {
             if (c1.CompareTo(c2) == 1)
                 return true;
@@ -102,7 +102,7 @@ namespace Program
                 return false;
         }
 
-        public static bool operator >=(Rnumber c1, Rnumber c2)
+        public static bool operator >=(Ratio c1, Ratio c2)
         {
             if (c1.CompareTo(c2) >= 0)
                 return true;
@@ -110,7 +110,7 @@ namespace Program
                 return false;
         }
 
-        public static bool operator <(Rnumber c1, Rnumber c2)
+        public static bool operator <(Ratio c1, Ratio c2)
         {
             if (c1.CompareTo(c2) == -1)
                 return true;
@@ -118,7 +118,7 @@ namespace Program
                 return false;
         }
 
-        public static bool operator <=(Rnumber c1, Rnumber c2)
+        public static bool operator <=(Ratio c1, Ratio c2)
         {
             if (c1.CompareTo(c2) <= 0)
                 return true;
@@ -128,28 +128,28 @@ namespace Program
 
         public string toString1()
         {
-            return String.Format("{0}/{1}", Dividend, Denominator);
+            return String.Format("{0}/{1}", Up, Down);
         }
 
         public string toString2()
         {
-            return String.Format("Dividend:{0}\nDenominator:{1}", Dividend, Denominator);
+            return String.Format("Up:{0}\nDown:{1}", Up, Down);
         }
 
-        public static Rnumber Parse(string input)
+        public static Ratio Parse(string input)
         {
             Regex regex = new Regex("\\d+");
             Match match = regex.Match(input);
-            Rnumber temp = new Rnumber();
-            temp.Dividend = Int32.Parse(match.Groups[0].Value);
+            Ratio temp = new Ratio();
+            temp.Up = Int32.Parse(match.Groups[0].Value);
             match = match.NextMatch();
-            temp.Denominator = Int32.Parse(match.Groups[0].Value);
+            temp.Down = Int32.Parse(match.Groups[0].Value);
             return temp;
         }
 
-        public bool Equals(Rnumber temp)
+        public bool Equals(Ratio temp)
         {
-            if (this.Dividend * temp.Denominator == temp.Dividend * this.Denominator)
+            if (this.Up * temp.Down == temp.Up * this.Down)
                 return true;
             else
                 return false;
@@ -157,38 +157,38 @@ namespace Program
 
         public override bool Equals(Object obj)
         {
-            Rnumber RnumberObj = obj as Rnumber;
-            return Equals(RnumberObj);
+            Ratio RatioObj = obj as Ratio;
+            return Equals(RatioObj);
         }
 
         public override int GetHashCode()
         {
-            return this.dividend.GetHashCode();
+            return this.upnum.GetHashCode();
         }
 
-        public int CompareTo(Rnumber temp)
+        public int CompareTo(Ratio temp)
         {
             if (this.Equals(temp))
                 return 0;
-            else if (this.Dividend * temp.Denominator < temp.Dividend * this.Denominator)
+            else if (this.Up * temp.Down < temp.Up * this.Down)
                 return -1;
             else
                 return 1;
         }
 
-        public static explicit operator int(Rnumber temp)
+        public static explicit operator int(Ratio temp)
         {
             int rezult;
-            if (temp.Dividend % temp.Denominator == 0)
-                rezult = temp.Dividend / temp.Denominator;
+            if (temp.Up % temp.Down == 0)
+                rezult = temp.Up / temp.Down;
             else
                 rezult = -1;
             return rezult;
         }
 
-        public static implicit operator double(Rnumber temp)
+        public static implicit operator double(Ratio temp)
         {
-            return (double)temp.Dividend / temp.Denominator;
+            return (double)temp.Up / temp.Down;
         }
     }
 
@@ -196,21 +196,23 @@ namespace Program
     {
         static int Main()
         {
-            Rnumber r1 = new Rnumber(4, 2);
-            int intr = (int)r1;
-            double doubler = r1;
-            Rnumber r2 = new Rnumber(3, 4);
-            Rnumber r3 = r1 * r2;
-            r3.Denominator = 0;
-            r3 = Rnumber.Parse("Dividend: 12, Denominator = 3");
-            Console.WriteLine("{0}/{1}", r3.Dividend, r3.Denominator);
+            Ratio r1 = new Ratio(4, 2);
+           // int intr = (int)r1;
+            //double doubler = r1;
+            Ratio r2 = new Ratio(3, 4);
+            Ratio r3 = r1 * r2;
+            r3.Down = 0;
+            r3 = Ratio.Parse("Up: 12, Down = 3");
+            Console.WriteLine("{0}\n--\n{1}\n", r3.Up, r3.Down);
             Console.WriteLine(r3.toString1());
             Console.WriteLine(r3.toString2());
-            Console.WriteLine("{0} {1}", intr, doubler);
+          //  Console.WriteLine("{0} {1}", intr, doubler);
             if (r1 == r2)
             {
-                Console.WriteLine("ravno");
+                Console.WriteLine("equal");
             }
+            else
+                Console.WriteLine("not equal");
             Console.ReadKey();
             return 0;
 
