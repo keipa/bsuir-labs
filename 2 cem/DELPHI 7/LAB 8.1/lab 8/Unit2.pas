@@ -232,7 +232,7 @@ procedure Tbtr.simvol;
 	   begin
 		if p<>nil then
 		  begin
-Form1.Memo1.Lines.Add(p^.Inf.s+'  '+IntToStr(length(p^.Inf.s)-1));
+Form1.Memo1.Lines.Add(p^.Inf.s+'  '+IntToStr(length(p^.Inf.s)));
 			Wr(p^.A1);
 			Wr(p^.A2);
 		  end;

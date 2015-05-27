@@ -29,10 +29,7 @@ Procedure Wrt2;
 		    End;
         type
   Tbtr=Class(Ttree)
-//      Function Maxk:TInf;
       procedure  simvol;
-      procedure Maxo(info:tinf);
-      procedure Mino(info:tinf);
   end;
   var  	proot,p,q,v,w : Ptree;
   Const nok:Tkey=120;
@@ -244,27 +241,5 @@ Form1.Memo1.Lines.Add(p^.Inf.s+'  '+IntToStr(length(p^.Inf.s)-1));
  p:=proot;
   wr(p)
 	    end;
-
-{Function Tbtr.Maxk;
-  begin
-  p:=proot;
-	    While p^.A2<>Nil do p:=p^.A2;
-	    Result:=p^.Inf;
-  end; }
-
-procedure Tbtr.Mino;
-  begin
- p:=proot;
-	    While p^.A1<>Nil do
-      p:=p^.A1;
-p^.Inf.S:=info.s;
-  end;
-
-procedure Tbtr.Maxo;
-  begin
-  p:=proot;
-	    While p^.A2<>Nil do p:=p^.A2;
-p^.Inf.s:=info.s;
-  end;
 end.
 

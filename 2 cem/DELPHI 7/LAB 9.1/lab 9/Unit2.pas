@@ -26,11 +26,15 @@ TH=class(Tobject)
     procedure Print(M1:Tmemo;h:Pms);
 end;
 TR=class(TH)
+     procedure SearchForMedium;
      procedure add1(Inf:Tinf);
      procedure add2(Inf:Tinf);
      procedure po;
+     procedure HowManyBiggerThanMedium(m1:TMemo);
+
 end;
 var H,Hp,Ho:Pms;   m:word; n1,n2:Word;
+MediumValue:Extended;
 implementation
 
 Constructor TH.create(M0:word);
@@ -39,6 +43,7 @@ Constructor TH.create(M0:word);
        M:=M0; n:=0;
        Getmem(H,M*4);
        for i:=0 to M-1 do H[i]:=Nil;
+
     end;
 
 Destructor TH.Free;
@@ -123,16 +128,61 @@ new(sp);
 n1:=0; n2:=0;
        Getmem(Hp,M*4);
        for i:=0 to M-1 do Hp[i]:=Nil;
-              Getmem(Ho,M*4);
+       Getmem(Ho,M*4);
        for i:=0 to M-1 do Ho[i]:=Nil;
-  for i:=0 to M-1 do
-    if H[i]<>Nil then begin
-    sp:=h[i];
-     while sp<>Nil do
+
+      for i:=0 to M-1 do
+      if H[i]<>Nil then begin
+        sp:=h[i];
+          while sp<>Nil do
           begin
-            if sp.inf.key<0 then add2(sp.inf) else add1(sp.inf);
-            sp:=sp^.A; end;
+            if sp.inf.key<0 then
+              add2(sp.inf)
+            else
+              add1(sp.inf);
+            sp:=sp^.A;
           end;
+      end;
+end;
+
+procedure tr.SearchForMedium;
+var i:Integer;counter,fillmedium:Extended; sp:Psel;
+begin
+  new(sp);
+  counter := 0;
+  fillmedium := 0;
+  for i:=0 to M-1 do
+  if h[i]<>nil then begin
+    sp:=h[i];
+    while sp<>nil
+    do begin
+    counter:=counter+1;
+    fillmedium:= fillmedium + sp.inf.key;
+    sp:=sp^.A;
+    end;
+  end;
+  if (counter<>0) then
+    MediumValue:=fillmedium/counter;
+
+end;
+procedure tr.HowManyBiggerThanMedium;
+var i,howmanybigger:Integer;sp:Psel;
+begin
+  new(sp);
+  howmanybigger:=0;
+  for i:=0 to M-1 do
+      if H[i]<>Nil then begin
+        sp:=h[i];
+          while sp<>Nil do
+          begin
+            if sp.inf.key>MediumValue then
+              howmanybigger:=howmanybigger+1;
+              sp:=sp^.A;
+          end;
+      end;
+
+
+      m1.Lines.Add(IntToStr(howmanybigger));
 end;
 
 Procedure Tr.Add1;// добавить новую запись

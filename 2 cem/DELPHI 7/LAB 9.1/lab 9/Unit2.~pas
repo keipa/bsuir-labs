@@ -15,24 +15,21 @@ Type
         end;
    Ms=array[0..1] of Psel;
    Pms=^Ms;
-
-   TH=class(Tobject)
+TH=class(Tobject)
      n:Word;
      sp,sp1:psel;
-
     Constructor create(M0:word);
     Destructor Free(Var stringgrid:TStringGrid);
     Procedure Add(Inf:Tinf);
     Procedure Read(key:Tkey; Var Inf:Tinf);
     Procedure Red(key:Tkey; Var Inf:Tinf);
     procedure Print(M1:Tmemo;h:Pms);
-   end;
-     TR=class(TH)
-
+end;
+TR=class(TH)
      procedure add1(Inf:Tinf);
      procedure add2(Inf:Tinf);
      procedure po;
-     end;
+end;
 var H,Hp,Ho:Pms;   m:word; n1,n2:Word;
 implementation
 
@@ -44,19 +41,18 @@ Constructor TH.create(M0:word);
        for i:=0 to M-1 do H[i]:=Nil;
     end;
 
-Destructor TH.Free; // Прочесть и удалить
-  Var i,j:word;    // все записи
+Destructor TH.Free;
+  Var i,j:word;
  begin
    j:=0;
     for i:=0 to M-1 do
       While H[i]<>Nil do begin
-            Inc(j);
-          sp:=H[i];
+            Inc(j); sp:=H[i];
     StringGrid.Cells[0,j]:=sp^.inf.Fio;
     StringGrid.Cells[1,j]:=IntToStr(sp^.inf.key);
           H[i]:= sp^.A;
           dispose(sp);
-				                 		end;
+    end;
    FreeMem(H,4*M);
 end;
 
@@ -137,7 +133,6 @@ n1:=0; n2:=0;
             if sp.inf.key<0 then add2(sp.inf) else add1(sp.inf);
             sp:=sp^.A; end;
           end;
-
 end;
 
 Procedure Tr.Add1;// добавить новую запись
@@ -162,5 +157,4 @@ begin
     p^.A:=Ho[i];
   Ho[i]:=p;
 end;
-
 end.

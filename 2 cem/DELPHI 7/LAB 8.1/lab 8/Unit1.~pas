@@ -9,7 +9,6 @@ uses
 type
   TForm1 = class(TForm)
     Edit1: TEdit;
-    Label1: TLabel;
     StringGrid1: TStringGrid;
     Button1: TButton;
     Button2: TButton;
@@ -19,7 +18,6 @@ type
     Button4: TButton;
     Button5: TButton;
     Edit2: TEdit;
-    Label2: TLabel;
     Button6: TButton;
     Button7: TButton;
     Button8: TButton;
@@ -54,16 +52,16 @@ begin
 n:=9; Edit1.Text:=IntToStr(n);
 Memo1.Clear; Edit2.Clear;
   With StringGrid1 do begin
-Cells[0,0]:='Ф.И.О.'; 			Cells[1,0]:='Номер';
-Cells[0,1]:='Иванов А.А.'; Cells[1,1]:='100005';
-Cells[0,2]:='Петров С.И.';	 Cells[1,2]:='100002';
-Cells[0,3]:='Сидоров К.М.'; Cells[1,3]:='100004';
-Cells[0,4]:='Васильев М.К.'; Cells[1,4]:='100001';
-Cells[0,5]:='Смирнов В.К.';  Cells[1,5]:='100007';
-Cells[0,6]:='Мишин Т.В.'; Cells[1,6]:='100006';
-Cells[0,7]:='Долин А.К.';	Cells[1,7]:='100008';
-Cells[0,8]:='Катаев А.М.'; Cells[1,8]:='100000';
-Cells[0,9]:='Рубан В.В.';	Cells[1,9]:='100009';
+Cells[0,0]:='Фамилия'; 			Cells[1,0]:='Номер';
+Cells[0,1]:='Капаницкая'; Cells[1,1]:='258487';
+Cells[0,2]:='Чужба';	 Cells[1,2]:='251548';
+Cells[0,3]:='Жукова'; Cells[1,3]:='254598';
+Cells[0,4]:='Васильев'; Cells[1,4]:='251677';
+Cells[0,5]:='Смирнов';  Cells[1,5]:='257899';
+Cells[0,6]:='Мишин'; Cells[1,6]:='256374';
+Cells[0,7]:='Лин';	Cells[1,7]:='256749';
+Cells[0,8]:='Катаевская'; Cells[1,8]:='258596';
+Cells[0,9]:='Рубанова';	Cells[1,9]:='259431';
   end;
   tr:=Ttree.create;
 end;
