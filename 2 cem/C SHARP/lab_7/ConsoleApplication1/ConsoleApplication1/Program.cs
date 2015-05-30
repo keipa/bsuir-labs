@@ -15,13 +15,13 @@ namespace Program
             downnum = b;
         }
 
-        public Ratio()
+        public Ratio()   //конструктор без параметров
         {
             upnum = 0;
-            downnum = 1;
+            downnum = 1; //do not equal 0
         }
 
-        public int Up
+        public int Up   //поле числителя
         {
             get
             {
@@ -33,7 +33,7 @@ namespace Program
             }
         }
 
-        public int Down
+        public int Down // поле знаменателя
         {
             get
             {
@@ -46,7 +46,14 @@ namespace Program
             }
         }
 
-        public static Ratio operator +(Ratio c1, Ratio c2)
+        /*
+         перегразка операторов
+         * операторов
+         
+         
+         */
+
+        public static Ratio operator +(Ratio c1, Ratio c2)              
         {
             Ratio temp = new Ratio();
             temp.upnum = c1.upnum * c2.downnum + c2.upnum * c1.downnum;
@@ -78,7 +85,7 @@ namespace Program
             return temp;
         }
 
-        public static bool operator ==(Ratio c1, Ratio c2)
+        public static bool operator ==(Ratio c1, Ratio c2)  //оператор == заменён
         {
             if (c1.Equals(c2))
                 return true;
@@ -126,20 +133,20 @@ namespace Program
                 return false;
         }
 
-        public string toString1()
+        public string toString1()       //первый метод вывода
         {
             return String.Format("{0}/{1}", Up, Down);
         }
 
-        public string toString2()
+        public string toString2() //второй метод вывода
         {
             return String.Format("Up:{0}\nDown:{1}", Up, Down);
         }
 
-        public static Ratio Parse(string input)
+        public static Ratio Parse(string input)  //парсинг строки и преобразование её в дробь
         {
-            Regex regex = new Regex("\\d+");
-            Match match = regex.Match(input);
+            Regex regex = new Regex("\\d+");   //регулярное выражение 
+            Match match = regex.Match(input);  //совпадают только отдельные числа
             Ratio temp = new Ratio();
             temp.Up = Int32.Parse(match.Groups[0].Value);
             match = match.NextMatch();
@@ -147,36 +154,36 @@ namespace Program
             return temp;
         }
 
-        public bool Equals(Ratio temp)
+        public bool Equals(Ratio temp)//метод equal требудет присутствия gethashcode для безопасной работы с экземплярам
         {
-            if (this.Up * temp.Down == temp.Up * this.Down)
+            if (temp.Up * temp.Down == this.Up * this.Down)
                 return true;
             else
                 return false;
         }
 
-        public override bool Equals(Object obj)
+        public override bool Equals(Object obj)   //сравнение с приведением типов
         {
             Ratio RatioObj = obj as Ratio;
             return Equals(RatioObj);
         }
 
-        public override int GetHashCode()
+        public override int GetHashCode()     //шанс коллизий
         {
             return this.upnum.GetHashCode();
         }
 
-        public int CompareTo(Ratio temp)
+        public int CompareTo(Ratio temp)   //сравнение 
         {
             if (this.Equals(temp))
                 return 0;
-            else if (this.Up * temp.Down < temp.Up * this.Down)
+            else if (temp.Up / temp.Down < this.Up * this.Down)
                 return -1;
             else
                 return 1;
         }
 
-        public static explicit operator int(Ratio temp)
+        public static explicit operator int(Ratio temp)//явное приведение
         {
             int rezult;
             if (temp.Up % temp.Down == 0)
@@ -186,7 +193,7 @@ namespace Program
             return rezult;
         }
 
-        public static implicit operator double(Ratio temp)
+        public static implicit operator double(Ratio temp)  //неявное приведение
         {
             return (double)temp.Up / temp.Down;
         }

@@ -75,7 +75,7 @@ object Form1: TForm1
   object Button3: TButton
     Left = 296
     Top = 240
-    Width = 89
+    Width = 177
     Height = 49
     Caption = 'Straight'
     TabOrder = 6
@@ -103,7 +103,7 @@ object Form1: TForm1
     Left = 384
     Top = 88
     Width = 89
-    Height = 57
+    Height = 25
     TabOrder = 9
   end
   object Button6: TButton
@@ -118,7 +118,7 @@ object Form1: TForm1
   object Button7: TButton
     Left = 280
     Top = 120
-    Width = 97
+    Width = 193
     Height = 25
     Caption = 'Task'
     TabOrder = 11
@@ -127,7 +127,7 @@ object Form1: TForm1
   object Button8: TButton
     Left = 168
     Top = 240
-    Width = 123
+    Width = 105
     Height = 49
     Caption = 'SimmetricalSort'
     TabOrder = 12

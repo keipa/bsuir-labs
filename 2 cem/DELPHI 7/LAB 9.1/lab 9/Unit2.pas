@@ -182,7 +182,7 @@ begin
       end;
 
 
-      m1.Lines.Add(IntToStr(howmanybigger));
+      m1.Lines.Add('Кол-во элементов больше чем среднее значекние ключа:'+IntToStr(howmanybigger));
 end;
 
 Procedure Tr.Add1;// добавить новую запись

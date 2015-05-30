@@ -1,6 +1,6 @@
 object Form1: TForm1
-  Left = 248
-  Top = 292
+  Left = 298
+  Top = 350
   Width = 801
   Height = 622
   Caption = 'Form1'
@@ -18,7 +18,7 @@ object Form1: TForm1
     Left = 288
     Top = 184
     Width = 57
-    Height = 41
+    Height = 21
     TabOrder = 0
     Text = 'Edit1'
   end
@@ -103,7 +103,7 @@ object Form1: TForm1
     Left = 384
     Top = 88
     Width = 89
-    Height = 25
+    Height = 21
     TabOrder = 9
   end
   object Button6: TButton

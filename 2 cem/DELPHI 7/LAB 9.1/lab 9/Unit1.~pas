@@ -28,6 +28,8 @@ type
     Label4: TLabel;
     Label5: TLabel;
     Button8: TButton;
+    btn1: TButton;
+    btn2: TButton;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -37,6 +39,8 @@ type
     procedure Button5Click(Sender: TObject);
     procedure Button7Click(Sender: TObject);
     procedure Button8Click(Sender: TObject);
+    procedure btn1Click(Sender: TObject);
+    procedure btn2Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -67,9 +71,12 @@ StringGrid1.RowCount:=StrToInt(Edit1.Text);
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
+var i:Integer;
 begin
+  MediumValue:=0;
 Memo1.Clear; Edit1.Text:='7'; Edit2.Clear; Edit3.Clear; Memo2.Clear;
 Memo3.Clear; h1:=th.create(StrToInt(Edit1.Text));
+    Randomize;
   with StringGrid1 do begin
       Cells[0,0]:='Иванов А.А.';    Cells[1,0]:='-50';
       Cells[0,1]:='Петров С.И.';	  Cells[1,1]:='50';
@@ -79,7 +86,10 @@ Memo3.Clear; h1:=th.create(StrToInt(Edit1.Text));
       Cells[0,5]:='Мишин Т.В.';     Cells[1,5]:='3';
       Cells[0,6]:='Долин А.К.';	    Cells[1,6]:='-8';
       Cells[0,7]:='Катаев А.М.';    Cells[1,7]:='0';
-    end;
+      for  i:=0 to 7 do begin
+        Cells[1,i]:=IntToStr(Random(100));
+      end;
+  end;
 end;
 
 procedure TForm1.Button3Click(Sender: TObject);
@@ -118,4 +128,17 @@ procedure TForm1.Button8Click(Sender: TObject);
 begin
   r1.po; Memo2.Clear; Memo3.Clear; h1.Print(Memo2,hp); h1.Print(Memo3,ho);
 end;
+
+procedure TForm1.btn1Click(Sender: TObject);
+begin
+  r1.SearchForMedium;
+  btn1.Caption:=FloatToStr(MediumValue);
+end;
+
+procedure TForm1.btn2Click(Sender: TObject);
+begin
+  Memo1.Clear;
+  r1.HowManyBiggerThanMedium(Memo1);
+end;
+
 end.
