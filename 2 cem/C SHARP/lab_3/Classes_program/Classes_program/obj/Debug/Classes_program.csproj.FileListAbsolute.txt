@@ -1,9 +1,0 @@
-D:\LABS\2 cem\C SHARP\lab_3\Classes_program\Classes_program\bin\Debug\Classes_program.exe.config
-D:\LABS\2 cem\C SHARP\lab_3\Classes_program\Classes_program\obj\Debug\Classes_program.csprojResolveAssemblyReference.cache
-D:\LABS\2 cem\C SHARP\lab_3\Classes_program\Classes_program\bin\Debug\Classes_program.exe
-D:\LABS\2 cem\C SHARP\lab_3\Classes_program\Classes_program\bin\Debug\Classes_program.pdb
-D:\LABS\2 cem\C SHARP\lab_3\Classes_program\Classes_program\obj\Debug\Classes_program.exe
-D:\LABS\2 cem\C SHARP\lab_3\Classes_program\Classes_program\obj\Debug\Classes_program.pdb
-D:\LABS\BSUIR_labs\2 cem\C SHARP\lab_3\Classes_program\Classes_program\bin\Debug\Classes_program.exe.config
-D:\LABS\BSUIR_labs\2 cem\C SHARP\lab_3\Classes_program\Classes_program\obj\Debug\Classes_program.exe
-D:\LABS\BSUIR_labs\2 cem\C SHARP\lab_3\Classes_program\Classes_program\obj\Debug\Classes_program.pdb

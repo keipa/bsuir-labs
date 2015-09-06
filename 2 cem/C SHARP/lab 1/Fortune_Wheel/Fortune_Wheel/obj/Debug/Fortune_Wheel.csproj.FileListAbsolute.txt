@@ -1,6 +1,0 @@
-D:\LABS\2 cem\C SHARP\lab 1\Fortune_Wheel\Fortune_Wheel\bin\Debug\Fortune_Wheel.exe.config
-D:\LABS\2 cem\C SHARP\lab 1\Fortune_Wheel\Fortune_Wheel\obj\Debug\Fortune_Wheel.csprojResolveAssemblyReference.cache
-D:\LABS\2 cem\C SHARP\lab 1\Fortune_Wheel\Fortune_Wheel\bin\Debug\Fortune_Wheel.exe
-D:\LABS\2 cem\C SHARP\lab 1\Fortune_Wheel\Fortune_Wheel\bin\Debug\Fortune_Wheel.pdb
-D:\LABS\2 cem\C SHARP\lab 1\Fortune_Wheel\Fortune_Wheel\obj\Debug\Fortune_Wheel.exe
-D:\LABS\2 cem\C SHARP\lab 1\Fortune_Wheel\Fortune_Wheel\obj\Debug\Fortune_Wheel.pdb

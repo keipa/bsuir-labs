@@ -1,6 +1,0 @@
-D:\LABS\2 cem\C SHARP\lab 1.Vashch\ConsoleApplication1\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe.config
-D:\LABS\2 cem\C SHARP\lab 1.Vashch\ConsoleApplication1\ConsoleApplication1\obj\Debug\ConsoleApplication1.csprojResolveAssemblyReference.cache
-D:\LABS\2 cem\C SHARP\lab 1.Vashch\ConsoleApplication1\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe
-D:\LABS\2 cem\C SHARP\lab 1.Vashch\ConsoleApplication1\ConsoleApplication1\bin\Debug\ConsoleApplication1.pdb
-D:\LABS\2 cem\C SHARP\lab 1.Vashch\ConsoleApplication1\ConsoleApplication1\obj\Debug\ConsoleApplication1.exe
-D:\LABS\2 cem\C SHARP\lab 1.Vashch\ConsoleApplication1\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb

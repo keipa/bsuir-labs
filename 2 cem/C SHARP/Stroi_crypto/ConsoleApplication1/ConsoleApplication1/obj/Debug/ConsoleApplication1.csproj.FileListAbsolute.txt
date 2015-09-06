@@ -1,6 +1,0 @@
-D:\LABS\BSUIR_labs\2 cem\C SHARP\Stroi_crypto\ConsoleApplication1\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe.config
-D:\LABS\BSUIR_labs\2 cem\C SHARP\Stroi_crypto\ConsoleApplication1\ConsoleApplication1\obj\Debug\ConsoleApplication1.csprojResolveAssemblyReference.cache
-D:\LABS\BSUIR_labs\2 cem\C SHARP\Stroi_crypto\ConsoleApplication1\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe
-D:\LABS\BSUIR_labs\2 cem\C SHARP\Stroi_crypto\ConsoleApplication1\ConsoleApplication1\bin\Debug\ConsoleApplication1.pdb
-D:\LABS\BSUIR_labs\2 cem\C SHARP\Stroi_crypto\ConsoleApplication1\ConsoleApplication1\obj\Debug\ConsoleApplication1.exe
-D:\LABS\BSUIR_labs\2 cem\C SHARP\Stroi_crypto\ConsoleApplication1\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb
