@@ -28,6 +28,13 @@ public class Question : IEquatable<Question>
         else
             return false;
     }
+    public bool complexityRaise(Question next){
+        if (complexity < next.complexity)
+            return true;
+        else
+            return false;
+
+    }
 }
 
 public class TestCollection : ICollection<Question>
@@ -38,27 +45,26 @@ public class TestCollection : ICollection<Question>
 
     public int CurrentIndex { get; set; }
 
-    //Inner collection is using like a storage for objects
+    
     public Question[] testArray;
 
-    //Constructor
+   
     public TestCollection()
     {
-        // innerCollection = new List<Purchase>();
+        
         testArray = new Question[initialNumberOfQuestions];
         CurrentIndex = -1;
         NumberOfQuestions = initialNumberOfQuestions;
     }
 
-    //The address on an index
+    
     public Question this[int index]
     {
         get { return testArray[index]; }
         set { testArray[index] = value; }
     }
 
-    //-----------------------------------Realization of ICollection<T>---------------------------------------//
-    //Returns a count of items
+   
     public int Count
     {
         get
@@ -77,7 +83,7 @@ public class TestCollection : ICollection<Question>
         get { return false; }
     }
 
-    //Adds item to the collection
+    
     public void Add(Question item)
     {
         CurrentIndex++;
@@ -92,14 +98,14 @@ public class TestCollection : ICollection<Question>
         Console.WriteLine("Question added");
     }
 
-    //Removes all items from the collection 
+    
     public void Clear()
     {
         Array.Clear(testArray, 0, NumberOfQuestions);
         CurrentIndex = -1;
     }
 
-    //Returns true if collection contains item, and false if it is not
+    
     public bool Contains(Question item)
     {
         for (int counter = 0; counter < NumberOfQuestions; counter++)
@@ -120,12 +126,12 @@ public class TestCollection : ICollection<Question>
         }
     }
 
-    //Removes item from the collection
+    
     public bool Remove(Question item)
     {
         bool result = false;
 
-        //Finds item which will be removed
+       
         for (int i = 0; i < Count; i++)
         {
             Question currentQuest = testArray[i];
@@ -148,10 +154,7 @@ public class TestCollection : ICollection<Question>
     }
 
 
-    //-----------------------------------End of Realization of ICollection<T>---------------------------------------//
-
-    //-----------------------------------Realization of Enumerable------------------------------------------//
-    // Спросить зачем 2 GetEnumerator. ( по другому ошибка компиляции)
+    
     public IEnumerator<Question> GetEnumerator()
     {
         return new TestEnumerator(this);
@@ -161,11 +164,11 @@ public class TestCollection : ICollection<Question>
     {
         return new TestEnumerator(this);
     }
-    //----------------------------------- End of Realization of Enumerable------------------------------------------//
+   
 
 }
 
-//My Enumerator class
+
 public class TestEnumerator : IEnumerator<Question>
 {
     private TestCollection collection;
@@ -183,8 +186,7 @@ public class TestEnumerator : IEnumerator<Question>
 
     public bool MoveNext()
     {
-        //Increments index and check that is lower that count items of 
-        // a collection
+        
         if (++currentIndex >= array.Length)
         {
             return false;
@@ -196,10 +198,10 @@ public class TestEnumerator : IEnumerator<Question>
         return true;
     }
 
-    //Set current index before the first item of the collection
+    
     public void Reset() { currentIndex = -1; }
 
-    //I dont know how to dispose resources!!
+    
     void IDisposable.Dispose() { }
 
     public Question Current
@@ -236,10 +238,7 @@ class Program
         collection.Remove(quiz);
         Console.WriteLine("Count of items in the collection is " + collection.Count);
 
-     /*   if (collection.Contains(quiz))
-            Console.WriteLine("Collection contains 'milk'");
-        else
-            Console.WriteLine("Collection is not contains 'milk'");*/
+     
         
 
         Console.Read();
