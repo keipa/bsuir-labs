@@ -1,0 +1,30 @@
+.model   small
+.stack   200h
+.data
+	AXPROC dw 200
+
+.code
+start:
+MOV AX, @DATA
+MOV DS, AX
+
+	;MAIN CODE
+	MOV AX,AXPROC
+	CALL OUTPROC 
+
+
+MOV AX,4C00H
+INT 21H
+	
+OUTPROC PROC
+
+	PUSH AX
+	PUSH DX
+	MOV DX,AX
+	MOV AH, 02H
+	POP DX
+	POP AX
+
+RET
+OUTPROC ENDP
+END START
