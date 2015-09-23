@@ -9,20 +9,32 @@ using System.Collections;
 class Program
 {
     static void Main(string[] args)
-    { 
-        ConsoleKeyInfo switcher;
-        
-        switcher = Console.ReadKey();
-        Console.WriteLine();
-        while (switcher.Key != ConsoleKey.Escape)
-        {
-
-            Console.WriteLine("1 - Create new Test\n2 - Add Q1\n3 - Add Q2\n4 - Add Q3\n5 - Remove Q1\n6 - Remove Q2\n7 - Remove Q3\n");
-            switcher = Console.ReadKey();
-            Console.WriteLine("\n-----------------------------------------------");
-        }
+    {
 
         Test One = CreateCollection();
+        
+        int switcher = 1;
+        Console.WriteLine();
+        while (switcher != 0)
+        {
+            Console.Clear();
+            Console.WriteLine("1 - Create new Test\n2 - Add Q1\n3 - Add Q2\n4 - Add Q3\n5 - Remove Q1\n6 - Remove Q2\n7 - Remove Q3\n");
+            switcher = Convert.ToInt32(Console.ReadLine());
+
+            switch (switcher)
+            {
+                case 1:
+                    Console.Clear();
+                    One.Clear();
+                    One.Count = 0;
+                    Console.WriteLine("New test created! Press any key");
+                    Console.ReadKey();
+                    break;
+                default: break;
+            }
+        }
+
+        
 
         Question q1 = new Question("What's your name", 5);
         One.Add(q1);
