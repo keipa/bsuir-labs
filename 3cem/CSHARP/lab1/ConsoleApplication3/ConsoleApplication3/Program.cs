@@ -9,8 +9,20 @@ using System.Collections;
 class Program
 {
     static void Main(string[] args)
-    {
-        Test One = new Test();
+    { 
+        ConsoleKeyInfo switcher;
+        
+        switcher = Console.ReadKey();
+        Console.WriteLine();
+        while (switcher.Key != ConsoleKey.Escape)
+        {
+
+            Console.WriteLine("1 - Create new Test\n2 - Add Q1\n3 - Add Q2\n4 - Add Q3\n5 - Remove Q1\n6 - Remove Q2\n7 - Remove Q3\n");
+            switcher = Console.ReadKey();
+            Console.WriteLine("\n-----------------------------------------------");
+        }
+
+        Test One = CreateCollection();
 
         Question q1 = new Question("What's your name", 5);
         One.Add(q1);
@@ -30,9 +42,17 @@ class Program
         q2.Add(v2_1);
         q2.Add(v2_2);
         q2.Add(v2_3);
-        Console.WriteLine("Second question added");
+        if (One.Contains(q2))
+        {
+            Console.WriteLine("Second question added");
 
-        Question q3 = new Question("How are you", 3);
+        }
+        else
+        {
+            Console.WriteLine("Second question : ERROR");
+        }
+        
+        Question q3 = new Question("How are you", 6);
         One.Add(q3);
         Variants v3_1 = new Variants("Im doing well");
         Variants v3_2 = new Variants("Fine");
@@ -42,11 +62,18 @@ class Program
         q3.Add(v3_3);
         Console.WriteLine("Third question added");
 
+        Console.WriteLine(One.Count);
 
         
         //One.Add();
 
         // CreateTest(One);
+    }
+
+    private static Test CreateCollection()
+    {
+        Test One = new Test();
+        return One;
     }
 
     public static void CreateTest(Test test)
@@ -77,19 +104,15 @@ public class Test : ICollection<Question>
 
     public void Add(Question q)
     {
-        if (Count < 1)
-        {
-            current.Add(q); Console.WriteLine("First");
-        }
-        else  if(current[Count-1].Difficulty<current[Count].Difficulty)
-        {
-            current.Add(q);
-            Console.WriteLine("Difficulty");
-        }
-        else
+        current.Add(q);
+        ++Count;
+        if(Count > 1 && current[Count-1].Difficulty<current[Count-2].Difficulty)
         {
             Console.WriteLine("Difficulty is less than previous!!");
+            current.Remove(q);
+            --Count;
         }
+       
         
     }
 
