@@ -15,12 +15,21 @@ class Program
         Question q1 = new Question("What's your name", 5);
         Question q2 = new Question("How old are you", 4);
         Question q3 = new Question("How are you", 6);
+        Variants v1_1 = new Variants("Petya");
+        Variants v1_2 = new Variants("Sasha");
+        Variants v1_3 = new Variants("Nastia");
+        Variants v2_1 = new Variants("6 years");
+        Variants v2_2 = new Variants("8 years");
+        Variants v2_3 = new Variants("9 years");
+        Variants v3_1 = new Variants("Im doing well");
+        Variants v3_2 = new Variants("Fine");
+        Variants v3_3 = new Variants("So so");
         int switcher = 10;
         Console.WriteLine();
-        while (switcher != 0 )
+        while (switcher != 0)
         {
             Console.Clear();
-            Console.WriteLine("1 - Create new Test\n2 - Add Q1\n3 - Add Q2\n4 - Add Q3\n5 - Remove Q1\n6 - Remove Q2\n7 - Remove Q3\n8 - Count of the questions\n9 - Print test\n0 - for exit\n10 - autoadd\n");
+            Console.WriteLine("1 - Create new Test\n2 - Add Q1\n3 - Add Q2\n4 - Add Q3\n5 - Remove Q1\n6 - Remove Q2\n7 - Remove Q3\n8 - Count of the questions\n9 - Print test\n0 - for exit\n10 - autoadd\n11 - add own question\n");
             Console.WriteLine("Next question must be harder than previous");
             try { switcher = Convert.ToInt32(Console.ReadLine()); }
             catch (System.FormatException)
@@ -40,11 +49,8 @@ class Program
                     break;
                 case 2:
                     Console.Clear();
-                    
+
                     One.Add(q1);
-                    Variants v1_1 = new Variants("Petya");
-                    Variants v1_2 = new Variants("Sasha");
-                    Variants v1_3 = new Variants("Nastia");
 
                     if (One.Contains(q1))
                     {
@@ -58,16 +64,14 @@ class Program
                     {
                         Console.WriteLine("First question : ERROR. Press any key");
                     }
-                    
+
                     Console.ReadKey();
                     break;
                 case 3:
                     Console.Clear();
-                    
+
                     One.Add(q2);
-                    Variants v2_1 = new Variants("6 years");
-                    Variants v2_2 = new Variants("8 years");
-                    Variants v2_3 = new Variants("9 years");
+
 
                     if (One.Contains(q2))
                     {
@@ -86,13 +90,11 @@ class Program
 
                 case 4:
                     Console.Clear();
-                    
-                    One.Add(q3);
-                    Variants v3_1 = new Variants("Im doing well");
-                    Variants v3_2 = new Variants("Fine");
-                    Variants v3_3 = new Variants("So so");
 
-                    
+                    One.Add(q3);
+
+
+
                     if (One.Contains(q3))
                     {
                         Console.WriteLine("Third question added");
@@ -125,50 +127,33 @@ class Program
                 case 8:
                     Console.Clear();
                     Console.WriteLine("Count of the questions: " + One.Count);
-                        Console.ReadKey();
-                    break;
-                case 9:
-                    Console.Clear();
-                    int c1 = 1;
-                    foreach(Question q in One)
-                    {
-                        int c2 = 1;
-                        Console.WriteLine("Q"+c1+": "+"Difficulty - " + q.Difficulty);
-                        ++c1;
-                        Console.WriteLine(q.Name);
-                        foreach(Variants v in q)
-                        {
-
-                            Console.WriteLine(c2+") "+v.Name);
-                            ++c2;
-                        }
-                        Console.WriteLine();
-                    }
-                    Console.WriteLine("Press any key to continue...");
                     Console.ReadKey();
                     break;
-                case 10:
-                    
+                case 9:
+                    CreateTest(One);
                     break;
-
+                case 10:
+                    One.Add(q2);
+                    One.Add(q1);
+                    One.Add(q3);
+                    q1.Add(v1_1);
+                    q1.Add(v1_2);
+                    q1.Add(v1_3);
+                    q2.Add(v2_1);
+                    q2.Add(v2_2);
+                    q2.Add(v2_3);
+                    q3.Add(v3_1);
+                    q3.Add(v3_2);
+                    q3.Add(v3_3);
+                    Console.WriteLine("AutoAdd complete. Press any key...");
+                    Console.ReadKey();
+                    break;
+                case 11:
+                    One.Addown();
+                    break;
                 default: break;
             }
         }
-
-
-
-
-
-       
-
-       
-
-        
-
-
-        //One.Add();
-
-        // CreateTest(One);
     }
 
     private static Test CreateCollection()
@@ -179,14 +164,32 @@ class Program
 
     public static void CreateTest(Test test)
     {
+        
+        Console.Clear();
+        int c1 = 1;
+        foreach (Question q in test)
+        {
+            int c2 = 1;
+            Console.WriteLine("Q" + c1 + ": " + "Difficulty - " + q.Difficulty);
+            ++c1;
+            Console.WriteLine(q.Name);
+            foreach (Variants v in q)
+            {
 
+                Console.WriteLine(c2 + ") " + v.Name);
+                ++c2;
+            }
+            Console.WriteLine();
+        }
+        Console.WriteLine("Press any key to continue...");
+        Console.ReadKey();
     }
 }
 
 
 
 
-public class Test : ICollection<Question>
+public class Test : IEnumerable<Question>
 {
     private List<Question> current;
     public int Count { get; set; }
@@ -202,6 +205,34 @@ public class Test : ICollection<Question>
         current = new List<Question>();
     }
 
+    public void Addown()
+    {
+        
+        Console.Clear();
+        Console.WriteLine("Input question: ");
+        string nam = Console.ReadLine();
+        Console.WriteLine("Input difficulty: ");
+        int diff = Convert.ToInt32(Console.ReadLine());
+        Question oq = new Question(nam, diff);
+        current.Add(oq);
+        Console.WriteLine("do you gonna add variants? y/n");
+        int YNsw = Convert.ToInt32(Console.ReadLine());
+        while (YNsw != 0)
+        {
+            if (YNsw == 1)
+            {
+                string ovname;
+                Console.WriteLine("Input Variant: ");
+                ovname = Console.ReadLine();
+                Variants ov = new Variants(ovname);
+                oq.Add(ov);
+                Console.WriteLine("More? y/n");
+                
+            }
+            YNsw = Convert.ToInt32(Console.ReadLine());
+            
+        }
+    }
 
     public void Add(Question q)
     {
@@ -233,6 +264,7 @@ public class Test : ICollection<Question>
 
     public bool Remove(Question q)
     {
+        --Count;
         return current.Remove(q);
     }
 
@@ -260,7 +292,7 @@ public class Test : ICollection<Question>
 
 
 
-public class Question : ICollection<Variants>
+public class Question : IEnumerable<Variants>
 {
     public int Count { get; set; }
     public bool IsReadOnly { get; set; }
@@ -274,6 +306,7 @@ public class Question : ICollection<Variants>
         Name = name;
         Difficulty = difficulty;
     }
+
 
     public void Add(Variants q)
     {
@@ -297,6 +330,7 @@ public class Question : ICollection<Variants>
 
     public bool Remove(Variants q)
     {
+        --Count;
         return current.Remove(q);
     }
 
