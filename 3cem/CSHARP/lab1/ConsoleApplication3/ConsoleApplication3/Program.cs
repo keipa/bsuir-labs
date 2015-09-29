@@ -15,15 +15,15 @@ class Program
         Question q1 = new Question("What's your name", 5);
         Question q2 = new Question("How old are you", 4);
         Question q3 = new Question("How are you", 6);
-        Variants v1_1 = new Variants("Petya");
-        Variants v1_2 = new Variants("Sasha");
-        Variants v1_3 = new Variants("Nastia");
-        Variants v2_1 = new Variants("6 years");
-        Variants v2_2 = new Variants("8 years");
-        Variants v2_3 = new Variants("9 years");
-        Variants v3_1 = new Variants("Im doing well");
-        Variants v3_2 = new Variants("Fine");
-        Variants v3_3 = new Variants("So so");
+        Variant v1_1 = new Variant("Petya");
+        Variant v1_2 = new Variant("Sasha");
+        Variant v1_3 = new Variant("Nastia");
+        Variant v2_1 = new Variant("6 years");
+        Variant v2_2 = new Variant("8 years");
+        Variant v2_3 = new Variant("9 years");
+        Variant v3_1 = new Variant("Im doing well");
+        Variant v3_2 = new Variant("Fine");
+        Variant v3_3 = new Variant("So so");
         int switcher = 10;
         Console.WriteLine();
         while (switcher != 0)
@@ -164,7 +164,7 @@ class Program
 
     public static void CreateTest(Test test)
     {
-        
+
         Console.Clear();
         int c1 = 1;
         foreach (Question q in test)
@@ -173,7 +173,7 @@ class Program
             Console.WriteLine("Q" + c1 + ": " + "Difficulty - " + q.Difficulty);
             ++c1;
             Console.WriteLine(q.Name);
-            foreach (Variants v in q)
+            foreach (Variant v in q)
             {
 
                 Console.WriteLine(c2 + ") " + v.Name);
@@ -185,19 +185,10 @@ class Program
         Console.ReadKey();
     }
 }
-
-
-
-
 public class Test : IEnumerable<Question>
 {
     private List<Question> current;
-    public int Count { get; set; }
     public bool IsReadOnly { get; set; }
-
-
-
-
 
 
     public Test()
@@ -207,7 +198,7 @@ public class Test : IEnumerable<Question>
 
     public void Addown()
     {
-        
+
         Console.Clear();
         Console.WriteLine("Input question: ");
         string nam = Console.ReadLine();
@@ -217,6 +208,7 @@ public class Test : IEnumerable<Question>
         current.Add(oq);
         Console.WriteLine("do you gonna add variants? y/n");
         int YNsw = Convert.ToInt32(Console.ReadLine());
+
         while (YNsw != 0)
         {
             if (YNsw == 1)
@@ -224,13 +216,13 @@ public class Test : IEnumerable<Question>
                 string ovname;
                 Console.WriteLine("Input Variant: ");
                 ovname = Console.ReadLine();
-                Variants ov = new Variants(ovname);
+                Variant ov = new Variant(ovname);
                 oq.Add(ov);
                 Console.WriteLine("More? y/n");
-                
+
             }
             YNsw = Convert.ToInt32(Console.ReadLine());
-            
+
         }
     }
 
@@ -238,7 +230,7 @@ public class Test : IEnumerable<Question>
     {
         current.Add(q);
         ++Count;
-        if (Count > 1 && current[Count - 1].Difficulty < current[Count - 2].Difficulty)
+        if (Count > 1 && current[current.Count - 1].Difficulty < current[Count - 2].Difficulty)
         {
             Console.WriteLine("Difficulty is less than previous!!");
             current.Remove(q);
@@ -288,27 +280,23 @@ public class Test : IEnumerable<Question>
     }
 
 }
-
-
-
-
-public class Question : IEnumerable<Variants>
+public class Question : IEnumerable<Variant>
 {
     public int Count { get; set; }
     public bool IsReadOnly { get; set; }
     public string Name { get; set; }
     public int Difficulty { get; set; }
-    private List<Variants> current;
+    private List<Variant> current;
 
     public Question(string name, int difficulty)
     {
-        current = new List<Variants>();
+        current = new List<Variant>();
         Name = name;
         Difficulty = difficulty;
     }
 
 
-    public void Add(Variants q)
+    public void Add(Variant q)
     {
 
         current.Add(q);
@@ -322,19 +310,19 @@ public class Question : IEnumerable<Variants>
     }
 
 
-    public bool Contains(Variants q)
+    public bool Contains(Variant q)
     {
         return current.Contains(q);
     }
 
 
-    public bool Remove(Variants q)
+    public bool Remove(Variant q)
     {
         --Count;
         return current.Remove(q);
     }
 
-    public void CopyTo(Variants[] q, int index)
+    public void CopyTo(Variant[] q, int index)
     {
         current.CopyTo(q, index);
     }
@@ -344,28 +332,10 @@ public class Question : IEnumerable<Variants>
 
 
 
-    public bool Equals(Question other)
+
+    public IEnumerator<Variant> GetEnumerator()
     {
-        if (this.Name == other.Name)
-        {
-            return true;
-        }
-        else
-            return false;
-    }
-
-
-
-    public override int GetHashCode()
-    {
-
-        return base.GetHashCode();
-
-    }
-
-    public IEnumerator<Variants> GetEnumerator()
-    {
-        foreach (Variants i in current)
+        foreach (Variant i in current)
         {
             yield return i;
         }
@@ -378,10 +348,10 @@ public class Question : IEnumerable<Variants>
 
 
 }
-public class Variants
+public class Variant
 {
     public string Name;
-    public Variants(string name)
+    public Variant(string name)
     {
         Name = name;
     }
