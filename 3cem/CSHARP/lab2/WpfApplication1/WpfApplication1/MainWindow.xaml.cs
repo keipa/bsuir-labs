@@ -25,6 +25,7 @@ namespace WpfApplication1
         Test One = CreateCollection();
         int indexforoutput = 0;
         float resultmark = 0;
+        string resultscore;
         
         public MainWindow()
         {
@@ -46,9 +47,19 @@ namespace WpfApplication1
             }
 
             One.Addown(EditQuestion.Text, EditVar1.Text, (bool)ch1.IsChecked, EditVar2.Text, (bool)ch2.IsChecked, EditVar3.Text, (bool)ch3.IsChecked, EditVar4.Text, (bool)ch4.IsChecked, EditVar5.Text, (bool)ch5.IsChecked, Convert.ToInt32(DiffCombo.SelectedIndex+1));
+           
             Average.Content = (string)One.GetAverage();
             Available.Content = One.GetCount();
-            TreeView.Items.Add(new TreeViewItem().Header = EditQuestion.Text);
+            //TreeView.Items.Add(new TreeViewItem().Header = EditQuestion.Text);
+
+            var questionItem = new TreeViewItem { Header = EditQuestion.Text, Foreground = Central.Foreground };
+            foreach (var variant in One.GetQuestion(One.GetCount()-1))
+            {
+                questionItem.Items.Add(new TreeViewItem { Header = variant.Name, Foreground = Central.Foreground });
+            }
+            TreeView.Items.Add(questionItem);
+
+
             EditQuestion.Clear();
             EditVar1.Clear(); ch1.IsChecked = false;
             EditVar2.Clear(); ch2.IsChecked = false;
@@ -66,6 +77,7 @@ namespace WpfApplication1
 
         
         public void Autoadd (){
+
             bool c = true;
             bool i = false;
             string q1 = "What's included in a typical software packade";
@@ -75,7 +87,7 @@ namespace WpfApplication1
             string q1v4 = "software copyrights";
             int q1d = 4;
             One.Addown(q1, q1v1,c, q1v2,i, q1v3,i, q1v4,i, null,i, q1d);
-
+            //TreeView.Items.Add(new TreeViewItem().Header = q1);
             string q2 = "Military must";
             string q2v1 = "be healthy";
             string q2v2 = "be accurate";
@@ -84,16 +96,80 @@ namespace WpfApplication1
             string q2v5 = "be frighten";
             int q2d = 4;
             One.Addown(q2, q2v1, i, q2v2, i, q2v3, i, q2v4, c, q2v5, i, q2d);
-
+            //TreeView.Items.Add(new TreeViewItem().Header = q2);
             string q3 = "Never gonna...";
             string q3v1 = "make you cry";
             string q3v2 = "give you up";
             string q3v3 = "let you down";
-            string q3v4 = "say goodbuy";
+            string q3v4 = "say goodbye";
             string q3v5 = "tell a lie and hurt you";
             int q3d = 1;
+
             One.Addown(q3, q3v1, i, q3v2, i, q3v3, i, q3v4, c, q3v5, i, q3d);
+            //TreeView.Items.Add(new TreeViewItem().Header = q3);
+
+            string q4 = "Putins birthday";
+            string q4v1 = "25/8/1968";
+            string q4v2 = "4/8/1967";
+            string q4v3 = "7/9/1956";
+            string q4v4 = "5/8/7892";
+            string q4v5 = "1/7/1968";
+            int q4d = 6;
+
+            One.Addown(q4, q4v1, i, q4v2, i, q4v3, i, q4v4, i, q4v5, c, q4d);
+            //TreeView.Items.Add(new TreeViewItem().Header = q4);
+
+            string q5 = "When is elections day";
+            string q5v1 = "monday";
+            string q5v2 = "tuesday";
+            string q5v3 = "wendsday";
+            string q5v4 = "thuesday";
+            string q5v5 = "friday";
+            int q5d = 4;
+
+            One.Addown(q5, q5v1, i, q5v2, i, q5v3, i, q5v4, i, q5v5, c, q5d);
+            //TreeView.Items.Add(new TreeViewItem().Header = q5);
+
+            string q6 = "The most strongest marvel superhero";
+            string q6v1 = "wolwerine";
+            string q6v2 = "spider-man";
+            string q6v3 = "aquaman";
+            string q6v4 = "Hulk";
+            string q6v5 = "Ironman";
+            int q6d = 9;
+
+            One.Addown(q6, q6v1, c, q6v2, i, q6v3, i, q6v4, i, q6v5, i, q6d);
+            //TreeView.Items.Add(new TreeViewItem().Header = q6);
+
+            string q7 = "Who lives in the deep of the ocean";
+            string q7v1 = "spongebob";
+            string q7v2 = "patric";
+            string q7v3 = "Squidward";
+            string q7v4 = "plankton";
+            string q7v5 = "Mr. Crubs";
+            int q7d = 9;
+
+            One.Addown(q7, q7v1, c, q7v2, i, q7v3, i, q7v4, i, q7v5, i, q7d);
+            
+            //TreeView.Items.Add(new TreeViewItem().Header = q7);
+
+            TreeViewUpdate();
     }
+
+        private void TreeViewUpdate()
+        {
+            TreeView.Items.Clear();
+            var item = new TreeViewItem();
+            foreach (var question in One)
+            {
+                var questionItem = new TreeViewItem { Header = question.Name, Foreground = Central.Foreground };
+                foreach (var variant in question)
+                {
+                    questionItem.Items.Add(new TreeViewItem { Header = variant.Name, Foreground = Central.Foreground });
+                }
+                TreeView.Items.Add(questionItem);
+            }
+        }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
@@ -112,6 +188,8 @@ namespace WpfApplication1
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
+            //start test
+            resultscore = "";
             resultmark = 0;
             //TC.Items.Add()
             if (Available.Content == "0")
@@ -120,7 +198,7 @@ namespace WpfApplication1
             }
 
             MakeButtonsIsEnabled(false);
-            window.Height = 625d;
+            window.Height = 570d;
             AchClear();
             QuestionShow(indexforoutput);
             
@@ -245,6 +323,7 @@ namespace WpfApplication1
                     }
                 }
             }
+
             return false;
         }
         private void InitTest()
@@ -254,7 +333,12 @@ namespace WpfApplication1
                 //проверка на правильность
                 if (IsLastCorrect())
                 {
+                    
                    resultmark += (100 / One.GetCount());
+                }
+                else
+                {
+                    resultscore += " #" + (indexforoutput+1);
                 }                
             }
 
@@ -264,7 +348,7 @@ namespace WpfApplication1
                 NextButton.Content = "Next";
                 MakeButtonsIsEnabled(true);
                 indexforoutput = 0;
-                Result.Content = "Your result is "+ (resultmark+1) + "%";
+                Result.Content = "Your result is "+ (resultmark+1) + "% \nMistakes:"+resultscore;
                 return;
             }
             AchClear();
@@ -326,9 +410,7 @@ namespace WpfApplication1
         public int GetCount()
         {
             int s = 0;
-            string outs;
-             s = current.Count;
-            //outs = Convert.ToString(s);
+            s = current.Count;
             return s;
 
         }
@@ -372,42 +454,10 @@ namespace WpfApplication1
                     }
                 }
             }
-            //Console.WriteLine("do you gonna add variants? y/n");
-            //int YNsw = Convert.ToInt32(Console.ReadLine());
-
-           /* while (YNsw != 0)
-            {
-                if (YNsw == 1)
-                {
-                    
-                    //Console.WriteLine("Input Variant: ");
-                    //ovname = Console.ReadLine();
-                    //Variant ov = new Variant(ovname);
-                    //oq.Add(ov);
-                    //Console.WriteLine("More? y/n");
-
-                }
-                //YNsw = Convert.ToInt32(Console.ReadLine());
-
-            }*/
+            
         }
 
-        public void Add(Question q)
-        {
-            current.Add(q);
-
-            if (current.Count > 1 && current[current.Count - 1].Difficulty < current[current.Count - 2].Difficulty)
-            {
-                Console.WriteLine("Difficulty is less than previous!!");
-                current.Remove(q);
-
-            }
-
-
-        }
-
-
-
+       
         public void Clear()
         {
             current.Clear();
@@ -497,12 +547,6 @@ namespace WpfApplication1
         {
             current.CopyTo(q, index);
         }
-
-
-
-
-
-
 
         public IEnumerator<Variant> GetEnumerator()
         {
