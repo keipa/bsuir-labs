@@ -1,301 +1,370 @@
 .model small
-.stack 100h
+.stack 100H
 .data
-	MaxStringLength 	dw 	1000
-	String 				db 	1000 dup (0)
-	LongestWord 		db 	1000 dup (0)
+	STRLEN dw 1000													;THAT string LENGTH
+	String 	db 1000 dup (0)											;full sentence
+	LongestWord db 	1000 dup (0)									;THAT string
 
-	OutOfLengthError 	db 	10, 13, "Out of max string length. Entering is terminated:C", '$'
-	EnterStringMessage	db 	"Enter string: ", 10, 13, '$'
-	WordLenghtMessage 	db 	"The longest word length is: ", 10, 13, '$'
-	LongestWordMessage 	db 	"The longest words is:", 10, 13, '$'
-	EmptyStringMessage 	db 	"You enter a empty string. Program is terminated:C", 10, 13, '$'
+	MSG_SOF db 10, 13, "Reached string LIMIT. Enter is stopped", '$';STRING OVERFLOW...
+	MSG_ENT	db "ENTER :", 10, 13, '$'
+	MSG_LEN db "Max LENGTH is: ", 10, 13, '$'
+	MSG_WRD db "Max WORDS are:", 10, 13, '$'
+	MSG_EMP db "String is EMPTY. Enter is stopped", 10, 13, '$'
 .code
 
-IgnoreWhitespaces proc
-		dec 	SI
+
+
+
+
+WHITESPACE PROC
+		DEC SI
 IW_CYLE:
-		inc 	SI
-		cmp 	byte ptr [SI], ' '
-		je 		IW_CYLE
-
-		ret
-endp IgnoreWhitespaces
-
-GetWordLength proc
-		push 	SI
-		push 	AX
-		push 	BX
-		push  	DX
-		push 	DI
-
-		call 	IgnoreWhitespaces
-		mov 	DI, SI
-		mov 	BX, SI
-		xor 	CX, CX
-SCANNING_WORDS_CYCLE:
-		mov 	AL, [SI]
-		cmp 	AL, ' '
-		jne 	SCANNING_WORDS_CYCLE_CONT
+	INC SI
+	CMP byte ptr [SI], ' '											;if whitespace is exist then counter increment
 		
-		mov 	DX, SI
-		sub 	DX, BX
-		cmp 	CX, DX
-		jnc 	SCANNING_WORDS_CYCLE_NO_MAX 
-		mov 	CX, DX
+	JE IW_CYLE														;in a cycle
 
-SCANNING_WORDS_CYCLE_NO_MAX:
-		call 	IgnoreWhitespaces
-		mov 	BX, SI
-		dec		SI
 
-SCANNING_WORDS_CYCLE_CONT:
-		inc 	SI
-		cmp 	AL, '$'
-		jne 	SCANNING_WORDS_CYCLE
+	RET
+ENDP WHITESPACE
 
-		pop 	DI
-		pop 	DX
-		pop		BX
-		pop 	AX
-		pop 	SI
-		ret
-endp GetWordLength
 
-PrintLongestsWord proc
-		push 	SI
-		push 	AX
-		push 	BX
-		push 	CX
-		push  	DX
 
-		call 	IgnoreWhitespaces
-		mov 	DI, SI
-		mov 	BX, SI
+
+
+GETLENGTH PROC
+
+		PUSH SI									;save registers
+		PUSH AX									;save registers	
+		PUSH BX									
+		PUSH DX									;save registers
+		PUSH DI									;save registers
+
+
+
+
+		CALL WHITESPACE							;ignore whitespaces
+		MOV DI, SI 								;save word
+		MOV BX, SI								;save word
+		XOR CX, CX  							;clear CX
+
+SCAN_STR:
+		MOV AL, [SI]							;go to the position
+		CMP AL, ' '							
+
+
+		JNE SCAN_CONTINUE						;go to check of the last symbol
+		
+		MOV DX, SI
+		SUB DX, BX
+		
+		CMP CX, DX
+		
+		JNC SCAN_MAXW
+		MOV CX, DX
+
+SCAN_MAXW:
+		CALL WHITESPACE
+		
+
+		MOV BX, SI
+		DEC	SI
+
+SCAN_CONTINUE:
+		INC SI
+		CMP AL, '$'
+		JNE SCAN_STR
+
+		POP DI									;return registers
+		POP DX									;return registers
+		POP	BX									
+		POP AX									
+		POP SI									;return registers
+		RET
+ENDP GETLENGTH
+
+
+
+
+
+
+
+
+WLONGPRINT PROC
+		PUSH SI									;save registers
+		PUSH AX									;save registers
+		PUSH BX									;save registers
+		PUSH CX									
+		PUSH DX									;save registers
+
+		CALL WHITESPACE
+		MOV DI, SI
+		MOV BX, SI
 PRINTING_WORDS_CYCLE:
-		mov 	AL, [SI]
-		cmp 	AL, ' '
-		jne 	PRINTING_WORDS_CYCLE_CONT
+		MOV AL, [SI]
+		CMP AL, ' '
+		JNE PRINT_CONTINUE
 		
-		mov 	DX, SI
-		sub 	DX, BX
-		cmp 	CX, DX
-		jne  	PRINTING_WORDS_CYCLE_NO_MAX
-		call 	PrintWord		
+		MOV DX, SI
 
-PRINTING_WORDS_CYCLE_NO_MAX:
-		call 	IgnoreWhitespaces
-		mov 	BX, SI
-		dec		SI
+		SUB DX, BX
+		CMP CX, DX
+		
+		JNE PRINT_NOMW
+		CALL WPRINT		
 
-PRINTING_WORDS_CYCLE_CONT:
-		inc 	SI
-		cmp 	AL, '$'
-		jne 	PRINTING_WORDS_CYCLE
+PRINT_NOMW:
+		
+		CALL WHITESPACE
+		MOV BX, SI
+		
+		DEC	SI
 
-		pop 	DX
-		pop		BX
-		pop 	AX
-		pop 	SI
-		pop 	CX
-		ret
-endp PrintLongestsWord
+PRINT_CONTINUE:
+		INC SI
+		
+		CMP AL, '$'
+		JNE PRINTING_WORDS_CYCLE
 
-PrintWord proc
-		push 	AX
-		push 	DX
-		push 	SI
 
-		mov 	SI, BX
-		add 	SI, CX
-		mov 	byte ptr [SI], '$'
-		mov 	AH, 09h
-		mov 	DX, BX
-		int 	21h
-		mov 	byte ptr [SI], ' '
+		POP DX
 
-		mov 	AH, 02h
-		mov 	DL, 10
-		int 	21h
-		mov 	DL, 13
-		int 	21h
 
-		pop 	SI
-		pop 	DX
-		pop 	AX
-		ret
-endp PrintWord
+		POP	BX									
+		POP AX									;return registers
+		POP SI									;return registers
+		POP CX									;return registers
+		RET
+ENDP WLONGPRINT
 
-EnterString proc
-		push 	AX
-		push 	DX
-		push 	BX
-		push 	SI
 
-		mov 	BX, SI
+
+
+
+
+WPRINT PROC
+		PUSH AX									;save registers
+		PUSH DX									;save registers
+		PUSH SI									;save registers
+
+		MOV SI, BX
+		ADD SI, CX
+		MOV byte ptr [SI], '$'
+		MOV AH, 09H
+		MOV DX, BX
+
+
+
+		INT 21H
+		MOV byte ptr [SI], ' '
+
+		MOV AH, 02H
+		MOV DL, 10
+		INT 21H
+		MOV DL, 13
+		INT 21H
+
+		POP SI 									;return registers
+		POP DX									;return registers
+		POP AX									;return registers
+		RET
+ENDP WPRINT
+
+
+
+
+
+
+
+
+EnterString PROC
+		PUSH AX									;save registers
+		PUSH DX									;save registers
+		PUSH BX									;save registers
+		PUSH SI									;save registers
+
+		MOV 	BX, SI
 ENTERING_CYCLE:
-		mov 	AH, 08h
-		int 	21h
+		MOV AH, 08H
+		INT 21H
 
-		cmp 	AL, 8
-		je 		BACKSPACE_HANDLING
-		cmp 	AL, 13
-		je 		ENTERING_CYCLE_OUT
-		cmp 	AL, '$'
-		je 		ENTERING_CYCLE
+		CMP AL, 8
+		JE BACKSPACE_PROCESSING					;return cursor
+		CMP AL, 13
+		JE ENTER_OUT							;stop Enter
+		CMP AL, '$'
+		JE ENTERING_CYCLE 						;$ skipping
 
-		mov 	byte ptr [SI], AL
-		inc 	SI
+		MOV byte ptr [SI], AL
+		INC SI
 
-		mov 	CX, SI
-		sub 	CX, BX
-		cmp 	CX, MaxStringLength
-		jnc 	OUT_OF_STRING_LENGTH
+		MOV CX, SI
+		SUB CX, BX
+		CMP CX, STRLEN
+		JNC OVERLIMIT						;if OVERLIMIT then goto OVERLIMIT
 
-		mov		DL, AL
-		mov 	AH, 02h
-		int 	21h
-		jmp 	ENTERING_CYCLE
+		MOV	DL, AL
+		MOV AH, 02H
+		INT 21H
+		JMP ENTERING_CYCLE
 	
 
-BACKSPACE_HANDLING:
-		mov		DL, 8
-		mov 	AH, 02h
-		int 	21h
-		mov		DL, 0
-		int 	21h
-		mov		DL, 8
-		int 	21h
-
-		cmp 	SI, BX
-		je 		ENTERING_CYCLE
-		dec 	SI 
-		jmp 	ENTERING_CYCLE
-
-OUT_OF_STRING_LENGTH:
-		lea 	DX, OutOfLengthError
-		mov 	AH, 09h
-		int 	21h
-
-ENTERING_CYCLE_OUT:
-		mov 	byte ptr [SI], ' '
-		inc 	SI
-		mov 	byte ptr [SI], '$'
-
-		mov		DL, 10
-		mov 	AH, 02h
-		int 	21h
-		mov		DL, 13
-		int 	21h
-
-		pop 	SI
-		pop 	BX
-		pop 	DX
-		pop 	AX
-		ret
-endp EnterString
+BACKSPACE_PROCESSING:
+		MOV	DL, 8
+		MOV AH, 02H								;BACKSPACE processing
+		INT 21H
+		MOV	DL, 0
 
 
-GetDigitFromNumber proc						
-		push 	AX
-		push 	CX
 
-		mov 	AX, BX
-		xor 	DX, DX
-		mov		CX, 10
-		cwd
-		idiv	CX
-		mov 	BX, AX
+		INT 21H
+		MOV	DL, 8
+		INT 21H
 
-		test 	DX, DX 						
-		jns 	GETTING_DIGIT_OUT
-		neg 	DX
+		CMP SI, BX
+		JE 	ENTERING_CYCLE
+		DEC SI 
 
-GETTING_DIGIT_OUT:
-		Add 	DX, 48
+		JMP ENTERING_CYCLE
 
-		pop 	CX
-		pop 	AX
-		ret
-endp GetDigitFromNumber
+OVERLIMIT:
+		LEA DX, MSG_SOF
+		MOV AH, 09H
+		INT 21H
+
+ENTER_OUT:
+		MOV byte ptr [SI], ' '
+		INC SI
+		MOV byte ptr [SI], '$'					;interruption of the word
+
+		MOV	DL, 10
+		MOV AH, 02H
+		INT 21H
+		MOV	DL, 13
+		INT 21H
+
+		POP SI									;return registers
+		POP BX									;return registers
 
 
-PrintNumber proc						
-		push 	AX
-		push 	BX
-		push	CX
-		push 	DX
-		xor 	CX, CX
+		POP DX									;return registers
+		POP AX									;return registers
 
-		mov 	BX, AX
-		test 	BX, BX					
-		jns 	GETTING_DIGITS_LOOP
-		mov 	AH, 02h
-		mov 	DL, '-'
-		int 	21h
+
+
+
+		RET
+ENDP EnterString
+
+
+GET_DIGIT PROC						
+		PUSH AX									;save registers
+		PUSH CX									;save registers
+
+		MOV AX, BX
+		XOR DX, DX								;put 10 to cx register
+		MOV	CX, 10
+
+		CWD
+		IDIV CX									;decrese down to 10
+		MOV BX, AX
+
+		TEST DX, DX 
+		JNS GET_OUT
+		NEG 	DX
+
+GET_OUT:
+		ADD 	DX, 48
+
+		POP CX									;return registers
+		POP AX									;return registers
+		RET
+ENDP GET_DIGIT
+
+
+DIGIT_PRINT PROC						
+		PUSH AX									;save registers
+		PUSH BX									;save registers
+		PUSH CX									;save registers
+		PUSH DX									;save registers
+		XOR CX, CX
+
+		MOV BX, AX
+		TEST BX, BX					
+		JNS GETTING_DIGITS_LOOP
+
+
+
+		MOV AH, 02H
+		MOV DL, '-'
+		ы
+		INT 21H
 
 GETTING_DIGITS_LOOP:					
-		call 	GetDigitFromNumber
-		push 	DX
-		inc  	CX
-		cmp 	BX, 0
-		jne  	GETTING_DIGITS_LOOP
+		CALL GET_DIGIT
+		PUSH DX
+		INC CX
+		CMP BX, 0
+		JNE GETTING_DIGITS_LOOP
 
 PRINTING_DIGITS_LOOP:					
-		pop 	DX
-		mov 	AH, 02h
-		int 	21h
-		loop 	PRINTING_DIGITS_LOOP
+		POP DX
+		MOV AH, 02H								;out of digits from stack
+		INT 21H
+		loop PRINTING_DIGITS_LOOP
 
-		mov 	AH, 02h
-		mov 	DL, 10
-		int		21h
-		mov 	DL, 13
-		int 	21h
+		MOV AH, 02H								;cursor down
+		MOV DL, 10
+		INT	21H
+		MOV DL, 13
+		INT 21H
 
-		pop 	DX
-		pop 	CX
-		pop 	BX
-		pop 	AX
-		ret
-endp PrintNumber
+		POP DX									;return registers
+		POP CX									;return registers
+		POP BX									;return registers
+		POP AX									;return registers
+		RET
+ENDP DIGIT_PRINT
 
 
 		assume	DS: @data, ES: @data 	 
 MAIN:
-		mov 	AX, @data
-		mov 	DS, AX
-		mov 	ES, AX
+		MOV AX, @data
+		MOV DS, AX
+		MOV ES, AX
 
-		lea 	DX, EnterStringMessage
-		mov 	AH, 09h
-		int 	21h
+		LEA DX, MSG_ENT
+		MOV AH, 09H
+		INT 21H
 
-		lea 	SI, String
-		call 	EnterString
-		call 	GetWordLength	
-		cmp 	CX, 0
-		je 		EMPTY_STRING_HANDLING
+		LEA SI, String
+		CALL EnterString
 
-		lea 	DX, WordLenghtMessage
-		mov 	AH, 09h
-		int		21h
+		CALL GETLENGTH								;GET LENGTH of THAT string
+		CMP CX, 0
 
-		mov 	AX, CX
-		call 	PrintNumber
 
-		lea 	DX, LongestWordMessage
-		mov 	AH, 09h
-		int 	21h
-		call 	PrintLongestsWord
-		jmp 	MAIN_END
+		JE 	MAIN_EMPCH								;if LENGTH is 0 then go to exit
 
-EMPTY_STRING_HANDLING:
-		lea 	DX, EmptyStringMessage
-		mov 	AH, 09h
-		int 	21h
+		LEA DX, MSG_LEN								;MSG outout
+		MOV AH, 09H
+		INT	21H
+
+		MOV AX, CX
+		CALL DIGIT_PRINT
+
+		LEA DX, MSG_WRD								;MSG outout
+		MOV AH, 09H
+		INT 21H
+		CALL WLONGPRINT
+		JMP MAIN_END
+
+MAIN_EMPCH:
+		LEA DX, MSG_EMP								;ERR outout
+		MOV AH, 09H
+		INT 21H
 	
 MAIN_END:
-		mov 	AX, 4c00h
-		int		21h
+		MOV AX, 4c00H
+		INT	21H
 end MAIN
