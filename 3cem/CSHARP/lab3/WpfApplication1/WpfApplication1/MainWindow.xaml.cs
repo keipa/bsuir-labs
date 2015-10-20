@@ -23,17 +23,27 @@ namespace WpfApplication1
     /// </summary>
     public partial class MainWindow : Window
     {
-        Test One = CreateCollection();
+        
         int indexforoutput = 0;
         float resultmark = 0;
         string resultscore;
-        
+
+        private Test _one;
+        public Test One { get { return _one; } private set { _one = value; } }
+
         public MainWindow()
         {
             InitializeComponent();
-            TreeView.Items.Clear();
+           // TreeView.Items.Clear();
+            
             Available.Content = "0";
             Average.Content = "0";
+            //TreeView.Items.Clear();
+
+            //TreeView.ItemsSource = One; //<--------------thats it
+            DataContext = this;
+            One = CreateCollection();
+
             
         }
 
@@ -53,13 +63,13 @@ namespace WpfApplication1
             Available.Content = One.GetCount();
             //TreeView.Items.Add(new TreeViewItem().Header = EditQuestion.Text);
 
-            var questionItem = new TreeViewItem { Header = EditQuestion.Text, Foreground = Central.Foreground };
+           /*var questionItem = new TreeViewItem { Header = EditQuestion.Text, Foreground = Central.Foreground };
             foreach (var variant in One.GetQuestion(One.GetCount()-1))
             {
                 questionItem.Items.Add(new TreeViewItem { Header = variant.Name, Foreground = Central.Foreground });
             }
-            TreeView.Items.Add(questionItem);
-
+            TreeView.Items.Add(questionItem);*/
+            //TreeView.ItemsSource = One;
 
             EditQuestion.Clear();
             EditVar1.Clear(); ch1.IsChecked = false;
@@ -73,6 +83,8 @@ namespace WpfApplication1
         public static Test CreateCollection()
         {
             Test One = new Test();
+            
+            
             return One;
         }
 
@@ -154,12 +166,13 @@ namespace WpfApplication1
             
             //TreeView.Items.Add(new TreeViewItem().Header = q7);
 
-            TreeViewUpdate();
+        //    TreeViewUpdate();
+            //TreeView.ItemsSource = One;
     }
 
-        private void TreeViewUpdate()
+        /*private void TreeViewUpdate()
         {
-            TreeView.Items.Clear();
+            TreeView.Items.Clear();                 //make it databinding
             var item = new TreeViewItem();
             foreach (var question in One)
             {
@@ -170,7 +183,7 @@ namespace WpfApplication1
                 }
                 TreeView.Items.Add(questionItem);
             }
-        }
+        }*/
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
@@ -184,7 +197,8 @@ namespace WpfApplication1
             Available.Content = "0";
             Average.Content = "0";
             One.Clear();
-            TreeView.Items.Clear();
+            
+            //TreeView.Items.Clear();
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
@@ -385,8 +399,10 @@ namespace WpfApplication1
 
     public class Test : IEnumerable<Question>, INotifyCollectionChanged
     {
-        private List<Question> current;
+        public List<Question> current;
         public bool IsReadOnly { get; set; }
+        public event NotifyCollectionChangedEventHandler CollectionChanged;
+   
 
 
         public Test()
@@ -455,13 +471,16 @@ namespace WpfApplication1
                     }
                 }
             }
-            
+            if (CollectionChanged != null)
+                CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add));
         }
 
        
         public void Clear()
         {
             current.Clear();
+            if (CollectionChanged != null)
+                CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
         }
 
 
@@ -495,6 +514,11 @@ namespace WpfApplication1
         {
             return GetEnumerator();
         }
+         
+
+        
+
+
 
     }
     public class Question : IEnumerable<Variant>
@@ -503,7 +527,7 @@ namespace WpfApplication1
         public bool IsReadOnly { get; set; }
         public string Name { get; set; }
         public int Difficulty { get; set; }
-        private List<Variant> current;
+        public List<Variant> current;
 
         public Variant GetVariant(int c)
         {

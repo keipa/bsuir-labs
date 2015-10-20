@@ -1,6 +1,7 @@
 ﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="WpfApplication1.MainWindow"
         
         Name="window" Title="Central Testing" Width="646" Height="345" ResizeMode="NoResize">
@@ -51,28 +52,25 @@
             <ListBoxItem Content="9"/>
             <ListBoxItem Content="10"/>
         </ComboBox>
+
         <TreeView Name="TreeView" Margin="242,85,0,0" Background="#FF2D2D30" Foreground="White" FontSize="15" Height="164" VerticalAlignment="Top" HorizontalAlignment="Left" Width="355">
-            <TreeViewItem Header="How are you?" Foreground="White">
-                <TreeViewItem Header="So well" Foreground="White"></TreeViewItem>
-                <TreeViewItem Header="Not bad" Foreground="White"></TreeViewItem>
-                <TreeViewItem Header="Good" Foreground="White"></TreeViewItem>
-                <TreeViewItem Header="So so" Foreground="White"></TreeViewItem>
-                <TreeViewItem Header="Regular" Foreground="White"></TreeViewItem>
-            </TreeViewItem>
-            <TreeViewItem Header="What is your name?" Foreground="White">
-                <TreeViewItem Header="Mark" Foreground="White"></TreeViewItem>
-                <TreeViewItem Header="Alex" Foreground="White"></TreeViewItem>
-                <TreeViewItem Header="John" Foreground="White"></TreeViewItem>
-                <TreeViewItem Header="Mike" Foreground="White"></TreeViewItem>
-                <TreeViewItem Header="Jane" Foreground="White"></TreeViewItem>
-            </TreeViewItem>
-            <TreeViewItem Header="How old are you?" Foreground="White">
-                <TreeViewItem Header="10 years" Foreground="White"></TreeViewItem>
-                <TreeViewItem Header="7 years" Foreground="White"></TreeViewItem>
-                <TreeViewItem Header="5 years" Foreground="White"></TreeViewItem>
-                <TreeViewItem Header="3 years" Foreground="White"></TreeViewItem>
-                <TreeViewItem Header="1 year" Foreground="White"></TreeViewItem>
-            </TreeViewItem>
+            <TreeView.ItemTemplate>
+                <DataTemplate>
+                    <TreeViewItem Name="NameTemplate" ItemsSource="{Binding Path=One}" Header="{Binding Path=Name}" Foreground="White">
+                        <TreeViewItem.ItemTemplate>
+                            <HierarchicalDataTemplate ItemsSource="{Binding Variants}">
+                                <HierarchicalDataTemplate.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" />
+                                    </DataTemplate>
+                                </HierarchicalDataTemplate.ItemTemplate>
+                                <TextBlock Text="{Binding Name}"/>
+                            </HierarchicalDataTemplate>
+                        </TreeViewItem.ItemTemplate>
+
+                    </TreeViewItem>
+                </DataTemplate>
+            </TreeView.ItemTemplate>
         </TreeView>
 
         <Label Name="QuestionTitle" Content="" HorizontalAlignment="Center" Margin="46,326,31,0" VerticalAlignment="Top" Width="439" Height="66" Foreground="White" HorizontalContentAlignment="Center" FontFamily="Simplified Arabic" FontSize="22"/>
