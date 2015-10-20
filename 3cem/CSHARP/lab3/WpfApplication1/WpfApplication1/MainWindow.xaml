@@ -56,15 +56,16 @@
         <TreeView Name="TreeView" Margin="242,85,0,0" Background="#FF2D2D30" Foreground="White" FontSize="15" Height="164" VerticalAlignment="Top" HorizontalAlignment="Left" Width="355">
             <TreeView.ItemTemplate>
                 <DataTemplate>
-                    <TreeViewItem Name="NameTemplate" ItemsSource="{Binding Path=One}" Header="{Binding Path=Name}" Foreground="White">
+                    <TreeViewItem Name="NameTemplate" ItemsSource="{Binding current}" Header="{Binding Path=Name}" Foreground="White">
                         <TreeViewItem.ItemTemplate>
-                            <HierarchicalDataTemplate ItemsSource="{Binding Variants}">
-                                <HierarchicalDataTemplate.ItemTemplate>
+                            
+                            <HierarchicalDataTemplate>
+                                <!--<HierarchicalDataTemplate.ItemTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Name}" />
+                                        <TextBlock Text="{Binding Name}" Foreground="White"/>
                                     </DataTemplate>
-                                </HierarchicalDataTemplate.ItemTemplate>
-                                <TextBlock Text="{Binding Name}"/>
+                                </HierarchicalDataTemplate.ItemTemplate>-->
+                                <TextBlock Text="{Binding Name}" Foreground="White"/>
                             </HierarchicalDataTemplate>
                         </TreeViewItem.ItemTemplate>
 
@@ -81,6 +82,7 @@
         <CheckBox Name="Ach5" Content="" HorizontalAlignment="Left" Margin="32,456,0,0" VerticalAlignment="Top" FontSize="15" Foreground="White"/>
         <Button Name="NextButton" Content="NEXT" HorizontalAlignment="Left" Height="35" Margin="496,485,0,-204" VerticalAlignment="Top" Width="101" Click="Button_Click_4" Background="#FFFFCC00" FontSize="15"/>
         <Label Name="Result" Content="" HorizontalAlignment="Left" Margin="214,256,0,0" VerticalAlignment="Top" Foreground="White" FontSize="15" Width="304" Height="48"/>
+        <TextBlock HorizontalAlignment="Left" Height="38" Margin="267,22,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="74"/>
 
 
 

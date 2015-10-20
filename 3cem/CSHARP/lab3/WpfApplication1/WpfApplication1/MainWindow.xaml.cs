@@ -23,14 +23,11 @@ namespace WpfApplication1
     /// </summary>
     public partial class MainWindow : Window
     {
-        
+        Test One = CreateCollection();
         int indexforoutput = 0;
         float resultmark = 0;
         string resultscore;
-
-        private Test _one;
-        public Test One { get { return _one; } private set { _one = value; } }
-
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -38,12 +35,10 @@ namespace WpfApplication1
             
             Available.Content = "0";
             Average.Content = "0";
-            //TreeView.Items.Clear();
+            TreeView.Items.Clear();
 
-            //TreeView.ItemsSource = One; //<--------------thats it
-            DataContext = this;
-            One = CreateCollection();
-
+            TreeView.ItemsSource = One; //<--------------thats it
+            
             
         }
 
@@ -472,7 +467,7 @@ namespace WpfApplication1
                 }
             }
             if (CollectionChanged != null)
-                CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add));
+                CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
         }
 
        
@@ -527,8 +522,10 @@ namespace WpfApplication1
         public bool IsReadOnly { get; set; }
         public string Name { get; set; }
         public int Difficulty { get; set; }
-        public List<Variant> current;
+        //public List<Variant> current;
 
+        public List<Variant> current { get; set; }
+         
         public Variant GetVariant(int c)
         {
             return current[c];
@@ -590,9 +587,9 @@ namespace WpfApplication1
     }
     public class Variant
     {
-        public string Name;
         public bool Ans;
 
+        public string Name { get; set; }
         /*
          * 
          * 0 - incorrect;
