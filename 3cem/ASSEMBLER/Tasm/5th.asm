@@ -30,15 +30,13 @@ ENDP WHITESPACE
 
 
 
-
-
 GETLENGTH PROC
 
 		PUSH SI									;save registers
-		PUSH AX									;save registers	
 		PUSH BX									
-		PUSH DX									;save registers
-		PUSH DI									;save registers
+		PUSH AX									
+		PUSH DX									
+		PUSH DI									
 
 
 
@@ -65,7 +63,6 @@ SCAN_STR:
 
 SCAN_MAXW:
 		CALL WHITESPACE
-		
 
 		MOV BX, SI
 		DEC	SI
@@ -76,7 +73,7 @@ SCAN_CONTINUE:
 		JNE SCAN_STR
 
 		POP DI									;return registers
-		POP DX									;return registers
+		POP DX									
 		POP	BX									
 		POP AX									
 		POP SI									;return registers
@@ -86,14 +83,10 @@ ENDP GETLENGTH
 
 
 
-
-
-
-
 WLONGPRINT PROC
 		PUSH SI									;save registers
-		PUSH AX									;save registers
-		PUSH BX									;save registers
+		PUSH AX									
+		PUSH BX									
 		PUSH CX									
 		PUSH DX									;save registers
 
@@ -131,7 +124,7 @@ PRINT_CONTINUE:
 
 
 		POP	BX									
-		POP AX									;return registers
+		POP AX									
 		POP SI									;return registers
 		POP CX									;return registers
 		RET
@@ -144,7 +137,7 @@ ENDP WLONGPRINT
 
 WPRINT PROC
 		PUSH AX									;save registers
-		PUSH DX									;save registers
+		PUSH DX									
 		PUSH SI									;save registers
 
 		MOV SI, BX
@@ -165,8 +158,8 @@ WPRINT PROC
 		INT 21H
 
 		POP SI 									;return registers
-		POP DX									;return registers
-		POP AX									;return registers
+		POP DX									
+		POP AX									
 		RET
 ENDP WPRINT
 
@@ -178,9 +171,9 @@ ENDP WPRINT
 
 
 EnterString PROC
-		PUSH AX									;save registers
-		PUSH DX									;save registers
-		PUSH BX									;save registers
+		PUSH AX									
+		PUSH DX									
+		PUSH BX								
 		PUSH SI									;save registers
 
 		MOV 	BX, SI
@@ -213,9 +206,8 @@ BACKSPACE_PROCESSING:
 		MOV	DL, 8
 		MOV AH, 02H								;BACKSPACE processing
 		INT 21H
+
 		MOV	DL, 0
-
-
 
 		INT 21H
 		MOV	DL, 8
@@ -244,10 +236,10 @@ ENTER_OUT:
 		INT 21H
 
 		POP SI									;return registers
-		POP BX									;return registers
+		POP BX									
 
 
-		POP DX									;return registers
+		POP DX									
 		POP AX									;return registers
 
 
@@ -276,7 +268,7 @@ GET_DIGIT PROC
 GET_OUT:
 		ADD 	DX, 48
 
-		POP CX									;return registers
+		POP CX									
 		POP AX									;return registers
 		RET
 ENDP GET_DIGIT
@@ -284,8 +276,8 @@ ENDP GET_DIGIT
 
 DIGIT_PRINT PROC						
 		PUSH AX									;save registers
-		PUSH BX									;save registers
-		PUSH CX									;save registers
+		PUSH BX									
+		PUSH CX									
 		PUSH DX									;save registers
 		XOR CX, CX
 
@@ -297,7 +289,7 @@ DIGIT_PRINT PROC
 
 		MOV AH, 02H
 		MOV DL, '-'
-		ы
+		
 		INT 21H
 
 GETTING_DIGITS_LOOP:					
@@ -319,10 +311,10 @@ PRINTING_DIGITS_LOOP:
 		MOV DL, 13
 		INT 21H
 
-		POP DX									;return registers
+		POP DX									
 		POP CX									;return registers
-		POP BX									;return registers
-		POP AX									;return registers
+		POP BX									
+		POP AX									
 		RET
 ENDP DIGIT_PRINT
 
