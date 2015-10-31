@@ -10,7 +10,7 @@
         </Style>
     </Window.Resources>
     <Grid Background="#FF2D2D30">
-        <Label Name="Central" Content="Central Testing" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.538" Foreground="White" FontSize="30"/>
+        <Label Name="Central" Content="Central Testing" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.538" Foreground="White" FontSize="30" FontFamily="Eurostile"/>
         <Button Name="AutoaddButton" Content="Autoadd" Margin="10,262,0,0" Background="#FF333337" Foreground="#FFF5FFFF" HorizontalAlignment="Left" Width="99" Height="36" VerticalAlignment="Top" Click="Button_Click_1"/>
         <Button Name="Start" Content="START" Margin="523,261,0,0" Background="#FFFFCC00" FontSize="15" Height="36" VerticalAlignment="Top" HorizontalAlignment="Left" Width="74" Click="Button_Click_3"/>
         <Button Name="AddButton" Content="ADD" Margin="10,235,0,0" Click="Button_Click" Foreground="Black" Background="#FFFFCC00" HorizontalAlignment="Left" Width="200" Height="22" VerticalAlignment="Top" FontSize="15"/>

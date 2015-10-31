@@ -7,9 +7,13 @@
 
 	MSG_SOF db 10, 13, "Reached string LIMIT. Enter is stopped", '$';STRING OVERFLOW...
 	MSG_ENT	db "ENTER :", 10, 13, '$'
-	MSG_LEN db "Max LENGTH is: ", 10, 13, '$'
-	MSG_WRD db "Max WORDS are:", 10, 13, '$'
+	MSG_LEN db 10,13,"Max LENGTH is: ", 10, 13, '$'
+	MSG_WRD db 10,13,"Max WORDS are:", 10, 13, '$'
 	MSG_EMP db "String is EMPTY. Enter is stopped", 10, 13, '$'
+	MSG_YED db "You entered: ", 10, 13, '$'
+	
+	CC_S db "RRSOURSE BIgs STRING" , '$'
+	RESERVE db 1000 dup (" ")
 .code
 
 
@@ -47,17 +51,17 @@ GETLENGTH PROC
 		XOR CX, CX  							;clear CX
 
 SCAN_STR:
-		MOV AL, [SI]							;go to the position
+		MOV AL, [SI]							;go to the position SI is a index
 		CMP AL, ' '							
 
 
 		JNE SCAN_CONTINUE						;go to check of the last symbol
 		
-		MOV DX, SI
+		MOV DX, SI 				; save the index
 		SUB DX, BX
 		
-		CMP CX, DX
-		
+		CMP CX, DX				;compare lenght of the previus word and current word
+								; if current word bigger than previus then save maxlength to the bx register
 		JNC SCAN_MAXW
 		MOV CX, DX
 
@@ -189,7 +193,7 @@ ENTERING_CYCLE:
 		JE ENTERING_CYCLE 						;$ skipping
 
 		MOV byte ptr [SI], AL
-		INC SI
+		INC SI 
 
 		MOV CX, SI
 		SUB CX, BX
@@ -235,6 +239,8 @@ ENTER_OUT:
 		MOV	DL, 13
 		INT 21H
 
+
+
 		POP SI									;return registers
 		POP BX									
 
@@ -272,6 +278,9 @@ GET_OUT:
 		POP AX									;return registers
 		RET
 ENDP GET_DIGIT
+
+
+
 
 
 DIGIT_PRINT PROC						
@@ -332,6 +341,30 @@ MAIN:
 		LEA SI, String
 		CALL EnterString
 
+		LEA DX, MSG_YED
+		MOV AH, 09H
+		INT 21H
+
+		PUSH SI
+		PUSH DI
+		PUSH CX
+		PUSH DX
+
+		LEA SI,String
+		LEA DI, RESERVE
+		MOV CX, 1000
+		REP MOVS RESERVE,String
+		LEA DX,RESERVE
+		MOV AH,09H
+		INT 21H
+POP DX
+POP CX
+POP DI
+		POP SI
+		
+		
+		
+
 		CALL GETLENGTH								;GET LENGTH of THAT string
 		CMP CX, 0
 
@@ -348,7 +381,10 @@ MAIN:
 		LEA DX, MSG_WRD								;MSG outout
 		MOV AH, 09H
 		INT 21H
-		CALL WLONGPRINT
+		CALL WLONGPRINT	
+	
+		
+
 		JMP MAIN_END
 
 MAIN_EMPCH:

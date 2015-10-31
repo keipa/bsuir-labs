@@ -406,7 +406,10 @@ namespace WpfApplication1
 
 
 
-
+        /// <summary>
+        /// //////////////////////////////////////////////////////////////////////////////////
+        /// </summary>
+      
         private void binary_save(object sender, RoutedEventArgs e)
         {
             SaveFileDialog dlg = new SaveFileDialog();
@@ -464,8 +467,8 @@ namespace WpfApplication1
         private void archivefile(object sender, RoutedEventArgs e)
         {
             SaveFileDialog dlg = new SaveFileDialog();
-            dlg.DefaultExt = ".zip";
-            dlg.Filter = "Archived file (.zip)|*.zip";
+            //dlg.DefaultExt = ".zip";
+            //dlg.Filter = "Archived file (.zip)|*.zip";
             dlg.CheckFileExists = true;
             if (dlg.ShowDialog() == true)
             {
@@ -488,7 +491,7 @@ namespace WpfApplication1
                 filepath = dlg.FileName;
             }
 
-            string outFilename = filepath;
+            string outFilename = filepath + ".bin";
 
             One.DecompressFile(filepath, outFilename);
         }
@@ -550,6 +553,17 @@ namespace WpfApplication1
 
         }
     }
+
+
+
+    /// <summary>
+    /// ///////////////////////////////////////////////////////////////////////////////////
+    /// </summary>
+
+
+
+
+
 
 
 
