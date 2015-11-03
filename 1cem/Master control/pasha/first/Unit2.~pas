@@ -1,0 +1,24 @@
+unit Unit2;
+
+interface
+
+procedure sort(var a:array of integer;var n:integer);
+
+implementation
+
+
+procedure sort(var a:array of integer;var n:integer);
+var i,j,r:integer;
+begin
+    for i:=0 to n-1 do
+     for j:=0 to n do
+       if a[i]> a[j]then
+       begin
+         r:=a[i];                                       //sorting
+         a[i]:=a[j];
+         a[j]:=r;
+       end;
+end;
+
+
+end.

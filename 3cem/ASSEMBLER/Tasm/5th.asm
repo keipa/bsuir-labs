@@ -13,7 +13,7 @@
 	MSG_YED db "You entered: ", 10, 13, '$'
 	
 	CC_S db "RRSOURSE BIgs STRING" , '$'
-	RESERVE db 1000 dup (" ")
+	RESERVE  	 1000 dup (" ")
 .code
 
 
@@ -180,7 +180,7 @@ EnterString PROC
 		PUSH BX								
 		PUSH SI									;save registers
 
-		MOV 	BX, SI
+		MOV BX, SI
 ENTERING_CYCLE:
 		MOV AH, 08H
 		INT 21H
@@ -210,17 +210,13 @@ BACKSPACE_PROCESSING:
 		MOV	DL, 8
 		MOV AH, 02H								;BACKSPACE processing
 		INT 21H
-
 		MOV	DL, 0
-
 		INT 21H
 		MOV	DL, 8
 		INT 21H
-
 		CMP SI, BX
 		JE 	ENTERING_CYCLE
 		DEC SI 
-
 		JMP ENTERING_CYCLE
 
 OVERLIMIT:
@@ -232,25 +228,16 @@ ENTER_OUT:
 		MOV byte ptr [SI], ' '
 		INC SI
 		MOV byte ptr [SI], '$'					;interruption of the word
-
 		MOV	DL, 10
 		MOV AH, 02H
 		INT 21H
 		MOV	DL, 13
 		INT 21H
 
-
-
 		POP SI									;return registers
 		POP BX									
-
-
 		POP DX									
 		POP AX									;return registers
-
-
-
-
 		RET
 ENDP EnterString
 
@@ -262,17 +249,15 @@ GET_DIGIT PROC
 		MOV AX, BX
 		XOR DX, DX								;put 10 to cx register
 		MOV	CX, 10
-
 		CWD
 		IDIV CX									;decrese down to 10
 		MOV BX, AX
-
 		TEST DX, DX 
 		JNS GET_OUT
 		NEG 	DX
 
 GET_OUT:
-		ADD 	DX, 48
+		ADD DX, 48
 
 		POP CX									
 		POP AX									;return registers
@@ -288,17 +273,13 @@ DIGIT_PRINT PROC
 		PUSH BX									
 		PUSH CX									
 		PUSH DX									;save registers
-		XOR CX, CX
 
+		XOR CX, CX
 		MOV BX, AX
 		TEST BX, BX					
 		JNS GETTING_DIGITS_LOOP
-
-
-
 		MOV AH, 02H
 		MOV DL, '-'
-		
 		INT 21H
 
 GETTING_DIGITS_LOOP:					
@@ -307,13 +288,11 @@ GETTING_DIGITS_LOOP:
 		INC CX
 		CMP BX, 0
 		JNE GETTING_DIGITS_LOOP
-
 PRINTING_DIGITS_LOOP:					
 		POP DX
 		MOV AH, 02H								;out of digits from stack
 		INT 21H
 		loop PRINTING_DIGITS_LOOP
-
 		MOV AH, 02H								;cursor down
 		MOV DL, 10
 		INT	21H
@@ -341,6 +320,8 @@ MAIN:
 		LEA SI, String
 		CALL EnterString
 
+
+
 		LEA DX, MSG_YED
 		MOV AH, 09H
 		INT 21H
@@ -357,9 +338,10 @@ MAIN:
 		LEA DX,RESERVE
 		MOV AH,09H
 		INT 21H
-POP DX
-POP CX
-POP DI
+
+		POP DX
+		POP CX
+		POP DI
 		POP SI
 		
 		

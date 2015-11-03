@@ -1,0 +1,29 @@
+unit Unit2;
+
+interface
+  Type
+    TRec = class (TObject)
+      r:extended;
+      Function FRecursion(n:integer):extended;
+      Function FRecurent(n:integer):extended;
+    end;
+implementation
+  Function TRec.FRecursion;
+    begin
+      if n=2 then FRecursion:=4/3
+             else FRecursion:=FRecursion(n-2)*sqr(n)/(sqr(n)-1);
+    end;
+  Function TRec.FRecurent;
+    var i:byte;
+        res:extended;
+    begin
+      res:=4/3;
+      i:=4;
+      while i<=n do
+        begin
+          res:=res*(sqr(i)/(sqr(i)-1));
+          i:=i+2;
+        end;
+      Result:=res;
+    end;
+end.

@@ -1,0 +1,13 @@
+      str,fulstr:string;
+begin
+AssignFile(f, 'saveme.txt');
+Reset(f);
+while not Eof(f)  do
+begin
+readln(f, str);
+fulstr:=fulstr+#$9+str;
+end;
+Clipboard.AsText:=  fulstr;
+CloseFile(f);
+end;
+

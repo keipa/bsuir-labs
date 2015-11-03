@@ -1,0 +1,21 @@
+﻿#include <stdio.h>
+#include <locale.h>
+int main(void) {
+char str[]="";
+int n;
+setlocale(LC_ALL, "Rus");
+scanf (n);
+for (int i=0; i=n;i++){
+	scanf (str[n]);
+}
+for (int i=0; i=n;i++){
+	str[i]=" "; 
+
+for (int i=0; i=n;i++){
+	printf (str[n]);
+}
+}
+	return 0;
+}
+
+хоакин феникс

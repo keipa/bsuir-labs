@@ -1,0 +1,36 @@
+﻿#include <stdio.h>
+#include <locale.h>
+// подсчёт общей суммы
+int main()
+{
+unsigned int s, a = 50, b = 20, c = 1;
+setlocale(LC_ALL, "Rus");
+printf("Сумма в рублях :");
+scanf("%d", &s);
+printf("пятидесятирублёвые купюры %d\n", s / a);
+printf("двадцатирублёвые купюры %d\n", s / b);
+printf("купюры в один рубль %d\n", s / c);
+return 0;
+}
+
+__________________________________________________
+
+#include <stdio.h>
+#include <locale.h>
+//посчёт суммы от остатка
+int main()
+{
+unsigned int s,s50,s20,s1, a = 50, b = 20, c = 1;
+setlocale(LC_ALL, "Rus");
+printf("Сумма в рублях :");
+scanf("%d", &s);
+s50 = s/a;
+printf("пятидесятирублёвые купюры %d\n", s50);
+s = s - s50*a;
+s20 = s/b;
+printf("двадцатирублёвые купюры %d\n", s20);
+s = s - s20*b;
+s1  = s/c;
+printf("купюры в один рубль %d\n", s1);
+return 0;
+}
