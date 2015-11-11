@@ -627,12 +627,19 @@ namespace WpfApplication1
 
         public void Serialize(StreamWriter serializationStream, object graph)
         {
-            foreach (FieldInfo finfo in graph.GetType().GetFields(BindingFlags.GetField | BindingFlags.SetField | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance))
+            Type type = graph.GetType();
+
+            if (!type.IsPrimitive)
             {
-                if (!finfo.IsLiteral && !finfo.IsInitOnly && !finfo.IsNotSerialized && finfo.FieldType.BaseType != null && !finfo.FieldType.BaseType.Equals(typeof(System.MulticastDelegate)))
+                FieldInfo[] fi = type.GetFields(BindingFlags.GetField | BindingFlags.SetField | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
+                foreach (FieldInfo finfo in fi )
                 {
-                    serializationStream.WriteLine(finfo.Name);
-                    serializationStream.WriteLine(finfo.GetValue(graph));
+                    /*if (!finfo.IsLiteral && !finfo.IsInitOnly && !finfo.IsNotSerialized && finfo.FieldType.BaseType != null && !finfo.FieldType.BaseType.Equals(typeof(System.MulticastDelegate)))
+                    {
+                        serializationStream.WriteLine(finfo.Name);
+                        serializationStream.WriteLine(finfo.GetValue(graph));
+                    }*/
+                    Serialize(serializationStream, finfo.GetValue(graph));
                 }
             }
                
