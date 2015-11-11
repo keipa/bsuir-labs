@@ -623,39 +623,67 @@ namespace WpfApplication1
     /// FORMATTER↓↓↓↓↓↓
     public class XFormatter
     {
+        
         public XFormatter() { }
 
         public void Serialize(StreamWriter serializationStream, object graph)
         {
-            Type type = graph.GetType();
-
-            if (!type.IsPrimitive)
+            Type _type = graph.GetType();
+            if (!_type.BaseType.Equals(typeof(MulticastDelegate)))
             {
-                FieldInfo[] fi = type.GetFields(BindingFlags.GetField | BindingFlags.SetField | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
-                foreach (FieldInfo finfo in fi )
+                if (_type.Equals(typeof(string)))
                 {
-                    /*if (!finfo.IsLiteral && !finfo.IsInitOnly && !finfo.IsNotSerialized && finfo.FieldType.BaseType != null && !finfo.FieldType.BaseType.Equals(typeof(System.MulticastDelegate)))
-                    {
-                        serializationStream.WriteLine(finfo.Name);
-                        serializationStream.WriteLine(finfo.GetValue(graph));
-                    }*/
-                    Serialize(serializationStream, finfo.GetValue(graph));
+                    serializationStream.WriteLine(graph.ToString());
+                    return;
                 }
-            }
-               
+                if (_type.IsArray)
+                {
+                    
+                    foreach(object innerobj in (Array)graph)
+                    {
+                        if (innerobj != null)
+                        {
+                            Serialize(serializationStream, innerobj);
+                        }
+                    }
+                }
+                if (!_type.IsPrimitive)
+                {
+                    FieldInfo[] fi = _type.GetFields(BindingFlags.GetField | BindingFlags.SetField | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
+                    foreach (FieldInfo finfo in fi)
+                    {
+                        /*if (!finfo.IsLiteral && !finfo.IsInitOnly && !finfo.IsNotSerialized && finfo.FieldType.BaseType != null && !finfo.FieldType.BaseType.Equals(typeof(System.MulticastDelegate)))
+                        {
+                            serializationStream.WriteLine(finfo.Name);
+                            serializationStream.WriteLine(finfo.GetValue(graph));
+                        }*/
+                        if (finfo.GetValue(graph) != null)
+                        {
+                            Serialize(serializationStream, finfo.GetValue(graph));
+                        }
+                    }
+                }
+                else
+                {
+                    serializationStream.WriteLine(_type.ToString());
+                    serializationStream.WriteLine(graph.ToString());
+                }
 
-            serializationStream.WriteLine("One name");
-            string s = graph.GetType().FullName;
-            if (graph.GetType().IsPrimitive)
-            {
-                serializationStream.WriteLine(s);
+
+
+               // serializationStream.WriteLine("One name");
+               // string s = graph.GetType().FullName;
+               // if (graph.GetType().IsPrimitive)
+               // {
+               //     serializationStream.WriteLine(s);
+               // }
+
+                //s = p
+
+
             }
-            
-            //s = p
-            
-                
+
         }
-
 
 
 
