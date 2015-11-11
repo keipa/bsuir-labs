@@ -638,8 +638,8 @@ namespace WpfApplication1
                 }
                 if (_type.IsArray)
                 {
-                    
-                    foreach(object innerobj in (Array)graph)
+
+                    foreach (object innerobj in (Array)graph)
                     {
                         if (innerobj != null)
                         {
@@ -659,18 +659,21 @@ namespace WpfApplication1
                         }*/
                         if (finfo.GetValue(graph) != null)
                         {
+                            serializationStream.WriteLine(">");
                             Serialize(serializationStream, finfo.GetValue(graph));
+                            serializationStream.WriteLine("<");
                         }
                     }
                 }
                 else
                 {
+                    
                     serializationStream.WriteLine(_type.ToString());
                     serializationStream.WriteLine(graph.ToString());
                 }
 
 
-
+            }
                // serializationStream.WriteLine("One name");
                // string s = graph.GetType().FullName;
                // if (graph.GetType().IsPrimitive)
@@ -681,7 +684,7 @@ namespace WpfApplication1
                 //s = p
 
 
-            }
+            
 
         }
 
@@ -693,6 +696,7 @@ namespace WpfApplication1
         public object Deserialize(Stream serializationStream)
         {
             object my = null;
+
             return my;
         }
     }
@@ -719,7 +723,7 @@ namespace WpfApplication1
         {
             SerializableObject objToSerialize = null;
             FileStream fstream = File.Open(fileName, FileMode.Open);
-            BinaryFormatter binaryFormatter = new BinaryFormatter();
+            BinaryFormatter binaryFormatter = new BinaryFormatter(); 
             objToSerialize = (SerializableObject)binaryFormatter.Deserialize(fstream);
             fstream.Close();
             return objToSerialize;

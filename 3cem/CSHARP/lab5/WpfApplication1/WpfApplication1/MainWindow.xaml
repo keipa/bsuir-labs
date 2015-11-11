@@ -149,7 +149,7 @@
         <Button Content="&lt;--srz" HorizontalAlignment="Left" Height="19" Margin="259,26,0,0" VerticalAlignment="Top" Width="67" Background="#FF333337" Foreground="White" Click="startDeserialize" />
         <Button x:Name="LINQ" Content="LINQ" Margin="140,235,0,0" Background="#FF333337" Foreground="White" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" Width="69" Click="startLINQ" />
         <Button Content="XSERIALIZE" HorizontalAlignment="Left" Height="19" Margin="368,64,0,0" VerticalAlignment="Top" Width="78" Background="#FF333337" Foreground="White" Click="XSerialize" />
-        <Button Content="xDEserialize" HorizontalAlignment="Left" Height="19" Margin="451,64,0,0" VerticalAlignment="Top" Width="81" Background="#FF333337" Foreground="White" Click="XDESerialize" />
+        <Button Content="xDEserialize" HorizontalAlignment="Left" Height="19" Margin="451,64,0,0" VerticalAlignment="Top" Width="81" Background="#FF333337" Foreground="White" Click="startDeserialize" />
 
 
 
