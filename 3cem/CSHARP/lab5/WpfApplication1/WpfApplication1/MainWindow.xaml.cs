@@ -633,6 +633,8 @@ namespace WpfApplication1
             {
                 if (_type.Equals(typeof(string)))
                 {
+                    serializationStream.WriteLine("System.String");
+                    //serializationStream.WriteLine(_type.ToString());
                     serializationStream.WriteLine(graph.ToString());
                     return;
                 }
@@ -650,6 +652,7 @@ namespace WpfApplication1
                 if (!_type.IsPrimitive)
                 {
                     FieldInfo[] fi = _type.GetFields(BindingFlags.GetField | BindingFlags.SetField | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
+                    serializationStream.WriteLine(graph.ToString());
                     foreach (FieldInfo finfo in fi)
                     {
                         /*if (!finfo.IsLiteral && !finfo.IsInitOnly && !finfo.IsNotSerialized && finfo.FieldType.BaseType != null && !finfo.FieldType.BaseType.Equals(typeof(System.MulticastDelegate)))
@@ -657,8 +660,10 @@ namespace WpfApplication1
                             serializationStream.WriteLine(finfo.Name);
                             serializationStream.WriteLine(finfo.GetValue(graph));
                         }*/
+                        
                         if (finfo.GetValue(graph) != null)
                         {
+                           
                             serializationStream.WriteLine(">");
                             Serialize(serializationStream, finfo.GetValue(graph));
                             serializationStream.WriteLine("<");
