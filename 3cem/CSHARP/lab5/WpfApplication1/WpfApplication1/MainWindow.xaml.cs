@@ -213,7 +213,7 @@ namespace WpfApplication1
             resultscore = "";
             resultmark = 0;
             //TC.Items.Add()
-            if (Available.Content == "0")
+            if (Convert.ToString(Available.Content) == "0")
             {
                 return;
             }
@@ -236,33 +236,33 @@ namespace WpfApplication1
             QuestionTitle.Content = One.GetQuestion(index).Name;
             foreach (Variant v in One.GetQuestion(index))
             {
-                if (Ach1.Content == "")
+                if (Convert.ToString(Ach1.Content) == "")
                 {
                     Ach1.Content = v.Name;
                     continue;
                 }
-                if (Ach2.Content == "")
+                if (Convert.ToString(Ach2.Content) == "")
                 {
                     Ach2.Content = v.Name;
                     continue;
                 }
-                if (Ach3.Content == "")
+                if (Convert.ToString(Ach3.Content) == "")
                 {
                     Ach3.Content = v.Name;
                     continue;
                 }
-                if (Ach4.Content == "")
+                if (Convert.ToString(Ach4.Content) == "")
                 {
                     Ach4.Content = v.Name;
                     continue;
                 }
-                if (Ach5.Content == "")
+                if (Convert.ToString(Ach5.Content) == "")
                 {
                     Ach5.Content = v.Name;
                     continue;
                 }
             }
-            if (Ach5.Content == "")
+            if (Convert.ToString(Ach5.Content) == "")
             {
                 Ach5.IsEnabled = false;
             }
@@ -270,7 +270,7 @@ namespace WpfApplication1
             {
                 return;
             }
-            if (Ach4.Content == "")
+            if (Convert.ToString(Ach4.Content) == "")
             {
                 Ach4.IsEnabled = false;
             }
@@ -278,7 +278,7 @@ namespace WpfApplication1
             {
                 return;
             }
-            if (Ach3.Content == "")
+            if (Convert.ToString(Ach3.Content) == "")
             {
                 Ach3.IsEnabled = false;
             }
@@ -286,7 +286,7 @@ namespace WpfApplication1
             {
                 return;
             }
-            if (Ach2.Content == "")
+            if (Convert.ToString(Ach2.Content) == "")
             {
                 Ach2.IsEnabled = false;
             }
@@ -349,7 +349,7 @@ namespace WpfApplication1
         }
         private void InitTest()
         {
-            if (QuestionTitle.Content != "")
+            if (Convert.ToString(QuestionTitle.Content) != "")
             {
                 //проверка на правильность
                 if (IsLastCorrect())
@@ -363,7 +363,7 @@ namespace WpfApplication1
                 }
             }
 
-            if (NextButton.Content == "Finish")
+            if (Convert.ToString(NextButton.Content) == "Finish")
             {
                 window.Height = 345d;
                 NextButton.Content = "Next";
@@ -700,7 +700,7 @@ namespace WpfApplication1
 
         public object Deserialize(StreamReader serializationStream)
         {
-            string close = "<";
+            //string close = "<";
             object recursionObj = null;
             string line = serializationStream.ReadLine();
             Type type = Type.GetType(line);
