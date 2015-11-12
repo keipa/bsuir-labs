@@ -640,7 +640,7 @@ namespace WpfApplication1
                 }
                 if (_type.IsArray)
                 {
-
+                    serializationStream.WriteLine(((Array)graph).Length);
                     foreach (object innerobj in (Array)graph)
                     {
                         if (innerobj != null)
@@ -698,11 +698,55 @@ namespace WpfApplication1
 
 
 
-        public object Deserialize(Stream serializationStream)
+        public object Deserialize(StreamReader serializationStream)
         {
-            object my = null;
+            string close = "<";
+            object recursionObj = null;
+            string line = serializationStream.ReadLine();
+            Type type = Type.GetType(line);
 
-            return my;
+            if (type.Equals(typeof(string)))
+            {
+                string value = serializationStream.ReadLine();
+                recursionObj = value;
+                return recursionObj;
+            }
+            else if (type.IsPrimitive)  
+            {
+                recursionObj = (object)type.InvokeMember("Parse",
+              BindingFlags.InvokeMethod | BindingFlags.Static | BindingFlags.Public,
+              null, null, new object[] { serializationStream.ReadLine() });
+
+                return recursionObj;
+            }
+            else if (type.IsArray)
+            {
+                line = serializationStream.ReadLine();
+                recursionObj = Activator.CreateInstance(type ,Convert.ToInt32(serializationStream.ReadLine())); //создаем сам объект
+
+
+
+                for (int counter = 0; counter < ((Array)recursionObj).Length; counter++)
+                {
+                    ((Array)recursionObj).SetValue(Deserialize(serializationStream), counter);
+                    serializationStream.ReadLine();
+                }
+            }else if(!type.IsPrimitive){
+
+                recursionObj = Activator.CreateInstance(type);
+                
+                FieldInfo[] finfo = type.GetFields(BindingFlags.GetField | BindingFlags.SetField |
+                                 BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
+                line = serializationStream.ReadLine();
+                foreach (FieldInfo field in finfo)
+                {
+                    field.SetValue(recursionObj, Deserialize(serializationStream));
+                    line = serializationStream.ReadLine();
+                }
+            }
+
+
+            return recursionObj;
         }
     }
 
@@ -754,8 +798,10 @@ namespace WpfApplication1
         {
             SerializableObject objToSerialize = null;
             FileStream fstream = File.Open(fileName, FileMode.Open);
+            StreamReader read = new StreamReader(fstream);
+
             XFormatter xformat = new XFormatter();
-            objToSerialize = (SerializableObject)xformat.Deserialize(fstream);
+            objToSerialize = (SerializableObject)xformat.Deserialize(read);
             fstream.Close();
             return objToSerialize;
         }
