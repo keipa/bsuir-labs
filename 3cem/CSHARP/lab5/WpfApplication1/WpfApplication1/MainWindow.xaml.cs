@@ -583,7 +583,7 @@ namespace WpfApplication1
 
         private void startLINQ(object sender, RoutedEventArgs e)
         {
-
+            window.Width = 920d;
         }
 
         private void XSerialize(object sender, RoutedEventArgs e)
@@ -612,10 +612,82 @@ namespace WpfApplication1
             One = obj.Each;
             TreeView.ItemsSource = One;
         }
+
+        private void CloseLinq(object sender, RoutedEventArgs e)
+        {
+            window.Width = 710d;
+        }
+
+        private void Button_Click_5(object sender, RoutedEventArgs e)//search
+        {
+
+
+            
+            var selectedTeams = from t in One // определяем каждый объект из teams как t
+                                where t.Name.StartsWith(textLINQ.Text) //фильтрация по критерию
+                                select t; // выбираем объект
+
+            //listLINQ.ItemsSource = selectedTeams;
+            foreach (var s in selectedTeams)
+            {
+                listLINQ.Items.Add(s.Name);
+            }
+            
+
+        }
+
+        private void Button_Click_6(object sender, RoutedEventArgs e)//min
+        
+        {
+            listLINQ.Items.Clear();
+            listLINQ.Items.Refresh();
+
+            int minim = One.Min(a => a.Difficulty);
+            textLINQ.Text = minim.ToString();
+        }
+
+       
+
+        private void Button_Click_8(object sender, RoutedEventArgs e)//group
+        {
+            
+
+            var selectedTeams = from s in One
+                                group s by s.Difficulty;
+
+            var unGroup = from b in selectedTeams
+                          from c in b
+                          select c;
+
+            foreach (var s in unGroup)
+            {
+                listLINQ.Items.Add(s.Difficulty + " "+s.Name);
+            }                    
+        }
+
+        private void Button_Click_9(object sender, RoutedEventArgs e)//sortbyname
+        {
+            listLINQ.Items.Clear();
+            listLINQ.Items.Refresh();
+
+            var selectedTeams = from lan in One
+
+                                orderby lan.Name
+                                select lan;
+            foreach (var s in selectedTeams)
+            {
+                listLINQ.Items.Add(s.Name + " "+ s.Difficulty);
+            }
+        }
+
+        private void Button_Click_10(object sender, RoutedEventArgs e)
+        {
+            
+            listLINQ.Items.Clear();
+            listLINQ.Items.Refresh();
+
+        }
     }
-
-
-
     /// <summary>
     /// ///////////////////////////////////////////////////////////////////////////////////
     /// </summary>
@@ -623,13 +695,13 @@ namespace WpfApplication1
     /// FORMATTER↓↓↓↓↓↓
     public class XFormatter
     {
-        
+
         public XFormatter() { }
 
         public void Serialize(StreamWriter serializationStream, object graph)
         {
             Type _type = graph.GetType();
-            if (!_type.BaseType.Equals(typeof(MulticastDelegate)))
+            if (!_type.BaseType.Equals(typeof(MulticastDelegate)) && !_type.BaseType.Equals(typeof(System.Collections.Specialized.INotifyCollectionChanged)))
             {
                 if (_type.Equals(typeof(string)))
                 {
@@ -649,10 +721,11 @@ namespace WpfApplication1
                         }
                     }
                 }
+
                 if (!_type.IsPrimitive)
                 {
                     FieldInfo[] fi = _type.GetFields(BindingFlags.GetField | BindingFlags.SetField | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
-                    serializationStream.WriteLine(graph.ToString());
+                    serializationStream.WriteLine(_type.FullName);
                     foreach (FieldInfo finfo in fi)
                     {
                         /*if (!finfo.IsLiteral && !finfo.IsInitOnly && !finfo.IsNotSerialized && finfo.FieldType.BaseType != null && !finfo.FieldType.BaseType.Equals(typeof(System.MulticastDelegate)))
@@ -660,58 +733,42 @@ namespace WpfApplication1
                             serializationStream.WriteLine(finfo.Name);
                             serializationStream.WriteLine(finfo.GetValue(graph));
                         }*/
-                        
-                        if (finfo.GetValue(graph) != null)
+                        if (finfo.GetValue(graph) != null && !finfo.IsLiteral && !finfo.IsInitOnly && !finfo.IsNotSerialized && finfo.FieldType.BaseType != null && !finfo.FieldType.BaseType.Equals(typeof(System.MulticastDelegate)))
                         {
-                           
-                            serializationStream.WriteLine(">");
+                            serializationStream.WriteLine("{");
                             Serialize(serializationStream, finfo.GetValue(graph));
-                            serializationStream.WriteLine("<");
+                            serializationStream.WriteLine("}");
                         }
                     }
                 }
                 else
                 {
-                    
                     serializationStream.WriteLine(_type.ToString());
                     serializationStream.WriteLine(graph.ToString());
                 }
-
-
             }
-               // serializationStream.WriteLine("One name");
-               // string s = graph.GetType().FullName;
-               // if (graph.GetType().IsPrimitive)
-               // {
-               //     serializationStream.WriteLine(s);
-               // }
-
-                //s = p
-
-
-            
-
+            // serializationStream.WriteLine("One name");
+            // string s = graph.GetType().FullName;
+            // if (graph.GetType().IsPrimitive)
+            // {
+            //     serializationStream.WriteLine(s);
+            //s = p
         }
-
-
-
-
-
-
         public object Deserialize(StreamReader serializationStream)
         {
             //string close = "<";
             object recursionObj = null;
             string line = serializationStream.ReadLine();
+            //if (line == "<"|| line == ">") { line = serializationStream.ReadLine(); }
             Type type = Type.GetType(line);
 
-            if (type.Equals(typeof(string)))
+            if (type.Equals(typeof(string)))// если это строка
             {
                 string value = serializationStream.ReadLine();
                 recursionObj = value;
                 return recursionObj;
             }
-            else if (type.IsPrimitive)  
+            else if (type.IsPrimitive)  //если объект примитивный
             {
                 recursionObj = (object)type.InvokeMember("Parse",
               BindingFlags.InvokeMethod | BindingFlags.Static | BindingFlags.Public,
@@ -719,25 +776,39 @@ namespace WpfApplication1
 
                 return recursionObj;
             }
-            else if (type.IsArray)
+            else if (type.IsArray || type.IsEnum)//если массив
             {
                 line = serializationStream.ReadLine();
-                recursionObj = Activator.CreateInstance(type ,Convert.ToInt32(serializationStream.ReadLine())); //создаем сам объект
+                int co = Convert.ToInt32(serializationStream.ReadLine());
+                recursionObj = Activator.CreateInstance(type, co); //создаем сам объект
 
-
-
-                for (int counter = 0; counter < ((Array)recursionObj).Length; counter++)
+                for (int counter = 0; counter <= co; counter++)
                 {
                     ((Array)recursionObj).SetValue(Deserialize(serializationStream), counter);
                     serializationStream.ReadLine();
                 }
-            }else if(!type.IsPrimitive){
+            }
+            else if (type.IsGenericType)
+            {
+                line = serializationStream.ReadLine();
+                int co = Convert.ToInt32(serializationStream.ReadLine());
+                recursionObj = Activator.CreateInstance(type, co); //создаем сам объект
+
+                for (int counter = 0; counter <= co; counter++)
+                {
+                    ((System.Array)recursionObj).SetValue(Deserialize(serializationStream), counter);
+                    serializationStream.ReadLine();
+                }
+            }
+            else if (!type.IsPrimitive)
+            {//если объект не примитивный
 
                 recursionObj = Activator.CreateInstance(type);
-                
+
                 FieldInfo[] finfo = type.GetFields(BindingFlags.GetField | BindingFlags.SetField |
                                  BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
                 line = serializationStream.ReadLine();
+                // if (line == ">"|| line == "<") { line = serializationStream.ReadLine(); }
                 foreach (FieldInfo field in finfo)
                 {
                     field.SetValue(recursionObj, Deserialize(serializationStream));
@@ -749,13 +820,7 @@ namespace WpfApplication1
             return recursionObj;
         }
     }
-
-
     //serialization of object to file and from file
-
-
-
-
     public class MySerializer
     {
         public MySerializer() { }
@@ -772,7 +837,7 @@ namespace WpfApplication1
         {
             SerializableObject objToSerialize = null;
             FileStream fstream = File.Open(fileName, FileMode.Open);
-            BinaryFormatter binaryFormatter = new BinaryFormatter(); 
+            BinaryFormatter binaryFormatter = new BinaryFormatter();
             objToSerialize = (SerializableObject)binaryFormatter.Deserialize(fstream);
             fstream.Close();
             return objToSerialize;
@@ -807,10 +872,6 @@ namespace WpfApplication1
         }
 
     }
-
-
-
-
     //объект сущностей, для которых нужна сериализация
     [Serializable]
     public class SerializableObject : ISerializable
@@ -840,7 +901,6 @@ namespace WpfApplication1
 
     }
     //end of serialization
-
     [Serializable]
     public class Test : IEnumerable<Question>, INotifyCollectionChanged, ISerializable
     {

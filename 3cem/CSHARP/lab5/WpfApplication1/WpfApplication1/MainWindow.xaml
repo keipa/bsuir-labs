@@ -4,7 +4,7 @@
     xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="WpfApplication1.MainWindow"
         
-        Name="window" Title="Central Testing" Width="720" Height="345" ResizeMode="NoResize">
+        Name="window" Title="Central Testing" Width="707" Height="345" ResizeMode="NoResize">
     <Window.Resources>
         <Style TargetType="{x:Type TreeViewItem}">
         </Style>
@@ -150,6 +150,16 @@
         <Button x:Name="LINQ" Content="LINQ" Margin="140,235,0,0" Background="#FF333337" Foreground="White" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" Width="69" Click="startLINQ" />
         <Button Content="XSERIALIZE" HorizontalAlignment="Left" Height="19" Margin="368,64,0,0" VerticalAlignment="Top" Width="78" Background="#FF333337" Foreground="White" Click="XSerialize" />
         <Button Content="xDEserialize" HorizontalAlignment="Left" Height="19" Margin="451,64,0,0" VerticalAlignment="Top" Width="81" Background="#FF333337" Foreground="White" Click="XDESerialize" />
+        <Button x:Name="LINQ_Copy" Content="Close" Margin="830,241,0,0" Background="#FF333337" Foreground="White" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" Width="69" Click="CloseLinq" />
+        <ComboBox HorizontalAlignment="Left" Margin="708,22,0,0" VerticalAlignment="Top" Width="120">
+            <Button Content="Select" Click="Button_Click_5"/>
+            <Button Content="Min" Click="Button_Click_6"/>
+            <Button Content="Group" Click="Button_Click_8"/>
+            <Button Content="OrderBy" Click="Button_Click_9"/>
+        </ComboBox>
+        <ListBox x:Name="listLINQ" HorizontalAlignment="Left" Height="118" Margin="722,107,0,0" VerticalAlignment="Top" Width="193"/>
+        <TextBox x:Name="textLINQ" HorizontalAlignment="Left" Height="23" Margin="830,79,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85"/>
+        <Button Content="Clear" HorizontalAlignment="Left" Margin="722,243,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_10"/>
 
 
 
