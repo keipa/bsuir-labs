@@ -10,13 +10,17 @@
         </Style>
     </Window.Resources>
     <Grid Background="#FF2D2D30">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="523*"/>
+            <ColumnDefinition Width="178*"/>
+        </Grid.ColumnDefinitions>
         <Label Name="Central" Content="Central Testing" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.538" Foreground="White" FontSize="30" FontFamily="Eurostile"/>
         <Button Name="AutoaddButton" Content="Autoadd" Margin="10,262,0,0" Background="#FF333337" Foreground="#FFF5FFFF" HorizontalAlignment="Left" Width="99" Height="36" VerticalAlignment="Top" Click="Button_Click_1"/>
-        <Button Name="Start" Content="START" Margin="545,262,0,0" Background="#FFFFCC00" FontSize="15" Height="36" VerticalAlignment="Top" HorizontalAlignment="Left" Width="97" Click="Button_Click_3" />
+        <Button Name="Start" Content="START" Margin="22,262,0,0" Background="#FFFFCC00" FontSize="15" Height="36" VerticalAlignment="Top" HorizontalAlignment="Left" Width="97" Click="Button_Click_3" Grid.Column="1" />
         <Button Name="AddButton" Content="ADD" Margin="10,235,0,0" Click="Button_Click" Foreground="Black" Background="#FFFFCC00" HorizontalAlignment="Left" Width="125" Height="22" VerticalAlignment="Top" FontSize="15"/>
         <Label Name="Available" Content="0" HorizontalAlignment="Left" Margin="451,0,0,0" VerticalAlignment="Top" Foreground="White" FontSize="45" FontFamily="Segoe UI Light" FontWeight="Bold"/>
-        <Label Content="questions" HorizontalAlignment="Left" Margin="484,22,0,0" VerticalAlignment="Top" Foreground="LightGray" FontSize="15" Height="32"/>
-        <Label Content="available" HorizontalAlignment="Left" Margin="484,38,0,0" VerticalAlignment="Top" Foreground="#FFD3D3C3"/>
+        <Label Content="questions" HorizontalAlignment="Left" Margin="484,22,0,0" VerticalAlignment="Top" Foreground="LightGray" FontSize="15" Height="32" Grid.ColumnSpan="2"/>
+        <Label Content="available" HorizontalAlignment="Left" Margin="484,38,0,0" VerticalAlignment="Top" Foreground="#FFD3D3C3" Grid.ColumnSpan="2"/>
         <Label Content="avarage" HorizontalAlignment="Left" Margin="329,22,0,0" VerticalAlignment="Top" Foreground="LightGray" FontSize="15" Height="32"/>
         <Label Content="difficulty" HorizontalAlignment="Left" Margin="335,38,0,0" VerticalAlignment="Top" Foreground="#FFD3D3C3"/>
         <Label Name="Average" Content="0" HorizontalAlignment="Left" Margin="396,0,0,0" VerticalAlignment="Top" Foreground="White" FontSize="45" FontFamily="Segoe UI Light" FontWeight="Bold"/>
@@ -53,7 +57,7 @@
             <ListBoxItem Content="10"/>
         </ComboBox>
 
-        <TreeView Name="TreeView" Margin="282,85,0,0" Background="#FF2D2D30" Foreground="White" FontSize="15" Height="164" VerticalAlignment="Top" HorizontalAlignment="Left" Width="337">
+        <TreeView Name="TreeView" Margin="282,85,0,0" Background="#FF2D2D30" Foreground="White" FontSize="15" Height="164" VerticalAlignment="Top" HorizontalAlignment="Left" Width="337" Grid.ColumnSpan="2">
             <TreeView.ItemTemplate>
                 <DataTemplate>
                     <TreeViewItem Name="NameTemplate" ItemsSource="{Binding current}" Header="{Binding Path=Name}" Foreground="White">
@@ -75,13 +79,13 @@
             <TextBox Height="23" TextWrapping="Wrap" Text="TextBox" Width="120"/>
         </TreeView>
 
-        <Label Name="QuestionTitle" Content="" HorizontalAlignment="Center" Margin="46,326,31,0" VerticalAlignment="Top" Width="439" Height="66" Foreground="White" HorizontalContentAlignment="Center" FontFamily="Simplified Arabic" FontSize="22"/>
-        <CheckBox Name="Ach1" Content="" HorizontalAlignment="Left" Margin="32,395,0,0" VerticalAlignment="Top" FontSize="15" Foreground="White"/>
-        <CheckBox Name="Ach2" Content="" HorizontalAlignment="Left" Margin="32,410,0,0" VerticalAlignment="Top" FontSize="15" Foreground="White"/>
-        <CheckBox Name="Ach3" Content="" HorizontalAlignment="Left" Margin="32,426,0,0" VerticalAlignment="Top" FontSize="15" Foreground="White"/>
-        <CheckBox Name="Ach4" Content="" HorizontalAlignment="Left" Margin="32,441,0,0" VerticalAlignment="Top" FontSize="15" Foreground="White"/>
-        <CheckBox Name="Ach5" Content="" HorizontalAlignment="Left" Margin="32,456,0,0" VerticalAlignment="Top" FontSize="15" Foreground="White"/>
-        <Button Name="NextButton" Content="NEXT" HorizontalAlignment="Left" Height="35" Margin="496,485,0,-204" VerticalAlignment="Top" Width="101" Click="Button_Click_4" Background="#FFFFCC00" FontSize="15"/>
+        <Label Name="QuestionTitle" Content="" HorizontalAlignment="Center" Margin="138,326,123,-76" VerticalAlignment="Top" Width="440" Height="66" Foreground="White" HorizontalContentAlignment="Center" FontFamily="Simplified Arabic" FontSize="22" Grid.ColumnSpan="2"/>
+        <CheckBox Name="Ach1" Content="" HorizontalAlignment="Left" Margin="32,395,0,-79" VerticalAlignment="Top" FontSize="15" Foreground="White"/>
+        <CheckBox Name="Ach2" Content="" HorizontalAlignment="Left" Margin="32,410,0,-94" VerticalAlignment="Top" FontSize="15" Foreground="White"/>
+        <CheckBox Name="Ach3" Content="" HorizontalAlignment="Left" Margin="32,426,0,-110" VerticalAlignment="Top" FontSize="15" Foreground="White"/>
+        <CheckBox Name="Ach4" Content="" HorizontalAlignment="Left" Margin="32,441,0,-125" VerticalAlignment="Top" FontSize="15" Foreground="White"/>
+        <CheckBox Name="Ach5" Content="" HorizontalAlignment="Left" Margin="32,456,0,-140" VerticalAlignment="Top" FontSize="15" Foreground="White"/>
+        <Button Name="NextButton" Content="NEXT" HorizontalAlignment="Left" Height="35" Margin="496,485,0,-204" VerticalAlignment="Top" Width="101" Click="Button_Click_4" Background="#FFFFCC00" FontSize="15" Grid.ColumnSpan="2"/>
         <Label Name="Result" Content="" HorizontalAlignment="Left" Margin="214,256,0,0" VerticalAlignment="Top" Foreground="White" FontSize="15" Width="304" Height="48"/>
         <Button Content="OPEN" HorizontalAlignment="Left" Height="18" Margin="231,113,0,0" VerticalAlignment="Top" Width="74" Background="#FF333337" Foreground="White" Click="binary_open" RenderTransformOrigin="0.5,0.5">
             <Button.RenderTransform>
@@ -93,7 +97,7 @@
                 </TransformGroup>
             </Button.RenderTransform>
         </Button>
-        <Button Content="SAVE" HorizontalAlignment="Left" Height="18" Margin="591,196,0,0" VerticalAlignment="Top" Width="86" Background="#FF333337" Foreground="White" Click="text_save" RenderTransformOrigin="0.5,0.5">
+        <Button Content="SAVE" HorizontalAlignment="Left" Height="18" Margin="68,196,0,0" VerticalAlignment="Top" Width="86" Background="#FF333337" Foreground="White" Click="text_save" RenderTransformOrigin="0.5,0.5" Grid.Column="1">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -104,7 +108,7 @@
             </Button.RenderTransform>
         </Button>
         <Button Content="ARCHIVE" HorizontalAlignment="Left" Height="19" Margin="259,64,0,0" VerticalAlignment="Top" Width="107" Background="#FF333337" Foreground="White" Click="archivefile"/>
-        <Button Content="DISARHIVE" HorizontalAlignment="Left" Height="19" Margin="535,64,0,0" VerticalAlignment="Top" Width="107" Background="#FF333337" Foreground="White" Click="disarchive"/>
+        <Button Content="DISARHIVE" HorizontalAlignment="Left" Height="19" Margin="12,64,0,0" VerticalAlignment="Top" Width="107" Background="#FF333337" Foreground="White" Click="disarchive" Grid.Column="1"/>
         <Button Content="SAVE" HorizontalAlignment="Left" Height="18" Margin="224,197,0,0" VerticalAlignment="Top" Width="86" Background="#FF333337" Foreground="White" Click="binary_save" RenderTransformOrigin="0.5,0.5">
             <Button.RenderTransform>
                 <TransformGroup>
@@ -115,7 +119,7 @@
                 </TransformGroup>
             </Button.RenderTransform>
         </Button>
-        <Button Content="OPEN" HorizontalAlignment="Left" Height="18" Margin="597,114,0,0" VerticalAlignment="Top" Width="74" Background="#FF333337" Foreground="White" Click="text_open" RenderTransformOrigin="0.5,0.5">
+        <Button Content="OPEN" HorizontalAlignment="Left" Height="18" Margin="74,114,0,0" VerticalAlignment="Top" Width="74" Background="#FF333337" Foreground="White" Click="text_open" RenderTransformOrigin="0.5,0.5" Grid.Column="1">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -135,7 +139,7 @@
                 </TransformGroup>
             </TextBlock.RenderTransform>
         </TextBlock>
-        <TextBlock HorizontalAlignment="Left" Margin="641,156,0,0" TextWrapping="Wrap" Text="Text" VerticalAlignment="Top" Foreground="Gray" RenderTransformOrigin="0.5,0.5" FontFamily="Eurostile">
+        <TextBlock HorizontalAlignment="Left" Margin="118,156,0,0" TextWrapping="Wrap" Text="Text" VerticalAlignment="Top" Foreground="Gray" RenderTransformOrigin="0.5,0.5" FontFamily="Eurostile" Grid.Column="1">
             <TextBlock.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -149,17 +153,17 @@
         <Button Content="&lt;--srz" HorizontalAlignment="Left" Height="19" Margin="259,26,0,0" VerticalAlignment="Top" Width="67" Background="#FF333337" Foreground="White" Click="startDeserialize" />
         <Button x:Name="LINQ" Content="LINQ" Margin="140,235,0,0" Background="#FF333337" Foreground="White" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" Width="69" Click="startLINQ" />
         <Button Content="XSERIALIZE" HorizontalAlignment="Left" Height="19" Margin="368,64,0,0" VerticalAlignment="Top" Width="78" Background="#FF333337" Foreground="White" Click="XSerialize" />
-        <Button Content="xDEserialize" HorizontalAlignment="Left" Height="19" Margin="451,64,0,0" VerticalAlignment="Top" Width="81" Background="#FF333337" Foreground="White" Click="XDESerialize" />
-        <Button x:Name="LINQ_Copy" Content="Close" Margin="830,241,0,0" Background="#FF333337" Foreground="White" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" Width="69" Click="CloseLinq" />
-        <ComboBox HorizontalAlignment="Left" Margin="708,22,0,0" VerticalAlignment="Top" Width="120">
+        <Button Content="xDEserialize" HorizontalAlignment="Left" Height="19" Margin="451,64,0,0" VerticalAlignment="Top" Width="81" Background="#FF333337" Foreground="White" Click="XDESerialize" Grid.ColumnSpan="2" />
+        <Button x:Name="LINQ_Copy" Content="Close" Margin="307,241,-198,0" Background="#FF333337" Foreground="White" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" Width="69" Click="CloseLinq" Grid.Column="1" />
+        <ComboBox HorizontalAlignment="Left" Margin="185,22,-127,0" VerticalAlignment="Top" Width="120" Grid.Column="1">
             <Button Content="Select" Click="Button_Click_5"/>
             <Button Content="Min" Click="Button_Click_6"/>
             <Button Content="Group" Click="Button_Click_8"/>
             <Button Content="OrderBy" Click="Button_Click_9"/>
         </ComboBox>
-        <ListBox x:Name="listLINQ" HorizontalAlignment="Left" Height="118" Margin="722,107,0,0" VerticalAlignment="Top" Width="193"/>
-        <TextBox x:Name="textLINQ" HorizontalAlignment="Left" Height="23" Margin="830,79,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85"/>
-        <Button Content="Clear" HorizontalAlignment="Left" Margin="722,243,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_10"/>
+        <ListBox x:Name="listLINQ" HorizontalAlignment="Left" Height="118" Margin="199,107,-214,0" VerticalAlignment="Top" Width="193" Grid.Column="1"/>
+        <TextBox x:Name="textLINQ" HorizontalAlignment="Left" Height="23" Margin="307,79,-214,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" Grid.Column="1"/>
+        <Button Content="Clear" HorizontalAlignment="Left" Margin="199,243,-96,0" VerticalAlignment="Top" Width="75" Click="Button_Click_10" Grid.Column="1"/>
 
 
 

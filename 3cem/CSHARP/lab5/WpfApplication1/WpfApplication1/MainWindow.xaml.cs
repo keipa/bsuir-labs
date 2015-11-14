@@ -41,6 +41,7 @@ namespace WpfApplication1
         {
             InitializeComponent();
             // TreeView.Items.Clear();
+            MessageBox.Show("Kolya pidr))))");
 
             Available.Content = "0";
             Average.Content = "0";
@@ -709,9 +710,12 @@ namespace WpfApplication1
                     //serializationStream.WriteLine(_type.ToString());
                     serializationStream.WriteLine(graph.ToString());
                     return;
-                }
+                }else
                 if (_type.IsArray)
+                
                 {
+                    
+                    serializationStream.WriteLine(_type.FullName);
                     serializationStream.WriteLine(((Array)graph).Length);
                     foreach (object innerobj in (Array)graph)
                     {
@@ -720,15 +724,18 @@ namespace WpfApplication1
                             Serialize(serializationStream, innerobj);
                         }
                     }
+                    return;
                 }
-
+                else 
+                
                 if (!_type.IsPrimitive)
                 {
                     FieldInfo[] fi = _type.GetFields(BindingFlags.GetField | BindingFlags.SetField | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
                     serializationStream.WriteLine(_type.FullName);
+
                     foreach (FieldInfo finfo in fi)
                     {
-                        /*if (!finfo.IsLiteral && !finfo.IsInitOnly && !finfo.IsNotSerialized && finfo.FieldType.BaseType != null && !finfo.FieldType.BaseType.Equals(typeof(System.MulticastDelegate)))
+                       /* if (!finfo.IsLiteral && !finfo.IsInitOnly && !finfo.IsNotSerialized && finfo.FieldType.BaseType != null && !finfo.FieldType.BaseType.Equals(typeof(System.MulticastDelegate)))
                         {
                             serializationStream.WriteLine(finfo.Name);
                             serializationStream.WriteLine(finfo.GetValue(graph));
@@ -761,28 +768,38 @@ namespace WpfApplication1
             string line = serializationStream.ReadLine();
             //if (line == "<"|| line == ">") { line = serializationStream.ReadLine(); }
             Type type = Type.GetType(line);
-
+            if (type.BaseType.Equals(typeof(MulticastDelegate)))
+            {
+                
+            }
             if (type.Equals(typeof(string)))// если это строка
             {
                 string value = serializationStream.ReadLine();
                 recursionObj = value;
                 return recursionObj;
             }
-            else if (type.IsPrimitive)  //если объект примитивный
+            else /*if (type.Equals(typeof(Boolean)))
+            {
+                string value = serializationStream.ReadLine();
+                recursionObj = value;
+                return recursionObj;
+            }
+            else*/
+                if (type.IsPrimitive)  //если объект примитивный
             {
                 recursionObj = (object)type.InvokeMember("Parse",
               BindingFlags.InvokeMethod | BindingFlags.Static | BindingFlags.Public,
               null, null, new object[] { serializationStream.ReadLine() });
-
+                line = serializationStream.ReadLine();
                 return recursionObj;
             }
             else if (type.IsArray || type.IsEnum)//если массив
             {
                 line = serializationStream.ReadLine();
-                int co = Convert.ToInt32(serializationStream.ReadLine());
+                int co = Convert.ToInt32(line);
                 recursionObj = Activator.CreateInstance(type, co); //создаем сам объект
-
-                for (int counter = 0; counter <= co; counter++)
+                line =  serializationStream.ReadLine();
+                for (int counter = 0; counter < co; counter++)
                 {
                     ((Array)recursionObj).SetValue(Deserialize(serializationStream), counter);
                     serializationStream.ReadLine();
@@ -790,15 +807,21 @@ namespace WpfApplication1
             }
             else if (type.IsGenericType)
             {
-                line = serializationStream.ReadLine();
-                int co = Convert.ToInt32(serializationStream.ReadLine());
-                recursionObj = Activator.CreateInstance(type, co); //создаем сам объект
+                recursionObj = Activator.CreateInstance(type);
 
-                for (int counter = 0; counter <= co; counter++)
+                FieldInfo[] finfo = type.GetFields(BindingFlags.GetField | BindingFlags.SetField |
+                                 BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
+                
+                // if (line == ">"|| line == "<") { line = serializationStream.ReadLine(); }
+                foreach (FieldInfo field in finfo)
+                
                 {
-                    ((System.Array)recursionObj).SetValue(Deserialize(serializationStream), counter);
-                    serializationStream.ReadLine();
+                    line = serializationStream.ReadLine();
+                    if (line == "}") { return recursionObj; }
+                    field.SetValue(recursionObj, Deserialize(serializationStream));
+                    
                 }
+               
             }
             else if (!type.IsPrimitive)
             {//если объект не примитивный
@@ -811,6 +834,9 @@ namespace WpfApplication1
                 // if (line == ">"|| line == "<") { line = serializationStream.ReadLine(); }
                 foreach (FieldInfo field in finfo)
                 {
+                    var t = field.GetType();
+                    if (field.FieldType.BaseType.Equals(typeof(MulticastDelegate)))
+                        continue;
                     field.SetValue(recursionObj, Deserialize(serializationStream));
                     line = serializationStream.ReadLine();
                 }
