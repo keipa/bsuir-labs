@@ -23,6 +23,7 @@ using System.ComponentModel;
 using System.IO.Compression;
 using System.Collections;
 using System.Reflection;
+using System.Globalization;
 
 namespace WpfApplication1
 {
@@ -49,7 +50,36 @@ namespace WpfApplication1
 
             TreeView.ItemsSource = One; //<--------------thats it
 
+            App.LanguageChanged += LanguageChanged;
+            CultureInfo currentLang = App.Language;
+            localization.Items.Clear();
+            foreach(var lang in App.Languages)
+            {
+                MenuItem mi = new MenuItem();
+                mi.Header = lang.DisplayName;
+                mi.Tag = lang;
+                mi.IsChecked = lang.Equals(currentLang);
+                mi.Click += ChangeLanguageClick;
+                localization.Items.Add(mi);
+            }
+        }
 
+        private void LanguageChanged(object sender,EventArgs e)
+        {
+            CultureInfo currentLang = App.Language; //получаем текущий язык
+            foreach(MenuItem ni in localization.Items)
+            {
+                CultureInfo i = (CultureInfo)ni.Tag;
+                ni.IsChecked = i != null && i.Equals(currentLang);
+            }
+
+        }
+        private void ChangeLanguageClick(object sender, EventArgs e)
+        {
+            MenuItem mi = (MenuItem)sender;
+            if(mi != null) { CultureInfo ci = (CultureInfo)mi.Tag;
+                if (ci != null) { App.Language = ci; } }
+            
         }
 
         public void Button_Click(object sender, RoutedEventArgs e)
