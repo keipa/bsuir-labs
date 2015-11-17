@@ -5,7 +5,7 @@
     xmlns:local="clr-namespace:WpfApplication1"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="WpfApplication1.MainWindow"
         
-        Name="window" Title="{DynamicResource header}" Width="668" Height="321" ResizeMode="NoResize">
+        Name="window" Title="{DynamicResource header}" Width="673" Height="321" ResizeMode="NoResize">
     <Window.Resources>
         <Style TargetType="{x:Type TreeViewItem}">
         </Style>
@@ -28,7 +28,7 @@
 
 
     </Window.Resources>
-    
+
     <Window.CommandBindings>
         <CommandBinding Command="local:HotKeys.AddTest" Executed="Button_Click_1" />
         <CommandBinding Command="local:HotKeys.Clear" Executed="Button_Click_2" />
@@ -183,16 +183,16 @@
         <Button x:Name="LINQ" Content="LINQ" Margin="140,213,0,0" Background="#FF333337" Foreground="White" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" Width="69" Click="startLINQ" />
         <Button Content="XSERIALIZE" HorizontalAlignment="Left" Height="19" Margin="368,83,0,0" VerticalAlignment="Top" Width="78" Background="#FF333337" Foreground="White" Click="XSerialize" Visibility="Hidden" />
         <Button Content="xDEserialize" HorizontalAlignment="Left" Height="19" Margin="451,83,0,0" VerticalAlignment="Top" Width="81" Background="#FF333337" Foreground="White" Click="XDESerialize" Visibility="Hidden" />
-        <Button x:Name="LINQ_Copy" Content="Close" Margin="725,271,0,0" Background="#FF333337" Foreground="White" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" Width="68" Click="CloseLinq" />
-        <ComboBox HorizontalAlignment="Left" Margin="787,45,0,0" VerticalAlignment="Top" Width="120" Height="22">
+        <Button x:Name="LINQ_Copy" Content="Close" Margin="693,259,0,0" Background="#FF333337" Foreground="White" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" Width="68" Click="CloseLinq" />
+        <ComboBox HorizontalAlignment="Left" Margin="755,33,0,0" VerticalAlignment="Top" Width="120" Height="22">
             <Button Content="Select" Click="Button_Click_5"/>
             <Button Content="Min" Click="Button_Click_6"/>
             <Button Content="Group" Click="Button_Click_8"/>
             <Button Content="OrderBy" Click="Button_Click_9"/>
         </ComboBox>
-        <ListBox x:Name="listLINQ" HorizontalAlignment="Left" Height="118" Margin="715,134,0,0" VerticalAlignment="Top" Width="192"/>
-        <TextBox x:Name="textLINQ" HorizontalAlignment="Left" Height="23" Margin="823,83,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="84"/>
-        <Button Content="{DynamicResource fclear}" HorizontalAlignment="Left" Margin="833,272,0,0" VerticalAlignment="Top" Width="74" Click="Button_Click_10" Height="20"/>
+        <ListBox x:Name="listLINQ" HorizontalAlignment="Left" Height="118" Margin="683,122,0,0" VerticalAlignment="Top" Width="192"/>
+        <TextBox x:Name="textLINQ" HorizontalAlignment="Left" Height="23" Margin="791,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="84"/>
+        <Button Content="{DynamicResource fclear}" HorizontalAlignment="Left" Margin="801,260,0,0" VerticalAlignment="Top" Width="74" Click="Button_Click_10" Height="20"/>
         <Menu Margin="0,0,-35,0" Background="#FFDEDEDE" Foreground="#FF020202" RenderTransformOrigin="0.5,0.5" Height="20" VerticalAlignment="Top">
 
             <MenuItem x:Name="Base" Header="{DynamicResource rootTest}" Height="20">
