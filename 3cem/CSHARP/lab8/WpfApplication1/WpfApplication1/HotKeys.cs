@@ -24,6 +24,7 @@ namespace WpfApplication1
     {
         
         private static RoutedUICommand addTest;
+        private static RoutedUICommand clear;
         //private static RoutedUICommand 
 
 
@@ -31,17 +32,23 @@ namespace WpfApplication1
         {
 
             
-            InputGestureCollection inputs = new InputGestureCollection();
-            //повторять N раз
-            inputs.Add(new KeyGesture(Key.F2, ModifierKeys.None ,"F2"));
-            addTest = new RoutedUICommand("Add Test","Add",typeof(HotKeys),inputs);
-            //повторять N раз
+            InputGestureCollection primary = new InputGestureCollection();
+            InputGestureCollection secondary = new InputGestureCollection();
+          
+            primary.Add(new KeyGesture(Key.F2, ModifierKeys.None ,"F2"));
+            addTest = new RoutedUICommand("Add Test","Add",typeof(HotKeys),primary);
 
-            inputs = new InputGestureCollection();
+            secondary.Add(new KeyGesture(Key.F3, ModifierKeys.None, "F3"));
+            clear = new RoutedUICommand("Clear All", "clear", typeof(HotKeys), secondary);
+            
+            primary = new InputGestureCollection();
+            secondary = new InputGestureCollection();
             
 
         }
         public static RoutedUICommand AddTest { get { return addTest; } }
+        public static RoutedUICommand Clear { get { return clear; } }
     }
+   
 
 }

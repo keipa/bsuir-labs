@@ -28,8 +28,10 @@
 
 
     </Window.Resources>
+    
     <Window.CommandBindings>
         <CommandBinding Command="local:HotKeys.AddTest" Executed="Button_Click_1" />
+        <CommandBinding Command="local:HotKeys.Clear" Executed="Button_Click_2" />
     </Window.CommandBindings>
 
 
