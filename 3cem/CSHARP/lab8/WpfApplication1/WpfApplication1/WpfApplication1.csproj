@@ -221,10 +221,10 @@
     <None Include="ico\Remove-Male-User.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ico\remove-ticket.ico" />
+    <Resource Include="ico\remove-ticket.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ico\remove-ticket1.ico" />
+    <Resource Include="ico\remove-ticket1.ico" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ico\reports.ico" />
@@ -260,10 +260,10 @@
     <None Include="ico\Star-Half-Full.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ico\ticket.ico" />
+    <Resource Include="ico\ticket.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ico\ticket1.ico" />
+    <Resource Include="ico\ticket1.ico" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ico\tickets.ico" />

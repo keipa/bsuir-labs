@@ -2,4 +2,33 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:langloc="clr-namespace:System;assembly=mscorlib">
     <langloc:String x:Key="header">Тестирование</langloc:String>
+    <langloc:String x:Key="rootTest">Файл</langloc:String>
+    <langloc:String x:Key="rootOpen">Открыть</langloc:String>
+    <langloc:String x:Key="rootSave">Сохранить</langloc:String>
+    <langloc:String x:Key="rootArchive">Архивация</langloc:String>
+    <langloc:String x:Key="rootSerialization">Сериализация</langloc:String>
+    <langloc:String x:Key="rootLanguage">Язык</langloc:String>
+    <langloc:String x:Key="TestAdd">Автодобавление</langloc:String>
+    <langloc:String x:Key="TestDelete">Удалить все записи</langloc:String>
+    <langloc:String x:Key="OpenBin">Как бинарный файл</langloc:String>
+    <langloc:String x:Key="OpenText">Как текст</langloc:String>
+    <langloc:String x:Key="SaveBin">Как бинарный файл</langloc:String>
+    <langloc:String x:Key="SaveText">Как текст</langloc:String>
+    <langloc:String x:Key="Archiveto">Архивировать</langloc:String>
+    <langloc:String x:Key="Archivefrom">Распаковать</langloc:String>
+    <langloc:String x:Key="Ser_X">Сериализация "X"</langloc:String>
+    <langloc:String x:Key="Deser_x">Десериализация "X</langloc:String>
+    <langloc:String x:Key="Ser_bin">Бинарная сериализация</langloc:String>
+    <langloc:String x:Key="Deser_bin">Бинарная десериализация</langloc:String>
+    <langloc:String x:Key="Ser_text">Текстовая сериализация</langloc:String>
+    <langloc:String x:Key="Deser_text">Текстовая десериализация</langloc:String>
+
+    <langloc:String x:Key="fadd">Добавить</langloc:String>
+    <langloc:String x:Key="fstart">СТАРТ</langloc:String>
+    <langloc:String x:Key="flinq">ЛИНКЮ</langloc:String>
+    <langloc:String x:Key="fclear">Очистить</langloc:String>
+    <langloc:String x:Key="faver">средняя</langloc:String>
+    <langloc:String x:Key="fdiff">сложность</langloc:String>
+    <langloc:String x:Key="fque">вопросов</langloc:String>
+    <langloc:String x:Key="favail">доступно</langloc:String>
 </ResourceDictionary>
