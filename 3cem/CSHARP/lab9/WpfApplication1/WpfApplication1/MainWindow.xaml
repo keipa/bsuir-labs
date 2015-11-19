@@ -36,6 +36,8 @@
             <GradientStop Color="White" Offset="0"/>
             <GradientStop Color="Green" Offset="1"/>
         </LinearGradientBrush>
+        
+        
         <Style x:Key="ColorChange" TargetType="Button">
             <Setter Property="Foreground" Value="Blue"/>
             <Setter Property="FontSize" Value="14"/>
@@ -82,6 +84,34 @@
             </Setter>
         </Style>
 
+
+        <Style x:Key="EllipseAnim" TargetType="Ellipse">
+            <Setter Property="Width" Value="20"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="Fill" Value="Black"/>
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <TranslateTransform X="0" Y="0"/>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="MouseDown">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation From="0" To="260" Duration="0:0:5"
+                                Storyboard.TargetProperty
+                                    ="RenderTransform.(TranslateTransform.X)"/>
+                            <DoubleAnimation From="0" To="130" Duration="0:0:5"
+                                Storyboard.TargetProperty
+                                    ="RenderTransform.(TranslateTransform.Y)"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+        
+
         
     </Window.Resources>
 
@@ -96,8 +126,9 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Button Name="AutoaddButton" Content="{DynamicResource TestAdd}" Margin="10,240,0,0" Background="#FF333337" Foreground="#FFF5FFFF" HorizontalAlignment="Left" Width="99" Height="36" VerticalAlignment="Top" Click="Button_Click_1"/>
+       <!--animation binding-->
         <Button Name="Start" Content="{DynamicResource fstart}" Style="{StaticResource ColorChange}" Margin="537,40,0,0" Background="#FFFFCC00" FontSize="15" Height="36" VerticalAlignment="Top" HorizontalAlignment="Left" Width="97" Click="Button_Click_3" />
-        <Button Name="AddButton" Content="{DynamicResource fadd}" Margin="10,213,0,0" Click="Button_Click" Foreground="Black" Background="#FFFFCC00" HorizontalAlignment="Left" Width="125" Height="22" VerticalAlignment="Top" FontSize="15"/>
+        <Button Name="AddButton" Content="{DynamicResource fadd}"   Margin="10,213,0,0" Click="Button_Click" Foreground="Black" Background="#FFFFCC00" HorizontalAlignment="Left" Width="125" Height="22" VerticalAlignment="Top" FontSize="15"/>
         <Label Name="Available" Content="0" HorizontalAlignment="Left" Margin="378,19,0,0" VerticalAlignment="Top" Foreground="White" FontSize="45" FontFamily="Segoe UI Light" FontWeight="Bold" Height="70" Width="33"/>
         <Label Content="{DynamicResource fque}" HorizontalAlignment="Left" Margin="411,41,0,0" VerticalAlignment="Top" Foreground="LightGray" FontSize="15" Height="32" Width="89"/>
         <Label Content="{DynamicResource favail}" HorizontalAlignment="Left" Margin="411,57,0,0" VerticalAlignment="Top" Foreground="#FFD3D3C3" Height="26" Width="69" RenderTransformOrigin="0.5,0.5">
@@ -278,6 +309,7 @@
             </MenuItem>
 
         </Menu>
+        <Ellipse Fill="#FFF4F4F5" HorizontalAlignment="Left" Style="{StaticResource EllipseAnim}" Height="37" Margin="218,29,0,0" Stroke="Black" VerticalAlignment="Top" Width="27"/>
 
 
 
