@@ -37,11 +37,11 @@ SCANNING_WORDS_CYCLE:
 		mov 	AL, [SI]
 		cmp 	AL, ' '
 		jne 	SCANNING_WORDS_CYCLE_CONT
-		
+
 		mov 	DX, SI
 		sub 	DX, BX
 		cmp 	CX, DX
-		jnc 	SCANNING_WORDS_CYCLE_NO_MAX 
+		jnc 	SCANNING_WORDS_CYCLE_NO_MAX
 		mov 	CX, DX
 
 SCANNING_WORDS_CYCLE_NO_MAX:
@@ -76,12 +76,12 @@ PRINTING_WORDS_CYCLE:
 		mov 	AL, [SI]
 		cmp 	AL, ' '
 		jne 	PRINTING_WORDS_CYCLE_CONT
-		
+
 		mov 	DX, SI
 		sub 	DX, BX
 		cmp 	CX, DX
 		jne  	PRINTING_WORDS_CYCLE_NO_MAX
-		call 	PrintWord		
+		call 	PrintWord
 
 PRINTING_WORDS_CYCLE_NO_MAX:
 		call 	IgnoreWhitespaces
@@ -156,7 +156,7 @@ ENTERING_CYCLE:
 		mov 	AH, 02h
 		int 	21h
 		jmp 	ENTERING_CYCLE
-	
+
 
 BACKSPACE_HANDLING:
 		mov		DL, 8
@@ -169,7 +169,7 @@ BACKSPACE_HANDLING:
 
 		cmp 	SI, BX
 		je 		ENTERING_CYCLE
-		dec 	SI 
+		dec 	SI
 		jmp 	ENTERING_CYCLE
 
 OUT_OF_STRING_LENGTH:
@@ -196,7 +196,7 @@ ENTERING_CYCLE_OUT:
 endp EnterString
 
 
-GetDigitFromNumber proc						
+GetDigitFromNumber proc
 		push 	AX
 		push 	CX
 
@@ -207,7 +207,7 @@ GetDigitFromNumber proc
 		idiv	CX
 		mov 	BX, AX
 
-		test 	DX, DX 						
+		test 	DX, DX
 		jns 	GETTING_DIGIT_OUT
 		neg 	DX
 
@@ -220,7 +220,7 @@ GETTING_DIGIT_OUT:
 endp GetDigitFromNumber
 
 
-PrintNumber proc						
+PrintNumber proc
 		push 	AX
 		push 	BX
 		push	CX
@@ -228,20 +228,20 @@ PrintNumber proc
 		xor 	CX, CX
 
 		mov 	BX, AX
-		test 	BX, BX					
+		test 	BX, BX
 		jns 	GETTING_DIGITS_LOOP
 		mov 	AH, 02h
 		mov 	DL, '-'
 		int 	21h
 
-GETTING_DIGITS_LOOP:					
+GETTING_DIGITS_LOOP:
 		call 	GetDigitFromNumber
 		push 	DX
 		inc  	CX
 		cmp 	BX, 0
 		jne  	GETTING_DIGITS_LOOP
 
-PRINTING_DIGITS_LOOP:					
+PRINTING_DIGITS_LOOP:
 		pop 	DX
 		mov 	AH, 02h
 		int 	21h
@@ -261,7 +261,7 @@ PRINTING_DIGITS_LOOP:
 endp PrintNumber
 
 
-		assume	DS: @data, ES: @data 	 
+		assume	DS: @data, ES: @data
 MAIN:
 		mov 	AX, @data
 		mov 	DS, AX
@@ -273,7 +273,7 @@ MAIN:
 
 		lea 	SI, String
 		call 	EnterString
-		call 	GetWordLength	
+		call 	GetWordLength
 		cmp 	CX, 0
 		je 		EMPTY_STRING_HANDLING
 
@@ -294,7 +294,7 @@ EMPTY_STRING_HANDLING:
 		lea 	DX, EmptyStringMessage
 		mov 	AH, 09h
 		int 	21h
-	
+
 MAIN_END:
 		mov 	AX, 4c00h
 		int		21h

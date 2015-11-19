@@ -1,0 +1,285 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk"
+    xmlns:local="clr-namespace:WpfApplication1"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="WpfApplication1.MainWindow"
+        
+        Name="window" Title="{DynamicResource header}" Width="673" Height="321" ResizeMode="NoResize">
+    <Window.Resources>
+        <Style TargetType="{x:Type TreeViewItem}">
+        </Style>
+        <Image x:Key="Add" Source="ico/ordering.ico"/>
+        <Image x:Key="subAdd" Source="ico/add-to-database.ico"/>
+        <Image x:Key="subAddRem" Source="ico/remove-from-database.ico"/>
+        <Image x:Key="open" Source="ico/download-database.ico"/>
+        <Image x:Key="save" Source="ico/Database-Upload.ico"/>
+        <Image x:Key="arch" Source="ico/Product.ico"/>
+        <Image x:Key="serialize" Source="ico/Product.ico"/>
+        <Image x:Key="textopen" Source="ico/order-history.ico"/>
+        <Image x:Key="binaropen" Source="ico/binary-tree.ico"/>
+        <Image x:Key="textsave" Source="ico/order-history.ico"/>
+        <Image x:Key="binarsave" Source="ico/binary-tree.ico"/>
+        <Image x:Key="unpack" Source="ico/packing.ico"/>
+        <Image x:Key="xser" Source="ico/ticket.ico"/>
+        <Image x:Key="xdeser" Source="ico/remove-ticket.ico"/>
+        <Image x:Key="binser" Source="ico/ticket.ico"/>
+        <Image x:Key="bindeser" Source="ico/remove-ticket1.ico"/>
+
+        <LinearGradientBrush x:Key="NormalBackgroundButton" EndPoint="0.5,1" StartPoint="0.5,0">
+            <!--gradient-->
+            <GradientStop Color="Yellow" Offset="0"/>
+            <GradientStop Color="Wheat" Offset="1"/>
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="HighLightBackgroundButton" EndPoint="0.5,1" StartPoint="0.5,0">
+            <!--gradient-->
+            <GradientStop Color="White" Offset="0"/>
+            <GradientStop Color="Green" Offset="1"/>
+        </LinearGradientBrush>
+        <Style x:Key="ColorChange" TargetType="Button">
+            <Setter Property="Foreground" Value="Blue"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="Magneto"/>
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualStateGroup.Transitions>
+                                        <VisualTransition To="MouseOver" GeneratedDuration="0:0:1.0"/>
+                                        <!--settime 0:0:"time in seconds"-->
+                                            <VisualTransition To="Normal" GeneratedDuration="0:0:1.0"/>
+                                    </VisualStateGroup.Transitions>
+                                    <VisualState x:Name="MouseOver">
+                                        <Storyboard>
+                                            <DoubleAnimation To="0" Storyboard.TargetName="colorized" Storyboard.TargetProperty="Opacity"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Normal">
+                                        <Storyboard>
+                                            <DoubleAnimation To="1" Storyboard.TargetName="colorized" Storyboard.TargetProperty="Opacity"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="FocusStates">
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Border x:Name="default" Background="{StaticResource NormalBackgroundButton}"  />
+                            <Border x:Name="colorized" Opacity="0" Background="{StaticResource HighLightBackgroundButton}"  />
+                            
+                            <ContentPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        
+    </Window.Resources>
+
+    <Window.CommandBindings>
+        <CommandBinding Command="local:HotKeys.AddTest" Executed="Button_Click_1" />
+        <CommandBinding Command="local:HotKeys.Clear" Executed="Button_Click_2" />
+    </Window.CommandBindings>
+
+
+    <Grid Background="#FF2D2D30">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Button Name="AutoaddButton" Content="{DynamicResource TestAdd}" Margin="10,240,0,0" Background="#FF333337" Foreground="#FFF5FFFF" HorizontalAlignment="Left" Width="99" Height="36" VerticalAlignment="Top" Click="Button_Click_1"/>
+        <Button Name="Start" Content="{DynamicResource fstart}" Style="{StaticResource ColorChange}" Margin="537,40,0,0" Background="#FFFFCC00" FontSize="15" Height="36" VerticalAlignment="Top" HorizontalAlignment="Left" Width="97" Click="Button_Click_3" />
+        <Button Name="AddButton" Content="{DynamicResource fadd}" Margin="10,213,0,0" Click="Button_Click" Foreground="Black" Background="#FFFFCC00" HorizontalAlignment="Left" Width="125" Height="22" VerticalAlignment="Top" FontSize="15"/>
+        <Label Name="Available" Content="0" HorizontalAlignment="Left" Margin="378,19,0,0" VerticalAlignment="Top" Foreground="White" FontSize="45" FontFamily="Segoe UI Light" FontWeight="Bold" Height="70" Width="33"/>
+        <Label Content="{DynamicResource fque}" HorizontalAlignment="Left" Margin="411,41,0,0" VerticalAlignment="Top" Foreground="LightGray" FontSize="15" Height="32" Width="89"/>
+        <Label Content="{DynamicResource favail}" HorizontalAlignment="Left" Margin="411,57,0,0" VerticalAlignment="Top" Foreground="#FFD3D3C3" Height="26" Width="69" RenderTransformOrigin="0.5,0.5">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.335"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
+        <Label Content="{DynamicResource faver}" HorizontalAlignment="Left" Margin="245,41,0,0" VerticalAlignment="Top" Foreground="LightGray" FontSize="15" Height="32" Width="73"/>
+        <Label Content="{DynamicResource fdiff}" HorizontalAlignment="Left" Margin="245,57,0,0" VerticalAlignment="Top" Foreground="#FFD3D3C3" Height="26" Width="73"/>
+        <Label Name="Average" Content="0" HorizontalAlignment="Left" Margin="323,19,0,0" VerticalAlignment="Top" Foreground="White" FontSize="45" FontFamily="Segoe UI Light" FontWeight="Bold" Height="70" Width="33"/>
+        <Label Content="l" HorizontalAlignment="Left" Margin="356,9,0,0" VerticalAlignment="Top" Foreground="#FF595959" FontSize="60" Height="90" Width="25"/>
+        <Button Name="ClearButton" Content="{DynamicResource fclear}" Margin="114,240,0,0" Background="#FF333337" Foreground="White" Height="36" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96" Click="Button_Click_2"/>
+        <TextBox Name="EditQuestion" HorizontalAlignment="Left" Height="26" Margin="10,35,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="155" Background="#FF333337" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="15"/>
+
+        <TextBox Name="EditVar1" HorizontalAlignment="Left" Height="24" Margin="46,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="164" Background="#FF333337" Foreground="White"/>
+        <CheckBox Name="ch1"  HorizontalAlignment="Left" Margin="215,71,0,0" VerticalAlignment="Top" Height="15" Width="16"/>
+        <TextBox Name="EditVar2" HorizontalAlignment="Left" Height="24" Margin="46,95,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="164" Background="#FF333337" Foreground="White"/>
+        <CheckBox Name="ch2" HorizontalAlignment="Left" Margin="215,101,0,0" VerticalAlignment="Top" Height="15" Width="16"/>
+        <TextBox Name="EditVar3" HorizontalAlignment="Left" Height="24" Margin="46,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="164" Background="#FF333337" Foreground="White"/>
+        <CheckBox Name="ch3" HorizontalAlignment="Left" Margin="215,131,0,0" VerticalAlignment="Top" Height="15" Width="16"/>
+        <TextBox Name="EditVar4" HorizontalAlignment="Left" Height="24" Margin="46,155,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="164" Background="#FF333337" Foreground="White"/>
+        <CheckBox Name="ch4" HorizontalAlignment="Left" Margin="214,160,0,0" VerticalAlignment="Top" Height="15" Width="16"/>
+        <TextBox Name="EditVar5" HorizontalAlignment="Left" Height="24" Margin="46,184,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="164" Background="#FF333337" Foreground="White"/>
+        <CheckBox Name="ch5" HorizontalAlignment="Left" Margin="214,189,0,0" VerticalAlignment="Top" Height="15" Width="16"/>
+
+        <Label Content="1." HorizontalAlignment="Left" Margin="15,67,0,0" VerticalAlignment="Top" Foreground="#FF787878" Height="26" Width="19"/>
+        <Label Content="2." HorizontalAlignment="Left" Margin="15,94,0,0" VerticalAlignment="Top" Foreground="#FF787878" Height="26" Width="19"/>
+        <Label Content="3." HorizontalAlignment="Left" Margin="15,125,0,0" VerticalAlignment="Top" Foreground="#FF787878" Height="26" Width="19"/>
+        <Label Content="4." HorizontalAlignment="Left" Margin="15,156,0,0" VerticalAlignment="Top" Foreground="#FF787878" Height="26" Width="19"/>
+        <Label Content="5." HorizontalAlignment="Left" Margin="15,182,0,0" VerticalAlignment="Top" Foreground="#FF787878" Height="26" Width="19"/>
+        <ComboBox Name="DiffCombo" HorizontalAlignment="Left" Height="26" Margin="170,35,0,0" VerticalAlignment="Top" Width="40" Foreground="#FF383838" BorderBrush="{x:Null}" Background="{x:Null}">
+            <ListBoxItem Content="1"/>
+            <ListBoxItem Content="2"/>
+            <ListBoxItem Content="3"/>
+            <ListBoxItem Content="4"/>
+            <ListBoxItem Content="5"/>
+            <ListBoxItem Content="6"/>
+            <ListBoxItem Content="7"/>
+            <ListBoxItem Content="8"/>
+            <ListBoxItem Content="9"/>
+            <ListBoxItem Content="10"/>
+        </ComboBox>
+
+        <TreeView Name="TreeView" Margin="236,94,0,0" Background="#FF2D2D30" Foreground="White" FontSize="15" Height="141" VerticalAlignment="Top" HorizontalAlignment="Left" Width="408">
+            <TreeView.ItemTemplate>
+                <DataTemplate>
+                    <TreeViewItem Name="NameTemplate" ItemsSource="{Binding current}" Header="{Binding Path=Name}" Foreground="White">
+                        <TreeViewItem.ItemTemplate>
+
+                            <HierarchicalDataTemplate>
+
+                                <TextBlock Text="{Binding Name}" Foreground="White"/>
+                            </HierarchicalDataTemplate>
+                        </TreeViewItem.ItemTemplate>
+
+                    </TreeViewItem>
+                </DataTemplate>
+            </TreeView.ItemTemplate>
+            <TextBox Height="23" TextWrapping="Wrap" Text="TextBox" Width="120"/>
+        </TreeView>
+
+        <Label Name="QuestionTitle" Content="" HorizontalAlignment="Center" Margin="114,320,108,0" VerticalAlignment="Top" Width="440" Height="66" Foreground="White" HorizontalContentAlignment="Center" FontFamily="Simplified Arabic" FontSize="22"/>
+        <CheckBox Name="Ach1" Content="" HorizontalAlignment="Left" Margin="32,395,0,0" VerticalAlignment="Top" FontSize="15" Foreground="White" Height="19" Width="233"/>
+        <CheckBox Name="Ach2" Content="" HorizontalAlignment="Left" Margin="32,410,0,0" VerticalAlignment="Top" FontSize="15" Foreground="White" Height="19" Width="233"/>
+        <CheckBox Name="Ach3" Content="" HorizontalAlignment="Left" Margin="32,426,0,0" VerticalAlignment="Top" FontSize="15" Foreground="White" Height="19" Width="233"/>
+        <CheckBox Name="Ach4" Content="" HorizontalAlignment="Left" Margin="32,441,0,0" VerticalAlignment="Top" FontSize="15" Foreground="White" Height="19" Width="233"/>
+        <CheckBox Name="Ach5" Content="" HorizontalAlignment="Left" Margin="32,456,0,0" VerticalAlignment="Top" FontSize="15" Foreground="White" Height="19" Width="233"/>
+        <Button Name="NextButton" Content="NEXT" HorizontalAlignment="Left" Height="35" Margin="496,485,0,-183" VerticalAlignment="Top" Width="101" Click="Button_Click_4" Background="#FFFFCC00" FontSize="15"/>
+        <Label Name="Result" Content="" HorizontalAlignment="Left" Margin="236,240,0,0" VerticalAlignment="Top" Foreground="White" FontSize="15" Width="304" Height="48"/>
+        <Button Content="OPEN" HorizontalAlignment="Left" Height="18" Margin="231,132,0,0" VerticalAlignment="Top" Width="74" Background="#FF333337" Foreground="White" Click="binary_open" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <Button Content="SAVE" HorizontalAlignment="Left" Height="18" Margin="590,215,0,0" VerticalAlignment="Top" Width="86" Background="#FF333337" Foreground="White" Click="text_save" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <Button Content="ARCHIVE" HorizontalAlignment="Left" Height="19" Margin="259,83,0,0" VerticalAlignment="Top" Width="107" Background="#FF333337" Foreground="White" Click="archivefile" Visibility="Hidden"/>
+        <Button Content="DISARHIVE" HorizontalAlignment="Left" Height="19" Margin="537,85,0,0" VerticalAlignment="Top" Width="107" Background="#FF333337" Foreground="White" Click="disarchive" Visibility="Hidden"/>
+        <Button Content="SAVE" HorizontalAlignment="Left" Height="18" Margin="224,216,0,0" VerticalAlignment="Top" Width="86" Background="#FF333337" Foreground="White" Click="binary_save" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <Button Content="OPEN" HorizontalAlignment="Left" Height="18" Margin="596,133,0,0" VerticalAlignment="Top" Width="74" Background="#FF333337" Foreground="White" Click="text_open" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <TextBlock HorizontalAlignment="Left" Margin="237,175,0,0" TextWrapping="Wrap" Text="Binary" VerticalAlignment="Top" Foreground="Gray" RenderTransformOrigin="0.5,0.5" FontFamily="Eurostile" Visibility="Hidden" Height="13" Width="33">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <TextBlock HorizontalAlignment="Left" Margin="640,175,0,0" TextWrapping="Wrap" Text="Text" VerticalAlignment="Top" Foreground="Gray" RenderTransformOrigin="0.5,0.5" FontFamily="Eurostile" Visibility="Hidden" Height="13" Width="22">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <Button Content="--&gt;srz" HorizontalAlignment="Left" Height="19" Margin="259,64,0,0" VerticalAlignment="Top" Width="67" Background="#FF333337" Foreground="White" Click="startSerialize" Visibility="Hidden" />
+        <Button Content="&lt;--srz" HorizontalAlignment="Left" Height="19" Margin="259,45,0,0" VerticalAlignment="Top" Width="67" Background="#FF333337" Foreground="White" Click="startDeserialize" Visibility="Hidden" />
+        <Button x:Name="LINQ" Content="LINQ" Margin="140,213,0,0" Background="#FF333337" Foreground="White" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" Width="69" Click="startLINQ" />
+        <Button Content="XSERIALIZE" HorizontalAlignment="Left" Height="19" Margin="368,83,0,0" VerticalAlignment="Top" Width="78" Background="#FF333337" Foreground="White" Click="XSerialize" Visibility="Hidden" />
+        <Button Content="xDEserialize" HorizontalAlignment="Left" Height="19" Margin="451,83,0,0" VerticalAlignment="Top" Width="81" Background="#FF333337" Foreground="White" Click="XDESerialize" Visibility="Hidden" />
+        <Button x:Name="LINQ_Copy" Content="Close" Margin="693,259,0,0" Background="#FF333337" Foreground="White" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" Width="68" Click="CloseLinq" />
+        <ComboBox HorizontalAlignment="Left" Margin="755,33,0,0" VerticalAlignment="Top" Width="120" Height="22">
+            <Button Content="Select" Click="Button_Click_5"/>
+            <Button Content="Min" Click="Button_Click_6"/>
+            <Button Content="Group" Click="Button_Click_8"/>
+            <Button Content="OrderBy" Click="Button_Click_9"/>
+        </ComboBox>
+        <ListBox x:Name="listLINQ" HorizontalAlignment="Left" Height="118" Margin="683,122,0,0" VerticalAlignment="Top" Width="192"/>
+        <TextBox x:Name="textLINQ" HorizontalAlignment="Left" Height="23" Margin="791,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="84"/>
+        <Button Content="{DynamicResource fclear}" HorizontalAlignment="Left" Margin="801,260,0,0" VerticalAlignment="Top" Width="74" Click="Button_Click_10" Height="20"/>
+        <Menu Margin="0,0,-35,0" Background="#FFDEDEDE" Foreground="#FF020202" RenderTransformOrigin="0.5,0.5" Height="20" VerticalAlignment="Top">
+
+            <MenuItem x:Name="Base" Header="{DynamicResource rootTest}" Height="20">
+                <MenuItem x:Name="autoadd" Header="{DynamicResource TestAdd}"  Click="Button_Click_1" Icon="{StaticResource subAdd}"/>
+                <MenuItem x:Name="remove" Header="{DynamicResource TestDelete}"  Click="Button_Click_2" Icon="{StaticResource subAddRem}"/>
+            </MenuItem>
+            <MenuItem x:Name="Open" Header="{DynamicResource rootOpen}" >
+                <MenuItem x:Name="oas_bin" Click="binary_open" Icon="{StaticResource binaropen}" Header="{DynamicResource OpenBin}"/>
+                <MenuItem x:Name="oas_text" Click="text_open" Icon="{StaticResource textopen}" Header="{DynamicResource OpenText}"/>
+            </MenuItem>
+            <MenuItem x:Name="Save" Header="{DynamicResource rootSave}" >
+                <MenuItem x:Name="sas_bin" Click="binary_save" Icon="{StaticResource binarsave}" Header="{DynamicResource SaveBin}"/>
+                <MenuItem x:Name="sas_text" Click="text_save" Icon="{StaticResource textsave}" Header="{DynamicResource SaveText}"/>
+            </MenuItem>
+            <MenuItem x:Name="ArchiveItem" Header="{DynamicResource rootArchive}">
+                <MenuItem x:Name="archive" Click="archivefile" Icon="{StaticResource arch}" Header="{DynamicResource Archiveto}"/>
+                <MenuItem x:Name="disarchiv" Click="disarchive" Icon="{StaticResource unpack}" Header="{DynamicResource Archivefrom}"/>
+            </MenuItem>
+            <MenuItem x:Name="Serialization" Header="{DynamicResource rootSerialization}">
+                <MenuItem x:Name="mic_ser" Click="startSerialize" Icon="{StaticResource xser}" Header="{DynamicResource Ser_bin}"/>
+                <MenuItem x:Name="mic_deser" Click="startDeserialize" Icon="{StaticResource xdeser}" Header="{DynamicResource Deser_bin}"/>
+                <MenuItem x:Name="xser" Click="XSerialize" Icon="{StaticResource binser}" Header="{DynamicResource Ser_X}"/>
+                <MenuItem x:Name="xdeser" Click="XDESerialize" Icon="{StaticResource bindeser}" Header="{DynamicResource Deser_x}"/>
+            </MenuItem>
+            <MenuItem x:Name="localization" Header="{DynamicResource rootLanguage}">
+
+            </MenuItem>
+
+        </Menu>
+
+
+
+    </Grid>
+</Window>

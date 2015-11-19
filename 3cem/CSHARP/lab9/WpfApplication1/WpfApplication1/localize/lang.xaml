@@ -1,0 +1,35 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:langloc="clr-namespace:System;assembly=mscorlib">
+    <langloc:String x:Key="header">Central Testing</langloc:String>
+    <langloc:String x:Key="rootTest">File</langloc:String>
+    <langloc:String x:Key="rootOpen">Open</langloc:String>
+    <langloc:String x:Key="rootSave">Save</langloc:String>
+    <langloc:String x:Key="rootArchive">Archive</langloc:String>
+    <langloc:String x:Key="rootSerialization">Serialization</langloc:String>
+    <langloc:String x:Key="rootLanguage">Language</langloc:String>
+    <langloc:String x:Key="TestAdd">Autoadd</langloc:String>
+    <langloc:String x:Key="TestDelete">Delete All</langloc:String>
+    <langloc:String x:Key="OpenBin">As Binary</langloc:String>
+    <langloc:String x:Key="OpenText">As Text</langloc:String>
+    <langloc:String x:Key="SaveBin">As Binary</langloc:String>
+    <langloc:String x:Key="SaveText">As Text</langloc:String>
+    <langloc:String x:Key="Archiveto">Archivize</langloc:String>
+    <langloc:String x:Key="Archivefrom">Dearchivize</langloc:String>
+    <langloc:String x:Key="Ser_X">XSerialization</langloc:String>
+    <langloc:String x:Key="Deser_x">XDeserialization</langloc:String>
+    <langloc:String x:Key="Ser_bin">Binary Serialization</langloc:String>
+    <langloc:String x:Key="Deser_bin">Binary Deserialization</langloc:String>
+    <langloc:String x:Key="Ser_text">Text Serialization</langloc:String>
+    <langloc:String x:Key="Deser_text">Text Deserialization</langloc:String>
+    <langloc:String x:Key="fadd">ADD</langloc:String>
+    <langloc:String x:Key="fstart">Start</langloc:String>
+    <langloc:String x:Key="flinq">LINQ</langloc:String>
+    <langloc:String x:Key="fclear">Clear</langloc:String>
+    <langloc:String x:Key="faver">average</langloc:String>
+    <langloc:String x:Key="fdiff">difficulty</langloc:String>
+    <langloc:String x:Key="fque">questions</langloc:String>
+    <langloc:String x:Key="favail">available</langloc:String>
+    
+
+</ResourceDictionary>

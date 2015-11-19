@@ -1,0 +1,295 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A31B54FB-B574-42EE-AFE1-D6C344B4D08B}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WpfApplication1</RootNamespace>
+    <AssemblyName>WpfApplication1</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="localize\lang.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="localize\lang.ru-RU.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="HotKeys.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ico\accept-database.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ico\Accept-Male-User.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ico\Add-Male-User.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ico\add-to-database.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ico\add-to-favorites.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ico\Autoship.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ico\binary-tree.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ico\business-info.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ico\Database-Upload.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ico\distributor-report.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ico\download-database.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ico\Edit-Male-User.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ico\gealogy-view.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ico\Globe.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ico\Globe-Download.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ico\Globe-Warning.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ico\inventory-maintenance.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ico\item-configuration.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ico\library.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ico\Mail-Search.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ico\Male-User-Help.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ico\Male-User-Warning.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ico\order-history.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ico\ordering.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ico\Package-Accept.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ico\Package-Add.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ico\Package-Download.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ico\Package-Warning.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ico\packing.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ico\payment-card.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ico\Process-Accept.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ico\Process-Info.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ico\Process-Warning.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ico\product.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ico\product-sales-report.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ico\Rank-History.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ico\remove-from-database.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ico\remove-from-favorites.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ico\Remove-Male-User.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ico\remove-ticket.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ico\remove-ticket1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ico\reports.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ico\Sales-by-Payment-Method-rep.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ico\sales-report.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ico\search-database.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ico\Search-Globe.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ico\Search-Male-User.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ico\Select-Language.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ico\sign-up.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ico\Star-Empty.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ico\Star-Full.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ico\Star-Half-Full.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ico\ticket.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ico\ticket1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ico\tickets.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ico\Upline.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ico\web-management.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ico\wheel.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ico\zoom-in.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ico\zoom-out.ico" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
