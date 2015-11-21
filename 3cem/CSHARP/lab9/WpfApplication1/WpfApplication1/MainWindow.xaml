@@ -36,8 +36,8 @@
             <GradientStop Color="White" Offset="0"/>
             <GradientStop Color="Green" Offset="1"/>
         </LinearGradientBrush>
-        
-        
+
+
         <Style x:Key="ColorChange" TargetType="Button">
             <Setter Property="Foreground" Value="Blue"/>
             <Setter Property="FontSize" Value="14"/>
@@ -50,6 +50,7 @@
             <Setter Property="Margin" Value="5"/>
             <Setter Property="Template">
                 <Setter.Value>
+                    <!--templates-->
                     <ControlTemplate TargetType="Button">
                         <Grid>
                             <VisualStateManager.VisualStateGroups>
@@ -57,7 +58,7 @@
                                     <VisualStateGroup.Transitions>
                                         <VisualTransition To="MouseOver" GeneratedDuration="0:0:1.0"/>
                                         <!--settime 0:0:"time in seconds"-->
-                                            <VisualTransition To="Normal" GeneratedDuration="0:0:1.0"/>
+                                        <VisualTransition To="Normal" GeneratedDuration="0:0:1.0"/>
                                     </VisualStateGroup.Transitions>
                                     <VisualState x:Name="MouseOver">
                                         <Storyboard>
@@ -69,14 +70,14 @@
                                             <DoubleAnimation To="1" Storyboard.TargetName="colorized" Storyboard.TargetProperty="Opacity"/>
                                         </Storyboard>
                                     </VisualState>
-                                    
+
                                 </VisualStateGroup>
                                 <VisualStateGroup x:Name="FocusStates">
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
                             <Border x:Name="default" Background="{StaticResource NormalBackgroundButton}"  />
                             <Border x:Name="colorized" Opacity="0" Background="{StaticResource HighLightBackgroundButton}"  />
-                            
+
                             <ContentPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
                         </Grid>
                     </ControlTemplate>
@@ -86,33 +87,38 @@
 
 
         <Style x:Key="EllipseAnim" TargetType="Ellipse">
-            <Setter Property="Width" Value="20"/>
-            <Setter Property="Height" Value="20"/>
-            <Setter Property="Fill" Value="Black"/>
+           
+
             <Setter Property="RenderTransform">
                 <Setter.Value>
+                    <!--begin point-->
                     <TranslateTransform X="0" Y="0"/>
                 </Setter.Value>
             </Setter>
 
             <Style.Triggers>
+                <!--if clicked thren begins a story-->
                 <EventTrigger RoutedEvent="MouseDown">
                     <BeginStoryboard>
                         <Storyboard>
-                            <DoubleAnimation From="0" To="260" Duration="0:0:5"
+                            <DoubleAnimation From="0" To="260" Duration="0:0:2.5"
                                 Storyboard.TargetProperty
                                     ="RenderTransform.(TranslateTransform.X)"/>
+                            
+                            
                             <DoubleAnimation From="0" To="130" Duration="0:0:5"
                                 Storyboard.TargetProperty
                                     ="RenderTransform.(TranslateTransform.Y)"/>
-                        </Storyboard>
+
+                          </Storyboard>
+
                     </BeginStoryboard>
                 </EventTrigger>
             </Style.Triggers>
         </Style>
-        
 
-        
+
+
     </Window.Resources>
 
     <Window.CommandBindings>
@@ -125,10 +131,10 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Button Name="AutoaddButton" Content="{DynamicResource TestAdd}" Margin="10,240,0,0" Background="#FF333337" Foreground="#FFF5FFFF" HorizontalAlignment="Left" Width="99" Height="36" VerticalAlignment="Top" Click="Button_Click_1"/>
-       <!--animation binding-->
+        <Button Name="AutoaddButton" Content="{DynamicResource TestAdd}" Margin="10,240,0,0" Style="{StaticResource ColorChange}" Background="#FF333337" Foreground="#FFF5FFFF" HorizontalAlignment="Left" Width="99" Height="36" VerticalAlignment="Top" Click="Button_Click_1"/>
+        <!--animation binding-->
         <Button Name="Start" Content="{DynamicResource fstart}" Style="{StaticResource ColorChange}" Margin="537,40,0,0" Background="#FFFFCC00" FontSize="15" Height="36" VerticalAlignment="Top" HorizontalAlignment="Left" Width="97" Click="Button_Click_3" />
-        <Button Name="AddButton" Content="{DynamicResource fadd}"   Margin="10,213,0,0" Click="Button_Click" Foreground="Black" Background="#FFFFCC00" HorizontalAlignment="Left" Width="125" Height="22" VerticalAlignment="Top" FontSize="15"/>
+        <Button Name="AddButton" Content="{DynamicResource fadd}"  Style="{StaticResource ColorChange}" Margin="10,213,0,0" Click="Button_Click" Foreground="Black" Background="#FFFFCC00" HorizontalAlignment="Left" Width="125" Height="22" VerticalAlignment="Top" FontSize="15"/>
         <Label Name="Available" Content="0" HorizontalAlignment="Left" Margin="378,19,0,0" VerticalAlignment="Top" Foreground="White" FontSize="45" FontFamily="Segoe UI Light" FontWeight="Bold" Height="70" Width="33"/>
         <Label Content="{DynamicResource fque}" HorizontalAlignment="Left" Margin="411,41,0,0" VerticalAlignment="Top" Foreground="LightGray" FontSize="15" Height="32" Width="89"/>
         <Label Content="{DynamicResource favail}" HorizontalAlignment="Left" Margin="411,57,0,0" VerticalAlignment="Top" Foreground="#FFD3D3C3" Height="26" Width="69" RenderTransformOrigin="0.5,0.5">
@@ -145,7 +151,7 @@
         <Label Content="{DynamicResource fdiff}" HorizontalAlignment="Left" Margin="245,57,0,0" VerticalAlignment="Top" Foreground="#FFD3D3C3" Height="26" Width="73"/>
         <Label Name="Average" Content="0" HorizontalAlignment="Left" Margin="323,19,0,0" VerticalAlignment="Top" Foreground="White" FontSize="45" FontFamily="Segoe UI Light" FontWeight="Bold" Height="70" Width="33"/>
         <Label Content="l" HorizontalAlignment="Left" Margin="356,9,0,0" VerticalAlignment="Top" Foreground="#FF595959" FontSize="60" Height="90" Width="25"/>
-        <Button Name="ClearButton" Content="{DynamicResource fclear}" Margin="114,240,0,0" Background="#FF333337" Foreground="White" Height="36" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96" Click="Button_Click_2"/>
+        <Button Name="ClearButton" Content="{DynamicResource fclear}" Style="{StaticResource ColorChange}" Margin="114,240,0,0" Background="#FF333337" Foreground="White" Height="36" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96" Click="Button_Click_2"/>
         <TextBox Name="EditQuestion" HorizontalAlignment="Left" Height="26" Margin="10,35,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="155" Background="#FF333337" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="15"/>
 
         <TextBox Name="EditVar1" HorizontalAlignment="Left" Height="24" Margin="46,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="164" Background="#FF333337" Foreground="White"/>
@@ -267,7 +273,7 @@
         </TextBlock>
         <Button Content="--&gt;srz" HorizontalAlignment="Left" Height="19" Margin="259,64,0,0" VerticalAlignment="Top" Width="67" Background="#FF333337" Foreground="White" Click="startSerialize" Visibility="Hidden" />
         <Button Content="&lt;--srz" HorizontalAlignment="Left" Height="19" Margin="259,45,0,0" VerticalAlignment="Top" Width="67" Background="#FF333337" Foreground="White" Click="startDeserialize" Visibility="Hidden" />
-        <Button x:Name="LINQ" Content="LINQ" Margin="140,213,0,0" Background="#FF333337" Foreground="White" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" Width="69" Click="startLINQ" />
+        <Button x:Name="LINQ" Style="{StaticResource ColorChange}" Content="LINQ" Margin="140,213,0,0" Background="#FF333337" Foreground="White" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" Width="69" Click="startLINQ" />
         <Button Content="XSERIALIZE" HorizontalAlignment="Left" Height="19" Margin="368,83,0,0" VerticalAlignment="Top" Width="78" Background="#FF333337" Foreground="White" Click="XSerialize" Visibility="Hidden" />
         <Button Content="xDEserialize" HorizontalAlignment="Left" Height="19" Margin="451,83,0,0" VerticalAlignment="Top" Width="81" Background="#FF333337" Foreground="White" Click="XDESerialize" Visibility="Hidden" />
         <Button x:Name="LINQ_Copy" Content="Close" Margin="693,259,0,0" Background="#FF333337" Foreground="White" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" Width="68" Click="CloseLinq" />
@@ -279,7 +285,7 @@
         </ComboBox>
         <ListBox x:Name="listLINQ" HorizontalAlignment="Left" Height="118" Margin="683,122,0,0" VerticalAlignment="Top" Width="192"/>
         <TextBox x:Name="textLINQ" HorizontalAlignment="Left" Height="23" Margin="791,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="84"/>
-        <Button Content="{DynamicResource fclear}" HorizontalAlignment="Left" Margin="801,260,0,0" VerticalAlignment="Top" Width="74" Click="Button_Click_10" Height="20"/>
+        <Button Content="{DynamicResource fclear}" Style="{StaticResource ColorChange}" HorizontalAlignment="Left" Margin="801,260,0,0" VerticalAlignment="Top" Width="74" Click="Button_Click_10" Height="20"/>
         <Menu Margin="0,0,-35,0" Background="#FFDEDEDE" Foreground="#FF020202" RenderTransformOrigin="0.5,0.5" Height="20" VerticalAlignment="Top">
 
             <MenuItem x:Name="Base" Header="{DynamicResource rootTest}" Height="20">
@@ -309,7 +315,7 @@
             </MenuItem>
 
         </Menu>
-        <Ellipse Fill="#FFF4F4F5" HorizontalAlignment="Left" Style="{StaticResource EllipseAnim}" Height="37" Margin="218,29,0,0" Stroke="Black" VerticalAlignment="Top" Width="27"/>
+        <Ellipse Fill="#FFF4F4F5" HorizontalAlignment="Left" Style="{StaticResource EllipseAnim}" Height="26" Margin="215,38,0,0" Stroke="Black" VerticalAlignment="Top" Width="27"/>
 
 
 
