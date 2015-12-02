@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
- 
+
 namespace WpfApplication1
 {
     /// <summary>
@@ -23,6 +23,9 @@ namespace WpfApplication1
         public MainWindow()
         {
             InitializeComponent();
+            Song one = new Song();
+            Playlist play = new Playlist();
+            
         }
     }
 }
