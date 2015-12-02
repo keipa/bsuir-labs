@@ -34,13 +34,13 @@ namespace WpfApplication1
       public int _sduration{get;set;}
       public int _rating{get;set;}
 
-      public bool Contains(Song q)
-      {
-          return current.Contains(q);
-      }
+        public bool Contains(Song q)
+        {
+            return current.Contains(q);
+        }
 
 
-      public bool Remove(Song q)
+        public bool Remove(Song q)
       {
 
           return current.Remove(q);
@@ -52,17 +52,6 @@ namespace WpfApplication1
       }
 
 
-      public IEnumerator<Song> GetEnumerator()
-      {
-          foreach (Song i in current)
-          {
-              yield return i;
-          }
-      }
-
-      IEnumerator IEnumerable.GetEnumerator()
-      {
-          return GetEnumerator();
-      }
+   
     }
 }

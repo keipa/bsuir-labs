@@ -1,301 +1,129 @@
-﻿.model small
-.stack 100h
-.data
-	MaxStringLength 	dw 	1000
-	String 				db 	1000 dup (0)
-	LongestWord 		db 	1000 dup (0)
 
-	OutOfLengthError 	db 	10, 13, "Out of max string length. Entering is terminated:C", '$'
-	EnterStringMessage	db 	"Enter string: ", 10, 13, '$'
-	WordLenghtMessage 	db 	"The longest word length is: ", 10, 13, '$'
-	LongestWordMessage 	db 	"The longest words is:", 10, 13, '$'
-	EmptyStringMessage 	db 	"You enter a empty string. Program is terminated:C", 10, 13, '$'
+;by intercepting interrupt produced duplication vowels
+; tasm as a default
+;tlink /t 7-1th
+;7-1th
+.286
+.model tiny  ;code and date contains together
 .code
 
-IgnoreWhitespaces proc
-		dec 	SI
-IW_CYLE:
-		inc 	SI
-		cmp 	byte ptr [SI], ' '
-		je 		IW_CYLE
 
+org 2Ch   ; starting offset addressing
+org 80h
+
+
+cmd_len db ?  ; command length
+cmd_line db ? ; command begining
+
+org 100h 		;standart offset DANGER DO NOT TOUCH
+
+prog:
+jmp start
+old_handler dd 0
+count dw 0
+initialized dw 0
+
+dublicateKeyHandler proc
+				push ds si es di dx cx bx ax		;we must save the registers
+;vowels - гласные буквы - "A","E","Y","U","I","O"
+		mov dx, 123
+				cmp cs:initialized, dx  ;if handler is initialized
+				jnz use_old_handler			;then use old handler
+				xor ax, ax						;clear the ax
+				in  al, 60h
+
+				mov dl, 'a'	;when "A" will pressed
+				cmp al, 1eh ;set scan code for A
+		je custom_keyboard_handler
+				mov dl, 'e'	;when "e" will pressed
+				cmp al, 12h;set scan code for e
+		je custom_keyboard_handler
+
+				mov dl, 'y';when "y" will pressed
+				cmp al, 15h ;set scan code for y
+		je custom_keyboard_handler
+
+				mov dl, 'u';when "u" will pressed
+				cmp al, 16h;set scan code for u
+		je custom_keyboard_handler
+
+				mov dl, 'i';when "i" will pressed
+				cmp al, 17h;set scan code for i
+		je custom_keyboard_handler
+
+			mov dl, 'o';when "o" will pressed
+			cmp al, 18h;set scan code for o
+		je custom_keyboard_handler
+
+
+	  jmp use_old_handler
+
+		custom_keyboard_handler:;main logic of the progma
+				mov ah, 05H				;some miracle
+				mov cl, dl				;dl contains scan code for keybor which we send upper
+				int 16H						;INTERRUPION!!!11
+
+				mov ah, 05H			;repeat to duplicate
+				mov cl, dl
+				int 16H
+
+				jmp end_of_handler
+
+
+			 use_old_handler:;old handler if we bored
+								pop ax bx cx dx di es si ds			;restore registers
+								jmp dword ptr cs:old_handler	;and restore default handler
+								jmp end_of_handler
+
+				end_of_handler:
+								xor ax, ax			;some MAGIC
+								mov al, 20h
+								out 20h, al
+								pop ax bx cx dx di es si ds			;and restore registers
+								iret
+dublicateKeyHandler endp
+
+
+err_msg db "pls use '-d'!$"
+start:
+		mov ax, 3509h 				;MAGIC
+		int 21h
+		mov word ptr old_handler, bx			;preserving the old interrupt handler
+		mov word ptr old_handler + 2, es
+		mov ah, cmd_len							; if comand lenght not equal zero
+		cmp ah, 0										;than
+		jnz param_read							;read the parametr
+		mov ax, es:initialized			;MAGIC(i suppose this line save standart interrupt)
+		cmp ax, 123
+		mov ax, 123
+		mov initialized, ax
+		mov ax, 2509h												;DANGER ZONE ENTERANCE TO THE custom_handler
+		mov dx, offset dublicateKeyHandler  ;offset to custom_handler
+		int 21h															;and useing
+		mov dx, offset start								;go to start(maybe org use this too)
+		int 27h
 		ret
-endp IgnoreWhitespaces
 
-GetWordLength proc
-		push 	SI
-		push 	AX
-		push 	BX
-		push  	DX
-		push 	DI
-
-		call 	IgnoreWhitespaces
-		mov 	DI, SI
-		mov 	BX, SI
-		xor 	CX, CX
-SCANNING_WORDS_CYCLE:
-		mov 	AL, [SI]
-		cmp 	AL, ' '
-		jne 	SCANNING_WORDS_CYCLE_CONT
-
-		mov 	DX, SI
-		sub 	DX, BX
-		cmp 	CX, DX
-		jnc 	SCANNING_WORDS_CYCLE_NO_MAX
-		mov 	CX, DX
-
-SCANNING_WORDS_CYCLE_NO_MAX:
-		call 	IgnoreWhitespaces
-		mov 	BX, SI
-		dec		SI
-
-SCANNING_WORDS_CYCLE_CONT:
-		inc 	SI
-		cmp 	AL, '$'
-		jne 	SCANNING_WORDS_CYCLE
-
-		pop 	DI
-		pop 	DX
-		pop		BX
-		pop 	AX
-		pop 	SI
-		ret
-endp GetWordLength
-
-PrintLongestsWord proc
-		push 	SI
-		push 	AX
-		push 	BX
-		push 	CX
-		push  	DX
-
-		call 	IgnoreWhitespaces
-		mov 	DI, SI
-		mov 	BX, SI
-PRINTING_WORDS_CYCLE:
-		mov 	AL, [SI]
-		cmp 	AL, ' '
-		jne 	PRINTING_WORDS_CYCLE_CONT
-
-		mov 	DX, SI
-		sub 	DX, BX
-		cmp 	CX, DX
-		jne  	PRINTING_WORDS_CYCLE_NO_MAX
-		call 	PrintWord
-
-PRINTING_WORDS_CYCLE_NO_MAX:
-		call 	IgnoreWhitespaces
-		mov 	BX, SI
-		dec		SI
-
-PRINTING_WORDS_CYCLE_CONT:
-		inc 	SI
-		cmp 	AL, '$'
-		jne 	PRINTING_WORDS_CYCLE
-
-		pop 	DX
-		pop		BX
-		pop 	AX
-		pop 	SI
-		pop 	CX
-		ret
-endp PrintLongestsWord
-
-PrintWord proc
-		push 	AX
-		push 	DX
-		push 	SI
-
-		mov 	SI, BX
-		add 	SI, CX
-		mov 	byte ptr [SI], '$'
-		mov 	AH, 09h
-		mov 	DX, BX
-		int 	21h
-		mov 	byte ptr [SI], ' '
-
-		mov 	AH, 02h
-		mov 	DL, 10
-		int 	21h
-		mov 	DL, 13
-		int 	21h
-
-		pop 	SI
-		pop 	DX
-		pop 	AX
-		ret
-endp PrintWord
-
-EnterString proc
-		push 	AX
-		push 	DX
-		push 	BX
-		push 	SI
-
-		mov 	BX, SI
-ENTERING_CYCLE:
-		mov 	AH, 08h
-		int 	21h
-
-		cmp 	AL, 8
-		je 		BACKSPACE_HANDLING
-		cmp 	AL, 13
-		je 		ENTERING_CYCLE_OUT
-		cmp 	AL, '$'
-		je 		ENTERING_CYCLE
-
-		mov 	byte ptr [SI], AL
-		inc 	SI
-
-		mov 	CX, SI
-		sub 	CX, BX
-		cmp 	CX, MaxStringLength
-		jnc 	OUT_OF_STRING_LENGTH
-
-		mov		DL, AL
-		mov 	AH, 02h
-		int 	21h
-		jmp 	ENTERING_CYCLE
+		param_read:							;flag processing
+		lea di, cmd_line				;load comand line
+		mov al, [di + 1]				;space skip
+			cmp al, '-'						;if flag not begin with "-"
+				jnz error						;send  error
+														;else
+				mov al, [di + 2]		;offset to next symbol
+				cmp al, 'd'					;if it not "d"
+				jnz error						;send error msg
+														;else
+				mov ax, es:initialized;return standart handler
+				cmp ax, 123						;MAGIC
+				mov ax, 0							;MAGIC
+				mov es:initialized, ax;MAGIC
+				ret										;and return
+		error:
+				lea dx, err_msg ;msg with error
+				ret											;and return
 
 
-BACKSPACE_HANDLING:
-		mov		DL, 8
-		mov 	AH, 02h
-		int 	21h
-		mov		DL, 0
-		int 	21h
-		mov		DL, 8
-		int 	21h
 
-		cmp 	SI, BX
-		je 		ENTERING_CYCLE
-		dec 	SI
-		jmp 	ENTERING_CYCLE
-
-OUT_OF_STRING_LENGTH:
-		lea 	DX, OutOfLengthError
-		mov 	AH, 09h
-		int 	21h
-
-ENTERING_CYCLE_OUT:
-		mov 	byte ptr [SI], ' '
-		inc 	SI
-		mov 	byte ptr [SI], '$'
-
-		mov		DL, 10
-		mov 	AH, 02h
-		int 	21h
-		mov		DL, 13
-		int 	21h
-
-		pop 	SI
-		pop 	BX
-		pop 	DX
-		pop 	AX
-		ret
-endp EnterString
-
-
-GetDigitFromNumber proc
-		push 	AX
-		push 	CX
-
-		mov 	AX, BX
-		xor 	DX, DX
-		mov		CX, 10
-		cwd
-		idiv	CX
-		mov 	BX, AX
-
-		test 	DX, DX
-		jns 	GETTING_DIGIT_OUT
-		neg 	DX
-
-GETTING_DIGIT_OUT:
-		Add 	DX, 48
-
-		pop 	CX
-		pop 	AX
-		ret
-endp GetDigitFromNumber
-
-
-PrintNumber proc
-		push 	AX
-		push 	BX
-		push	CX
-		push 	DX
-		xor 	CX, CX
-
-		mov 	BX, AX
-		test 	BX, BX
-		jns 	GETTING_DIGITS_LOOP
-		mov 	AH, 02h
-		mov 	DL, '-'
-		int 	21h
-
-GETTING_DIGITS_LOOP:
-		call 	GetDigitFromNumber
-		push 	DX
-		inc  	CX
-		cmp 	BX, 0
-		jne  	GETTING_DIGITS_LOOP
-
-PRINTING_DIGITS_LOOP:
-		pop 	DX
-		mov 	AH, 02h
-		int 	21h
-		loop 	PRINTING_DIGITS_LOOP
-
-		mov 	AH, 02h
-		mov 	DL, 10
-		int		21h
-		mov 	DL, 13
-		int 	21h
-
-		pop 	DX
-		pop 	CX
-		pop 	BX
-		pop 	AX
-		ret
-endp PrintNumber
-
-
-		assume	DS: @data, ES: @data
-MAIN:
-		mov 	AX, @data
-		mov 	DS, AX
-		mov 	ES, AX
-
-		lea 	DX, EnterStringMessage
-		mov 	AH, 09h
-		int 	21h
-
-		lea 	SI, String
-		call 	EnterString
-		call 	GetWordLength
-		cmp 	CX, 0
-		je 		EMPTY_STRING_HANDLING
-
-		lea 	DX, WordLenghtMessage
-		mov 	AH, 09h
-		int		21h
-
-		mov 	AX, CX
-		call 	PrintNumber
-
-		lea 	DX, LongestWordMessage
-		mov 	AH, 09h
-		int 	21h
-		call 	PrintLongestsWord
-		jmp 	MAIN_END
-
-EMPTY_STRING_HANDLING:
-		lea 	DX, EmptyStringMessage
-		mov 	AH, 09h
-		int 	21h
-
-MAIN_END:
-		mov 	AX, 4c00h
-		int		21h
-end MAIN
+ret
+end prog
