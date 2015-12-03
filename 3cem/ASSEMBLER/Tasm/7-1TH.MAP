@@ -4,4 +4,6 @@
  00000H 001D9H 001DAH _TEXT              CODE
  001DAH 001DAH 00000H _DATA              DATA
 
+Program entry point at 0000:0100
+Warning: No stack
 

@@ -30,29 +30,29 @@ dublicateKeyHandler proc
 				cmp cs:initialized, dx  ;if handler is initialized
 				jnz use_old_handler			;then use old handler
 				xor ax, ax						;clear the ax
-				in  al, 60h
+				in  al, 60h						;load to al keyboard processing
 
 				mov dl, 'a'	;when "A" will pressed
-				cmp al, 1eh ;set scan code for A
+				cmp al, 1eh ;set scan code for "A"
 		je custom_keyboard_handler
 				mov dl, 'e'	;when "e" will pressed
-				cmp al, 12h;set scan code for e
+				cmp al, 12h;set scan code for "e"
 		je custom_keyboard_handler
 
 				mov dl, 'y';when "y" will pressed
-				cmp al, 15h ;set scan code for y
+				cmp al, 15h ;set scan code for "y"
 		je custom_keyboard_handler
 
 				mov dl, 'u';when "u" will pressed
-				cmp al, 16h;set scan code for u
+				cmp al, 16h;set scan code for "u"
 		je custom_keyboard_handler
 
 				mov dl, 'i';when "i" will pressed
-				cmp al, 17h;set scan code for i
+				cmp al, 17h;set scan code for "i"
 		je custom_keyboard_handler
 
 			mov dl, 'o';when "o" will pressed
-			cmp al, 18h;set scan code for o
+			cmp al, 18h;set scan code for "o"
 		je custom_keyboard_handler
 
 
@@ -60,11 +60,11 @@ dublicateKeyHandler proc
 
 		custom_keyboard_handler:;main logic of the progma
 				mov ah, 05H				;some miracle
-				mov cl, dl				;dl contains scan code for keybor which we send upper
-				int 16H						;INTERRUPION!!!11
+				mov cl, dl				;dl contains scan code for keyboard which we send upper
+				int 16H						;INTERRUPION!!!11 and output to the screen
 
 				mov ah, 05H			;repeat to duplicate
-				mov cl, dl
+				mov cl, dl			;
 				int 16H
 
 				jmp end_of_handler
