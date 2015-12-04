@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <tchar.h>
+#include <math.h>
 
 TCHAR mainMessage[] = "I can set text in the center of the window... and yes, it's blue";
 
@@ -26,6 +27,57 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam){
 //	PAINTSTRUCT ps;
 	//RECT rect;
 
+	hDC = GetDC(hwnd);
+	int iter = 4000;
+	int   k, mx, my;
+	float t, x, y ,p, r;
+	
+	mx = 600;
+	my = 800;
+	x = 1.0;
+	y = 0.0;
+	r = 0.1*my;
+	for (k = 1; k < iter; k++){
+		p = (rand() % 100) / (100 * 1.0);
+		t = x;
+		if (p <= 0.85) {
+			x = 0.84*x + 0.045*y;
+			y = 0.045*t + 0.86*y + 1.6;
+
+			}
+		else
+			if (p <= 0.91999)
+			{
+				x = 0.25*x - 0.26*y;
+				y = 0.23*t + 0.25*y + 1.6;
+			}
+			else
+				if (p <= 0.999)
+				{
+					x = -0.135*x + 0.28*y;
+					y = 0.26*t + 0.245*y + 0.44;
+				}
+				else
+				{
+					x = 0;
+					y = 0.16*y;
+				}
+				SetPixel(hDC, mx + r*x, my - r*y+35, RGB(0, 255, 0));
+
+		
+
+	}
+
+
+	SetPixel(hDC, 10, 100, RGB(0, 0, 255));
+	//
+	//for (int i = 0; i < 50; i++)
+	//{
+	//	// SetPixel(HDC hdc, int x, int y, COLORREF color)
+	//}
+
+
+
 
 
 	switch (iMsg){
@@ -33,7 +85,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam){
 		hDC = BeginPaint(hwnd, &ps); // инициализируем контекст устройства
 		GetClientRect(hwnd, &rect); // получаем ширину и высоту области для рисования
 		SetTextColor(hDC, colorText); // устанавливаем цвет контекстного устройства
-		DrawText(hDC, mainMessage, -1, &rect, DT_SINGLELINE | DT_CENTER | DT_VCENTER); // рисуем текст
+		DrawText(hDC, mainMessage, -1, &rect, DT_SINGLELINE | 400 | DT_VCENTER); // рисуем текст
+		
+
 		EndPaint(hwnd, &ps); // заканчиваем рисовать
 		break;
 	case WM_RBUTTONUP:
@@ -209,7 +263,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam){
 
 
 
-
+		
 
 
 
