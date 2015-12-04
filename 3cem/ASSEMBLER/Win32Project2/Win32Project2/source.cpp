@@ -3,18 +3,40 @@
 #include <string.h>
 #include <tchar.h>
 
+TCHAR mainMessage[] = "text";
 
-LRESULT CALLBACK WndProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam){ return DefWindowProc(hwnd, iMsg, wParam, lParam); }
+LRESULT CALLBACK WndProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam){
+	HDC hDC; // создаЄм дескриптор ориентации текста на экране
+	PAINTSTRUCT ps; // структура, сод-ща€ информацию о клиентской области (размеры, цвет и тп)
+	RECT rect; // стр-ра, определ€юща€ размер клиентской области
+	COLORREF colorText = RGB(0, 0, 255); // задаЄм цвет текста
+	switch (iMsg){
+	case WM_PAINT: // если нужно нарисовать, то:
+		hDC = BeginPaint(hwnd, &ps); // инициализируем контекст устройства
+		GetClientRect(hwnd, &rect); // получаем ширину и высоту области дл€ рисовани€
+		SetTextColor(hDC, colorText); // устанавливаем цвет контекстного устройства
+		DrawText(hDC, mainMessage, -1, &rect, DT_SINGLELINE | DT_CENTER | DT_VCENTER); // рисуем текст
+		EndPaint(hwnd, &ps); // заканчиваем рисовать
+		break;
+	case WM_DESTROY: // если окошко закрылось, то:
+		PostQuitMessage(NULL); // отправл€ем WinMain() сообщение WM_QUIT
+		break;
+	default:
+		return DefWindowProc(hwnd, iMsg, wParam, lParam); // если закрыли окошко
+	}
+
+
+	return DefWindowProc(hwnd, iMsg, wParam, lParam); }
 
 // ќсновна€ функци€ - аналог int main() в консольном приложении:
-int WINAPI WinMain(HINSTANCE hInstance,
-	HINSTANCE hPrevInstance,
-	LPSTR lpCmdLine,
+int WINAPI WinMain(HINSTANCE hInstance, //дескриптор экземпл€ра приложени€
+	HINSTANCE hPrevInstance,// дескриптор предыдущего экземпл€ра приложени€
+	LPSTR lpCmdLine,//указатель на начало командной строки, введенной при запуске программы.
 	int nCmdShow) // режим отображени€ окна
 {
 	HWND hwnd;
 	MSG msg;
-	
+
 	static TCHAR szWindowClass[] = _T("win32app");
 
 
@@ -43,7 +65,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
 		return 1;
 	}
 
-	
+
 	// ‘ункци€ вывода окна с кнопкой "ќ " на экран (о параметрах позже)
 	//
 	//MessageBox(NULL, "hi!!!", "hi", MB_OK);
@@ -54,12 +76,12 @@ int WINAPI WinMain(HINSTANCE hInstance,
 		300, // ширина окошка (по умолчанию)
 		100, // высота окна (раз дефолт в ширине, то писать не нужно)
 		NULL,
-		NULL, 
+		NULL,
 		hInstance,
 		NULL);
 
-	//ShowWindow(hwnd,nCmdShow);
-	//UpdateWindow(hwnd);
+	ShowWindow(hwnd,nCmdShow);
+	UpdateWindow(hwnd);
 
 
 	while (GetMessage(&msg, NULL, 0, 0))
