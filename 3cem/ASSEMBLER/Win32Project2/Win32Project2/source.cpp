@@ -28,12 +28,12 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam){
 	//RECT rect;
 
 	hDC = GetDC(hwnd);
-	int iter = 4000;
+	int iter = 400;
 	int   k, mx, my;
 	float t, x, y ,p, r;
 	
 	mx = 600;
-	my = 800;
+	my = 1000;
 	x = 1.0;
 	y = 0.0;
 	r = 0.1*my;
@@ -46,7 +46,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam){
 
 			}
 		else
-			if (p <= 0.91999)
+			if (p <= 0.9199)
 			{
 				x = 0.25*x - 0.26*y;
 				y = 0.23*t + 0.25*y + 1.6;
@@ -90,6 +90,22 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam){
 
 		EndPaint(hwnd, &ps); // заканчиваем рисовать
 		break;
+	
+
+
+	case WM_COMMAND:
+		switch (LOWORD(wParam))
+		{
+		case BN_CLICKED:
+			hDC = BeginPaint(hwnd, &ps);
+	
+			InvalidateRect(hwnd, NULL, TRUE);
+			UpdateWindow(hwnd);
+			MessageBox(NULL, "04NlllEHO", "LOL", MB_OK);
+
+			EndPaint(hwnd, &ps); // заканчиваем рисовать
+
+		}
 	case WM_RBUTTONUP:
 
 		GetClientRect(hwnd, &rcClient);
@@ -182,34 +198,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam){
 		EndPaint(hwnd, &ps);
 		ClipCursor(NULL);
 		break;
-
-
-
-	//case WM_MOUSEMOVE:
-	//	if (wParam & MK_LBUTTON)
-	//	{
-	//		hDC = GetDC(hwnd);
-	//		SetROP2(hDC, R2_NOTXORPEN);
-
-	//		if (fPrevLine)
-	//		{
-	//			MoveToEx(hDC, ptsBegin.x, ptsBegin.y,
-	//				(LPPOINT)NULL);
-	//			LineTo(hDC, ptsPrevEnd.x, ptsPrevEnd.y);
-	//		}
-
-	//		ptsEnd = MAKEPOINTS(lParam);
-	//		MoveToEx(hDC, ptsBegin.x, ptsBegin.y, (LPPOINT)NULL);
-	//		LineTo(hDC, ptsEnd.x, ptsEnd.y);
-
-	//		fPrevLine = TRUE;
-	//		ptsPrevEnd = ptsEnd;
-	//		ReleaseDC(hwnd, hDC);
-	//	}
-	//	break;
-
-
-	
 
 	case WM_LBUTTONUP:
 		GetClientRect(hwnd, &rcClient);
@@ -331,7 +319,7 @@ int WINAPI WinMain(HINSTANCE hInstance, //дескриптор экземпляра приложения
 	// Функция вывода окна с кнопкой "ОК" на экран (о параметрах позже)
 	//
 	//MessageBox(NULL, "hi!!!", "hi", MB_OK);
-	hwnd = CreateWindow(szWindowClass, "proc",
+	hwnd = CreateWindow(szWindowClass, "WINAIP",
 		WS_OVERLAPPEDWINDOW | WS_VISIBLE, // режимы отображения окошка
 		500, // положение окна по оси х (по умолчанию)
 		300, // позиция окна по оси у (раз дефолт в х, то писать не нужно)
@@ -344,12 +332,12 @@ int WINAPI WinMain(HINSTANCE hInstance, //дескриптор экземпляра приложения
 
 	HWND hwndButton = CreateWindow(
 		"BUTTON",  // Predefined class; Unicode assumed
-		"CLEAR",      // Button text
+		"04NCTKA",      // Button text
 		WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_PUSHBUTTON,  // Styles
 		10,         // x position
 		10,         // y position
-		50,        // Button width
-		50,        // Button height
+		90,        // Button width
+		20,        // Button height
 		hwnd,     // Parent window
 		NULL,       // No menu.
 		(HINSTANCE)GetWindowLong(hwnd, GWL_HINSTANCE),
