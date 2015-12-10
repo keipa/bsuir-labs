@@ -37,6 +37,15 @@ namespace WpfApplication1
 
 
         /*interface realization*/
+      public void Add(Song s)
+      {
+          current.Add(s); 
+      }
+      public void Clear()
+      {
+          current.Clear();
+      }
+
       public bool Contains(Song q)
       {
           return current.Contains(q);

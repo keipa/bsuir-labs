@@ -10,38 +10,39 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace WpfApplication1
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для add_song.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class add_song : Window
     {
-
-
-        public MainWindow()
+        public add_song()
         {
+            Random rnd = new Random();
             InitializeComponent();
-            
+            ID.Text = Convert.ToString(rnd.Next(10000, 100000));
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            add_song asi = new add_song();
-            asi.Show();
+           
+            MainWindow back = new MainWindow();
+            back.Show();
             Hide();
+            
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void settime(object sender, DragEventArgs e)
         {
-            for (double i = 0.1; i < 100; i++)
-            {
-                Progres.Value = i;
-                
+            int min = (int) slide.Value / 60 ;
+            
+            if (min < 1){
+                _min.Text = "00";
             }
+
         }
     }
 }
