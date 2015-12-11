@@ -6,16 +6,16 @@
         <ProgressBar Name="Progres" HorizontalAlignment="Left" Height="15" Margin="10,61,0,0" VerticalAlignment="Top" Width="497"/>
 
 
-        <Button Content="+" HorizontalAlignment="Left" Margin="10,81,0,0" VerticalAlignment="Top" Width="25" Click="Button_Click"/>
-        <Button Content="Проиграть" HorizontalAlignment="Left" Margin="221,8,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
+        <Button Content="+" HorizontalAlignment="Left" Margin="10,81,0,0" VerticalAlignment="Top" Width="25" Click="add_playlist_click"/>
+        <Button Content="Проиграть" HorizontalAlignment="Left" Margin="221,8,0,0" VerticalAlignment="Top" Width="75" Click="play_clicked"/>
         <Button Content="→" HorizontalAlignment="Left" Margin="301,10,0,0" VerticalAlignment="Top" Width="24" Height="39"/>
         <Button Content="←" HorizontalAlignment="Left" Margin="192,10,0,0" VerticalAlignment="Top" Width="24" Height="39"/>
-        <Button Content="+" HorizontalAlignment="Left" Margin="39,294,0,0" VerticalAlignment="Top" Width="25"/>
+        <Button Content="+" HorizontalAlignment="Left" Margin="39,294,0,0" VerticalAlignment="Top" Width="25" Click="click_add_song"/>
         <Button Content="S" HorizontalAlignment="Left" Margin="10,127,0,0" VerticalAlignment="Top" Width="25"/>
-        <Button Content="Пауза" HorizontalAlignment="Left" Margin="221,30,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="Пауза" HorizontalAlignment="Left" Margin="221,30,0,0" VerticalAlignment="Top" Width="75" Click="pause_click"/>
         <Button Content="-" HorizontalAlignment="Left" Margin="68,294,0,0" VerticalAlignment="Top" Width="25"/>
         <Button Content="-" HorizontalAlignment="Left" Margin="10,104,0,0" VerticalAlignment="Top" Width="25"/>
-        <TabControl HorizontalAlignment="Left" Height="208" Margin="38,81,0,0" VerticalAlignment="Top" Width="358">
+        <TabControl Name="tabs" HorizontalAlignment="Left" Height="208" Margin="38,81,0,0" VerticalAlignment="Top" Width="358">
             <TabItem Header="KEK">
                 <ListBox Margin="0,0,4,2">
                     <ListBoxItem Content="[13216 - Rap] Tехнический - Демидович - 04:35 - 5S" FontFamily="PF BeauSans Pro Thin"/>

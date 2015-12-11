@@ -18,6 +18,8 @@ namespace WpfApplication1
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
+    /// 
+
     public partial class MainWindow : Window
     {
 
@@ -25,23 +27,38 @@ namespace WpfApplication1
         public MainWindow()
         {
             InitializeComponent();
-            
+            tabs.Items.Clear();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+
+
+     
+        private void click_add_song(object sender, RoutedEventArgs e)
         {
             add_song asi = new add_song();
             asi.Show();
             Hide();
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void play_clicked(object sender, RoutedEventArgs e)
         {
-            for (double i = 0.1; i < 100; i++)
+            for (double i = 0; i < 100; i++)
             {
                 Progres.Value = i;
-                
             }
+        }
+
+        private void pause_click(object sender, RoutedEventArgs e)
+        {
+            Progres.Value = 0;
+
+        }
+
+        private void add_playlist_click(object sender, RoutedEventArgs e)
+        {
+            add_playlist abi = new add_playlist();
+            abi.Show();
+            Hide();
         }
     }
 }

@@ -3,23 +3,27 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="add_song" Height="300" Width="300">
     <Grid>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="84,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" ToolTip="Name"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="84,102,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" ToolTip="Artist"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="84,128,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" ToolTip="Janr"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="84,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" ToolTip="Name" Text="Африка"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="84,102,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" ToolTip="Artist" Text="Без Билета"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="84,128,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" ToolTip="Janr" Text="Поп"/>
         <TextBlock Name="ID" HorizontalAlignment="Left" Margin="87,10,0,0" TextWrapping="Wrap" Text="45618" VerticalAlignment="Top" FontFamily="Segoe UI Light" FontSize="48"/>
         <Button Content="add" HorizontalAlignment="Left" Margin="106,234,0,0" VerticalAlignment="Top" Width="74" Click="Button_Click"/>
-        <Slider Name="slide" HorizontalAlignment="Left" Margin="32,181,0,0" VerticalAlignment="Top" Width="238" Maximum="600" Minimum="10" DragEnter="settime" Value="50"/>
+        <Slider Name="slide" HorizontalAlignment="Left" Margin="32,181,0,0" VerticalAlignment="Top" Width="238" Maximum="600" Minimum="10" Value="50" MouseMove="set_time_move"/>
         <ComboBox HorizontalAlignment="Left" Margin="84,156,0,0" VerticalAlignment="Top" Width="120">
-            <ListBoxItem Content="Shanson"/>
-            <ListBoxItem Content="Rock"/>
-            <ListBoxItem Content="Indie"/>
-            <ListBoxItem/>
+            <MenuItem Header="1 star"/>
+            <MenuItem Header="2 stars"/>
+            <MenuItem Header="3 stars"/>
+            <MenuItem Header="4 stars"/>
+            <MenuItem Header="5 stars"/>
         </ComboBox>
         <Label Content=":" HorizontalAlignment="Left" Margin="138,200,0,0" VerticalAlignment="Top"/>
-        <TextBlock Name="_min" HorizontalAlignment="Left" Margin="116,200,0,0" TextWrapping="Wrap" Text="{Binding ElementName=slide, Path=Value, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" VerticalAlignment="Top" FontSize="20"/>
+        <TextBlock Name="_min" HorizontalAlignment="Left" Margin="116,200,0,0" TextWrapping="Wrap" Text="00" VerticalAlignment="Top" FontSize="20"/>
         <TextBlock Name="_sec" HorizontalAlignment="Left" Margin="151,200,0,0" TextWrapping="Wrap" Text="45" VerticalAlignment="Top" FontSize="20"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,181,0,0" TextWrapping="Wrap" Text="10s" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="265,182,0,0" TextWrapping="Wrap" Text="10m" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
+
+<!--{Binding ElementName=slide, Path=Value, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}-->
+    

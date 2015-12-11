@@ -21,7 +21,17 @@ namespace WpfApplication1
     {
         public add_playlist()
         {
+            Random rnd = new Random();
             InitializeComponent();
+            ID.Text = Convert.ToString(rnd.Next(10000, 100000));
+        }
+
+        private void add_clicked(object sender, RoutedEventArgs e)
+        {
+
+            MainWindow back = new MainWindow();
+            back.Show();
+            Hide();
         }
     }
 }
