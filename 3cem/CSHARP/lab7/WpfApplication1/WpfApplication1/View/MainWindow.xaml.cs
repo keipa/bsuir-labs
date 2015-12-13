@@ -12,8 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfApplication1.ViewModel;
 
-namespace WpfApplication1
+namespace WpfApplication1.View
 {
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
@@ -22,20 +23,31 @@ namespace WpfApplication1
 
     public partial class MainWindow : Window
     {
+        public MainViewModel add = new MainViewModel();
+
 
 
         public MainWindow()
         {
+
+            InitializeComponent();
+            tabs.Items.Clear();
+            add.AddPlaylist(0, "Default");
+            add.AddPlaylist(1, "Default2");
+            //tabs.ItemsSource = add.GetPlaylistsTabs();
+        }
+        public MainWindow(MainViewModel a)
+        {
+            add = a;
+            
             InitializeComponent();
             tabs.Items.Clear();
         }
 
 
-
-     
         private void click_add_song(object sender, RoutedEventArgs e)
         {
-            add_song asi = new add_song();
+            View.add_song asi = new View.add_song(add);
             asi.Show();
             Hide();
         }
@@ -51,14 +63,26 @@ namespace WpfApplication1
         private void pause_click(object sender, RoutedEventArgs e)
         {
             Progres.Value = 0;
-
         }
 
         private void add_playlist_click(object sender, RoutedEventArgs e)
         {
-            add_playlist abi = new add_playlist();
+
+            View.add_playlist abi = new View.add_playlist(add);
             abi.Show();
             Hide();
+
         }
+
+        private void Refresh(object sender, RoutedEventArgs e)
+        {
+            //TabItem a = new TabItem();
+            foreach (Model.PlaylistModel playlist in add.GetPlaylistsTabs()){
+                TabItem a = new TabItem();
+                a.Header = playlist._name + "[" + playlist._id+"]";
+                tabs.Items.Add(a);
+
+            }
+    }
     }
 }

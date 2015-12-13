@@ -1,11 +1,11 @@
-﻿<Window x:Class="WpfApplication1.add_playlist"
+﻿<Window x:Class="WpfApplication1.View.add_playlist"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="add_playlist" Height="300" Width="300">
     <Grid>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="87,129,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" ToolTip="Name" Text="Африка"/>
+        <TextBox Name="NameOfPlaylist" HorizontalAlignment="Left" Height="23" Margin="87,129,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" ToolTip="Name" Text="Африка"/>
         <TextBlock Name="ID" HorizontalAlignment="Left" Margin="87,10,0,0" TextWrapping="Wrap" Text="45618" VerticalAlignment="Top" FontFamily="Segoe UI Light" FontSize="48"/>
-        <Button Content="add" HorizontalAlignment="Left" Margin="87,212,0,0" VerticalAlignment="Top" Width="120" Click="add_clicked" Height="34"/>
+        <Button Content="add" HorizontalAlignment="Left" Margin="77,207,0,0" VerticalAlignment="Top" Width="120" Click="add_clicked" Height="34"/>
 
     </Grid>
 </Window>

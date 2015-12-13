@@ -11,35 +11,30 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WpfApplication1.ViewModel;
 
-namespace WpfApplication1
+
+namespace WpfApplication1.View
 {
     /// <summary>
     /// Логика взаимодействия для add_song.xaml
     /// </summary>
     public partial class add_song : Window
     {
-        public add_song()
+
+        public MainViewModel add;
+        #region Constructor
+        public add_song(MainViewModel a)
         {
+            add = a;
             Random rnd = new Random();
             InitializeComponent();
             ID.Text = Convert.ToString(rnd.Next(10000, 100000));
             _min.Text = "20";
             
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-           
-            MainWindow back = new MainWindow();
-            back.Show();
-            Hide();
-            
-        }
-
-      
-       
-
+        #endregion
+   
         
         private void set_time_move(object sender, MouseEventArgs e)
         {
@@ -66,7 +61,24 @@ namespace WpfApplication1
                     _sec.Text = Convert.ToString((int)slide.Value - min * 60);
             }
         }
+        #region Clicks
 
-        
+        private void Add_Click(object sender, RoutedEventArgs e)
+        {
+            //MainViewModel add = new MainViewModel();
+            add.AddSong(Convert.ToInt32(ID.Text),
+                ARTIST.Text,
+                SONGNAME.Text,
+                SONGNAME.Text,
+                RATING.SelectedIndex + 1,
+                Convert.ToInt32(_sec.Text),
+                Convert.ToInt32(_min.Text));
+
+            View.MainWindow back = new View.MainWindow();
+            back.Show();
+            Hide();
+        }
+
+        #endregion
     }
 }

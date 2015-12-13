@@ -1,15 +1,15 @@
-﻿<Window x:Class="WpfApplication1.add_song"
+﻿<Window x:Class="WpfApplication1.View.add_song"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="add_song" Height="300" Width="300">
     <Grid>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="84,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" ToolTip="Name" Text="Африка"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="84,102,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" ToolTip="Artist" Text="Без Билета"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="84,128,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" ToolTip="Janr" Text="Поп"/>
+        <TextBox Name="ARTIST" HorizontalAlignment="Left" Height="23" Margin="84,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" ToolTip="Name" Text="Африка"/>
+        <TextBox Name="SONGNAME" HorizontalAlignment="Left" Height="23" Margin="84,102,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" ToolTip="Artist" Text="Без Билета"/>
+        <TextBox Name="GENRE" HorizontalAlignment="Left" Height="23" Margin="84,128,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" ToolTip="Janr" Text="Поп"/>
         <TextBlock Name="ID" HorizontalAlignment="Left" Margin="87,10,0,0" TextWrapping="Wrap" Text="45618" VerticalAlignment="Top" FontFamily="Segoe UI Light" FontSize="48"/>
-        <Button Content="add" HorizontalAlignment="Left" Margin="106,234,0,0" VerticalAlignment="Top" Width="74" Click="Button_Click"/>
+        <Button Content="add" HorizontalAlignment="Left" Margin="106,234,0,0" VerticalAlignment="Top" Width="74" Click="Add_Click"/>
         <Slider Name="slide" HorizontalAlignment="Left" Margin="32,181,0,0" VerticalAlignment="Top" Width="238" Maximum="600" Minimum="10" Value="50" MouseMove="set_time_move"/>
-        <ComboBox HorizontalAlignment="Left" Margin="84,156,0,0" VerticalAlignment="Top" Width="120">
+        <ComboBox Name="RATING" HorizontalAlignment="Left" Margin="84,156,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0">
             <MenuItem Header="1 star"/>
             <MenuItem Header="2 stars"/>
             <MenuItem Header="3 stars"/>
