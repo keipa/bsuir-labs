@@ -34,12 +34,13 @@ namespace WpfApplication1.View
             tabs.Items.Clear();
             add.AddPlaylist(0, "Default");
             add.AddPlaylist(1, "Default2");
+            add.AddSong(23,"d","3","e",3,2,2);
             //tabs.ItemsSource = add.GetPlaylistsTabs();
         }
         public MainWindow(MainViewModel a)
         {
             add = a;
-            
+
             InitializeComponent();
             tabs.Items.Clear();
         }
@@ -77,12 +78,26 @@ namespace WpfApplication1.View
         private void Refresh(object sender, RoutedEventArgs e)
         {
             //TabItem a = new TabItem();
-            foreach (Model.PlaylistModel playlist in add.GetPlaylistsTabs()){
+            tabs.Items.Clear();
+            foreach (Model.PlaylistModel playlist in add.GetPlaylistsTabs())
+            {
                 TabItem a = new TabItem();
-                a.Header = playlist._name + "[" + playlist._id+"]";
+                a.Header = playlist._name + "[" + playlist._id + "]";
                 tabs.Items.Add(a);
+                foreach (Model.SongModel song in playlist)
+                {
+                    TextBlock textBlock = new TextBlock();
+                    
+                    textBlock.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
+                    textBlock.VerticalAlignment = System.Windows.VerticalAlignment.Top;
+                    textBlock.Text = song._name;
+                    ListBox grid = new ListBox();
+                    grid.Items.Add(textBlock);
+                    a.Content = grid;
+
+                }
 
             }
-    }
+        }
     }
 }
