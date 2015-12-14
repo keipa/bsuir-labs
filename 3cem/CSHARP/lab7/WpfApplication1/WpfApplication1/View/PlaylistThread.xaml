@@ -3,9 +3,51 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="PlaylistThread" Height="300" Width="300">
     <Grid>
-        <ListView Name="ListWithSongs" HorizontalAlignment="Left" Height="249" Margin="10,10,0,0" VerticalAlignment="Top" Width="272">
-            
+
+        <ListView Name="ListWithSongs" HorizontalAlignment="Left" Height="143" Margin="10,44,0,0" VerticalAlignment="Top" Width="272">
+
         </ListView>
+        <Button Content="▲" HorizontalAlignment="Left" Margin="115,10,0,0" VerticalAlignment="Top" Width="30" Height="30" RenderTransformOrigin="0.5,0.5" Click="StartTread">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90.237"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <Button Content="II" HorizontalAlignment="Left" Margin="151,10,0,0" VerticalAlignment="Top" Width="30" Height="30" RenderTransformOrigin="0.5,0.5" FontWeight="Bold">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.028"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <Button Content="→" HorizontalAlignment="Left" Margin="184,10,0,0" VerticalAlignment="Top" Width="97" Height="30" RenderTransformOrigin="0.5,0.5">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.374"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <Button Content="←" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="102" Height="30" RenderTransformOrigin="0.5,0.5">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.374"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <TextBlock Name="REPORT" HorizontalAlignment="Left" Margin="8,198,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="274" Height="61"/>
 
     </Grid>
 </Window>
