@@ -8,13 +8,12 @@
         </Grid.ColumnDefinitions>
 
 
-        <Button Content="Добавить плейлист" HorizontalAlignment="Left" Margin="189,36,0,0" VerticalAlignment="Top" Width="176" Click="add_playlist_click" Height="20"/>
-        <Button Content="Воспроизвести" HorizontalAlignment="Left" Margin="8,36,0,0" VerticalAlignment="Top" Width="176" Click="play_clicked" Height="20"/>
-        <Button Content="Добавить композицию" HorizontalAlignment="Left" Margin="189,61,0,0" VerticalAlignment="Top" Width="176" Click="click_add_song" Height="20"/>
-        <Button x:Name="addbutton" Content="Отобразить доступные" HorizontalAlignment="Left" Margin="8,61,0,0" VerticalAlignment="Top" Width="176" Click="Refresh" Height="20"/>
-        <Button Content="DS" HorizontalAlignment="Left" Margin="10,234,0,0" VerticalAlignment="Top" Width="176" Height="20"/>
-        <Button Content="DP" HorizontalAlignment="Left" Margin="189,234,0,0" VerticalAlignment="Top" Width="176" Height="20"/>
-        <TabControl Name="tabs" HorizontalAlignment="Left" Height="144" Margin="8,81,0,0" VerticalAlignment="Top" Width="358">
+        <Button Content="Add playlist" HorizontalAlignment="Left" Margin="189,36,0,0" VerticalAlignment="Top" Width="133" Click="add_playlist_click" Height="20" FontStyle="Italic"/>
+        <Button Content="Play" HorizontalAlignment="Left" Margin="8,36,0,0" VerticalAlignment="Top" Width="176" Click="play_clicked" Height="45" FontStyle="Italic" FontFamily="Eurostile" FontSize="30"/>
+        <Button Content="Add song" HorizontalAlignment="Left" Margin="189,61,0,0" VerticalAlignment="Top" Width="133" Click="click_add_song" Height="20" FontStyle="Italic"/>
+        <Button Content="DS" HorizontalAlignment="Left" Margin="327,61,0,0" VerticalAlignment="Top" Width="39" Height="20"/>
+        <Button Content="DP" HorizontalAlignment="Left" Margin="327,36,0,0" VerticalAlignment="Top" Width="39" Height="20" Click="deletePlaylist"/>
+        <TabControl Name="tabs" HorizontalAlignment="Left" Height="144" Margin="8,81,0,0" VerticalAlignment="Top" Width="358" SelectionChanged="playlist_info">
             <!--<TabControl.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding _name}"/>
@@ -35,7 +34,7 @@
                 </ListBox>
             </TabItem>
         </TabControl>
-        <TextBlock HorizontalAlignment="Left" Height="118" Margin="371,107,0,0" TextWrapping="Wrap" Text="{}{...}" VerticalAlignment="Top" Width="109" Foreground="White"/>
+        <TextBlock Name="PLAYLISTINFO" HorizontalAlignment="Left" Height="118" Margin="371,107,0,0" TextWrapping="Wrap" Text="{}{...}" VerticalAlignment="Top" Width="109" Foreground="White"/>
         <DataGrid HorizontalAlignment="Left" Margin="-188,-68,0,0" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="&lt;/ThreadPlay&gt;" VerticalAlignment="Top" Foreground="White" FontFamily="Segoe UI Light" FontSize="20"/>
 

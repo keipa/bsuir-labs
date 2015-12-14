@@ -1,0 +1,11 @@
+﻿<Window x:Class="WpfApplication1.View.PlaylistThread"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="PlaylistThread" Height="300" Width="300">
+    <Grid>
+        <ListView Name="ListWithSongs" HorizontalAlignment="Left" Height="249" Margin="10,10,0,0" VerticalAlignment="Top" Width="272">
+            
+        </ListView>
+
+    </Grid>
+</Window>

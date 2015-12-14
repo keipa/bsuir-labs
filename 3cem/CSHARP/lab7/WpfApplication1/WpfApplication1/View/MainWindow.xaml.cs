@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WpfApplication1.ViewModel;
+using System.Threading;
 
 namespace WpfApplication1.View
 {
@@ -24,9 +25,6 @@ namespace WpfApplication1.View
     public partial class MainWindow : Window
     {
         public MainViewModel add = new MainViewModel();
-
-
-
         public MainWindow()
         {
 
@@ -42,7 +40,6 @@ namespace WpfApplication1.View
             tabs.Items.Clear();
             UpdateList();
         }
-
         public MainWindow(MainViewModel a, int select_playlist)
         {
             
@@ -59,14 +56,7 @@ namespace WpfApplication1.View
             asi.Show();
             Hide();
         }
-
-        private void play_clicked(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
-        
-
+      
         private void add_playlist_click(object sender, RoutedEventArgs e)
         {
 
@@ -75,12 +65,27 @@ namespace WpfApplication1.View
             Hide();
 
         }
+        private void deletePlaylist(object sender, RoutedEventArgs e)
+        {
+            add.DelPlaylist(tabs.SelectedIndex);
+            tabs.SelectedIndex = -1;
+            UpdateList();
 
+        }
+        private void playlist_info(object sender, SelectionChangedEventArgs e)
+        {
+            PLAYLISTINFO.Text = add.GetPlaylistsTabs()[tabs.SelectedIndex]._id+"\n"+
+                                add.GetPlaylistsTabs()[tabs.SelectedIndex]._name+"\n"+
+            add.GetPlaylistsTabs()[tabs.SelectedIndex]._rating+"\n"+
+            add.GetPlaylistsTabs()[tabs.SelectedIndex]._mduration + ":" +
+            add.GetPlaylistsTabs()[tabs.SelectedIndex]._sduration;
+        }
+
+        /*click refresh button*/
         private void Refresh(object sender, RoutedEventArgs e)
         {
             UpdateList();
         }
-
         private void UpdateList()
         {
             //TabItem a = new TabItem();
@@ -107,5 +112,52 @@ namespace WpfApplication1.View
 
             }
         }
+
+        
+
+        
+        #region Threading
+
+        private void play_clicked(object sender, RoutedEventArgs e)
+        {
+            View.PlaylistThread ati = new View.PlaylistThread(add.GetPlaylistsTabs()[tabs.SelectedIndex]);
+            ati.Title = add.GetPlaylistsTabs()[tabs.SelectedIndex]._name;
+            ati.Show();
+            //Thread t = new Thread(ThreadProc);
+            //Console.WriteLine("Before setting apartment state: {0}",
+            //    t.GetApartmentState());
+
+            //t.SetApartmentState(ApartmentState.STA);
+            //Console.WriteLine("After setting apartment state: {0}",
+            //    t.GetApartmentState());
+
+            //bool result = t.TrySetApartmentState(ApartmentState.MTA);
+            //Console.WriteLine("Try to change state: {0}", result);
+
+            //t.Start();
+
+            //Thread.Sleep(500);
+
+            //try
+            //{
+            //    t.TrySetApartmentState(ApartmentState.STA);
+            //}
+            //catch (ThreadStateException)
+            //{
+            //    Console.WriteLine("ThreadStateException occurs " +
+            //        "if apartment state is set after starting thread.");
+            //}
+
+            //t.Join();
+        }
+
+        //public static void ThreadProc()
+        //{
+        //    Thread.Sleep(2000);
+        //}
+
+        #endregion
+
+        
     }
 }

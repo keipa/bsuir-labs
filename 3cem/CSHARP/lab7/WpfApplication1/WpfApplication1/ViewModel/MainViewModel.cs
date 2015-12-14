@@ -68,7 +68,12 @@ namespace WpfApplication1.ViewModel
             current.Add(newP);
             currentPlaylist = newP;
 
-            
+        }
+        
+        public void DelPlaylist(int selected_playlist)
+        {
+
+            current.Remove(current[selected_playlist]);
         }
         public void AddSong(int id,string artist, string name, string janr, int rating, int sdurtion, int mduration, int selected_playlist)
         {

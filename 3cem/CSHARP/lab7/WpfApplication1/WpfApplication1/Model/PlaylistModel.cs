@@ -47,15 +47,20 @@ namespace WpfApplication1.Model
         {
             get
             {
-                int summ = 0;
+                double summ = 0;
+                double summseconds = 0;
                 foreach (Model.SongModel song in current)
                 {
                     summ += song._mduration;
+                    summseconds +=song._sduration;
+                    if (summseconds>=60){
+                       summ += (int)Math.Truncate(summseconds / 60);
+                    }
                 }
-                return summ;
+                return (int)summ;
             }
             set { }
-        }
+        }//badass
         public int _sduration
         {
             get
@@ -76,7 +81,7 @@ namespace WpfApplication1.Model
                 else { return (int)summ; }
             }
             set { }
-        }
+        }//useless strings
         public int _rating
         {
             get
@@ -89,10 +94,14 @@ namespace WpfApplication1.Model
                     summ += song._rating;
 
                 }
+                if (count == 0)
+                {
+                    return 0;
+                }else
                 return summ / count;
             }
             set { }
-        }
+        }//well
         #endregion
 
         #region InterfaceRealizaiton
@@ -115,7 +124,6 @@ namespace WpfApplication1.Model
 
         public bool Remove(Model.SongModel q)
         {
-
             return current.Remove(q);
         }
 
@@ -137,7 +145,7 @@ namespace WpfApplication1.Model
         {
             return GetEnumerator();
         }
-        #endregion
+        #endregion//well
 
     }
 }
