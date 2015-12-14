@@ -70,11 +70,20 @@ namespace WpfApplication1.ViewModel
 
             
         }
-        public void AddSong(int id,string artist, string name, string janr, int rating, int sdurtion, int mduration)
+        public void AddSong(int id,string artist, string name, string janr, int rating, int sdurtion, int mduration, int selected_playlist)
         {
-
+            
+            try
+            {
+                currentPlaylist = current[selected_playlist];
+            }
+            catch (System.ArgumentOutOfRangeException)
+            {
+                MessageBox.Show("Playlist does not exist");
+                throw;
+            }
             Model.SongModel newS = new SongModel();
-
+            newS._name = name;
             newS._artist = artist;
             newS._genre = janr;
             newS._id = id;

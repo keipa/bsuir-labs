@@ -23,9 +23,11 @@ namespace WpfApplication1.View
     {
 
         public MainViewModel add;
+        int selected_playlist_index = 0;
         #region Constructor
-        public add_song(MainViewModel a)
+        public add_song(MainViewModel a, int s)
         {
+            selected_playlist_index = s;
             add = a;
             Random rnd = new Random();
             InitializeComponent();
@@ -69,12 +71,12 @@ namespace WpfApplication1.View
             add.AddSong(Convert.ToInt32(ID.Text),
                 ARTIST.Text,
                 SONGNAME.Text,
-                SONGNAME.Text,
+                GENRE.Text,
                 RATING.SelectedIndex + 1,
                 Convert.ToInt32(_sec.Text),
-                Convert.ToInt32(_min.Text));
+                Convert.ToInt32(_min.Text),selected_playlist_index);
 
-            View.MainWindow back = new View.MainWindow();
+            View.MainWindow back = new View.MainWindow(add,selected_playlist_index);
             back.Show();
             Hide();
         }

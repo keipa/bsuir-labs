@@ -1,38 +1,33 @@
 ﻿<Window x:Class="WpfApplication1.View.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="357.333" Width="525">
-    <Grid>
+        Title="&lt;/Thread&gt;" Height="300.333" Width="498">
+    <Grid Background="#FF114F66">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="47*"/>
-            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <ProgressBar Name="Progres" HorizontalAlignment="Left" Height="15" Margin="10,61,0,0" VerticalAlignment="Top" Width="497"/>
 
 
-        <Button Content="+" HorizontalAlignment="Left" Margin="10,81,0,0" VerticalAlignment="Top" Width="25" Click="add_playlist_click"/>
-        <Button Content="Проиграть" HorizontalAlignment="Left" Margin="221,8,0,0" VerticalAlignment="Top" Width="75" Click="play_clicked"/>
-        <Button Content="→" HorizontalAlignment="Left" Margin="301,10,0,0" VerticalAlignment="Top" Width="24" Height="39"/>
-        <Button Content="←" HorizontalAlignment="Left" Margin="192,10,0,0" VerticalAlignment="Top" Width="24" Height="39"/>
-        <Button Content="+" HorizontalAlignment="Left" Margin="39,294,0,0" VerticalAlignment="Top" Width="25" Click="click_add_song"/>
-        <Button x:Name="addbutton" Content="S" HorizontalAlignment="Left" Margin="10,127,0,0" VerticalAlignment="Top" Width="25" Click="Refresh"/>
-        <Button Content="Пауза" HorizontalAlignment="Left" Margin="221,30,0,0" VerticalAlignment="Top" Width="75" Click="pause_click"/>
-        <Button Content="-" HorizontalAlignment="Left" Margin="68,294,0,0" VerticalAlignment="Top" Width="25"/>
-        <Button Content="-" HorizontalAlignment="Left" Margin="10,104,0,0" VerticalAlignment="Top" Width="25"/>
-        <TabControl Name="tabs" HorizontalAlignment="Left" Height="208" Margin="38,81,0,0" VerticalAlignment="Top" Width="358">
+        <Button Content="Добавить плейлист" HorizontalAlignment="Left" Margin="189,36,0,0" VerticalAlignment="Top" Width="176" Click="add_playlist_click" Height="20"/>
+        <Button Content="Воспроизвести" HorizontalAlignment="Left" Margin="8,36,0,0" VerticalAlignment="Top" Width="176" Click="play_clicked" Height="20"/>
+        <Button Content="Добавить композицию" HorizontalAlignment="Left" Margin="189,61,0,0" VerticalAlignment="Top" Width="176" Click="click_add_song" Height="20"/>
+        <Button x:Name="addbutton" Content="Отобразить доступные" HorizontalAlignment="Left" Margin="8,61,0,0" VerticalAlignment="Top" Width="176" Click="Refresh" Height="20"/>
+        <Button Content="DS" HorizontalAlignment="Left" Margin="10,234,0,0" VerticalAlignment="Top" Width="176" Height="20"/>
+        <Button Content="DP" HorizontalAlignment="Left" Margin="189,234,0,0" VerticalAlignment="Top" Width="176" Height="20"/>
+        <TabControl Name="tabs" HorizontalAlignment="Left" Height="144" Margin="8,81,0,0" VerticalAlignment="Top" Width="358">
             <!--<TabControl.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding _name}"/>
                 </DataTemplate>
             </TabControl.ItemTemplate>-->
-            <TabItem Header="KEK">
+            <TabItem Header="KEK" Margin="0,0,-4,-2">
                 <ListBox Margin="0,0,4,2">
                     <ListBoxItem Content="[13216 - Rap] Tехнический - Демидович - 04:35 - 5S" FontFamily="PF BeauSans Pro Thin"/>
                 </ListBox>
             </TabItem>
             <TabItem Header="KEK">
                 <ListBox Margin="0,0,4,2">
-                    
+
                     <ListBoxItem Content="[46554 - Rock] Пахом - А жизнь весёлый карнавал- 02:47 - 4S" FontFamily="PF BeauSans Pro Thin"/>
                     <ListBoxItem Content="[46554 - Rock] Пахом - А жизнь весёлый карнавал- 02:47 - 4S" FontFamily="PF BeauSans Pro Thin"/>
                     <ListBoxItem Content="[46554 - Rock] Пахом - А жизнь весёлый карнавал- 02:47 - 4S" FontFamily="PF BeauSans Pro Thin"/>
@@ -40,8 +35,10 @@
                 </ListBox>
             </TabItem>
         </TabControl>
-        <TextBlock HorizontalAlignment="Left" Height="207" Margin="398,82,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="109"/>
-        
+        <TextBlock HorizontalAlignment="Left" Height="118" Margin="371,107,0,0" TextWrapping="Wrap" Text="{}{...}" VerticalAlignment="Top" Width="109" Foreground="White"/>
+        <DataGrid HorizontalAlignment="Left" Margin="-188,-68,0,0" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="&lt;/ThreadPlay&gt;" VerticalAlignment="Top" Foreground="White" FontFamily="Segoe UI Light" FontSize="20"/>
+
 
     </Grid>
 </Window>

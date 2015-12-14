@@ -32,39 +32,40 @@ namespace WpfApplication1.View
 
             InitializeComponent();
             tabs.Items.Clear();
-            add.AddPlaylist(0, "Default");
-            add.AddPlaylist(1, "Default2");
-            add.AddSong(23,"d","3","e",3,2,2);
+            
             //tabs.ItemsSource = add.GetPlaylistsTabs();
         }
         public MainWindow(MainViewModel a)
         {
             add = a;
-
             InitializeComponent();
             tabs.Items.Clear();
+            UpdateList();
         }
 
+        public MainWindow(MainViewModel a, int select_playlist)
+        {
+            
+            add = a;
+            InitializeComponent();
+            tabs.Items.Clear();
+            UpdateList();
+            tabs.SelectedIndex = select_playlist;
+        }
 
         private void click_add_song(object sender, RoutedEventArgs e)
         {
-            View.add_song asi = new View.add_song(add);
+            View.add_song asi = new View.add_song(add,tabs.SelectedIndex);
             asi.Show();
             Hide();
         }
 
         private void play_clicked(object sender, RoutedEventArgs e)
         {
-            for (double i = 0; i < 100; i++)
-            {
-                Progres.Value = i;
-            }
+            
         }
 
-        private void pause_click(object sender, RoutedEventArgs e)
-        {
-            Progres.Value = 0;
-        }
+        
 
         private void add_playlist_click(object sender, RoutedEventArgs e)
         {
@@ -77,6 +78,11 @@ namespace WpfApplication1.View
 
         private void Refresh(object sender, RoutedEventArgs e)
         {
+            UpdateList();
+        }
+
+        private void UpdateList()
+        {
             //TabItem a = new TabItem();
             tabs.Items.Clear();
             foreach (Model.PlaylistModel playlist in add.GetPlaylistsTabs())
@@ -84,14 +90,16 @@ namespace WpfApplication1.View
                 TabItem a = new TabItem();
                 a.Header = playlist._name + "[" + playlist._id + "]";
                 tabs.Items.Add(a);
+                ListBox grid = new ListBox();
                 foreach (Model.SongModel song in playlist)
                 {
                     TextBlock textBlock = new TextBlock();
-                    
+
+
                     textBlock.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
                     textBlock.VerticalAlignment = System.Windows.VerticalAlignment.Top;
-                    textBlock.Text = song._name;
-                    ListBox grid = new ListBox();
+                    textBlock.Text = "[" + song._mduration + ":" + song._sduration + "] " + song._artist + " - " + song._name + "(" + song._genre + ")";
+
                     grid.Items.Add(textBlock);
                     a.Content = grid;
 
