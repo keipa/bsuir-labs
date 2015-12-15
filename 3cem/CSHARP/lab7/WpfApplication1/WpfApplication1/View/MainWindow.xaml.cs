@@ -24,6 +24,7 @@ namespace WpfApplication1.View
 
     public partial class MainWindow : Window
     {
+        int currentsongindex = 0;
         public MainViewModel add = new MainViewModel();
         public MainWindow()
         {
@@ -56,7 +57,13 @@ namespace WpfApplication1.View
             asi.Show();
             Hide();
         }
-      
+        private void delete_song(object sender, RoutedEventArgs e)
+        {
+            add.DelSong(tabs.SelectedIndex,currentsongindex);
+            UpdateList();
+        }
+
+
         private void add_playlist_click(object sender, RoutedEventArgs e)
         {
 
@@ -74,11 +81,11 @@ namespace WpfApplication1.View
         }
         private void playlist_info(object sender, SelectionChangedEventArgs e)
         {
-            PLAYLISTINFO.Text = add.GetPlaylistsTabs()[tabs.SelectedIndex]._id+"\n"+
-                                add.GetPlaylistsTabs()[tabs.SelectedIndex]._name+"\n"+
-            add.GetPlaylistsTabs()[tabs.SelectedIndex]._rating+"\n"+
-            add.GetPlaylistsTabs()[tabs.SelectedIndex]._mduration + ":" +
-            add.GetPlaylistsTabs()[tabs.SelectedIndex]._sduration;
+            //PLAYLISTINFO.Text = add.GetPlaylistsTabs()[tabs.SelectedIndex]._id+"\n"+
+            //                    add.GetPlaylistsTabs()[tabs.SelectedIndex]._name+"\n"+
+            //add.GetPlaylistsTabs()[tabs.SelectedIndex]._rating+"\n"+
+            //add.GetPlaylistsTabs()[tabs.SelectedIndex]._mduration + ":" +
+            //add.GetPlaylistsTabs()[tabs.SelectedIndex]._sduration;
         }
 
         /*click refresh button*/
@@ -120,9 +127,17 @@ namespace WpfApplication1.View
 
         private void play_clicked(object sender, RoutedEventArgs e)
         {
-            View.PlaylistThread ati = new View.PlaylistThread(add.GetPlaylistsTabs()[tabs.SelectedIndex]);
-            ati.Title = add.GetPlaylistsTabs()[tabs.SelectedIndex]._name;
-            ati.Show();
+            try
+            {
+                View.PlaylistThread ati = new View.PlaylistThread(add.GetPlaylistsTabs()[tabs.SelectedIndex]);
+                ati.Title = add.GetPlaylistsTabs()[tabs.SelectedIndex]._name;
+                ati.Show();
+            }
+            catch (System.ArgumentOutOfRangeException)
+            {
+                MessageBox.Show("Add playlist with a songs");
+            }
+            
             //Thread t = new Thread(ThreadProc);
             //Console.WriteLine("Before setting apartment state: {0}",
             //    t.GetApartmentState());
@@ -149,6 +164,11 @@ namespace WpfApplication1.View
             //}
 
             //t.Join();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
 
         //public static void ThreadProc()
