@@ -81,12 +81,12 @@ namespace WpfApplication1.View
         }
         private void playlist_info(object sender, SelectionChangedEventArgs e)
         {
-            //PLAYLISTINFO.Text = add.GetPlaylistsTabs()[tabs.SelectedIndex]._id+"\n"+
-            //                    add.GetPlaylistsTabs()[tabs.SelectedIndex]._name+"\n"+
-            //add.GetPlaylistsTabs()[tabs.SelectedIndex]._rating+"\n"+
-            //add.GetPlaylistsTabs()[tabs.SelectedIndex]._mduration + ":" +
-            //add.GetPlaylistsTabs()[tabs.SelectedIndex]._sduration;
-        }
+            if (add.GetPlaylistsTabs().Count != 0)
+            {
+                //PLAYLISTINFO.Text = add.GetPlaylistsTabs()[tabs.SelectedIndex]._id + "\n" +
+                                    //add.GetPlaylistsTabs()[tabs.SelectedIndex]._name + "\n" ;
+            }
+        }   
 
         /*click refresh button*/
         private void Refresh(object sender, RoutedEventArgs e)

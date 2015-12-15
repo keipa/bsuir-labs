@@ -34,6 +34,9 @@ namespace WpfApplication1.Model
         {
             _name = "default";
             _id = 0;
+            _mduration = 0;
+            _sduration = 0;
+            _rating = 0;
         }
 
 
@@ -47,17 +50,25 @@ namespace WpfApplication1.Model
         {
             get
             {
-                double summ = 0;
-                double summseconds = 0;
-                foreach (Model.SongModel song in current)
+                if (current.Count == 0)
                 {
-                    summ += song._mduration;
-                    summseconds +=song._sduration;
-                    if (summseconds>=60){
-                       summ += (int)Math.Truncate(summseconds / 60);
-                    }
+                    return 0;
                 }
-                return (int)summ;
+                else
+                {
+                    double summ = 0;
+                    double summseconds = 0;
+                    foreach (Model.SongModel song in current)
+                    {
+                        summ += song._mduration;
+                        summseconds += song._sduration;
+                        if (summseconds >= 60)
+                        {
+                            summ += (int)Math.Truncate(summseconds / 60);
+                        }
+                    }
+                    return (int)summ;
+                }
             }
             set { }
         }//badass
@@ -65,20 +76,27 @@ namespace WpfApplication1.Model
         {
             get
             {
-                double summ = 0;
-                int plus_min;
-                foreach (Model.SongModel song in current)
+                if (current.Count == 0)
                 {
-                    summ += song._sduration;
+                    return 0;
                 }
-                if (summ >= 60)
+                else
                 {
-                    plus_min = (int)Math.Truncate(summ / 60);
-                    _mduration += plus_min;
-                    summ = summ - plus_min * 60;
-                    return (int)summ;
+                    double summ = 0;
+                    int plus_min;
+                    foreach (Model.SongModel song in current)
+                    {
+                        summ += song._sduration;
+                    }
+                    if (summ >= 60)
+                    {
+                        plus_min = (int)Math.Truncate(summ / 60);
+                        _mduration += plus_min;
+                        summ = summ - plus_min * 60;
+                        return (int)summ;
+                    }
+                    else { return (int)summ; }
                 }
-                else { return (int)summ; }
             }
             set { }
         }//useless strings

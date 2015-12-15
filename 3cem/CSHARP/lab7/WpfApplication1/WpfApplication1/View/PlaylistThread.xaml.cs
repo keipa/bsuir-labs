@@ -40,15 +40,15 @@ namespace WpfApplication1.View
         private void StartTread(object sender, RoutedEventArgs e)
         {
 
-            backgroundWorker = new BackgroundWorker(); //создает объект класса
-            backgroundWorker.WorkerReportsProgress = true; //включает индикацию хода выполнения
+            backgroundWorker = new BackgroundWorker(); 
+            //backgroundWorker.WorkerReportsProgress = true; 
             //backgroundWorker.ProgressChanged +=
-            //    new ProgressChangedEventHandler(backgroundWorker_ProgressChanged); //привязывает метод для индикации хода выполнения
+            //    new ProgressChangedEventHandler(backgroundWorker_ProgressChanged); 
             foreach (var song in current)
             {
                 currentSong = song;
                 //REPORT.Text += "\n" + "Playing now:" + currentSong._name;
-                backgroundWorker.DoWork += new DoWorkEventHandler(backgroundWorker_DoWork); //метод который выполняет в другом потоке
+                backgroundWorker.DoWork += new DoWorkEventHandler(backgroundWorker_DoWork); //method in other thread
                 
             }
             
@@ -107,6 +107,7 @@ namespace WpfApplication1.View
                     }
                     else
                     {
+                        
                         Thread.Sleep(5000);
                         //REPORT.Text += "\n" + "Playing now:" + currentSong._name;
                         
@@ -126,6 +127,11 @@ namespace WpfApplication1.View
         public static void ThreadProc()
         {
             Thread.Sleep(2000);
+        }
+
+        private void pause_thread(object sender, RoutedEventArgs e)
+        {
+            //Thread.Abort();
         }//notworkthread
     }
 }

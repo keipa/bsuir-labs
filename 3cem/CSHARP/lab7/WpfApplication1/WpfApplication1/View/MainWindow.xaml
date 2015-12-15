@@ -2,18 +2,18 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="&lt;/Waterfall&gt;" Height="300.333" Width="498" ResizeMode="NoResize">
-    <Grid Background="#FF114F66">
+    <Grid Background="#FF11294B">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
 
-        <Button Content="Add playlist" HorizontalAlignment="Left" Margin="189,36,0,0" VerticalAlignment="Top" Width="133" Click="add_playlist_click" Height="20" FontStyle="Italic" Foreground="White" Background="#FF114F66" BorderBrush="White"/>
-        <Button Content="Play" HorizontalAlignment="Left" Margin="8,36,0,0" VerticalAlignment="Top" Width="176" Click="play_clicked" Height="45" FontStyle="Italic" FontFamily="Eurostile" FontSize="30" Background="#FF1C7A9C" Foreground="White" BorderBrush="White"/>
-        <Button Content="Add song" HorizontalAlignment="Left" Margin="189,61,0,0" VerticalAlignment="Top" Width="133" Click="click_add_song" Height="20" FontStyle="Italic" Foreground="White" Background="#FF114F66" BorderBrush="White"/>
-        <Button Content="DS" HorizontalAlignment="Left" Click="delete_song" Margin="327,61,0,0" VerticalAlignment="Top" Width="39" Height="20" BorderBrush="White" Background="#FF114F66" Foreground="White"/>
-        <Button Content="DP" HorizontalAlignment="Left" Margin="327,36,0,0" VerticalAlignment="Top" Width="39" Height="20" Click="deletePlaylist" BorderBrush="White" Background="#FF114F66" Foreground="White"/>
-        <TabControl Name="tabs" HorizontalAlignment="Left" Height="144" Margin="8,81,0,0" VerticalAlignment="Top" Width="358" SelectionChanged="playlist_info" Background="#FF114F66">
+        <Button Content="Add playlist" HorizontalAlignment="Left" Margin="189,36,0,0" VerticalAlignment="Top" Width="133" Click="add_playlist_click" Height="20" FontStyle="Italic" Foreground="White" Background="#FF11294B" BorderBrush="White"/>
+        <Button Content="Play" HorizontalAlignment="Left" Margin="8,36,0,0" VerticalAlignment="Top" Width="176" Click="play_clicked" Height="45" FontStyle="Italic" FontFamily="Eurostile" FontSize="30" Background="#FF245397" Foreground="White" BorderBrush="White"/>
+        <Button Content="Add song" HorizontalAlignment="Left" Margin="189,61,0,0" VerticalAlignment="Top" Width="133" Click="click_add_song" Height="20" FontStyle="Italic" Foreground="White" Background="#FF11294B" BorderBrush="White"/>
+        <Button Content="DS" HorizontalAlignment="Left" Click="delete_song" Margin="327,61,0,0" VerticalAlignment="Top" Width="39" Height="20" BorderBrush="White" Background="#FF11294B" Foreground="White"/>
+        <Button Content="DP" HorizontalAlignment="Left" Margin="327,36,0,0" VerticalAlignment="Top" Width="39" Height="20" Click="deletePlaylist" BorderBrush="White" Background="#FF11294B" Foreground="White"/>
+        <TabControl Name="tabs" HorizontalAlignment="Left" Height="144" Margin="8,81,0,0" VerticalAlignment="Top" Width="358" SelectionChanged="playlist_info" Background="#FF11294B">
             <!--<TabControl.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding _name}"/>
