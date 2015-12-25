@@ -1,0 +1,20 @@
+syms x FpK Ckoeff
+hold on
+grid on
+for FpK= -10:1:10
+    y = x*x+FpK;
+
+    plot_izoklin = ezplot(y);
+     axis([-10,10,-10,50])
+     set(plot_izoklin,'Color','red')
+end
+
+pretty(dsolve('Dy = (y-x*x )','x'))
+
+for Ckoeff = -20:1:10
+y=(2*x+Ckoeff*exp(x)+x*x+2);
+plot_integ = ezplot(y)
+set(plot_integ,'Color','blue')
+axis([-10,10,-20,40])
+end;
+dsolve(('Dy = (y-x*x )','x'))
