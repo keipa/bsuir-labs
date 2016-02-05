@@ -12,17 +12,13 @@ body {
 
 #tetraedor {
   width: 300px;
-  height: 260px;
-  /*последнее значение указывает на точку от которой будет произведено вращение*/
+  height: 300px;
   transform-origin: 50% 50% -150px;
-  /*сохранять 3d*/
   transform-style: preserve-3d;
-  /*поворот*/
-  /*transform:rotate3d(1,1,1,50deg);*/
-  /*animation-name: spin;
+  animation-name: spin;
   animation-duration: 40s;
   animation-iteration-count: infinite;
-  animation-timing-function: ease;*/
+  animation-timing-function: ease;
 }
 
 @keyframes spin{
@@ -44,30 +40,20 @@ body {
 }
 
 
-
 #side1 {
 /*нижнее ребро*/
-  /*transform: rotateX(30deg) ;*/
-
-  /*transform: rotateY(10deg);*/
   width: 0;
-    height: 0;
+  height: 0;
   background: rgba(60 ,150,190,0);
   position: absolute;
   border-right: 150px solid transparent;
-border-bottom: 300px solid black;
+  border-bottom: 300px solid black;
   border-left: 150px solid transparent;
-  /*border-radius: 10px;
-  border-color: white;*/
-  /*border: 10px solid rgb(73 , 75 , 95);*/
-  /*border-radius: 10px;*/
   font-size: 7em;
-
   color: #fff;
   font-family: sans-serif;
   line-height: 300px;
   text-align: center;
-  /*точка захвата*/
   transform-origin: 50% 50% -150px;
 }
 /*изначальный поворот всех сторон*/
@@ -75,83 +61,51 @@ border-bottom: 300px solid black;
 /*левая сторона*/
 #side2 {
   transform: rotateY(117deg) ;
-
-  width: 0;
-    height: 0;
-  background: rgba(60 ,150,190,0);
-  position: absolute;
-  border-right: 150px solid transparent;
-border-bottom: 300px solid black;
-  border-left: 150px solid transparent;
-  /*border-radius: 10px;
-  border-color: white;*/
-  /*border: 10px solid rgb(73 , 75 , 95);*/
-  /*border-radius: 10px;*/
-  font-size: 7em;
-
-  color: #fff;
-  font-family: sans-serif;
-  line-height: 300px;
-  text-align: center;
-  /*точка захвата*/
-  transform-origin: 50% 50% -93px;
-}
-/*правая сторона*/
-#side3 {
-  transform: rotateY(-117deg);
-
-  width: 0;
-    height: 0;
-  background: rgba(60 ,150,190,0);
-  position: absolute;
-  border-right: 150px solid transparent;
-border-bottom: 300px solid black;
-  border-left: 150px solid transparent;
-  /*border-radius: 10px;
-  border-color: white;*/
-  /*border: 10px solid rgb(73 , 75 , 95);*/
-  /*border-radius: 10px;*/
-  font-size: 7em;
-
-  color: #fff;
-  font-family: sans-serif;
-  line-height: 300px;
-  text-align: center;
-  /*точка захвата*/
-  transform-origin: 50% 50% -93px;
-}
-/*верхняя сторона*/
-#side4 {
-
-  transform: rotateX(-90deg);
-
   width: 0;
   height: 0;
   background: rgba(60 ,150,190,0);
   position: absolute;
   border-right: 150px solid transparent;
-border-top:  300px solid black;
+ border-bottom: 300px solid yellow;
   border-left: 150px solid transparent;
-  /*border-radius: 10px;
-  border-color: white;*/
-  /*border: 10px solid rgb(73 , 75 , 95);*/
-  /*border-radius: 10px;*/
   font-size: 7em;
-
   color: #fff;
   font-family: sans-serif;
   line-height: 300px;
   text-align: center;
-  /*точка захвата*/
+  transform-origin: 50% 50% -93px;
+}
+/*правая сторона*/
+#side3 {
+  transform: rotateY(-117deg);
+  width: 0;
+  height: 0;
+  background: rgba(60 ,150,190,0);
+  position: absolute;
+  border-right: 150px solid transparent;
+  border-bottom: 300px solid red;
+  border-left: 150px solid transparent;
+  font-size: 7em;
+  color: #fff;
+  font-family: sans-serif;
+  line-height: 300px;
+  text-align: center;
+  transform-origin: 50% 50% -93px;
+}
+/*верхняя сторона*/
+#side4 {
+  transform: rotateX(-90deg);
+  width: 0;
+  height: 0;
+  background: rgba(60 ,150,190,0);
+  position: absolute;
+  border-right: 150px solid transparent;
+  border-top:  300px solid grey;
+  border-left: 150px solid transparent;
+  font-size: 7em;
+  color: #fff;
+  font-family: sans-serif;
+  line-height: 300px;
+  text-align: center;
   transform-origin: 50% 50% -150px;
 }
-/*нижняя сторона*/
-/*#side5 {
-  transform: rotateX(-90deg);
-}*/
-
-/*задняя сторона
-полный разворот*/
-/*#side6 {
-  transform: rotateY(180deg);
-}*/
