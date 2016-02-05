@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>Cube</title>		<!--заголовок страницы-->
+	<link rel="stylesheet" href="main.css">
+</head>
+
+
+
+<body>
+<!-- тег для перспективы -->
+	<div id="wrapper">
+		<!-- сам куб -->
+		<div id="cube">
+			<!-- стороны куба -->
+			<div class="side" id="side1">1</div>
+			<div class="side" id="side2">2</div>
+			<div class="side" id="side3">3</div>
+			<div class="side" id="side4">4</div>
+			<div class="side" id="side5">5</div>
+			<div class="side" id="side6">6</div>
+
+		</div>
+	</div>
+
+
+
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script>
+	// скрипт на jquery привязывает перемещения мыши к изменению параметра transform по X и Y
+	//мы залезаем прямо в css и изменяем тег в реальном времени
+		// $(function(){
+		// 	$(document).mousemove(function(e){
+		// 		$('#cube').css({
+		// 			'transform':'rotateX(-'+e.pageY*0.2+'deg) rotateY('+e.pageX*0.2+'deg)'
+		// 		});
+		// 	});
+		// });
+	</script>
+</body>
+</html>

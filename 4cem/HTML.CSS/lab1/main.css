@@ -1,0 +1,88 @@
+body {
+  /*устанавливаем обоину*/
+  background: url(http://subtlepatterns.com/patterns/stardust.png);
+  font: "Consolas", Arial;
+}
+
+#wrapper {
+  /*включение перспективы*/
+  perspective: 400px;
+  margin: 300px;
+}
+
+#cube {
+  width: 300px;
+  height: 300px;
+  /*последнее значение указывает на точку от которой будет произведено вращение*/
+  transform-origin: 50% 50% -150px;
+  /*сохранять 3d*/
+  transform-style: preserve-3d;
+  /*поворот*/
+  /*transform:rotate3d(1,1,1,50deg);*/
+  animation-name: spin;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease;
+}
+
+@keyframes spin{
+  0% {
+  transform: rotate3d(1,1,1,1);
+  }
+  25%{
+    transform: rotate3d(1,50,1,90deg);
+  }
+50%{
+  transform: rotate3d(50,1,1,90deg);
+}
+75%{
+  transform: rotate3d(100,50,50,180deg);
+}
+  100% {
+      transform:rotate3d(1,1,1,1);
+
+  }
+}
+.side {
+  width: 300px;
+  height: 300px;
+  background: rgba(60 ,150,190,1);
+  position: absolute;
+
+  /*border-radius: 10px;
+  border-color: white;*/
+  border: 10px solid rgb(73 , 75 , 95);
+  border-radius: 10px;
+  font-size: 7em;
+
+  color: #fff;
+  font-family: sans-serif;
+  line-height: 300px;
+  text-align: center;
+  /*точка захвата*/
+  transform-origin: 50% 50% -150px;
+}
+/*изначальный поворот всех сторон*/
+
+/*левая сторона*/
+#side2 {
+  transform: rotateY(90deg);
+}
+/*правая сторона*/
+#side3 {
+  transform: rotateY(-90deg);
+}
+/*верхняя сторона*/
+#side4 {
+  transform: rotateX(90deg);
+}
+/*нижняя сторона*/
+#side5 {
+  transform: rotateX(-90deg);
+}
+
+/*задняя сторона
+полный разворот*/
+#side6 {
+  transform: rotateY(180deg);
+}
