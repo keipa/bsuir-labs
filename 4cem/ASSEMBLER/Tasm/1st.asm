@@ -9,288 +9,307 @@ model small
            STRING_X2 DB ' X2 : $'
            STRING_ENT DB 10, 13, '$'
            STRING_D db 10,13, ' D  = $'
-                                                                                                                                                                 ;рабочие переменные коэффициэнтов Ax^2+Bx+C
+           STRING_CONT db 10,13, ' Continue y/n?    $'
+           STRING_NOTKVADR db 10,13, ' Format error. Enter correct format     $'
+                                                                                                                                                            ;рабочие переменные коэффициэнтов Ax^2+Bx+C
             a dd ?                                                                                                                                          ;коэффициент при X^2
             b dd ?                                                                                                                                          ;коэффициент при X
-            nb dd ?                                                                                                                                        ;(-b)
+            nb dd ?                                                                                                                                         ;(-b)
             c dd ?                                                                                                                                          ;свободный член
             d dd ?                                                                                                                                          ;значение дискриминанта
-            two dd 2.0                                                                                                                                  ;два
-            four dd 4.0                                                                                                                                 ;четыре
-            kd dd ?                                                                                                                                        ;корень из дискриминанта
-            nkd dd ?                                                                                                                                      ;negative корень из дискриминанта
-            x1 dd ?                                                                                                                                        ;корень 1
-            x2 dd ?                                                                                                                                        ;корень 2
+            two dd 2.0                                                                                                                                 ;два
+            four dd 4.0                                                                                                                                ;четыре
+            kd dd ?                                                                                                                                    ;корень из дискриминанта
+            nkd dd ?                                                                                                                                   ;negative корень из дискриминанта
+            x1 dd ?                                                                                                                                    ;корень 1
+            x2 dd ?                                                                                                                                    ;корень 2
 
 .code
-                        start:
-                                mov ax, @data                                                                                                      ;заносим область с данными
-                                mov ds, ax                                                                                                             ;в рабочую зону DS
+        start:
+        mov ax, @data                                                                                                      ;заносим область с данными
+        mov ds, ax                                                                                                         ;в рабочую зону DS
 
-                                restart:                                                                                                                    ;метка возврата в случае отрицательного дискриминанта
+        restart:
 
-                                lea dx,STRING_A                                                                                                   ;вывод
-	                        mov ah,09h	                                                                                                     ;сообщения
-	                        int 21h                                                                                                                    ;INPUT A
-                                call infloat                                                                                                              ;вызов функции ввода вещественного числа
-                                fstp a                                                                                                                      ;забираем с верхушки стека st() значение и заносим его в переменную
+        lea dx,STRING_ENT                                                                                                      ;переход
+        mov ah,09h	                                                                                                       ;на новую
+        int 21h
+                                                                                                                                ;метка возврата в случае отрицательного дискриминанта
 
-                                lea dx,STRING_B                                                                                                   ;вывод
-                                mov ah,09h	                                                                                                      ;сообщения
-                                int 21h                                                                                                                    ;INPUT B
-                                call infloat                                                                                                              ;вызов функции ввода вещественного числа
-                                fstp b                                                                                                                      ;забираем с верхушки стека st() значение и заносим его в переменную
+        lea dx,STRING_A                                                                                                         ;вывод
+        mov ah,09h	                                                                                                        ;сообщения
+        int 21h                                                                                                                 ;INPUT A
+        call infloat                                                                                                            ;вызов функции ввода вещественного числа
+        fstp a                                                                                                                  ;забираем с верхушки стека st() значение и заносим его в переменную
+        cmp a,0
+        jne zero
 
-                                lea dx,STRING_C                                                                                                   ;вывод
-	                        mov ah,09h	                                                                                                      ;сообщения
-	                        int 21h                                                                                                                    ;INPUT C
-                                call infloat                                                                                                              ;вызов функции ввода вещественного числа
-                                fstp c                                                                                                                      ;забираем с верхушки стека st() значение и заносим его в переменную
+        lea dx,STRING_NOTKVADR                                                                                                      ;переход
+        mov ah,09h	                                                                                                         ;на новую
+        int 21h
+        je restart
+        zero:
+        lea dx,STRING_B                                                                                                       ;вывод
+        mov ah,09h	                                                                                                      ;сообщения
+        int 21h                                                                                                               ;INPUT B
+        call infloat                                                                                                          ;вызов функции ввода вещественного числа
+        fstp b                                                                                                                ;забираем с верхушки стека st() значение и заносим его в переменную
 
-                                fstp st(0)                                                                                                                ;очистка
-                                fstp st(1)                                                                                                                ;стека
-                                fstp st(2)                                                                                                                ;st()
+        lea dx,STRING_C                                                                                                            ;вывод
+        mov ah,09h	                                                                                                           ;сообщения
+        int 21h                                                                                                                    ;INPUT C
+        call infloat                                                                                                               ;вызов функции ввода вещественного числа
+        fstp c                                                                                                                     ;забираем с верхушки стека st() значение и заносим его в переменную
 
-                                fld b                                                                                                                         ; s(0)=b
-                                fmul b                                                                                                                      ;s(0)=b*b
-                                fld a                                                                                                                         ; s(0) = a, s(1)=b*b
-                                fmul c                                                                                                                      ;s(0) = a*c, s(1)=b*b
-                                fmul four                                                                                                                 ;s(0) =4*a*c, s(1)=b*b
-                                fsub                                                                                                                         ;s(0) = b*b-4*a*c
-                                fstp d
-                                fld d
-                                lea dx,STRING_D                                                                                                   ;вывод
-                                mov ah,09h	                                                                                                      ;сообщения
-                                int 21h                                                                                                                    ;D
-                                call outfloat
+        fstp st(0)                                                                                                                ;очистка
+        fstp st(1)                                                                                                                ;стека
+        fstp st(2)                                                                                                                ;st()
 
-                                lea dx,STRING_ENT                                                                                            ;переход
-                                mov ah,09h	                                                                                                      ;на новую
-                                int 21h                                                                                                                  ;строку
-                                fld d
-                                                                                                                                                                  ;Проверка на отрицательный дискриминант
-                                  ftst                                                                                                                          ;сравниваем содержимое с нулём
-                                  fstsw ax                                                                                                                 ;сохраняем флаги
-                                  sahf                                                                                                                        ; помещает значение регистра ah в младший байт флагового регистра. чтобы можно было использовать операторы условного перехода
-                                  jc restart                                                                                                                ;если флаг сработал, то переходим по метке
+        fld b                                                                                                                       ; s(0)=b
+        fmul b                                                                                                                      ;s(0)=b*b
+        fld a                                                                                                                       ; s(0) = a, s(1)=b*b
+        fmul c                                                                                                                      ;s(0) = a*c, s(1)=b*b
+        fmul four                                                                                                                   ;s(0) =4*a*c, s(1)=b*b
+        fsub                                                                                                                        ;s(0) = b*b-4*a*c
+        fstp d
+        fld d
+        lea dx,STRING_D                                                                                                          ;вывод
+        mov ah,09h	                                                                                                         ;сообщения
+        int 21h                                                                                                                  ;D
+        call outfloat
 
-                                  fsqrt                                                                                                                       ;s(0) =sqrt(b*b-4*a*c)
-                                  fstp kd                                                                                                                   ;успешный случай вычисления дискриминанта
+        lea dx,STRING_ENT                                                                                                     ;переход
+        mov ah,09h	                                                                                                      ;на новую
+        int 21h                                                                                                               ;строку
+        fld d
+                                                                                                                                ;Проверка на отрицательный дискриминант
+          ftst                                                                                                                  ;сравниваем содержимое с нулём
+          fstsw ax                                                                                                              ;сохраняем флаги
+          sahf                                                                                                                  ; помещает значение регистра ah в младший байт флагового регистра. чтобы можно было использовать операторы условного перехода
+          jc restart                                                                                                                ;если флаг сработал, то переходим по метке
 
+          fsqrt                                                                                                                     ;s(0) =sqrt(b*b-4*a*c)
+          fstp kd                                                                                                                   ;успешный случай вычисления дискриминанта
 
+          fstp st(0)                                                                                                                  ;st(0)=0
+          fldz                                                                                                                        ;st(0)=0, st(1)=0
+          fld b                                                                                                                       ;st(0)=b, st(1)=0
+          fsub                                                                                                                        ;st(0)=-b
+          fstp nb                                                                                                                     ;достаём из стека значение и сохраняем nb
 
+          fstp st(0)                                                                                                                 ;st(0)=0
+          fldz                                                                                                                       ;st(0)=0, st(1)=0
+          fld kd                                                                                                                     ;st(0)=kd, st(1)=0
+          fsub                                                                                                                       ;st(0)=-kd
+          fstp nkd                                                                                                                   ;сохраняем  nkd   (поздно опомнился,надо было поменять на fchs)
 
-                                  fstp st(0)                                                                                                              ;st(0)=0
-                                  fldz                                                                                                                        ;st(0)=0, st(1)=0
-                                  fld b                                                                                                                       ;st(0)=b, st(1)=0
-                                  fsub                                                                                                                       ;st(0)=-b
-                                  fstp nb                                                                                                                  ;достаём из стека значение и сохраняем nb
+          fld nb                                                                                                                       ;st(0)=nb
+          fld nkd                                                                                                                      ;st(0)=nkd st(1)=nb
+          fadd                                                                                                                         ;st(0) = nkd + nb
+          fld a                                                                                                                        ;st(0)=a, st(1)=nkd+nb
+          fmul two                                                                                                                     ;st(0)=2*a
+          fdiv                                                                                                                         ;st(0)=(nkd+nb)/(2*a)
+          lea dx,STRING_X1                                                                                                       ;вывод
+          mov ah,09h	                                                                                                         ;текстового
+          int 21h                                                                                                                ;сообщения
+          call outfloat                                                                                                          ;вывод результата вычисления X1
 
-                                  fstp st(0)                                                                                                              ;st(0)=0
-                                  fldz                                                                                                                        ;st(0)=0, st(1)=0
-                                  fld kd                                                                                                                     ;st(0)=kd, st(1)=0
-                                  fsub                                                                                                                       ;st(0)=-kd
-                                  fstp nkd                                                                                                                 ;сохраняем  nkd   (поздно опомнился,надо было поменять на fchs)
+          lea dx,STRING_ENT                                                                                                      ;переход
+          mov ah,09h	                                                                                                         ;на новую
+          int 21h                                                                                                                ;строку
+          fld nb                                                                                                                 ;st(0)=nb
+          fld kd                                                                                                                 ;st(0)=nkd st(1)=nb
+          fadd                                                                                                                   ;st(0) = nkd + nb
+          fld a                                                                                                                  ; st(0)=a, st(1)=nkd+nb
+          fmul two                                                                                                               ;st(0)=2*a
+          fdiv                                                                                                                   ;st(0)=(kd+nb)/(2*a)
+          lea dx,STRING_X2                                                                                                       ;вывод
+          mov ah,09h	                                                                                                         ;текстового
+          int 21h                                                                                                                ;сообщения
+          call outfloat                                                                                                          ;вывод результата вычисления X1
 
-                                  fld nb                                                                                                                        ;st(0)=nb
-                                  fld nkd                                                                                                                      ;st(0)=nkd st(1)=nb
-                                  fadd                                                                                                                          ;st(0) = nkd + nb
-                                  fld a                                                                                                                          ;st(0)=a, st(1)=nkd+nb
-                                  fmul two                                                                                                                  ;st(0)=2*a
-                                  fdiv                                                                                                                           ;st(0)=(nkd+nb)/(2*a)
-                                  lea dx,STRING_X1                                                                                                  ;вывод
-                                  mov ah,09h	                                                                                                         ;текстового
-                                  int 21h                                                                                                                     ;сообщения
-                                  call outfloat                                                                                                            ;вывод результата вычисления X1
+        lea dx,STRING_CONT                                                                                                         ;вывод
+                mov ah,09h	                                                                                                        ;сообщения
+                int 21h                                                                                                                 ;INPUT A
 
-                                  lea dx,STRING_ENT                                                                                            ;переход
-                                  mov ah,09h	                                                                                                      ;на новую
-                                  int 21h                                                                                                                  ;строку
-                                  fld nb                                                                                                                     ;st(0)=nb
-                                  fld kd                                                                                                                     ;st(0)=nkd st(1)=nb
-                                  fadd                                                                                                                       ;st(0) = nkd + nb
-                                  fld a                                                                                                                       ; st(0)=a, st(1)=nkd+nb
-                                  fmul two                                                                                                               ;st(0)=2*a
-                                  fdiv                                                                                                                        ;st(0)=(kd+nb)/(2*a)
-                                  lea dx,STRING_X2                                                                                               ;вывод
-                                  mov ah,09h	                                                                                                      ;текстового
-                                  int 21h                                                                                                                  ;сообщения
-                                  call outfloat                                                                                                         ;вывод результата вычисления X1
+          mov     ah, 01h                                                                                                    ; Вводим  символ
+          int     21h
+          cmp     al, 'y'                                                                                                         ;сравниваем введённое значение с символом "-"
+          je     restart                                                                                                      ;если "-" то запоминаем, если нет то проверяем
 
-                                    mov ah, 4ch                                                                                                        ;передаём в ah код прерываня для выхода из программы
-                                    int 21h                                                                                                                 ;прерываение
+            mov ah, 4ch                                                                                                          ;передаём в ah код прерываня для выхода из программы
+            int 21h                                                                                                              ;прерываение
 
-                                    infloat proc    near
-                                        push    ax                                                                                                        ;сохранение регистра ax
-                                        push    dx                                                                                                        ;регистра dx
-                                        push    si                                                                                                         ;регистра si
-                                                                                                                                                                 ;Формируем  стэк, чтобы хранить десятку и ещё какую-нибудь цифру.
-                                        push    bp                                                                                                        ;регистра bp
-                                        mov     bp, sp                                                                                                  ;помещаем в bp указатель стека
-                                        push    10                                                                                                        ;заносим в стек  10
-                                        push    0                                                                                                          ;заносим в стек  0
-                                        xor     si, si                                                                                                             ; В SI хранится знак.
-                                                                                                                                                                        ; Начнём накапливать число. Сначала это ноль.
-                                        fldz
-                                                                                                                                                                        ; Вводим первый символ
-                                        mov     ah, 01h                                                                                                    ; Вводим первый символ
-                                        int     21h                                                                                                             ;через первую функцию 21го прерывания
-                                        cmp     al, '-'                                                                                                         ;сравниваем введённое значение с символом "-"
-                                        jne     short @if1                                                                                                      ;если "-" то запоминаем, если нет то проверяем следующие условия
-                                        inc     si                                                                                                                      ;запомиинаем минус в регистре si
-                                @if0:
-                                        mov     ah, 01h                                                                                                    ; Вводим  символ
-                                        int     21h                                                                                                             ;через первую функцию 21го прерывания
+            infloat proc    near
+                push    ax                                                                                                       ;сохранение регистра ax
+                push    dx                                                                                                       ;регистра dx
+                push    si                                                                                                       ;регистра si
+                                                                                                                                 ;Формируем  стэк, чтобы хранить десятку и ещё какую-нибудь цифру.
+                push    bp                                                                                                       ;регистра bp
+                mov     bp, sp                                                                                                   ;помещаем в bp указатель стека
+                push    10                                                                                                       ;заносим в стек  10
+                push    0                                                                                                        ;заносим в стек  0
+                xor     si, si                                                                                                   ; В SI хранится знак.
 
-
-                                @if1:
-                                        cmp     al, '.'                                                                                                               ; Если введена точка, то
-                                        je      short @if2                                                                                                      ; формируем дробную часть
-
-
-                                        cmp     al, 39h                                                                                                       ;проверяем
-                                        ja      short @if5                                                                                                    ;что вводим числа,
-                                        sub     al, 30h                                                                                                        ;и в случае если вводятся не числа,
-                                        jb      short @if5                                                                                                    ; то переходим по метке завершающей ввод
-                                                                                                                                                                        ; сохраним её во временной ячейке и допишем
-                                                                                                                                                                        ; к текущему результату справа,
-                                        mov     [bp - 4], al                                                                                                  ;переместим введённое число в память
-                                        fimul   word ptr [bp - 2]                                                                                       ;домножим верх стека на 10
-                                        fiadd   word ptr [bp - 4]                                                                                      ;добавим к веру стека введённое число
-                                        jmp     short @if0                                                                                                 ;повторяем
-                                @if2:                                                                                                                              ;метка вычисления дробной части
-                                 fld1                                                                                                                                ; добавляю в верх стека 1цу
-                                @if3:
-                                        mov     ah, 01h                                                                                                        ;принимаем
-                                        int     21h                                                                                                                 ;символ
-
-                                        cmp     al, 39h                                                                                                       ;проверяем
-                                        ja      short @if4                                                                                                    ;что вводим числа,
-                                        sub     al, 30h                                                                                                        ;и в случае если вводятся не числа,
-                                        jb      short @if4                                                                                                    ; то переходим по метке завершающей ввод
-
-                                        mov     [bp - 4], al                                                                                                  ; иначе сохраняем её во временной ячейке,
-                                        fidiv   word ptr [bp - 2]                                                                                         ; получаем очередную отрицательную степень десятки,
-                                        fld     st(0)                                                                                                              ;записываем её в стек
-                                        fimul   word ptr [bp - 4]                                                                                        ; помножаем на введённую цифру, тем самым получая её на нужном месте
-                                        faddp   st(2), st                                                                                                     ; и добавляем к  результату.
-                                        jmp     short @if3                                                                                                 ; повторяем
+                                                                                                                                 ; Начнём накапливать число. Сначала это ноль.
+                fldz
+                mov     ah, 01h                                                                                              ; Вводим первый символ
+                int     21h                                                                                                  ;через первую функцию 21го прерывания
+                cmp     al, '-'                                                                                              ;сравниваем введённое значение с символом "-"
+                jne     short @if1                                                                                           ;если "-" то запоминаем, если нет то проверяем следующие условия
+                inc     si                                                                                                   ;запомиинаем минус в регистре si
+        @if0:
+                mov     ah, 01h                                                                                              ; Вводим  символ
+                int     21h                                                                                                  ;через первую функцию 21го прерывания
 
 
-                                @if4:
-                                fstp    st(0)                                                                                                                   ;на вершине стэка получено введённое число.
-                                @if5:
-                                        mov     ah, 02h                                                                                                       ;вывод на экран
-                                        mov     dl, 0Dh                                                                                                        ;перевод каретки
-                                        int     21h
-                                        test    si, si                                                                                                          ;проверяем  наличие знака
-                                        jz      short @if6                                                                                                 ;если флаг  не ноль
-                                        fchs                                                                                                                    ;то меняем в стеке знак
-                                @if6:   leave
-                                        pop     si                                                                                                              ;восстанавливаем регистр si
-                                        pop     dx                                                                                                              ;восстанавливаем регистр dx
-                                        pop     ax                                                                                                              ;восстанавливаем регистр ax
-                                        ret
-                        infloat endp
+        @if1:
+                cmp     al, '.'                                                                                               ;Если введена точка, то
+                je      short @if2                                                                                            ; формируем дробную часть
+
+
+                cmp     al, 39h                                                                                                       ;проверяем
+                ja      short @if5                                                                                                    ;что вводим числа,
+                sub     al, 30h                                                                                                       ;и в случае если вводятся не числа,
+                jb      short @if5                                                                                                    ;то переходим по метке завершающей ввод
+                                                                                                                                      ;сохраним её во временной ячейке и допишем
+                                                                                                                                      ; к текущему результату справа,
+                mov     [bp - 4], al                                                                                                  ;переместим введённое число в память
+                fimul   word ptr [bp - 2]                                                                                             ;домножим верх стека на 10
+                fiadd   word ptr [bp - 4]                                                                                             ;добавим к веру стека введённое число
+                jmp     short @if0                                                                                                    ;повторяем
+        @if2:                                                                                                                         ;метка вычисления дробной части
+         fld1                                                                                                                         ; добавляю в верх стека 1цу
+        @if3:
+                mov     ah, 01h                                                                                                        ;принимаем
+                int     21h                                                                                                            ;символ
+
+                cmp     al, 39h                                                                                                       ;проверяем
+                ja      short @if4                                                                                                    ;что вводим числа,
+                sub     al, 30h                                                                                                       ;и в случае если вводятся не числа,
+                jb      short @if4                                                                                                    ; то переходим по метке завершающей ввод
+
+                mov     [bp - 4], al                                                                                          ; иначе сохраняем её во временной ячейке,
+                fidiv   word ptr [bp - 2]                                                                                     ; получаем очередную отрицательную степень десятки,
+                fld     st(0)                                                                                                 ;записываем её в стек
+                fimul   word ptr [bp - 4]                                                                                     ; помножаем на введённую цифру, тем самым получая её на нужном месте
+                faddp   st(2), st                                                                                             ; и добавляем к  результату.
+                jmp     short @if3                                                                                            ; повторяем
+
+
+        @if4:
+        fstp    st(0)                                                                                                                 ;на вершине стэка получено введённое число.
+        @if5:
+                mov     ah, 02h                                                                                                       ;вывод на экран
+                mov     dl, 0Dh                                                                                                       ;перевод каретки
+                int     21h
+                test    si, si                                                                                                          ;проверяем  наличие знака
+                jz      short @if6                                                                                                      ;если флаг  не ноль
+                fchs                                                                                                                    ;то меняем в стеке знак
+        @if6:   leave
+                pop     si                                                                                                              ;восстанавливаем регистр si
+                pop     dx                                                                                                              ;восстанавливаем регистр dx
+                pop     ax                                                                                                              ;восстанавливаем регистр ax
+                ret
+        infloat endp
 
 
 
-                        outfloat proc near
-                                        push    ax                                                                                                             ;сохраняем регистр ах
-                                        push    cx                                                                                                             ;регистр cx
-                                        push    dx                                                                                                             ;регистр dx
-                                        push    bp                                                                                                             ;регистр bp
-                                        mov     bp, sp                                                                                                       ;помещаем в bp указатель стека
-                                        push    10                                                                                                             ;заносим в стек  10
-                                        push    0                                                                                                               ;заносим в стек  0
+        outfloat proc near
+                push    ax                                                                                                             ;сохраняем регистр ах
+                push    cx                                                                                                             ;регистр cx
+                push    dx                                                                                                             ;регистр dx
+                push    bp                                                                                                             ;регистр bp
+                mov     bp, sp                                                                                                         ;помещаем в bp указатель стека
+                push    10                                                                                                             ;заносим в стек  10
+                push    0                                                                                                              ;заносим в стек  0
 
-                                        ftst                                                                                                                        ; Проверяем число на знак, и если оно отрицательное
-                                        fstsw   ax                                                                                                             ;сохраняем флаги
-                                        sahf                                                                                                                      ;помещает значение регистра ah в младший байт флагового регистра.
-                                        jnc   @of1                                                                                                      ;проверяем отрицание
+                ftst                                                                                                                   ; Проверяем число на знак, и если оно отрицательное
+                fstsw   ax                                                                                                             ;сохраняем флаги
+                sahf                                                                                                                   ;помещает значение регистра ah в младший байт флагового регистра.
+                jnc   @of1                                                                                                             ;проверяем отрицание
 
+                mov     ah, 02h                                                                                                        ;выводим
+                mov     dl, '-'                                                                                                        ;минус
+                int     21h
+                fchs                                                                                                                   ;берём модуль числа
 
-                                        mov     ah, 02h                                                                                                           ;выводим
-                                        mov     dl, '-'                                                                                                                 ; минус
-                                        int     21h
-                                        fchs                                                                                                                           ;берём модуль числа
+        @of1:
+                fld1
+                fld     st(1)
+                fprem                                                                                                                  ;Остаток от деления в вершине стека
+                fsub    st(2), st                                                                                                      ; вычитаем из исходного числа
+                fxch    st(2)                                                                                                          ;меняем местами
+                xor     cx, cx                                                                                                         ;обнулим cx для того, чтобы считать количество цифр до запятой
+                                                                                                                                       ; Поделим целую часть на десять,
+        @of2:
+                fidiv   word ptr [bp - 2]                                                                                              ;поделим на 10 вершину
+                fxch    st(1)                                                                                                          ;поменяем местами вершину и 1й элемент
+                fld     st(1)                                                                                                          ;число  1    число  дробь
 
-                                @of1:
-                                        fld1
-                                        fld     st(1)
-                                        fprem                                                                                                                              ; Остаток от деления в вершине стека
-                                        fsub    st(2), st                                                                                                               ; вычитаем из исходного числа
-                                        fxch    st(2)                                                                                                    ;меняем местами
-                                        xor     cx, cx                                                                                                    ;обнулим cx для того, чтобы считать количество цифр до запятой
-                                                                                                                                                                ; Поделим целую часть на десять,
-                                @of2:
-                                        fidiv   word ptr [bp - 2]                                                                                      ;поделим на 10 вершину
-                                        fxch    st(1)                                                                                                       ;поменяем местами вершину и 1й элемент
-                                        fld     st(1)                                                                                                      ; число  1    число  дробь
+                fprem                                                                                                                  ;снова берём остаток от вершины
 
-                                        fprem                                                                                                              ;  снова берём остаток от вершины
+                fsub    st(2), st                                                                                                      ;и от последующего разряда оставляем только целую часть
 
-                                        fsub    st(2), st                                                                                                ;и от последующего разряда оставляем только целую часть
+                fimul   word ptr [bp - 2]               ;домножим этот остаток на 10
+                fistp   word ptr [bp - 4]               ; сохраним цифру во временной ячейке вершины стека.те самую близкую к точке с левой стороны
+                                                        ; сейчас в стеке осталось в вершине 1 , 1-й целая часть без одного разряда стоящего ближе к точке, 2-й дробь
+                inc     cx                              ; увеличим счётчик, чтобы знать сколько выводим цифр из стека.
+                push    word ptr [bp - 4]                                                                                            ; сохраняемся
+                fxch    st(1)                                                                                                        ;меняем местами вершину и первый элемент, чтобы заново пройти цикл
 
-                                        fimul   word ptr [bp - 2]                                                                                         ;домножим этот остаток на 10
-                                        fistp   word ptr [bp - 4]                                                                                         ; сохраним цифру во временной ячейке вершины стека.те самую близкую к точке с левой стороны
-                                                                                                                                                                        ; сейчас в стеке осталось в вершине 1 , 1-й целая часть без одного разряда стоящего ближе к точке, 2-й дробь
-                                        inc     cx                                                                                                              ; увеличим счётчик, чтобы знать сколько выводим цифр из стека.
-                                        push    word ptr [bp - 4]                                                                                   ; созраняемся
-                                        fxch    st(1)                                                                                                        ;меняем местами вершину и первый элемент, чтобы заново пройти цикл
+                ftst                                                                                                                 ;проверяемся на ноль
+                fstsw   ax                                                                                                           ;сохраняем флаги
+                sahf                                                                                                                 ;смотреть выше
+                jnz     short @of2                                                                                                   ; Так будем повторять, пока от целой части не останется ноль.
 
-                                        ftst                                                                                                                      ;проверяемся на ноль
-                                        fstsw   ax                                                                                                           ;сохраняем флаги
-                                        sahf                                                                                                                     ;смотреть выше
-                                        jnz     short @of2                                                                                               ; Так будем повторять, пока от целой части не останется ноль.
+                mov     ah, 02h                                                                                                 ;выведем цифру
+        @of3:                                                                                                                   ;метка для вывода уже всех чисел до запятой из стека
+                pop     dx                                                                                                      ; Вытаскиваем очередную цифру, переводим её в символ и выводим.
+                add     dl, 30h
+                int     21h
+                loop    @of3                                                                                                      ; И так, пока не выведем все цифры работает флаг cx
+                                                                                                                                  ;работа с дробной частью
+                fstp    st(0)
+                fxch    st(1)                                                                                                       ;поменяем местами
+                ftst                                                                                                                ;проверим наличие дробной части
+                fstsw   ax
+                sahf
+                jz      short @of5                                                                                                  ; если её нет то идём на выход
 
-                                        mov     ah, 02h                                                                                                    ;выведем цифру
-                                @of3:                                                                                                                           ;метка для вывода уже всех чисел до запятой из стека
-                                        pop     dx                                                                                                              ; Вытаскиваем очередную цифру, переводим её в символ и выводим.
-                                        add     dl, 30h
-                                        int     21h
-                                        loop    @of3                                                                                                      ; И так, пока не выведем все цифры работает флаг cx
-                                                                                                                                                                   ;работа с дробной частью
-                                        fstp    st(0)
-                                        fxch    st(1)                                                                                                       ;поменяем местами
-                                        ftst                                                                                                                     ;проверим наличие дробной части
-                                        fstsw   ax
-                                        sahf
-                                        jz      short @of5                                                                                                        ; если её нет то идём на выход
+                mov     ah, 02h
+                mov     dl, '.'                                                                                                     ; Если она всё-таки ненулевая, выведем точку
+                int     21h
+                mov     cx, 6                                                                                                       ;максимум 6цифр после запятой
 
-                                        mov     ah, 02h
-                                        mov     dl, '.'                                                                                                       ; Если она всё-таки ненулевая, выведем точку
-                                        int     21h
-                                        mov     cx, 6                                                                                                      ;максимум 6цифр после запятой
+        @of4:
+                fimul   word ptr [bp - 2]                                                        ;Помножим дрообную часть на десять (разница в том, что мы умножаем на 10, а не делим)
+                fxch    st(1)                                                                    ;та же операция как и с целыми
+                fld     st(1)                                                                    ;ставим в верх домноженную на 10 дробь
 
-                                @of4:
-                                        fimul   word ptr [bp - 2]                                                                                 ; Помножим дрообную часть на десять (разница в том, что мы умножаем на 10, а не делим)
-                                        fxch    st(1)                                                                                                     ;  та же операция как и с целыми
-                                        fld     st(1)                                                                                                       ;  ставим в верх домноженную на 10 дробь
+                fprem                                                                                                         ; отделим целую часть
+                fsub    st(2), st                                                                                             ; оставим от домноженной на 10дроби лишь дробную часть
+                fxch    st(2)                                                                                                 ;поменяем местами верх и второй элемент
 
-                                        fprem                                                                                                              ; отделим целую часть
-                                        fsub    st(2), st                                                                                                ; оставим от домноженной на 10дроби лишь дробную часть
-                                        fxch    st(2)                                                                                                     ;поменяем местами верх и второй элемент
+                fistp   word ptr [bp - 4]                                                         ; сохраним полученную цифру во временной ячейке, чтобы можно было потом с ней работать
+                mov     ah, 02h                                                                   ; и сразу выведем.
+                mov     dl, [bp - 4]
+                add     dl, 30h
+                int     21h
 
-                                        fistp   word ptr [bp - 4]                                                                                   ; сохраним полученную цифру во временной ячейке, чтобы можно было потом с ней работать
-                                        mov     ah, 02h                                                                                                ; и сразу выведем.
-                                        mov     dl, [bp - 4]
-                                        add     dl, 30h
-                                        int     21h
+                fxch    st(1)                                                                                               ;снова проверяем на наличие нуля в остатке
+                ftst                                                                                                        ;(спрашивается зачем делать два раза,
+                fstsw   ax                                                                                                  ; потому что при первоначальной проверке дробь может отсутствовать )
+                sahf
+                loopnz  @of4                                                                                                ; пока не выведем 6 цифр (регистр CX)
 
-                                        fxch    st(1)                                                                                                     ;снова проверяем на наличие нуля в остатке
-                                        ftst                                                                                                                   ;(спрашивается зачем делать два раза,
-                                        fstsw   ax                                                                                                        ; потому что при первоначальной проверке дробь может отсутствовать )
-                                        sahf
-                                        loopnz  @of4                                                                                                 ; пока не выведем 6 цифр (регистр CX)
-
-                                @of5:
-                                        fstp    st(0)                                                                                                            ;очищаем остатки стека
-                                        fstp    st(0)
-                                        leave
-                                        pop     dx                                                                                                              ;восстанавливаем все регистры
-                                        pop     cx
-                                        pop     ax
-                                        ret
-                        outfloat endp
-                        end start
+        @of5:
+                fstp    st(0)                                                                                               ;очищаем остатки стека
+                fstp    st(0)
+                leave
+                pop     dx                                                                                                  ;восстанавливаем все регистры
+                pop     cx
+                pop     ax
+                ret
+        outfloat endp
+        end start
