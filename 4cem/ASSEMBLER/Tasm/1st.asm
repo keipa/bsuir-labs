@@ -1,4 +1,4 @@
-model small
+ small
 .stack 100h
 .386
 .data
