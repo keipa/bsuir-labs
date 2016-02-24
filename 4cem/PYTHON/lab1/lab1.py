@@ -1,21 +1,56 @@
-import fib,strproc,sorts,storage
-print('4.py.1.')
-# name = input("whats your name?\n")
-# print("hello,", name)
-# fib.fib()
-exb = """Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam laoreet porttitor vulputate. Curabitur commodo quam est, vel dignissim tortor imperdiet vitae. Donec enim neque, cursus et ex ac, elementum consectetur urna. Integer et odio nec sapien suscipit consequat et at neque. Pellentesque ut ante vitae sapien mollis porttitor. Mauris dignissim odio enim, a eleifend elit vehicula eget. Sed tempor, quam eget cursus posuere, mi est faucibus mauris, non vulputate nibh velit in metus.k"""
-exl = "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-exn = "29 8 7 6 5 4 8 1 9 1 8 12 789 35 164 2.48 45 13 456 48 4132"
-ex10 = "5 4 8 21 9 1 7 2 9 21 9"
-# print(exl, "\n")
-# fib.fib()
-# strproc.wr(ex)
-# strproc.acwis(ex)
-# strproc.mcwis(ex)
-# strproc.tkmrlng(exb)
-# sorts.quicksort(ex10)
-# sorts.mergesort(exn)
-# sorts.digitsort(ex10)
+import fib,strproc,sorts,storage,sys,argparse
 
-storage.initstorage()
 
+
+def createparser():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-p',"--program", default='fib')
+    parser.add_argument('-t', "--type", nargs='?')
+    parser.add_argument('-s', "--source", default='innums', nargs='?')
+    return parser
+
+
+def main():
+    parser = createparser()
+    namespace = parser.parse_args()
+    if namespace.program == "sort":
+        with open(namespace.source, 'r') as f:
+            A = "7 5 5 433 3 5 7 32 2 5 78"
+            if namespace.type == "quick":
+                sorts.quicksort(f.read())
+            elif namespace.type == "merge":
+                sorts.mergesort(f.read())
+            elif namespace.type == "digit":
+                sorts.digitsort(f.read())
+            elif namespace.type is None:
+                sorts.quicksort(f.read())
+            else:
+                print("err Parameter -t")
+    elif namespace.program == "fib":
+        fib.fib()
+    elif namespace.program == "string":
+        if namespace.source == 'innums':
+            namespace.source = 'intext'
+        with open(namespace.source,'r') as f:
+            if namespace.type is None:
+                print("enter -t parameter *top*, *medium*,*average* or *repeats* ")
+            elif namespace.type == "top":
+                strproc.tkmrlng(f.read())
+            elif namespace.type == "medium":
+                strproc.mcwis(f.read())
+            elif namespace.type == "average":
+                strproc.acwis(f.read())
+            elif namespace.type == "repeats":
+                strproc.wr(f.read())
+            elif namespace.type == "show":
+                strproc.showSource(f.read())
+            else:
+                print("err no such parameter -t")
+    elif namespace.program == "set":
+        storage.initstorage()
+    else:
+        print("there is no such parameter")
+
+
+if __name__ == '__main__':
+    main()

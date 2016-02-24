@@ -36,12 +36,17 @@ def mcwis(st):
     print(a[round(len(a)/2)])
 
 
+def showSource(st):
+    print(st)
+
+
 # top k most repeatable letter n-grams
 def tkmrlng(st):
     k = ""
     n = ""
+
     while True:
-        a = input("Use default settings?(y/n)")
+        a = input("Use default settings?(y/n): ")
         if a == 'y':
             k = 10
             n = 4
@@ -56,7 +61,7 @@ def tkmrlng(st):
             break
     k = int(k)
     n = int(n)
-    print(k-n)
+    # print(k-n)
     gramcoll = dict()
     top = dict()
     allgramms = list()
@@ -64,13 +69,15 @@ def tkmrlng(st):
     for each in words:
         gramword = dict()
         for i in range(0, len(each)-n+1):
+                if len(each)-n+1 <= 0:
+                    break
                 gramword[i] = each[i:i+n]
                 allgramms.append(each[i:i+n])
         gramcoll[each] = gramword
-    print(gramcoll)
+    # print(gramcoll)
     for gram in allgramms:
         top[gram] = allgramms.count(gram)
-    print(top)
+    # print(top)
     for i in range(1,k):
         fav = 0
         g = ""
@@ -78,6 +85,12 @@ def tkmrlng(st):
             if top[each] > fav:
                 g = each
                 fav = top[each]
-        del top[g]
+        try:
+            del top[g]
+        except KeyError:
+            print("K or N is too strange nums for this stroke restart the app")
+            print("please, look at your input and think a little")
+            print(st)
+            break
         print(i, ") ", g, " - ", fav, "t.")
 

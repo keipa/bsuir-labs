@@ -2,9 +2,9 @@ def prepfqs(st):
     st = str(st)
     nums = st.split()
     for i in range(0, len(nums)):
-        nums[i] = float(nums[i])
+        nums[i] = int(nums[i])
     print(nums)
-    print("↓ sort ↓")
+    print("sort")
     return nums
 
 
@@ -81,4 +81,5 @@ def algdigitsort(A):
     print(A)
 
 def digitsort(str):
+
     algdigitsort(prepfqs(str))
