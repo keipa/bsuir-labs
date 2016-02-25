@@ -4,8 +4,8 @@ import fib,strproc,sorts,storage,sys,argparse
 
 def createparser():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-p',"--program", default='fib')
-    parser.add_argument('-t', "--type", nargs='?')
+    parser.add_argument('-p',"--program", default='sort')
+    parser.add_argument('-t', "--type", nargs='?', default='digit')
     parser.add_argument('-s', "--source", default='innums', nargs='?')
     return parser
 

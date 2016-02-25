@@ -8,8 +8,12 @@ if func == "email":
         print("not valid")
 if func == "float":
     if re.match(r'[+-]?(\d+(\.\d*)?|\.\d+)([eE][+-]?\d+)?', valid):
-        print("ok")
+        print("valid")
     else:
         print("not valid")
 if func == "url":
-    print()
+    if re.match(r'https://.+\.+[a-z]+\/+', valid):
+        print("valid")
+    else:
+        print("not valid")
+
