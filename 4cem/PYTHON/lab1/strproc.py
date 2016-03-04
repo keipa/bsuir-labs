@@ -2,7 +2,6 @@
 def wr(st):
     st = str(st)
     words = st.split()
-
     repeat = dict()
     for each in words:
         repeat[each] = words.count(each)

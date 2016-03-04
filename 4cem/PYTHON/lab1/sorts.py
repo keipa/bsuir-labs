@@ -1,13 +1,13 @@
 def prepfqs(st):
     st = str(st)
     nums = st.split()
-    for i in range(0, len(nums)):
-        nums[i] = int(nums[i])
+    for i in nums:
+        i = int(i)
     print(nums)
     print("sort")
     return nums
 
-
+# list comprehension
 ###################################################################
 def algquicksort(lst):
     if len(lst) <= 1:
@@ -80,6 +80,8 @@ def algdigitsort(A):
             A += B[k]
     print(A)
 
-def digitsort(str):
 
+def digitsort(str):
     algdigitsort(prepfqs(str))
+
+
