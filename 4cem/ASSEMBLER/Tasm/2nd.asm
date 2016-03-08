@@ -184,8 +184,8 @@ model small
 
         sintail proc ;на входе только K(st0 = k)
         fld k
-        fldz ;st0 0 st1 k st2 k
-        fxch ;st0 k st1 0 st2 k
+        fldz                                                                    ;st0 0 st1 k st2 k
+        fxch                                                                    ;st0 k st1 0 st2 k
         fld x   ;st0 x  st1 k   st2 sum  st3 k            (в st2 лежит сумма st3 общий счётчик)
 
         sumcalculating:
