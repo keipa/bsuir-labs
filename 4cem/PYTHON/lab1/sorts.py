@@ -1,11 +1,5 @@
 def prepare_for_sort(st):
-    st = str(st)
-    nums = st.split()
-    for i in range(0, len(nums)):
-        nums[i] = int(nums[i])
-    print(nums)
-    print("sort")
-    return nums
+    return [int(n) for n in st.split()]
 
 
 # list comprehension

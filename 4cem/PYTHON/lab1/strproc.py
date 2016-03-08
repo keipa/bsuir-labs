@@ -1,10 +1,11 @@
 # word_repeats
-def wr(st):
-    st = str(st)
-    words = st.split()
+def word_repeats(st):
+    words = str(st).split()
     repeat = dict()
     for each in words:
-        repeat[each] = words.count(each)
+        repeat[each] = 0
+    for each in words:
+        repeat[each] += 1
     for each in repeat:
         print(each, ":", repeat[each])
 

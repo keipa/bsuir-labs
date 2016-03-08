@@ -7,8 +7,8 @@ import argparse
 
 def create_parser():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-p', "--program", default='sort')
-    parser.add_argument('-t', "--type", nargs='?', default='digit')
+    parser.add_argument('-p', "--program", default='string')
+    parser.add_argument('-t', "--type", nargs='?', default='repeats')
     parser.add_argument('-s', "--source", default='nums', nargs='?')
     return parser
 
@@ -44,7 +44,7 @@ def main():
             elif namespace.type == "average":
                 strproc.average_count_of_words_in_sentences(f.read())
             elif namespace.type == "repeats":
-                strproc.wr(f.read())
+                strproc.word_repeats(f.read())
             elif namespace.type == "show":
                 strproc.show_source(f.read())
             else:
