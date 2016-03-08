@@ -10,7 +10,7 @@ def wr(st):
 
 
 # average_count_of_words_in_sentences
-def acwis(st):
+def average_count_of_words_in_sentences(st):
 
     sentences = st.split(".")
     counts = dict()
@@ -22,8 +22,8 @@ def acwis(st):
     print("average: ", round(a/len(counts)))
 
 
-# medium_count_of_words_in_sentences
-def mcwis(st):
+# median_count_of_words_in_sentences
+def median_count_of_words_in_sentences(st):
     sentences = st.split(".")
     counts = dict()
     a = list()
@@ -35,12 +35,12 @@ def mcwis(st):
     print(a[round(len(a)/2)])
 
 
-def showSource(st):
+def show_source(st):
     print(st)
 
 
 # top k most repeatable letter n-grams
-def tkmrlng(st):
+def top_most_repeat_letter_grams(st):
     k = ""
     n = ""
 
@@ -56,28 +56,26 @@ def tkmrlng(st):
                 k = input("Input K: ")
             while not n.isdigit():
                 n = input("Input N: ")
-            print("k = ", k,  ", n = ",n)
+            print("k = ", k,  ", n = ", n)
             break
     k = int(k)
     n = int(n)
     # print(k-n)
-    gramcoll = dict()
+    gram_collection = dict()
     top = dict()
-    allgramms = list()
+    all_gram = list()
     words = st.split()
     for each in words:
-        gramword = dict()
+        gram_word = dict()
         for i in range(0, len(each)-n+1):
                 if len(each)-n+1 <= 0:
                     break
-                gramword[i] = each[i:i+n]
-                allgramms.append(each[i:i+n])
-        gramcoll[each] = gramword
-    # print(gramcoll)
-    for gram in allgramms:
-        top[gram] = allgramms.count(gram)
-    # print(top)
-    for i in range(1,k):
+                gram_word[i] = each[i:i+n]
+                all_gram.append(each[i:i+n])
+        gram_collection[each] = gram_word
+    for gram in all_gram:
+        top[gram] = all_gram.count(gram)
+    for i in range(1, k):
         fav = 0
         g = ""
         for each in top:
@@ -92,4 +90,3 @@ def tkmrlng(st):
             print(st)
             break
         print(i, ") ", g, " - ", fav, "t.")
-

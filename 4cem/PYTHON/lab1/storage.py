@@ -1,41 +1,41 @@
-def initstorage():
+def init_storage():
     import re
     storage = set()
     print("Set Is on the go")
-    inpt = ""
-    while inpt != "exit":
-        inpt = input("-->")
-        if inpt == "list":
+    input_string = ""
+    while input_string != "exit":
+        input_string = input("-->")
+        if input_string == "list":
             print(storage)
-        elif inpt.split()[0] == "add":
-            for each in inpt.split()[1:]:
+        elif input_string.split()[0] == "add":
+            for each in input_string.split()[1:]:
                 storage.add(each)
             # print("added")
-        elif inpt.split()[0] == "remove":
-            for each in inpt.split()[1:]:
+        elif input_string.split()[0] == "remove":
+            for each in input_string.split()[1:]:
                 storage.discard(each)
-        elif inpt.split()[0] == "find":
-            for each in inpt.split()[1:]:
+        elif input_string.split()[0] == "find":
+            for each in input_string.split()[1:]:
                 if each in storage:
                     print(each)
-                else: print("There is no", each, "in list")
-            # print(storage)
-        elif inpt.split()[0] == "save":
+                else:
+                    print("There is no", each, "in list")
+        elif input_string.split()[0] == "save":
             print("saving...")
-            with open(inpt.split()[1], "w") as f:
+            with open(input_string.split()[1], "w") as f:
                 for each in storage:
                     f.write(each+' ')
             print("saved.")
-        elif inpt.split()[0] == "load":
+        elif input_string.split()[0] == "load":
             storage.clear()
             print("loading...")
-            with open(inpt.split()[1], "r") as f:
+            with open(input_string.split()[1], "r") as f:
                 for each in f.read().split():
                     storage.add(each)
             print("load.")
-        elif inpt.split()[0] == "grep":
+        elif input_string.split()[0] == "grep":
             for each in storage:
-                if re.match(inpt.split()[1], each):
+                if re.match(input_string.split()[1], each):
                     print(each, " - valid")
-
-        else:print("err")
+        else:
+            print("err")

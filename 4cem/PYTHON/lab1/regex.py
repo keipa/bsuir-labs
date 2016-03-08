@@ -12,8 +12,7 @@ if func == "float":
     else:
         print("not valid")
 if func == "url":
-    if re.match(r'https://.+\.+[a-z]+\/+', valid):
+    if re.match(r'https://.+\.+[a-z]+/+', valid):
         print("valid")
     else:
         print("not valid")
-
