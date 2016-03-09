@@ -38,13 +38,14 @@ model small
             fact_twokplusone dd ?
             tmptwokplus dd ?
             ten dd 10.0
+            tmph dd 0.5
 
 .code
         start:
         mov ax, @data                                                           ;заносим область с данными
         mov ds, ax                                                              ;в рабочую зону DS
         finit
-        ;fstp	st(1)          ; Удаляем st1
+                                                                                ;fstp	st(1)          ; Удаляем st1
         org 100h
         mov  ax,2
         int  10H                                                                ;установка видеорежима 80x25
@@ -55,6 +56,8 @@ model small
 
         call infloat
         fstp a
+        fld a
+        call outfloat
         lea dx,STRING_B                                                         ;вывод
         mov ah,09h	                                                        ;сообщения
         int 21h                                                                 ;INPUT A
@@ -66,7 +69,11 @@ model small
         mov ah,09h	                                                        ;сообщения
         int 21h                                                                 ;INPUT A
         call infloat
+        ;fstp
+        ;fld tmph
         fstp h
+        fld h
+        call outfloat
 
         lea dx,STRING_EPS                                                       ;вывод
         mov ah,09h	                                                        ;сообщения
@@ -76,10 +83,6 @@ model small
         fdiv
         fstp eps
 
-
-
-
-
         fld a
         fstp x
 
@@ -87,17 +90,17 @@ model small
         xplush:
 
 
-        lea dx,STRING_XE                                                         ;вывод
+        lea dx,STRING_XE                                                        ;вывод
         mov ah,09h	                                                        ;сообщения
-        int 21h                                                                 ;INPUT A
+        int 21h                                                                 ;INPUT x=
         fld x
         call outfloat
-        lea dx,STRING_TAB                                                         ;вывод
+        lea dx,STRING_TAB                                                       ;вывод
         mov ah,09h	                                                        ;сообщения
-        int 21h                                                                 ;INPUT A
-        lea dx,STRING_YE                                                         ;вывод
+        int 21h                                                                 ;tab
+        lea dx,STRING_YE                                                        ;вывод
         mov ah,09h	                                                        ;сообщения
-        int 21h                                                                 ;INPUT A
+        int 21h                                                                 ;y =
 
         fld x
         call sinFPU
@@ -111,42 +114,40 @@ model small
 
         fld k
 
-        call sintail            ;st(0) = sintail
+        call sintail                                                            ;st(0) = sintail
 
         fld s
-        fld y                   ;st(0) = sinfpu; st(1) = sintail
-        fsub                    ;st(0) = sinfpu-sintail
-        fabs                    ;st(0) = ABS(sinfpu-sintail)
-        fld eps                 ;st(0) = eps; st(1) =  ABS(sinfpu-sintail)
+        fld y                                                                   ;st(0) = sinfpu; st(1) = sintail
+        fsub                                                                    ;st(0) = sinfpu-sintail
+        fabs                                                                    ;st(0) = ABS(sinfpu-sintail)
+        fld eps                                                                 ;st(0) = eps; st(1) =  ABS(sinfpu-sintail)
         fsub
         ftst
         fstsw ax
         sahf
         jnc kplusone
 
-        lea dx,STRING_TAB                                                         ;вывод
+        lea dx,STRING_TAB                                                       ;вывод
         mov ah,09h	                                                        ;сообщения
-        int 21h                                                                 ;INPUT A
+        int 21h                                                                 ;tab
 
-        lea dx,STRING_KE                                                         ;вывод
+        lea dx,STRING_KE                                                        ;вывод
         mov ah,09h	                                                        ;сообщения
-        int 21h                                                                 ;INPUT A
+        int 21h                                                                 ;k =
         fld k
         call outfloat
-        lea dx,STRING_TAB                                                         ;вывод
+        lea dx,STRING_TAB                                                       ;вывод
         mov ah,09h	                                                        ;сообщения
-        int 21h                                                                 ;INPUT A
+        int 21h                                                                 ;tab
 
-        lea dx,STRING_SE                                                         ;вывод
+        lea dx,STRING_SE                                                        ;вывод
         mov ah,09h	                                                        ;сообщения
-        int 21h                                                                 ;INPUT A
+        int 21h                                                                 ;s(x) =
         fld s
         call outfloat
-        lea dx,STRING_ENT                                                         ;вывод
+        lea dx,STRING_ENT                                                       ;вывод
         mov ah,09h	                                                        ;сообщения
-        int 21h                                                                 ;INPUT A
-
-
+        int 21h                                                                 ;Enter
 
         fld x
         fld h
@@ -162,31 +163,18 @@ model small
         fldz
         fstp k  ;обнуляем k
 
+
+
         jc xplush
-
-
-
-
-
-
-
-
-
 
         mov ah, 4ch                                                             ;передаём в ah код прерываня для выхода из программы
         int 21h                                                                 ;прерываение
-
-
-
-
-
-
 
         sintail proc ;на входе только K(st0 = k)
         fld k
         fldz                                                                    ;st0 0 st1 k st2 k
         fxch                                                                    ;st0 k st1 0 st2 k
-        fld x   ;st0 x  st1 k   st2 sum  st3 k            (в st2 лежит сумма st3 общий счётчик)
+        fld x                                                                   ;st0 x  st1 k   st2 sum  st3 k            (в st2 лежит сумма st3 общий счётчик)
 
         sumcalculating:
 
@@ -220,30 +208,30 @@ model small
         je xpowtwokplusoneEXT
         fld x                                                                   ;st0 x st1 x st2 twokplusone st3 sum st4 k
         fmul                                                                    ;st0 pow(x) st1 twokplusone st2 sum st3 k
-        fxch    ;st0 twokplusone st1 pow(x)
+        fxch                                                                    ;st0 twokplusone st1 pow(x)
         fst tmptwokplus
         fdiv
         fld tmptwokplus
         fld1
-        fsub    ;st0 twokplusone-1 st1 -pow(x)
-        fxch    ;st0 -pow(x) st1 twokplusone-1
+        fsub                                                                    ;st0 twokplusone-1 st1 -pow(x)
+        fxch                                                                    ;st0 -pow(x) st1 twokplusone-1
         jmp xpowtwokplusone
         xpowtwokplusoneEXT:                                                     ;st0 pow(x) st1 0 st2 sum st3 k
         fxch                                                                    ;st0 0 st1 pow(x) st2 sum st3 k
         fstp st(0)
 
         xminus:
-        fxch            ;берём к и проверяем на ноль
+        fxch                                                                    ;берём к и проверяем на ноль
         ftst
-        fstsw ax         ;сравнение с нулём если равен, то уходим
+        fstsw ax                                                                ;сравнение с нулём если равен, то уходим
         sahf
-        je xminusexit   ;if k = 0 then exit
+        je xminusexit                                                           ;if k = 0 then exit
         fxch
-        fchs  ;st0 -x st1 k
-        fxch    ;st0 k st1 -x
+        fchs                                                                    ;st0 -x st1 k
+        fxch                                                                    ;st0 k st1 -x
         fld1
-        fsub    ;st0 k-1 st1 -x
-        fxch    ;st0 -x st1 k-1
+        fsub                                                                    ;st0 k-1 st1 -x
+        fxch                                                                    ;st0 -x st1 k-1
         jmp xminus
         xminusexit:                                                             ;st0 x st1 0 st2 sum st3 k
         fstp st(0)                                                              ;st0 x st1 sum st2 k ;убираем мусор
@@ -429,7 +417,7 @@ model small
                 mov     ah, 02h
                 mov     dl, '.'                                                 ; Если она всё-таки ненулевая, выведем точку
                 int     21h
-                mov     cx, 6                                                   ;максимум 6цифр после запятой
+                mov     cx, 33                                                   ;максимум 6цифр после запятой
 
         @of4:
                 fimul   word ptr [bp - 2]                                       ;Помножим дрообную часть на десять (разница в том, что мы умножаем на 10, а не делим)
