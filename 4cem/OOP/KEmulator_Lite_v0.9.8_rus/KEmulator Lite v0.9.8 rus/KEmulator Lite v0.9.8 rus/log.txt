@@ -1,0 +1,180 @@
+KEmulator Lite v0.9.8 Running...
+Get classes from D:\LABS\BSUIR_labs\4cem\OOP\Download_For_240x320_S60.jar
+Get class GlomoReg.GlomoUtil
+Get class glomoRegForms.BaseAlert
+Get class GlomoReg.GlomoRegistrator
+Get class glomoRegForms.HelpAlert
+Get class b
+Get class glomoRegForms.SerialNumberForm
+Get class glomoRegForms.LangUtils
+Get class glomoRegForms.FormActivateInProgress
+Get class glomoRegForms.GameCodeAlert
+Get class glomoRegForms.RegisterFailedAlert
+Get class glomoRegForms.SendToFriendForm
+Get class GlomoRegStarter
+Get class glomoRegForms.SerialNumberRightAlert
+Get class GlomoReg.GlomoInfoObject
+Get class f
+Get class glomoRegForms.ActivateForm
+Get class GlomoReg.GlomoRMS
+Get class glomoRegForms.CountryList
+Get class a
+Get class glomoRegForms.SerialNumberWrongAlert
+Get class glomoRegForms.LanguageList
+Get class e
+Get class GameMidlet
+Get class glomoRegForms.SentToFriendAlert
+Get class GlomoReg.GlomoConstants
+Get class glomoRegForms.RegThread
+Get class glomoRegForms.RegisterOkAlert
+Get class GlomoReg.GlomoSMS
+Get class GlomoReg.GlomoConfig
+Get class glomoRegForms.StartAlert
+Get class GlomoReg.GlomoCountryShort
+Get class glomoRegForms.Resources
+Get class d
+Get class glomoRegForms.WindowsManager
+Get class GlomoReg.GlomoCountry
+Get class glomoRegForms.ActivateTextAlert
+Get class GlomoReg.GlomoDistributer
+Get class glomoRegForms.ErrorAlert
+Get class glomoRegForms.ThreadActivate
+Get class glomoRegForms.SendToFriendAlert
+Get class c
+Get class glomoRegForms.GameCodeForm
+Custom.jar.getResourceStream: /icon.png (6076)
+Launch MIDlet class: GameMidlet
+openRecordStore generalInfo
+getRecord generalInfo_2
+openRecordStore generalInfo
+openRecordStore generalInfo
+getRecord generalInfo_3
+openRecordStore generalInfo
+openRecordStore generalInfo
+openRecordStore generalInfo
+getRecord generalInfo_3
+openRecordStore generalInfo
+getRecord generalInfo_4
+System.getProperty#microedition.platform=SonyEricssonK800
+openRecordStore generalInfo
+getRecord generalInfo_1
+Custom.jar.getResourceStream: glomo.cfg (23070)
+openRecordStore generalInfo
+getRecord generalInfo_6
+openRecordStore generalInfo
+getRecord generalInfo_13
+openRecordStore generalInfo
+getRecord generalInfo_9
+openRecordStore generalInfo
+getRecord generalInfo_14
+Custom.jar.getResourceStream: vibra.txt (null)
+>>java.lang.IllegalArgumentException
+>>	at javax.microedition.media.Manager.createPlayer(Unknown Source)
+>>	at c.<init>(Unknown Source)
+>>	at GameMidlet.<init>(Unknown Source)
+>>	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+>>	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:39)
+>>	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:27)
+>>	at java.lang.reflect.Constructor.newInstance(Constructor.java:274)
+>>	at java.lang.Class.newInstance0(Class.java:308)
+>>	at java.lang.Class.newInstance(Class.java:261)
+>>	at emulator.Emulator.main(Unknown Source)
+Custom.jar.getResourceStream: a (100709)
+Custom.jar.getResourceStream: a (100709)
+Custom.jar.getResourceStream: t0 (15484)
+Custom.jar.getResourceStream: a (100709)
+openRecordStore SM
+getRecord SM_1
+System.getProperty#microedition.m3g.version=1.1
+Custom.jar.getResourceStream: a (100709)
+openRecordStore generalInfo
+getRecord generalInfo_14
+Custom.jar.getResourceStream: glomoRes/ru.lang (3676)
+Custom.jar.getResourceStream: a (100709)
+Custom.jar.getResourceStream: /logo.png (48353)
+Custom.jar.getResourceStream: intro.amr (42310)
+>>sound loaded: /intro.amr javax.microedition.media.PlayerImpl@238a47
+Custom.jar.getResourceStream: a (100709)
+Custom.jar.getResourceStream: /menuv.png (1874)
+Custom.jar.getResourceStream: a (100709)
+Custom.jar.getResourceStream: a (100709)
+openRecordStore SM1
+getRecord SM1_1
+Custom.jar.getResourceStream: /t1.png (7837)
+Custom.jar.getResourceStream: /fon1.png (12757)
+Custom.jar.getResourceStream: a (100709)
+Custom.jar.getResourceStream: /avatars.png (105)
+Custom.jar.getResourceStream: a (100709)
+Custom.jar.getResourceStream: a (100709)
+Custom.jar.getResourceStream: a (100709)
+Custom.jar.getResourceStream: /postr1.png (2049)
+Custom.jar.getResourceStream: /postr2.png (1639)
+Custom.jar.getResourceStream: /postr3.png (1318)
+Custom.jar.getResourceStream: menu.amr (166)
+>>sound loaded: /menu.amr javax.microedition.media.PlayerImpl@cb754f
+Custom.jar.getResourceStream: vibor.amr (614)
+>>sound loaded: /vibor.amr javax.microedition.media.PlayerImpl@b83be0
+Custom.jar.getResourceStream: /service.png (3906)
+Custom.jar.getResourceStream: /fuel.png (3660)
+Custom.jar.getResourceStream: zapravka.amr (2726)
+>>sound loaded: /zapravka.amr javax.microedition.media.PlayerImpl@10cc9b4
+Custom.jar.getResourceStream: resurs.amr (422)
+>>sound loaded: /resurs.amr javax.microedition.media.PlayerImpl@b6421
+Custom.jar.getResourceStream: sdacha.amr (486)
+>>sound loaded: /sdacha.amr javax.microedition.media.PlayerImpl@19a64
+Custom.jar.getResourceStream: quest.amr (2662)
+>>sound loaded: /quest.amr javax.microedition.media.PlayerImpl@15d7e83
+Custom.jar.getResourceStream: remont.amr (1830)
+>>sound loaded: /remont.amr javax.microedition.media.PlayerImpl@80ef2f
+Custom.jar.getResourceStream: upgrade.amr (2182)
+>>sound loaded: /upgrade.amr javax.microedition.media.PlayerImpl@db01e3
+Custom.jar.getResourceStream: a (100709)
+Custom.jar.getResourceStream: /t2.png (7929)
+Custom.jar.getResourceStream: /fon2.png (16458)
+Custom.jar.getResourceStream: a (100709)
+deleteRecordStore SM
+deleteRecord SM_1: OK
+openRecordStore SM0
+getRecord SM0_1
+deleteRecordStore SM0
+deleteRecord SM0_1: OK
+openRecordStore SM1
+getRecord SM1_1
+deleteRecordStore SM1
+deleteRecord SM1_1: OK
+openRecordStore SM2
+getRecord SM2_1
+deleteRecordStore SM2
+deleteRecord SM2_1: OK
+openRecordStore SM
+addRecord SM_1
+openRecordStore SM0
+addRecord SM0_1
+openRecordStore SM1
+addRecord SM1_1
+openRecordStore SM2
+addRecord SM2_1
+deleteRecordStore SM
+deleteRecord SM_1: OK
+openRecordStore SM0
+getRecord SM0_1
+deleteRecordStore SM0
+deleteRecord SM0_1: OK
+openRecordStore SM1
+getRecord SM1_1
+deleteRecordStore SM1
+deleteRecord SM1_1: OK
+openRecordStore SM2
+getRecord SM2_1
+deleteRecordStore SM2
+deleteRecord SM2_1: OK
+openRecordStore SM
+addRecord SM_1
+openRecordStore SM0
+addRecord SM0_1
+openRecordStore SM1
+addRecord SM1_1
+openRecordStore SM2
+addRecord SM2_1
+Notify Destroyed
+Exiting Emulator

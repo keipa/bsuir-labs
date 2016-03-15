@@ -1,0 +1,1 @@
+This sample project exhibits an animated sprite with data pulled from an external module, objects animated with an "enterFrame" runtime listener, and a container which visually constrains (clips) the scene objects inside a defined region.

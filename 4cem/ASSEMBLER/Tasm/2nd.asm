@@ -1,6 +1,6 @@
 model small
 .stack 100h
-.386
+.286
 .data
            STRING_A DB 10,13, ' INPUT A: $'
            STRING_B DB ' INPUT B: $'
@@ -38,7 +38,10 @@ model small
             fact_twokplusone dd ?
             tmptwokplus dd ?
             ten dd 10.0
-            tmph dd 0.5
+            tmph dd 1.0
+            tmpa dd 1.0
+            tmpb dd 10.0
+            tmpeps dd 0.01
 
 .code
         start:
@@ -55,9 +58,7 @@ model small
         int 21h                                                                 ;INPUT A
 
         call infloat
-        fstp a
-        fld a
-        call outfloat
+        fstp  a
         lea dx,STRING_B                                                         ;вывод
         mov ah,09h	                                                        ;сообщения
         int 21h                                                                 ;INPUT A
@@ -65,15 +66,13 @@ model small
         call infloat
         fstp b
 
+
         lea dx,STRING_H                                                         ;вывод
         mov ah,09h	                                                        ;сообщения
         int 21h                                                                 ;INPUT A
         call infloat
-        ;fstp
-        ;fld tmph
         fstp h
-        fld h
-        call outfloat
+
 
         lea dx,STRING_EPS                                                       ;вывод
         mov ah,09h	                                                        ;сообщения
@@ -164,8 +163,9 @@ model small
         fstp k  ;обнуляем k
 
 
-
+        .386
         jc xplush
+        .286
 
         mov ah, 4ch                                                             ;передаём в ah код прерываня для выхода из программы
         int 21h                                                                 ;прерываение
@@ -265,8 +265,9 @@ model small
 
 
         sinFPU proc
-
+        .386
         fsin
+        .286
         fstp y
         fld y
         call outfloat
@@ -417,7 +418,7 @@ model small
                 mov     ah, 02h
                 mov     dl, '.'                                                 ; Если она всё-таки ненулевая, выведем точку
                 int     21h
-                mov     cx, 33                                                   ;максимум 6цифр после запятой
+                mov     cx, 5                                                   ;максимум 6цифр после запятой
 
         @of4:
                 fimul   word ptr [bp - 2]                                       ;Помножим дрообную часть на десять (разница в том, что мы умножаем на 10, а не делим)
