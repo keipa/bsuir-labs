@@ -93,15 +93,15 @@ Custom.jar.getResourceStream: glomoRes/ru.lang (3676)
 Custom.jar.getResourceStream: a (100709)
 Custom.jar.getResourceStream: /logo.png (48353)
 Custom.jar.getResourceStream: intro.amr (42310)
->>sound loaded: /intro.amr javax.microedition.media.PlayerImpl@238a47
+>>sound loaded: /intro.amr javax.microedition.media.PlayerImpl@401369
 Custom.jar.getResourceStream: a (100709)
 Custom.jar.getResourceStream: /menuv.png (1874)
 Custom.jar.getResourceStream: a (100709)
 Custom.jar.getResourceStream: a (100709)
 openRecordStore SM1
 getRecord SM1_1
-Custom.jar.getResourceStream: /t1.png (7837)
-Custom.jar.getResourceStream: /fon1.png (12757)
+Custom.jar.getResourceStream: /t2.png (7929)
+Custom.jar.getResourceStream: /fon2.png (16458)
 Custom.jar.getResourceStream: a (100709)
 Custom.jar.getResourceStream: /avatars.png (105)
 Custom.jar.getResourceStream: a (100709)
@@ -110,71 +110,19 @@ Custom.jar.getResourceStream: a (100709)
 Custom.jar.getResourceStream: /postr1.png (2049)
 Custom.jar.getResourceStream: /postr2.png (1639)
 Custom.jar.getResourceStream: /postr3.png (1318)
-Custom.jar.getResourceStream: menu.amr (166)
->>sound loaded: /menu.amr javax.microedition.media.PlayerImpl@cb754f
+Custom.jar.getResourceStream: resurs.amr (422)
+>>sound loaded: /resurs.amr javax.microedition.media.PlayerImpl@19fc25
 Custom.jar.getResourceStream: vibor.amr (614)
->>sound loaded: /vibor.amr javax.microedition.media.PlayerImpl@b83be0
-Custom.jar.getResourceStream: /service.png (3906)
+>>sound loaded: /vibor.amr javax.microedition.media.PlayerImpl@bcbc
+Custom.jar.getResourceStream: sdacha.amr (486)
+>>sound loaded: /sdacha.amr javax.microedition.media.PlayerImpl@129b922
+Custom.jar.getResourceStream: menu.amr (166)
+>>sound loaded: /menu.amr javax.microedition.media.PlayerImpl@1628303
 Custom.jar.getResourceStream: /fuel.png (3660)
 Custom.jar.getResourceStream: zapravka.amr (2726)
->>sound loaded: /zapravka.amr javax.microedition.media.PlayerImpl@10cc9b4
-Custom.jar.getResourceStream: resurs.amr (422)
->>sound loaded: /resurs.amr javax.microedition.media.PlayerImpl@b6421
-Custom.jar.getResourceStream: sdacha.amr (486)
->>sound loaded: /sdacha.amr javax.microedition.media.PlayerImpl@19a64
-Custom.jar.getResourceStream: quest.amr (2662)
->>sound loaded: /quest.amr javax.microedition.media.PlayerImpl@15d7e83
-Custom.jar.getResourceStream: remont.amr (1830)
->>sound loaded: /remont.amr javax.microedition.media.PlayerImpl@80ef2f
-Custom.jar.getResourceStream: upgrade.amr (2182)
->>sound loaded: /upgrade.amr javax.microedition.media.PlayerImpl@db01e3
-Custom.jar.getResourceStream: a (100709)
-Custom.jar.getResourceStream: /t2.png (7929)
-Custom.jar.getResourceStream: /fon2.png (16458)
-Custom.jar.getResourceStream: a (100709)
-deleteRecordStore SM
-deleteRecord SM_1: OK
-openRecordStore SM0
-getRecord SM0_1
-deleteRecordStore SM0
-deleteRecord SM0_1: OK
-openRecordStore SM1
-getRecord SM1_1
-deleteRecordStore SM1
-deleteRecord SM1_1: OK
-openRecordStore SM2
-getRecord SM2_1
-deleteRecordStore SM2
-deleteRecord SM2_1: OK
-openRecordStore SM
-addRecord SM_1
-openRecordStore SM0
-addRecord SM0_1
-openRecordStore SM1
-addRecord SM1_1
-openRecordStore SM2
-addRecord SM2_1
-deleteRecordStore SM
-deleteRecord SM_1: OK
-openRecordStore SM0
-getRecord SM0_1
-deleteRecordStore SM0
-deleteRecord SM0_1: OK
-openRecordStore SM1
-getRecord SM1_1
-deleteRecordStore SM1
-deleteRecord SM1_1: OK
-openRecordStore SM2
-getRecord SM2_1
-deleteRecordStore SM2
-deleteRecord SM2_1: OK
-openRecordStore SM
-addRecord SM_1
-openRecordStore SM0
-addRecord SM0_1
-openRecordStore SM1
-addRecord SM1_1
-openRecordStore SM2
-addRecord SM2_1
+>>sound loaded: /zapravka.amr javax.microedition.media.PlayerImpl@b950d1
+Custom.jar.getResourceStream: /service.png (3906)
+Notify Destroyed
+Exiting Emulator
 Notify Destroyed
 Exiting Emulator

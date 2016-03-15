@@ -1,5 +1,5 @@
 #KEmulator properties
-#Sun Mar 13 20:44:23 GMT 2016
+#Tue Mar 15 08:14:05 GMT 2016
 2D_Graphics_Enginge=AWT
 3D_Graphics_Enginge=LWJ
 AlwaysOnTop=true
@@ -49,10 +49,10 @@ MAP_KEY_RSOFT=F2
 MAP_KEY_STAR=Key *
 MAP_KEY_UP=UP
 MRUList0=D\:\\LABS\\BSUIR_labs\\4cem\\OOP\\Download_For_240x320_S60.jar
-MRUList1=D\:\\LABS\\BSUIR_labs\\4cem\\OOP.JAVA\\Download_For_240x320_S60.jar
-MRUList2=C\:\\Users\\\u0414\u0430\u043D\u0438\u043B\u0430 \u0411\u043E\u0434\u0440\u043E\u0432\\Desktop\\Download_For_240x320_S60.jar
-MRUList3=C\:\\Documents and Settings\\m\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\KEmulator Lite v0.9.8 rus\\mobitva.jar
-MRUList4=C\:\\Documents and Settings\\m\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\Emulator\\opera mini 6.5\\opera-mini-6.5.26955-advanced-ru.jar
+MRUList1=D\:\\LABS\\BSUIR_labs\\4cem\\OOP\\Download_For_240x320_S60.jar
+MRUList2=D\:\\LABS\\BSUIR_labs\\4cem\\OOP.JAVA\\Download_For_240x320_S60.jar
+MRUList3=C\:\\Users\\\u0414\u0430\u043D\u0438\u043B\u0430 \u0411\u043E\u0434\u0440\u043E\u0432\\Desktop\\Download_For_240x320_S60.jar
+MRUList4=C\:\\Documents and Settings\\m\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\KEmulator Lite v0.9.8 rus\\mobitva.jar
 ProxyDomain=
 ProxyHost=
 ProxyPassword=
