@@ -3,12 +3,13 @@
 
 import pygame
 import miner
+import block
 from pygame import *
 
 window_width = 800
 window_height = 640
 display_dict = (window_width, window_height)
-background_color = "#003300"
+background_color = "#000000"
 
 
 class Camera(object):
@@ -41,57 +42,64 @@ def main():
     pygame.display.set_caption("Space Miner")  # Пишем в шапку
     timer = pygame.time.Clock()
     bg = Surface(display_dict)  # Создание видимой поверхности
+
     bg.fill(Color(background_color))
-    hero = miner.Miner(55, 155)
+
+    hero = miner.Miner(455, 455)
     left = right = False
     up = False
+
+    entities = pygame.sprite.Group() # Все объекты
+    platforms = [] # то, во что мы будем врезаться или опираться
+    entities.add(hero)
     level = [
-       "-------------------------",
-       "-                       -",
-       "-                       -",
-       "-                       -",
-       "-            --         -",
-       "-                       -",
-       "--                      -",
-       "-                       -",
-       "-                   --- -",
-       "-                       -",
-       "-                       -",
-       "-      ---              -",
-       "-                       -",
-       "-   -----------         -",
-       "-                       -",
-       "-                -      -",
-       "-                   --  -",
-       "-                       -",
-       "-                       -",
-       "-------------------------"]
+       "----------------------------------",
+       "-                                -",
+       "-                       --       -",
+       "-                                -",
+       "-            --                  -",
+       "-                                -",
+       "--                               -",
+       "-                                -",
+       "-                   ----     --- -",
+       "-                                -",
+       "--                               -",
+       "-                                -",
+       "-                            --- -",
+       "----------------------------------",
+       "----------------------------------",
+       "----------------------------------",
+       "----------------------------------",
+       "----------------------------------",
+       "----------------------------------",
+       "----------------------------------",
+       "----------------------------------",
+       "----------------------------------",
+       "----------------------------------",
+       "----------------------------------"]
     platform_width = 32
     platform_height = 32
     platform = (platform_width, platform_height)
     platform_color = "#006262"
     ground_color = "#124315"
+    x=y=0 # координаты
+    for row in level: # вся строка
+        for col in row: # каждый символ
+            if col == "-":
+                pf = block.Platform(x,y)
+                entities.add(pf)
+                platforms.append(pf)
 
-    # total_level_width = len(level[0])*platform_width # Высчитываем фактическую ширину уровня
-    # total_level_height = len(level)*platform_height   # высоту
-    #
-    # camera = Camera(camera_configure, total_level_width, total_level_height)
+            x += platform_width #блоки платформы ставятся на ширине блоков
+        y += platform_height    #то же самое и с высотой
+        x = 0                   #на каждой новой строчке начинаем с нуля
+
+    total_level_width = len(level[0])*platform_width
+    total_level_height = len(level)*platform_height   # высоту
+
+    camera = Camera(camera_configure, total_level_width, total_level_height)
     while 1:
-        timer.tick(80)
-        x = y = 0
-        for row in level:
-            for col in row:
-                if col == "-":
-                    bg = Surface(platform)
-                    bg.fill(Color(platform_color))
-                    screen.blit(bg, (x, y))
-                else:
-                    bg = Surface(platform)
-                    bg.fill(Color(ground_color))
-                    screen.blit(bg, (x, y))
-                x += platform_width
-            y += platform_height
-            x = 0
+        timer.tick(100)
         for e in pygame.event.get():
             if e.type == QUIT:
                 raise (SystemExit, "QUIT")
@@ -110,11 +118,11 @@ def main():
             if e.type == KEYUP and e.key == K_LEFT:
                 left = False
 
-        # camera.update(hero)  # центризируем камеру относительно персонажа
-
-        hero.update(left, right, up)
-        hero.draw(screen)
-        screen.blit(bg, (0, 0))
+        screen.blit(bg, (0, 0))      # Каждую итерацию необходимо всё перерисовывать
+        camera.update(hero)  # центризируем камеру относительно персонажа
+        hero.update(left, right, up, platforms)
+        for e in entities:
+            screen.blit(e.image, camera.apply(e))
         pygame.display.update()
 
 if __name__ == "__main__":
