@@ -2,20 +2,24 @@
 # -*- coding: utf-8 -*-
 
 from pygame import *
-
+import os
+import pyganim
 
 MOVE_SPEED = 3
-WIDTH = 32
-HEIGHT = 32
-COLOR = "#888888"
+WIDTH = 25
+HEIGHT = 25
+COLOR = "#cc0000"
+BLACK = "#000000"
 JUMP_POWER = 1
 move_speed = 7
-width = 32
-height = 32
+
 miner_color = "#888888"
+ICON_DIR = os.path.dirname(__file__)
+ANIMATION_DELAY = 0.1 # скорость смены кадров
 
 GRAVITY = 0.55
-
+ANIMATION_UP = [('%s/fly/miner_ru.png' % ICON_DIR),
+                ('%s/fly/miner_rul.png' % ICON_DIR)]
 
 class Miner(sprite.Sprite):
     def __init__(self, x, y):
@@ -25,23 +29,33 @@ class Miner(sprite.Sprite):
         self.xvel = 0
         self.start_x = x
         self.start_y = y
-        self.image = Surface((width, height))
-        self.image.fill(Color(miner_color))
-        self.rect = Rect(x, y, width, height)
-
+        self.image = Surface((WIDTH, HEIGHT))
+        # self.image.fill(Color(miner_color))
+        self.rect = Rect(x, y, WIDTH, HEIGHT)
+        boltAnim = []
+        for anim in ANIMATION_UP:
+            boltAnim.append((anim, ANIMATION_DELAY))
+        self.boltAnimUp = pyganim.PygAnimation(boltAnim)
+        self.boltAnimUp.play()
+#
     def update(self, left, right, up, platforms):
 
         if up:
-            if self.yvel > -10: # прыгаем, только когда можем оттолкнуться от земли
+            if self.yvel > -10:
                 self.yvel += -JUMP_POWER
-            print self.yvel
-            self.image.fill(Color(COLOR))
+            print 'speed =', self.yvel
+            self.image.fill(Color(BLACK))# делаем фон прозрачным
+            self.boltAnimUp.blit(self.image, (0, 0))
+
+
+
             # self.boltAnimJump.blit(self.image, (0, 0))
 
 
         if left:
             self.xvel = -MOVE_SPEED # Лево = x- n
             self.image.fill(Color(COLOR))
+            self.image = image.load("miner_l.png")
             # if up: # для прыжка влево есть отдельная анимация
             #     self.boltAnimJumpLeft.blit(self.image, (0, 0))
             # else:
@@ -50,14 +64,15 @@ class Miner(sprite.Sprite):
         if right:
             self.xvel = MOVE_SPEED # Право = x + n
             self.image.fill(Color(COLOR))
+            self.image = image.load("miner_r.png")
         if not(left or right): # стоим, когда нет указаний идти
             self.xvel = 0
-            if not up:
-                self.image.fill(Color(COLOR))
+            # if not up:
+            #     self.image.fill(Color(COLOR))
         if not self.onGround:
-            self.yvel +=  GRAVITY
+            self.yvel += GRAVITY
 
-        self.onGround = False; # Мы не знаем, когда мы на земле((
+        self.onGround = False # Мы не знаем, когда мы на земле((
         self.rect.y += self.yvel
         self.collide(0, self.yvel, platforms)
 
@@ -82,4 +97,3 @@ class Miner(sprite.Sprite):
                 if yvel < 0:                      # если движется вверх
                     self.rect.top = p.rect.bottom # то не движется вверх
                     self.yvel = 0                 # и энергия прыжка пропадает
-

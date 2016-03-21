@@ -49,28 +49,48 @@ def main():
     left = right = False
     up = False
 
-    entities = pygame.sprite.Group() # Все объекты
-    platforms = [] # то, во что мы будем врезаться или опираться
+    entities = pygame.sprite.Group()
+    platforms = []
     entities.add(hero)
     level = [
-       "----------------------------------",
-       "-                                -",
-       "-                       --       -",
-       "-                                -",
-       "-            --                  -",
-       "-                                -",
-       "--                               -",
-       "-                                -",
-       "-                   ----     --- -",
-       "-                                -",
-       "--                               -",
-       "-                                -",
-       "-                            --- -",
-       "----------------------------------",
-       "----------------------------------",
-       "----------------------------------",
-       "----------------------------------",
-       "----------------------------------",
+       "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "b                                b",
+       "b                       --       b",
+       "b                                b",
+       "b            --                  b",
+       "b                                b",
+       "b-                               b",
+       "b                                b",
+       "b                   ----     --- b",
+       "b                                b",
+       "b-                               b",
+       "b                                b",
+       "b                            --- b",
+       "----------------- ----------------",
+       "----------------- ----------------",
+       "----------------- ----------------",
+       "----------------- ----------------",
+       "----------------- ----------------",
+       "----------------- ----------------",
+       "----------------- ----------------",
+       "----------------- ----------------",
+       "----------------- ----------------",
+       "----- --    ----- ----------------",
+       "----- -- -------- ----------------",
+       "-----       ----  ---------------",
+       "-------- -- ----- ----------------",
+       "-----    -- ----- ----------------",
+       "----------------- ----------------",
+       "----------------- ----------------",
+       "----------------- ----------------",
+       "----------------- ----------------",
+       "----------------- ----------------",
+       "----------------- ----------------",
+       "----------------- ----------------",
+       "----------------- ----------------",
+       "----------------- ----------------",
+       "----------------- ----------------",
+       "----------------- ----------------",
        "----------------------------------",
        "----------------------------------",
        "----------------------------------",
@@ -79,27 +99,28 @@ def main():
        "----------------------------------"]
     platform_width = 32
     platform_height = 32
-    platform = (platform_width, platform_height)
-    platform_color = "#006262"
-    ground_color = "#124315"
-    x=y=0 # координаты
-    for row in level: # вся строка
-        for col in row: # каждый символ
+
+    x = y = 0
+    for row in level:
+        for col in row:
             if col == "-":
-                pf = block.Platform(x,y)
+                pf = block.Platform(x, y)
                 entities.add(pf)
                 platforms.append(pf)
-
-            x += platform_width #блоки платформы ставятся на ширине блоков
-        y += platform_height    #то же самое и с высотой
-        x = 0                   #на каждой новой строчке начинаем с нуля
+            if col == "b":
+                pf = block.Border(x, y)
+                entities.add(pf)
+                platforms.append(pf)
+            x += platform_width
+        y += platform_height
+        x = 0
 
     total_level_width = len(level[0])*platform_width
     total_level_height = len(level)*platform_height   # высоту
 
     camera = Camera(camera_configure, total_level_width, total_level_height)
     while 1:
-        timer.tick(100)
+        timer.tick(60)
         for e in pygame.event.get():
             if e.type == QUIT:
                 raise (SystemExit, "QUIT")
@@ -119,10 +140,11 @@ def main():
                 left = False
 
         screen.blit(bg, (0, 0))      # Каждую итерацию необходимо всё перерисовывать
-        camera.update(hero)  # центризируем камеру относительно персонажа
-        hero.update(left, right, up, platforms)
         for e in entities:
             screen.blit(e.image, camera.apply(e))
+        camera.update(hero)  # центризируем камеру относительно персонажа
+
+        hero.update(left, right, up, platforms)
         pygame.display.update()
 
 if __name__ == "__main__":
