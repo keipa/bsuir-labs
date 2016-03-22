@@ -10,6 +10,7 @@ namespace ConsoleApplication5
     {
         static void Main(string[] args)
         {
+            
             int a = Convert.ToInt32(Console.ReadLine());
             List<int> nums = new List<int>();
             foreach (var k in Console.ReadLine().Split(' '))
@@ -23,14 +24,14 @@ namespace ConsoleApplication5
             nums.Remove(nums.Max());
             int p2 = nums.Max();
             nums.Remove(nums.Max());
-            int positive = p1 * p2;
+            long positive = (long)p1 * (long)p2;
             nums.Add(p1);
             nums.Add(p2);
             int n1 = nums.Min();
             nums.Remove(nums.Min());
             int n2 = nums.Min();
             nums.Remove(nums.Min());
-            int negative = n1 * n2;
+            long negative = (long)n1 * (long)n2;
             if (positive >= negative)
             {
                 Console.WriteLine(positive);
@@ -39,7 +40,6 @@ namespace ConsoleApplication5
             {
                 Console.WriteLine(negative);
             }
-            Console.ReadLine();
         }
     }
 }

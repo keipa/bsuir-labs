@@ -14,11 +14,6 @@ namespace ConsoleApplication03
             int poly = str.Length;
             bool brk = false;
             List<string> sub = showSubstrings(str);
-            //Console.WriteLine(Reverse(str));
-            //Console.WriteLine(str.Substring(2).Remove(2));
-            //Console.ReadKey();
-
-            //Console.WriteLine(isPoly("kek", str));
             for (int i = sub.Count-1; i > 0;i-- )
             {
                 if (!isPoly(sub[i]))
@@ -32,46 +27,7 @@ namespace ConsoleApplication03
             {
                 Console.WriteLine(-1);
             }
-            Console.ReadKey();
-
-            //for (int p = str.Length; p > 0; p--)
-            //{
-            //    for (int i = 0; i <= str.Length - p; i++)
-            //    {
-            //        //if (p <= i)
-            //        //{
-            //        //    brk = true;
-            //        //    break;
-            //        //}
-            //        if (p == str.Length && i == 0)
-            //        {
-            //            if (!isPoly(str))
-            //            {
-            //                Console.WriteLine(poly);
-            //                brk = true;
-            //                break;
-            //            }
-            //            continue;
-            //        }
-            //        if (!isPoly(str.Substring(i).Remove(p-i)))
-            //        {
-            //            Console.WriteLine(poly);
-            //            brk = true;
-            //            break;
-            //        }
-            //    }
-            //    if (brk)
-            //        break;
-            //    --poly;
-            //    if (poly == 1)
-            //        brk = true;
-            //}
-            ////Console.WriteLine(poly);
-            //if (poly == 1)
-            //{
-            //    Console.WriteLine(-1);
-            //}
-            //Console.ReadKey();
+            
         }
         public static bool isPoly(string substr)
         {
@@ -88,7 +44,6 @@ namespace ConsoleApplication03
         {
             List<String> all = new List<string>();
             int len = 1;
-            //all.Add(str);
             while (len <= str.Length)
             {
                 for (int i = 0; i < str.Length && i+len <= str.Length; i++)

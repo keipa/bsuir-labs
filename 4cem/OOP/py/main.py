@@ -5,11 +5,14 @@ import pygame
 import miner
 import block
 from pygame import *
+import menu
 
 window_width = 800
 window_height = 640
 display_dict = (window_width, window_height)
 background_color = "#000000"
+platform_width = 32
+platform_height = 32
 
 
 class Camera(object):
@@ -49,11 +52,12 @@ def main():
     left = right = down = up = False
 
     entities = pygame.sprite.Group()
-    platforms = []
     entities.add(hero)
+    platforms = []
+
     level = [
-       "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
-       "b                                b",
+       "b-bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "-                                b",
        "b                       --       b",
        "b                                b",
        "b            --                  b",
@@ -96,8 +100,6 @@ def main():
        "----------------------------------",
        "----------------------------------",
        "----------------------------------"]
-    platform_width = 32
-    platform_height = 32
 
     x = y = 0
     for row in level:
@@ -152,7 +154,22 @@ def main():
             if e.type == KEYUP and e.key == K_DOWN:
                 down = False
             if e.type == KEYDOWN and e.key == K_g:
+                # menu.init()
                 hero.alive()
+            if e.key == K_ESCAPE:
+                # menu.initiate()
+                pygame.display.quit()
+                sys.exit()
+        if hero.fuel < 0:
+            hero.alive()
+            hero.fuel = 1000
+            font = pygame.font.Font(None, 38)
+            # выводим надпись
+            text = font.render(("There is no fuel. You died in the deep"), 1, (200, 150, 200))
+            screen.blit(text, (150, 100))
+            pygame.display.update()
+
+            time.wait(10000)
 
         screen.blit(bg, (0, 0))
         for e in entities:

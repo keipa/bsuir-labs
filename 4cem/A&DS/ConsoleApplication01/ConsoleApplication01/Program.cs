@@ -12,7 +12,9 @@ namespace ConsoleApplication01
         {
             int a = Convert.ToInt32(Console.ReadLine());
             
-            int[,] exclude = new int[a, a];
+            //int[,] exclude = new int[a, a];
+            ArrayList exclude = new ArrayList();
+            exclude.Add(new ArrayList())
             for (int i = 0; i < a; i++)
             {
                 for (int j = 0; j < a; j++)
