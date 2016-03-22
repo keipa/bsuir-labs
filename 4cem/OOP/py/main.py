@@ -45,9 +45,8 @@ def main():
 
     bg.fill(Color(background_color))
 
-    hero = miner.Miner(455, 455)
-    left = right = False
-    up = False
+    hero = miner.Miner(350, 255)
+    left = right = down = up = False
 
     entities = pygame.sprite.Group()
     platforms = []
@@ -65,8 +64,8 @@ def main():
        "b                                b",
        "b-                               b",
        "b                                b",
-       "b                            --- b",
-       "----------------- ----------------",
+       "b           b  g             --- b",
+       "----------------- ---- -----------",
        "----------------- ----------------",
        "----------------- ----------------",
        "----------------- ----------------",
@@ -77,7 +76,7 @@ def main():
        "----------------- ----------------",
        "----- --    ----- ----------------",
        "----- -- -------- ----------------",
-       "-----       ----  ---------------",
+       "-----       ----  ----------------",
        "-------- -- ----- ----------------",
        "-----    -- ----- ----------------",
        "----------------- ----------------",
@@ -111,6 +110,10 @@ def main():
                 pf = block.Border(x, y)
                 entities.add(pf)
                 platforms.append(pf)
+            if col == "g":
+                pf = block.ValueBlock(x, y)
+                entities.add(pf)
+                platforms.append(pf)
             x += platform_width
         y += platform_height
         x = 0
@@ -121,30 +124,42 @@ def main():
     camera = Camera(camera_configure, total_level_width, total_level_height)
     while 1:
         timer.tick(60)
+        hero.fuel -= 0.5
+        print hero.fuel
         for e in pygame.event.get():
             if e.type == QUIT:
                 raise (SystemExit, "QUIT")
             if e.type == KEYDOWN and e.key == K_UP:
                 up = True
+                hero.fuel -= 1.25
             if e.type == KEYUP and e.key == K_UP:
                 up = False
             if e.type == KEYDOWN and e.key == K_LEFT:
                 print "hero turn left"
                 left = True
+                hero.fuel -= 1
             if e.type == KEYDOWN and e.key == K_RIGHT:
                 print "hero turn right"
                 right = True
+                hero.fuel -= 1
             if e.type == KEYUP and e.key == K_RIGHT:
                 right = False
             if e.type == KEYUP and e.key == K_LEFT:
                 left = False
+            if e.type == KEYDOWN and e.key == K_DOWN:
+                down = True
+                hero.fuel -= 1.5
+            if e.type == KEYUP and e.key == K_DOWN:
+                down = False
+            if e.type == KEYDOWN and e.key == K_g:
+                hero.alive()
 
-        screen.blit(bg, (0, 0))      # Каждую итерацию необходимо всё перерисовывать
+        screen.blit(bg, (0, 0))
         for e in entities:
             screen.blit(e.image, camera.apply(e))
         camera.update(hero)  # центризируем камеру относительно персонажа
 
-        hero.update(left, right, up, platforms)
+        hero.update(left, right, up, down, platforms)
         pygame.display.update()
 
 if __name__ == "__main__":

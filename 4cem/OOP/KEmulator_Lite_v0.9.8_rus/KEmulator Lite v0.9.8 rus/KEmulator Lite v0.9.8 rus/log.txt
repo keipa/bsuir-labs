@@ -93,15 +93,14 @@ Custom.jar.getResourceStream: glomoRes/ru.lang (3676)
 Custom.jar.getResourceStream: a (100709)
 Custom.jar.getResourceStream: /logo.png (48353)
 Custom.jar.getResourceStream: intro.amr (42310)
->>sound loaded: /intro.amr javax.microedition.media.PlayerImpl@401369
+>>sound loaded: /intro.amr javax.microedition.media.PlayerImpl@ab444
 Custom.jar.getResourceStream: a (100709)
 Custom.jar.getResourceStream: /menuv.png (1874)
 Custom.jar.getResourceStream: a (100709)
 Custom.jar.getResourceStream: a (100709)
-openRecordStore SM1
-getRecord SM1_1
-Custom.jar.getResourceStream: /t2.png (7929)
-Custom.jar.getResourceStream: /fon2.png (16458)
+Custom.jar.getResourceStream: a (100709)
+Custom.jar.getResourceStream: /t1.png (7837)
+Custom.jar.getResourceStream: /fon1.png (12757)
 Custom.jar.getResourceStream: a (100709)
 Custom.jar.getResourceStream: /avatars.png (105)
 Custom.jar.getResourceStream: a (100709)
@@ -110,19 +109,11 @@ Custom.jar.getResourceStream: a (100709)
 Custom.jar.getResourceStream: /postr1.png (2049)
 Custom.jar.getResourceStream: /postr2.png (1639)
 Custom.jar.getResourceStream: /postr3.png (1318)
+Custom.jar.getResourceStream: death.amr (6918)
+>>sound loaded: /death.amr javax.microedition.media.PlayerImpl@a17378
+Custom.jar.getResourceStream: a (100709)
+Custom.jar.getResourceStream: a (100709)
 Custom.jar.getResourceStream: resurs.amr (422)
->>sound loaded: /resurs.amr javax.microedition.media.PlayerImpl@19fc25
-Custom.jar.getResourceStream: vibor.amr (614)
->>sound loaded: /vibor.amr javax.microedition.media.PlayerImpl@bcbc
-Custom.jar.getResourceStream: sdacha.amr (486)
->>sound loaded: /sdacha.amr javax.microedition.media.PlayerImpl@129b922
-Custom.jar.getResourceStream: menu.amr (166)
->>sound loaded: /menu.amr javax.microedition.media.PlayerImpl@1628303
-Custom.jar.getResourceStream: /fuel.png (3660)
-Custom.jar.getResourceStream: zapravka.amr (2726)
->>sound loaded: /zapravka.amr javax.microedition.media.PlayerImpl@b950d1
-Custom.jar.getResourceStream: /service.png (3906)
-Notify Destroyed
-Exiting Emulator
+>>sound loaded: /resurs.amr javax.microedition.media.PlayerImpl@a1320e
 Notify Destroyed
 Exiting Emulator
