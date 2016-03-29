@@ -1,14 +1,6 @@
-'''
-@author: avalanchy (at) google mail dot com
-@version: 0.1; python 2.7; pygame 1.9.2pre; SDL 1.2.14; MS Windows XP SP3
-@date: 2012-04-08
-@license: This document is under GNU GPL v3
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
-README on the bottom of document.
-
-@font: from http://www.dafont.com/coders-crux.font
-      more abuot license you can find in data/coders-crux/license.txt
-'''
 
 import pygame
 from pygame.locals import *
@@ -24,14 +16,14 @@ if not pygame.font.get_init():
 class Menu:
     lista = []
     pola = []
-    rozmiar_fontu = 32
+    font_size = 32
     font_path = 'data/coders_crux/coders_crux.ttf'
     font = pygame.font.Font
     dest_surface = pygame.Surface
     ilosc_pol = 0
-    kolor_tla = (51,51,51)
+    kolor_tla = (0 , 0,  0)
     kolor_tekstu =  (255,255, 255)
-    kolor_zaznaczenia = (237,28,36)
+    kolor_zaznaczenia = (25,250,36)
     pozycja_zaznaczenia = 0
     pozycja_wklejenia = (0,0)
     menu_width = 0
@@ -52,7 +44,7 @@ class Menu:
         self.kolor_zaznaczenia = selection
         
     def set_fontsize(self,font_size):
-        self.rozmiar_fontu = font_size
+        self.font_size = font_size
         
     def set_font(self, path):
         self.font_path = path
@@ -85,14 +77,14 @@ class Menu:
     def stworz_strukture(self):
         przesuniecie = 0
         self.menu_height = 0
-        self.font = pygame.font.Font(self.font_path, self.rozmiar_fontu)
+        self.font = pygame.font.Font(self.font_path, self.font_size)
         for i in xrange(self.ilosc_pol):
             self.pola.append(self.Pole())
             self.pola[i].tekst = self.lista[i]
             self.pola[i].pole = self.font.render(self.pola[i].tekst, 1, self.kolor_tekstu)
 
             self.pola[i].pole_rect = self.pola[i].pole.get_rect()
-            przesuniecie = int(self.rozmiar_fontu * 0.2)
+            przesuniecie = int(self.font_size * 0.2)
 
             height = self.pola[i].pole_rect.height
             self.pola[i].pole_rect.left = przesuniecie
@@ -116,47 +108,34 @@ class Menu:
 if __name__ == "__main__":
 
     import sys
-    surface = pygame.display.set_mode((800, 640)) #0,6671875 and 0,(6) of HD resoultion
-    surface.fill((51, 51, 51))
-
-    '''First you have to make an object of a *Menu class.
-    *init take 2 arguments. List of fields and destination surface.
-    Then you have a 4 configuration options:
-    *set_colors will set colors of menu (text, selection, background)
-    *set_fontsize will set size of font.
-    *set_font take a path to font you choose.
-    *move_menu is quite interseting. It is only option which you can use before 
-    and after *init statement. When you use it before you will move menu from 
-    center of your surface. When you use it after it will set constant coordinates. 
-    Uncomment every one and check what is result!
-    *draw will blit menu on the surface. Be carefull better set only -1 and 1 
-    arguments to move selection or nothing. This function will return actual 
-    position of selection.
-    *get_postion will return actual position of seletion. '''
+    surface = pygame.display.set_mode((800, 640))
+    pygame.display.set_caption("[DEEP DECENT]")  # Пишем в шапку
+    icon = pygame.image.load("icon.png")
+    pygame.display.set_icon(icon)
+    surface.fill((0, 0, 0))
     menu = Menu()#necessary
-    #menu.set_colors((255,255,255), (0,0,255), (0,0,0))#optional
     menu.set_fontsize(64)#optional
-    #menu.set_font('data/couree.fon')#optional
-    #menu.move_menu(100, 99)#optional
-    menu.init(['START', 'quit'], surface)#necessary
-    #menu.move_menu(0, 0)#optional
-    menu.draw()#necessary
-    
-    pygame.key.set_repeat(199,69)#(delay,interval)
+    menu.init(['[Depth Decent]', 'run custom', 'run generate', 'exit'], surface)
+    menu.draw()
+
+    pygame.key.set_repeat(199, 69)#(delay,interval)
     pygame.display.update()
     while 1:
         for event in pygame.event.get():
             if event.type == KEYDOWN:
                 if event.key == K_UP:
-                    menu.draw(-1) #here is the Menu class function
+                    menu.draw(-1)
                 if event.key == K_DOWN:
-                    menu.draw(1) #here is the Menu class function
+                    menu.draw(1)
                 if event.key == K_RETURN:
-                    if menu.get_position() == 0:
-                        main.main()
-                    if menu.get_position() == 1:#here is the Menu class function
+
+                    if menu.get_position() == 1:
+                        main.main("test")
+                    if menu.get_position() == 2:
+                        main.main("generate")
+                    if menu.get_position() == 3:
                         pygame.display.quit()
-                        sys.exit()                        
+                        sys.exit()
                 if event.key == K_ESCAPE:
                     pygame.display.quit()
                     sys.exit()
@@ -165,55 +144,3 @@ if __name__ == "__main__":
                 pygame.display.quit()
                 sys.exit()
         pygame.time.wait(8)
-
-    def initiate():
-        import sys
-        surface = pygame.display.set_mode((800, 640)) #0,6671875 and 0,(6) of HD resoultion
-        surface.fill((51, 51, 51))
-
-        '''First you have to make an object of a *Menu class.
-        *init take 2 arguments. List of fields and destination surface.
-        Then you have a 4 configuration options:
-        *set_colors will set colors of menu (text, selection, background)
-        *set_fontsize will set size of font.
-        *set_font take a path to font you choose.
-        *move_menu is quite interseting. It is only option which you can use before
-        and after *init statement. When you use it before you will move menu from
-        center of your surface. When you use it after it will set constant coordinates.
-        Uncomment every one and check what is result!
-        *draw will blit menu on the surface. Be carefull better set only -1 and 1
-        arguments to move selection or nothing. This function will return actual
-        position of selection.
-        *get_postion will return actual position of seletion. '''
-        menu = Menu()#necessary
-        #menu.set_colors((255,255,255), (0,0,255), (0,0,0))#optional
-        menu.set_fontsize(64)#optional
-        #menu.set_font('data/couree.fon')#optional
-        #menu.move_menu(100, 99)#optional
-        menu.init(['START', 'quit'], surface)#necessary
-        #menu.move_menu(0, 0)#optional
-        menu.draw()#necessary
-
-        pygame.key.set_repeat(199,69)#(delay,interval)
-        pygame.display.update()
-        while 1:
-            for event in pygame.event.get():
-                if event.type == KEYDOWN:
-                    if event.key == K_UP:
-                        menu.draw(-1) #here is the Menu class function
-                    if event.key == K_DOWN:
-                        menu.draw(1) #here is the Menu class function
-                    if event.key == K_RETURN:
-                        if menu.get_position() == 0:
-                            main.main()
-                        if menu.get_position() == 1:#here is the Menu class function
-                            pygame.display.quit()
-                            sys.exit()
-                    if event.key == K_ESCAPE:
-                        pygame.display.quit()
-                        sys.exit()
-                    pygame.display.update()
-                elif event.type == QUIT:
-                    pygame.display.quit()
-                    sys.exit()
-            pygame.time.wait(8)

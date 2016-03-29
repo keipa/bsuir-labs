@@ -20,7 +20,7 @@ import pygame, time
 # setting up constants
 PLAYING = 'playing'
 PAUSED = 'paused'
-STOPPED = 'stopped'
+STOPPED = 'stopped  '
 
 # These values are used in the anchor() method.
 NORTHWEST = 'northwest'
