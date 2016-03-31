@@ -4,6 +4,7 @@ from random import *
 def random_level():
     random_level = []
     level_width = 30
+    level_height = 150
     line = ""
     for _ in range(level_width):
         line += "b"
@@ -12,6 +13,7 @@ def random_level():
         line = ""
         line += "b"
         for j in range(level_width):
+            if i <= 10:
                 line += " "
             if i == 11:
                 if j == 15:
@@ -33,6 +35,7 @@ def random_level():
                 ground_or_nothing = randint(0, 100)
                 if ground_or_nothing < 10:
                     line += " "
+                if 10< ground_or_nothing < 20:
                     line += "f"
                 else:
                     line += "-"
@@ -41,7 +44,9 @@ def random_level():
                 ground_or_nothing = randint(0, 100)
                 if ground_or_nothing < 10:
                     line += " "
+                if 10 <= ground_or_nothing < 20:
                     line += "s"
+                if 20 <= ground_or_nothing < 30:
                     line += "f"
                 else:
                     line += "-"
@@ -49,8 +54,11 @@ def random_level():
                 ground_or_nothing = randint(0, 100)
                 if ground_or_nothing < 10:
                     line += " "
+                if 10 <= ground_or_nothing < 20:
                     line += "s"
+                if 20 <= ground_or_nothing < 30:
                     line += "f"
+                if 30 <= ground_or_nothing < 50:
                     line += "o"
                 else:
                     line += "-"
@@ -60,8 +68,11 @@ def random_level():
                     line += " "
                 if 10 < ground_or_nothing < 15:
                     line += "s"
+                if 15 <= ground_or_nothing < 20:
                     line += "f"
+                if 20 <= ground_or_nothing < 50:
                     line += "o"
+                if 50 <= ground_or_nothing < 60:
                     line += "m"
                 else:
                     line += "-"
@@ -69,10 +80,15 @@ def random_level():
                 ground_or_nothing = randint(0, 100)
                 if ground_or_nothing < 10:
                     line += " "
+                if 10 <= ground_or_nothing < 15:
                     line += "s"
+                if 15 <= ground_or_nothing < 20:
                     line += "f"
+                if 20 <= ground_or_nothing < 30:
                     line += "o"
+                if 50 <= ground_or_nothing < 70:
                     line += "m"
+                if 70 <= ground_or_nothing < 80:
                     line += "r"
                 else:
                     line += "-"
