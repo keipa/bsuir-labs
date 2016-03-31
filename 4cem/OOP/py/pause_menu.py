@@ -94,7 +94,7 @@ class Menu:
             left = self.pos[i].pole_rect.left - przesuniecie
             top = self.pos[i].pole_rect.top - przesuniecie
 
-            self.pos[i].zaznaczenie_rect = (left, top , width, height)
+            self.pos[i].zaznaczenie_rect = (left, top, width, height)
             if width > self.menu_width:
                     self.menu_width = width
             self.menu_height += height
@@ -104,7 +104,13 @@ class Menu:
         self.position_tuple = (x + mx, y + my)
 
 
-if __name__ == "__main__":
+def save_game_process(hero, platforms):
+    pass
+
+
+
+
+def main(hero, level):
 
     import sys
     pygame.init()
@@ -113,52 +119,35 @@ if __name__ == "__main__":
     icon = pygame.image.load("icon.png")
     pygame.display.set_icon(icon)
     surface.fill((0, 0, 0))
-    menu = Menu()
-    menu.set_font_size(64)
-    menu.init(['NEW GAME', 'LOAD', 'SETTINGS', 'EXIT'], surface)
+    my_menu = Menu()
+    my_menu.set_font_size(64)
+    my_menu.init(['CONTINUE', 'SAVE', 'EXIT'], surface)
     # menu.draw()
 
     pygame.key.set_repeat(199, 69)
     pygame.display.update()
-
     font = pygame.font.Font('data/coders_crux/coders_crux (5).ttf', 65)
     # выводим надпись
-    text = font.render(("DEEPDECENT"), 1, (117, 47, 13))
-    surface.blit(text, (170, 25))
+    text = font.render(("PAUSE"), 1, (170, 47, 13))
+    surface.blit(text, (290, 25))
     pygame.display.update()
     pygame.time.wait(150)
-    # выводим надпись
-    text = font.render(("DEEPDECENT"), 1, (190, 3, 10))
-    surface.blit(text, (170, 40))
-    pygame.display.update()
-    pygame.time.wait(150)
-    # выводим надпись
-    text = font.render(("DEEPDECENT"), 1, (230, 134, 11))
-    surface.blit(text, (170, 55))
-    pygame.display.update()
-    pygame.time.wait(150)
-    # выводим надпись
-    text = font.render(("DEEPDECENT"), 1, (252, 214, 27))
-    surface.blit(text, (170, 70))
-    pygame.display.update()
-    pygame.time.wait(400)
-    menu.draw()
+    my_menu.draw()
     pygame.display.update()
 
     while 1:
         for event in pygame.event.get():
             if event.type == KEYDOWN:
                 if event.key == K_UP:
-                    menu.draw(-1)
+                    my_menu.draw(-1)
                 if event.key == K_DOWN:
-                    menu.draw(1)
+                    my_menu.draw(1)
                 if event.key == K_RETURN:
-
-                    if menu.get_position() == 2:
-                        main.main("test")
-                    if menu.get_position() == 0:
-                        main.main("generate")
-                    if menu.get_position() == 3:
+                    if my_menu.get_position() == 1:
+                        save_game_process(hero, level)
+                    if my_menu.get_position() == 0:
+                        return
+                    if my_menu.get_position() == 2:
                         pygame.display.quit()
                         sys.exit()
                 if event.key == K_ESCAPE:
@@ -169,3 +158,4 @@ if __name__ == "__main__":
                 pygame.display.quit()
                 sys.exit()
         pygame.time.wait(8)
+

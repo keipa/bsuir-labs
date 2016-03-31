@@ -94,7 +94,7 @@ class Menu:
             left = self.pos[i].pole_rect.left - przesuniecie
             top = self.pos[i].pole_rect.top - przesuniecie
 
-            self.pos[i].zaznaczenie_rect = (left, top , width, height)
+            self.pos[i].zaznaczenie_rect = (left, top, width, height)
             if width > self.menu_width:
                     self.menu_width = width
             self.menu_height += height
@@ -104,8 +104,7 @@ class Menu:
         self.position_tuple = (x + mx, y + my)
 
 
-if __name__ == "__main__":
-
+def main(cash):
     import sys
     pygame.init()
     surface = pygame.display.set_mode((800, 640))
@@ -113,57 +112,54 @@ if __name__ == "__main__":
     icon = pygame.image.load("icon.png")
     pygame.display.set_icon(icon)
     surface.fill((0, 0, 0))
-    menu = Menu()
-    menu.set_font_size(64)
-    menu.init(['NEW GAME', 'LOAD', 'SETTINGS', 'EXIT'], surface)
+    my_menu = Menu()
+    my_menu.set_font_size(64)
+    my_menu.init(['FUEL ' +str(int(cash*0.75))+"$",
+                  'COOLING SYSTEM ' +str(int(cash*0.75))+"$",
+                  'ARMOR ' +str(int(cash*0.75))+"$",
+                  'CAPACITY ' +str(int(cash*0.75))+"$",
+                  'return'], surface)
     # menu.draw()
-
+    font = pygame.font.Font('data/coders_crux/coders_crux (5).ttf', 65)
     pygame.key.set_repeat(199, 69)
     pygame.display.update()
-
-    font = pygame.font.Font('data/coders_crux/coders_crux (5).ttf', 65)
-    # выводим надпись
-    text = font.render(("DEEPDECENT"), 1, (117, 47, 13))
-    surface.blit(text, (170, 25))
+    text = font.render("STORE", 1, (190, 3, 10))
+    surface.blit(text, (280, 40))
     pygame.display.update()
     pygame.time.wait(150)
-    # выводим надпись
-    text = font.render(("DEEPDECENT"), 1, (190, 3, 10))
-    surface.blit(text, (170, 40))
+    font = pygame.font.Font('data/coders_crux/coders_crux.ttf', 65)
     pygame.display.update()
-    pygame.time.wait(150)
-    # выводим надпись
-    text = font.render(("DEEPDECENT"), 1, (230, 134, 11))
-    surface.blit(text, (170, 55))
-    pygame.display.update()
-    pygame.time.wait(150)
-    # выводим надпись
-    text = font.render(("DEEPDECENT"), 1, (252, 214, 27))
-    surface.blit(text, (170, 70))
-    pygame.display.update()
-    pygame.time.wait(400)
-    menu.draw()
+    text = font.render("cash: " + str(cash)+"$", 1, (250, 250, 0))
+    surface.blit(text, (280, 500))
+    my_menu.draw()
     pygame.display.update()
 
     while 1:
         for event in pygame.event.get():
             if event.type == KEYDOWN:
                 if event.key == K_UP:
-                    menu.draw(-1)
+                    my_menu.draw(-1)
                 if event.key == K_DOWN:
-                    menu.draw(1)
+                    my_menu.draw(1)
                 if event.key == K_RETURN:
+                    if my_menu.get_position() == 0:
+                        return int(cash*0.25), "f"
+                    if my_menu.get_position() == 1:
+                        return int(cash*0.25), "c"
+                    if my_menu.get_position() == 2:
+                        return int(cash*0.25), "a"
+                    if my_menu.get_position() == 3:
+                        return int(cash*0.25), "g"
+                    if my_menu.get_position() == 4:
+                        return cash, "n"
 
-                    if menu.get_position() == 2:
-                        main.main("test")
-                    if menu.get_position() == 0:
-                        main.main("generate")
-                    if menu.get_position() == 3:
-                        pygame.display.quit()
-                        sys.exit()
                 if event.key == K_ESCAPE:
                     pygame.display.quit()
                     sys.exit()
+                font = pygame.font.Font('data/coders_crux/coders_crux.ttf', 65)
+                pygame.display.update()
+                text = font.render("cash: " + str(cash)+"$", 1, (250, 250, 0))
+                surface.blit(text, (280, 500))
                 pygame.display.update()
             elif event.type == QUIT:
                 pygame.display.quit()

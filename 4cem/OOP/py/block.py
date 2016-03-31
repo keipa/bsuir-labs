@@ -18,6 +18,8 @@ class Platform(sprite.Sprite):
         self.rect = Rect(x, y, PLATFORM_WIDTH, PLATFORM_HEIGHT)
         self.x = x
         self.y = y
+        self.value = 1
+        self.name = "-"
 
 
 class Border(sprite.Sprite):
@@ -28,16 +30,64 @@ class Border(sprite.Sprite):
         self.rect = Rect(x, y, PLATFORM_WIDTH, PLATFORM_HEIGHT)
         self.x = x
         self.y = y
+        self.name = "b"
 
-
-class ValueBlock(sprite.Sprite):
+class UpgradeStationBlock(sprite.Sprite):
     def __init__(self, x, y):
         sprite.Sprite.__init__(self)
         self.image = Surface((PLATFORM_WIDTH, PLATFORM_HEIGHT))
         self.image.fill(Color(PLATFORM_VALUE))
+        self.image = image.load("postr1.png")
         self.rect = Rect(x, y, PLATFORM_WIDTH, PLATFORM_HEIGHT)
         self.x = x
         self.y = y
+        self.name = "U"
+
+class UpdateTriggerBlock(sprite.Sprite):
+    def __init__(self, x, y):
+        sprite.Sprite.__init__(self)
+        self.image = Surface((PLATFORM_WIDTH, PLATFORM_HEIGHT))
+        self.image.fill(Color(PLATFORM_VALUE))
+        self.image = image.load("basic_ground_tileset.png")
+        self.rect = Rect(x, y, PLATFORM_WIDTH, PLATFORM_HEIGHT)
+        self.x = x
+        self.y = y
+        self.name = "u"
+
+class GasolineStationBlock(sprite.Sprite):
+    def __init__(self, x, y):
+        sprite.Sprite.__init__(self)
+        self.image = Surface((PLATFORM_WIDTH, PLATFORM_HEIGHT))
+        self.image.fill(Color(PLATFORM_VALUE))
+        self.image = image.load("postr2.png")
+        self.rect = Rect(x, y, PLATFORM_WIDTH, PLATFORM_HEIGHT)
+        self.x = x
+        self.y = y
+        self.name = "G"
+
+class FuelTriggerBlock(sprite.Sprite):
+    def __init__(self, x, y):
+        sprite.Sprite.__init__(self)
+        self.image = Surface((PLATFORM_WIDTH, PLATFORM_HEIGHT))
+        self.image.fill(Color(PLATFORM_VALUE))
+        self.image = image.load("basic_ground_tileset.png")
+        self.rect = Rect(x, y, PLATFORM_WIDTH, PLATFORM_HEIGHT)
+        self.x = x
+        self.y = y
+        self.name = "g"
+
+
+class WallpaperBlock(sprite.Sprite):
+    def __init__(self, x, y):
+        sprite.Sprite.__init__(self)
+        self.image = Surface((PLATFORM_WIDTH, PLATFORM_HEIGHT))
+        self.image.fill(Color(PLATFORM_VALUE))
+        self.image = image.load("background.png")
+
+        self.rect = Rect(x, y, PLATFORM_WIDTH, PLATFORM_HEIGHT)
+        self.x = x
+        self.y = y
+
 
 
 class FerrumBlock(sprite.Sprite):
@@ -50,6 +100,9 @@ class FerrumBlock(sprite.Sprite):
         self.rect = Rect(x, y, PLATFORM_WIDTH, PLATFORM_HEIGHT)
         self.x = x
         self.y = y
+        self.value = 50
+        self.name = "f"
+
 
 
 class SilverBlock(sprite.Sprite):
@@ -61,6 +114,9 @@ class SilverBlock(sprite.Sprite):
         self.rect = Rect(x, y, PLATFORM_WIDTH, PLATFORM_HEIGHT)
         self.x = x
         self.y = y
+        self.value = 150
+        self.name = "s"
+
 
 
 class MalahitBlock(sprite.Sprite):
@@ -72,6 +128,8 @@ class MalahitBlock(sprite.Sprite):
         self.rect = Rect(x, y, PLATFORM_WIDTH, PLATFORM_HEIGHT)
         self.x = x
         self.y = y
+        self.value = 800
+        self.name = "m"
 
 class RubyBlock(sprite.Sprite):
     def __init__(self, x, y):
@@ -82,6 +140,8 @@ class RubyBlock(sprite.Sprite):
         self.rect = Rect(x, y, PLATFORM_WIDTH, PLATFORM_HEIGHT)
         self.x = x
         self.y = y
+        self.value = 2500
+        self.name = "r"
 
 
 class AlienBlock(sprite.Sprite):
@@ -93,6 +153,7 @@ class AlienBlock(sprite.Sprite):
         self.rect = Rect(x, y, PLATFORM_WIDTH, PLATFORM_HEIGHT)
         self.x = x
         self.y = y
+        self.name = "a"
 
 class GoldBlock(sprite.Sprite):
     def __init__(self, x, y):
@@ -103,6 +164,9 @@ class GoldBlock(sprite.Sprite):
         self.rect = Rect(x, y, PLATFORM_WIDTH, PLATFORM_HEIGHT)
         self.x = x
         self.y = y
+        self.value = 100
+        self.name = "o"
+
 
 
 class NullBlock(sprite.Sprite):
@@ -115,4 +179,5 @@ class NullBlock(sprite.Sprite):
         self.rect = Rect(x, y, PLATFORM_WIDTH, PLATFORM_HEIGHT)
         self.x = x
         self.y = y
+        self.name = "0"
 
