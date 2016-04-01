@@ -179,12 +179,12 @@ def main(selected_level):
                 raise (SystemExit, "QUIT")
             if e.type == KEYDOWN and e.key == K_UP:
                 up = True
-                hero.current_fuel -= 1.25
+                hero.current_fuel -= 3
             if e.type == KEYUP and e.key == K_UP:
                 up = False
             if e.type == KEYDOWN and e.key == K_LEFT:
                 left = True
-                hero.current_fuel -= 4
+                hero.current_fuel -= 2
             if e.type == KEYDOWN and e.key == K_RIGHT:
                 right = True
                 hero.current_fuel -= 2
