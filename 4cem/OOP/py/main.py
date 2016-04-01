@@ -8,6 +8,7 @@ from menu import *
 import level_generation
 import interface
 import pause_menu
+import pickle
 
 window_width = 800
 window_height = 640
@@ -18,6 +19,7 @@ platform_height = 32
 level = []
 platforms = []
 entities = pygame.sprite.Group()
+
 
 def level_string(level):
     x = y = 0
@@ -118,7 +120,16 @@ def back_to_menu():
 
 
 def load_level_from_file():
-    pass
+    hero = miner.Miner(350, 265)
+    f = open('savings\hero.dd', 'wb')
+    pickle.dump(hero, f, 2)
+    f.close()
+    l = open('savings\level.dd', 'wb')
+    pickle.dump(platforms, l, 2)
+    l.close()
+    for each in platforms:
+        entities.add(each)
+    return hero
 
 
 def main(selected_level):
@@ -137,12 +148,17 @@ def main(selected_level):
     if selected_level == "generate":
         level = level_generation.random_level()
         level_string(level)
-
+        total_level_width = len(level[0]) * platform_width
+        total_level_height = len(level) * platform_height   # высоту
     if selected_level == "test":
         level = level_generation.custom_level()
         level_string(level)
+        total_level_width = len(level[0]) * platform_width
+        total_level_height = len(level) * platform_height   # высоту
     if selected_level == "load":
-        load_level_from_file()
+        hero = load_level_from_file()
+        total_level_height = 150 * platform_height
+        total_level_width = 45 * platform_width
 
     font = pygame.font.Font('data/coders_crux/coders_crux.ttf', 72)
     # выводим надпись
@@ -150,16 +166,14 @@ def main(selected_level):
     screen.blit(text, (300, 300))
     pygame.display.update()
 
-    total_level_width = len(level[0]) * platform_width
-    total_level_height = len(level) * platform_height   # высоту
+
     previous_speed = 0
     camera = Camera(camera_configure, total_level_width, total_level_height)
     pygame.mixer.music.load('ena.mp3')
     pygame.mixer.music.play(0)
     while 1:
 
-        timer.tick(60)
-        hero.current_fuel -= 0.1
+        timer.tick(100)
         for e in pygame.event.get():
             if e.type == QUIT:
                 raise (SystemExit, "QUIT")
@@ -170,36 +184,44 @@ def main(selected_level):
                 up = False
             if e.type == KEYDOWN and e.key == K_LEFT:
                 left = True
-                hero.current_fuel -= 1
+                hero.current_fuel -= 4
             if e.type == KEYDOWN and e.key == K_RIGHT:
                 right = True
-                hero.current_fuel -= 1
+                hero.current_fuel -= 2
             if e.type == KEYUP and e.key == K_RIGHT:
                 right = False
             if e.type == KEYUP and e.key == K_LEFT:
                 left = False
             if e.type == KEYDOWN and e.key == K_DOWN:
                 down = True
-                hero.current_fuel -= 1.5
+                hero.current_fuel -= 5
             if e.type == KEYUP and e.key == K_DOWN:
                 down = False
+            if e.type == KEYDOWN and e.key == K_t:
+                # menu.init()
+                if hero.teleports > 0:
+                    hero.alive()
+                    hero.teleports -= 1
             if e.type == KEYDOWN and e.key == K_g:
                 # menu.init()
-                hero.alive()
+                if hero.gasoline_tank > 0:
+                    hero.current_fuel += 750
+                    hero.gasoline_tank -= 1
             if e.type == KEYDOWN and e.key == K_ESCAPE:
 
                 pause_menu.main(hero, platforms)
         camera.update(hero)  # центризируем камеру относительно персонажа
         screen.blit(bg, (0, 0))
         if abs(previous_speed-hero.vertical_speed) >= 15:
-            hero.health -= 15
+            hero.health -= 50
         previous_speed = hero.vertical_speed
+
         for e in entities:
             screen.blit(e.image, camera.apply(e))
         hero.current_temperature = (hero.rect.y / 32)*2 /hero.cooling_index
-        if hero.current_temperature>hero.critical_temperature:
+        if hero.current_temperature > hero.critical_temperature:
             hero.health -= 0.4
-        if hero.current_fuel < 0 or hero.health < 0:
+        if hero.current_fuel < 0 or hero.health < 1:
             font = pygame.font.Font('data/coders_crux/coders_crux.ttf', 72)
             # выводим надпись
             text = font.render("You lose", 1, (250, 250, 250))
@@ -213,12 +235,21 @@ def main(selected_level):
             hero.health = 100
         deep = ((hero.rect.y / 32)-10)*2
         hero.update(left, right, up, down, platforms)
-        interface.update(screen, deep, hero.vertical_speed, hero.current_capacity,hero.max_capacity, hero.health, hero.max_health, hero.current_temperature, hero.current_fuel,hero.max_fuel, hero.cash)
+        interface.update(screen,
+                         deep,
+                         hero.vertical_speed,
+                         hero.current_capacity,
+                         hero.max_capacity,
+                         hero.health,
+                         hero.max_health,
+                         hero.current_temperature,
+                         hero.current_fuel,
+                         hero.max_fuel,
+                         hero.cash,
+                         hero.teleports,
+                         hero.gasoline_tank)
 
         pygame.display.update()
-
-
-
 
 
 if __name__ == "__main__":

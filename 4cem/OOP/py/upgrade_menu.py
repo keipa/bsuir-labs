@@ -114,23 +114,25 @@ def main(cash):
     surface.fill((0, 0, 0))
     my_menu = Menu()
     my_menu.set_font_size(64)
-    my_menu.init(['FUEL ' +str(int(cash*0.75))+"$",
-                  'COOLING SYSTEM ' +str(int(cash*0.75))+"$",
-                  'ARMOR ' +str(int(cash*0.75))+"$",
-                  'CAPACITY ' +str(int(cash*0.75))+"$",
+    my_menu.init(['FUEL ' + str(int(cash*0.75))+"$",
+                  'COOLING SYSTEM ' + str(int(cash*0.75))+"$",
+                  'ARMOR ' + str(int(cash*0.75))+"$",
+                  'CAPACITY ' + str(int(cash*0.75))+"$",
+                  'GASOLINE TANK ' +str(int(2500))+"$",
+                  'TELEPORT ' + str(int(5000))+"$",
                   'return'], surface)
     # menu.draw()
     font = pygame.font.Font('data/coders_crux/coders_crux (5).ttf', 65)
     pygame.key.set_repeat(199, 69)
     pygame.display.update()
     text = font.render("STORE", 1, (190, 3, 10))
-    surface.blit(text, (280, 40))
+    surface.blit(text, (280, 20))
     pygame.display.update()
     pygame.time.wait(150)
     font = pygame.font.Font('data/coders_crux/coders_crux.ttf', 65)
     pygame.display.update()
     text = font.render("cash: " + str(cash)+"$", 1, (250, 250, 0))
-    surface.blit(text, (280, 500))
+    surface.blit(text, (280, 550))
     my_menu.draw()
     pygame.display.update()
 
@@ -151,15 +153,20 @@ def main(cash):
                     if my_menu.get_position() == 3:
                         return int(cash*0.25), "g"
                     if my_menu.get_position() == 4:
+                        if cash > 2500:
+                            return int(cash - 2500), "g"
+                    if my_menu.get_position() == 5:
+                        if cash > 5000:
+                            return int(cash - 5000), "t"
+                    if my_menu.get_position() == 6:
                         return cash, "n"
-
                 if event.key == K_ESCAPE:
                     pygame.display.quit()
                     sys.exit()
                 font = pygame.font.Font('data/coders_crux/coders_crux.ttf', 65)
                 pygame.display.update()
                 text = font.render("cash: " + str(cash)+"$", 1, (250, 250, 0))
-                surface.blit(text, (280, 500))
+                surface.blit(text, (280, 550))
                 pygame.display.update()
             elif event.type == QUIT:
                 pygame.display.quit()

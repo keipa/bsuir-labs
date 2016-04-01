@@ -25,7 +25,7 @@
         <entry file="file://$PROJECT_DIR$/block.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="46" column="29" selection-start-line="46" selection-start-column="29" selection-end-line="46" selection-end-column="29" />
+              <caret line="42" column="18" selection-start-line="42" selection-start-column="18" selection-end-line="42" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -35,7 +35,7 @@
         <entry file="file://$PROJECT_DIR$/interface.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="12" column="35" selection-start-line="12" selection-start-column="35" selection-end-line="12" selection-end-column="35" />
+              <caret line="24" column="20" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="20" />
               <folding>
                 <element signature="e#47#67#0" expanded="true" />
               </folding>
@@ -47,9 +47,9 @@
         <entry file="file://$PROJECT_DIR$/menu.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="22" column="6" selection-start-line="22" selection-start-column="6" selection-end-line="22" selection-end-column="6" />
+              <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
               <folding>
-                <element signature="e#48#61#0" expanded="true" />
+                <element signature="e#47#60#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -59,7 +59,7 @@
         <entry file="file://$PROJECT_DIR$/miner.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="181" column="0" selection-start-line="181" selection-start-column="0" selection-end-line="181" selection-end-column="0" />
+              <caret line="192" column="28" selection-start-line="192" selection-start-column="28" selection-end-line="192" selection-end-column="28" />
               <folding>
                 <element signature="e#47#67#0" expanded="true" />
               </folding>
@@ -67,11 +67,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="48" column="34" selection-start-line="48" selection-start-column="34" selection-end-line="48" selection-end-column="34" />
+            <state vertical-scroll-proportion="0.024271844">
+              <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
               <folding>
                 <element signature="e#47#59#0" expanded="true" />
               </folding>
@@ -79,11 +79,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pause_menu.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="pause_menu.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pause_menu.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.56880736">
-              <caret line="111" column="0" selection-start-line="111" selection-start-column="0" selection-end-line="111" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="105" column="0" selection-start-line="105" selection-start-column="0" selection-end-line="105" selection-end-column="0" />
               <folding>
                 <element signature="e#48#61#0" expanded="true" />
               </folding>
@@ -95,7 +95,7 @@
         <entry file="file://$PROJECT_DIR$/upgrade_menu.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="147" column="50" selection-start-line="147" selection-start-column="50" selection-end-line="147" selection-end-column="50" />
+              <caret line="156" column="56" selection-start-line="156" selection-start-column="56" selection-end-line="156" selection-end-column="56" />
               <folding />
             </state>
           </provider>
@@ -105,7 +105,7 @@
         <entry file="file://$PROJECT_DIR$/level_generation.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="11" column="33" selection-start-line="11" selection-start-column="33" selection-end-line="11" selection-end-column="33" />
+              <caret line="139" column="44" selection-start-line="139" selection-start-column="44" selection-end-line="139" selection-end-column="44" />
               <folding />
             </state>
           </provider>
@@ -127,14 +127,14 @@
         <option value="$PROJECT_DIR$/main" />
         <option value="$PROJECT_DIR$/pyganim.py" />
         <option value="$PROJECT_DIR$/level.py" />
-        <option value="$PROJECT_DIR$/menu.py" />
-        <option value="$PROJECT_DIR$/interface.py" />
-        <option value="$PROJECT_DIR$/upgrade_menu.py" />
-        <option value="$PROJECT_DIR$/miner.py" />
         <option value="$PROJECT_DIR$/level_generation.py" />
-        <option value="$PROJECT_DIR$/main.py" />
-        <option value="$PROJECT_DIR$/block.py" />
+        <option value="$PROJECT_DIR$/upgrade_menu.py" />
         <option value="$PROJECT_DIR$/pause_menu.py" />
+        <option value="$PROJECT_DIR$/menu.py" />
+        <option value="$PROJECT_DIR$/block.py" />
+        <option value="$PROJECT_DIR$/interface.py" />
+        <option value="$PROJECT_DIR$/miner.py" />
+        <option value="$PROJECT_DIR$/main.py" />
       </list>
     </option>
   </component>
@@ -185,7 +185,7 @@
     <panes />
   </component>
   <component name="PropertiesComponent">
-    <property name="SearchEverywhereHistoryKey" value="up&#9;null&#9;null&#10;pa&#9;null&#9;null&#10;leve&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/OOP/py/level_generation.py&#10;le&#9;null&#9;null&#10;mine&#9;null&#9;null&#10;in&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/OOP/py/interface.py&#10;run&#9;ACTION&#9;ActivateRunToolWindow&#10;rub&#9;null&#9;null&#10;ru&#9;ACTION&#9;ActivateRunToolWindow&#10;m&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/OOP/py/miner.py&#10;sett&#9;ACTION&#9;WelcomeScreen.Settings&#10;plugin&#9;ACTION&#9;WelcomeScreen.Plugins&#10;set&#9;ACTION&#9;WelcomeScreen.Settings&#10;menu&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/OOP/py/menu.py&#10;full&#9;ACTION&#9;ToggleFullScreen&#10;new &#9;ACTION&#9;NewGroup&#10;ful&#9;ACTION&#9;ToggleFullScreen&#10;settings&#9;ACTION&#9;WelcomeScreen.Settings" />
+    <property name="SearchEverywhereHistoryKey" value="to&#9;ACTION&#9;ActivateTODOToolWindow&#10;up&#9;null&#9;null&#10;pa&#9;null&#9;null&#10;leve&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/OOP/py/level_generation.py&#10;le&#9;null&#9;null&#10;mine&#9;null&#9;null&#10;in&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/OOP/py/interface.py&#10;run&#9;ACTION&#9;ActivateRunToolWindow&#10;rub&#9;null&#9;null&#10;ru&#9;ACTION&#9;ActivateRunToolWindow&#10;m&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/OOP/py/miner.py&#10;sett&#9;ACTION&#9;WelcomeScreen.Settings&#10;plugin&#9;ACTION&#9;WelcomeScreen.Plugins&#10;set&#9;ACTION&#9;WelcomeScreen.Settings&#10;menu&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/OOP/py/menu.py&#10;full&#9;ACTION&#9;ToggleFullScreen&#10;new &#9;ACTION&#9;NewGroup&#10;ful&#9;ACTION&#9;ToggleFullScreen&#10;settings&#9;ACTION&#9;WelcomeScreen.Settings" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/menu.py" />
@@ -423,12 +423,12 @@
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20927319" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298969" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298122" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298122" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298122" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3274648" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3274648" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -505,7 +505,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#48#61#0" expanded="true" />
+            <element signature="e#47#60#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -543,7 +543,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="164" column="26" selection-start-line="164" selection-start-column="26" selection-end-line="164" selection-end-column="26" />
           <folding>
-            <element signature="e#48#61#0" expanded="true" />
+            <element signature="e#47#60#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -581,7 +581,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="165" column="26" selection-start-line="165" selection-start-column="26" selection-end-line="165" selection-end-column="26" />
           <folding>
-            <element signature="e#48#61#0" expanded="true" />
+            <element signature="e#47#60#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -885,15 +885,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pyganim.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.9805825">
-          <caret line="22" column="20" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/upgrade_menu.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="147" column="50" selection-start-line="147" selection-start-column="50" selection-end-line="147" selection-end-column="50" />
+        <state vertical-scroll-proportion="0.33333334">
+          <caret line="15" column="2" selection-start-line="15" selection-start-column="2" selection-end-line="15" selection-end-column="2" />
           <folding />
         </state>
       </provider>
@@ -901,15 +894,41 @@
     <entry file="file://$PROJECT_DIR$/level_generation.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="11" column="33" selection-start-line="11" selection-start-column="33" selection-end-line="11" selection-end-column="33" />
+          <caret line="139" column="44" selection-start-line="139" selection-start-column="44" selection-end-line="139" selection-end-column="44" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/miner.py">
+    <entry file="file://$PROJECT_DIR$/upgrade_menu.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="181" column="0" selection-start-line="181" selection-start-column="0" selection-end-line="181" selection-end-column="0" />
+          <caret line="156" column="56" selection-start-line="156" selection-start-column="56" selection-end-line="156" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pause_menu.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="105" column="0" selection-start-line="105" selection-start-column="0" selection-end-line="105" selection-end-column="0" />
+          <folding>
+            <element signature="e#48#61#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/block.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="42" column="18" selection-start-line="42" selection-start-column="18" selection-end-line="42" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interface.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="24" column="20" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="20" />
           <folding>
             <element signature="e#47#67#0" expanded="true" />
           </folding>
@@ -919,47 +938,29 @@
     <entry file="file://$PROJECT_DIR$/menu.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="22" column="6" selection-start-line="22" selection-start-column="6" selection-end-line="22" selection-end-column="6" />
+          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
           <folding>
-            <element signature="e#48#61#0" expanded="true" />
+            <element signature="e#47#60#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/interface.py">
+    <entry file="file://$PROJECT_DIR$/miner.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="12" column="35" selection-start-line="12" selection-start-column="35" selection-end-line="12" selection-end-column="35" />
+          <caret line="192" column="28" selection-start-line="192" selection-start-column="28" selection-end-line="192" selection-end-column="28" />
           <folding>
             <element signature="e#47#67#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/block.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="46" column="29" selection-start-line="46" selection-start-column="29" selection-end-line="46" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="48" column="34" selection-start-line="48" selection-start-column="34" selection-end-line="48" selection-end-column="34" />
+        <state vertical-scroll-proportion="0.024271844">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
           <folding>
             <element signature="e#47#59#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pause_menu.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.56880736">
-          <caret line="111" column="0" selection-start-line="111" selection-start-column="0" selection-end-line="111" selection-end-column="0" />
-          <folding>
-            <element signature="e#48#61#0" expanded="true" />
           </folding>
         </state>
       </provider>

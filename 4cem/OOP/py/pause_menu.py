@@ -5,6 +5,7 @@
 import pygame
 from pygame.locals import *
 import main
+import pickle
 
 if not pygame.display.get_init():
     pygame.display.init()
@@ -105,7 +106,13 @@ class Menu:
 
 
 def save_game_process(hero, platforms):
-    pass
+
+    f = open('savings\level.dd', 'wb')
+    pickle.dump(platforms, f, 2)
+    f.close()
+    h = open('savings\hero.dd', 'wb')
+    pickle.dump(hero, h, 2)
+    h.close()
 
 
 

@@ -56,6 +56,8 @@ class Miner(sprite.Sprite):
         self.max_health = 100
         self.health = self.max_health
         self.overheat = 300
+        self.teleports = 1
+        self.gasoline_tank = 1
 
         temp_animation = []
         for frame in ANIMATION_UP:
@@ -95,18 +97,18 @@ class Miner(sprite.Sprite):
             return True
 
     def update(self, left, right, up, down, platforms):
-        nullImage = image.load("null.png")
+        nullimage = image.load("null.png")
         if up:
             if self.vertical_speed > -10:
                 self.vertical_speed += -JUMP_POWER
-            self.image = nullImage
+            self.image = nullimage
             self.boltAnimUp.blit(self.image, (0, 0))
             self.digging_vertical = False
             self.digging_horizontal = False
 
         if left:
 
-            self.horizontal_speed = -MOVE_SPEED # Лево = x- n
+            self.horizontal_speed = -MOVE_SPEED
             self.image.fill(Color(COLOR))
             self.image = image.load("miner_l.png")
             if self.onGround and not up:
@@ -118,7 +120,7 @@ class Miner(sprite.Sprite):
                 self.digging_horizontal = False
 
         if right:
-            self.horizontal_speed = MOVE_SPEED # Право = x + n
+            self.horizontal_speed = MOVE_SPEED
             self.image.fill(Color(COLOR))
             self.image = image.load("miner_r.png")
             if self.onGround and not up:
@@ -136,10 +138,9 @@ class Miner(sprite.Sprite):
                 if self.can_i_digg():
                     self.digging_vertical = True
 
-            # platforms[]
-        if not(left or right or up): # стоим, когда нет указаний идти
+        if not(left or right or up):
             self.horizontal_speed = 0
-            self.image = nullImage
+            self.image = nullimage
             self.boltAnimStay.blit(self.image, (0, 0))
             # self.image = image.load("miner_stay.png")
             # if not up:
@@ -160,13 +161,19 @@ class Miner(sprite.Sprite):
                 if vertical_speed > 0:
                     if not isinstance(p, block.NullBlock):
                         if isinstance(p, block.FuelTriggerBlock):
-                            percentage_lost_fuel = self.current_fuel/self.max_fuel
-                            percentage_lost_health = self.health/100
-                            if self.current_fuel/self.max_fuel <= 0.95:
-                                self.current_fuel = self.max_fuel
-                                self.current_capacity = 0
-                                self.health = self.max_health
-                                self.cash -= round(percentage_lost_fuel*200)
+                            # percentage_lost_fuel = self.current_fuel/self.max_fuel
+                            # percentage_lost_health = self.health/100
+                            if self.current_fuel/self.max_fuel <= 0.99 or self.health/self.max_fuel <= 0.99:
+                                # self.current_fuel = self.max_fuel
+                                if self.current_fuel < self.max_fuel:
+                                    self.current_fuel += 10
+                                if self.current_capacity > 0:
+                                    self.current_capacity -= 1
+                                # self.current_capacity = 0
+                                if self.health < self.max_health:
+                                    self.health += 1
+
+                                # self.cash -= round(percentage_lost_fuel*200)
                         if isinstance(p, block.UpdateTriggerBlock):
                             data = upgrade_menu.main(self.cash)
                             self.cash = data[0]
@@ -178,9 +185,12 @@ class Miner(sprite.Sprite):
                                 self.max_capacity *= 2
                             if data[1] == "c":
                                 self.cooling_index += 1
+                            if data[1] == "g":
+                                self.gasoline_tank += 1
+                            if data[1] == "t":
+                                self.teleports += 1
                             self.alive()
-
-                                # self.cash -= round(percentage_lost_health*1000)
+                            # self.cash -= round(percentage_lost_health*1000)
                             # print p.
                         if self.digging_vertical and \
                                 not isinstance(p, block.Border) and \

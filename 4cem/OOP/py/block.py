@@ -32,6 +32,7 @@ class Border(sprite.Sprite):
         self.y = y
         self.name = "b"
 
+
 class UpgradeStationBlock(sprite.Sprite):
     def __init__(self, x, y):
         sprite.Sprite.__init__(self)
@@ -42,6 +43,7 @@ class UpgradeStationBlock(sprite.Sprite):
         self.x = x
         self.y = y
         self.name = "U"
+
 
 class UpdateTriggerBlock(sprite.Sprite):
     def __init__(self, x, y):
@@ -54,6 +56,7 @@ class UpdateTriggerBlock(sprite.Sprite):
         self.y = y
         self.name = "u"
 
+
 class GasolineStationBlock(sprite.Sprite):
     def __init__(self, x, y):
         sprite.Sprite.__init__(self)
@@ -64,6 +67,7 @@ class GasolineStationBlock(sprite.Sprite):
         self.x = x
         self.y = y
         self.name = "G"
+
 
 class FuelTriggerBlock(sprite.Sprite):
     def __init__(self, x, y):
@@ -89,7 +93,6 @@ class WallpaperBlock(sprite.Sprite):
         self.y = y
 
 
-
 class FerrumBlock(sprite.Sprite):
     def __init__(self, x, y):
         sprite.Sprite.__init__(self)
@@ -102,7 +105,6 @@ class FerrumBlock(sprite.Sprite):
         self.y = y
         self.value = 50
         self.name = "f"
-
 
 
 class SilverBlock(sprite.Sprite):
@@ -118,7 +120,6 @@ class SilverBlock(sprite.Sprite):
         self.name = "s"
 
 
-
 class MalahitBlock(sprite.Sprite):
     def __init__(self, x, y):
         sprite.Sprite.__init__(self)
@@ -130,6 +131,7 @@ class MalahitBlock(sprite.Sprite):
         self.y = y
         self.value = 800
         self.name = "m"
+
 
 class RubyBlock(sprite.Sprite):
     def __init__(self, x, y):
@@ -155,6 +157,7 @@ class AlienBlock(sprite.Sprite):
         self.y = y
         self.name = "a"
 
+
 class GoldBlock(sprite.Sprite):
     def __init__(self, x, y):
         sprite.Sprite.__init__(self)
@@ -168,7 +171,6 @@ class GoldBlock(sprite.Sprite):
         self.name = "o"
 
 
-
 class NullBlock(sprite.Sprite):
     def __init__(self, x, y):
         sprite.Sprite.__init__(self)
@@ -180,4 +182,3 @@ class NullBlock(sprite.Sprite):
         self.x = x
         self.y = y
         self.name = "0"
-

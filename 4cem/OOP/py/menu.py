@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-
 import pygame
 from pygame.locals import *
 import main
@@ -20,7 +19,7 @@ class Menu:
     font_path = 'data/coders_crux/coders_crux.ttf'
     font = pygame.font.Font
     dest_surface = pygame.Surface
-    ilosc_pol = 0
+    count_pol = 0
     color_background = (0, 0, 0)
     color_text = (252, 214, 27)
     color_back_of_text = (190, 3, 10)
@@ -55,44 +54,44 @@ class Menu:
     def init(self, list, dest_surface):
         self.list = list
         self.dest_surface = dest_surface
-        self.ilosc_pol = len(self.list)
-        self.stworz_strukture()
+        self.count_pol = len(self.list)
+        self.create_structure()
         
-    def draw(self, przesun=0):
-        if przesun:
-            self.current_position += przesun
+    def draw(self, moving=0):
+        if moving:
+            self.current_position += moving
             if self.current_position == -1:
-                self.current_position = self.ilosc_pol - 1
-            self.current_position %= self.ilosc_pol
+                self.current_position = self.count_pol - 1
+            self.current_position %= self.count_pol
         menu = pygame.Surface((self.menu_width, self.menu_height))
         menu.fill(self.color_background)
         selected_rect= self.pos[self.current_position].zaznaczenie_rect
         pygame.draw.rect(menu, self.color_back_of_text, selected_rect)
 
-        for i in xrange(self.ilosc_pol):
+        for i in xrange(self.count_pol):
             menu.blit(self.pos[i].pole, self.pos[i].pole_rect)
         self.dest_surface.blit(menu, self.position_tuple)
         return self.current_position
 
-    def stworz_strukture(self):
+    def create_structure(self):
         self.menu_height = 0
         self.font = pygame.font.Font(self.font_path, self.font_size)
-        for i in xrange(self.ilosc_pol):
+        for i in xrange(self.count_pol):
             self.pos.append(self.rectang())
             self.pos[i].tekst = self.list[i]
             self.pos[i].pole = self.font.render(self.pos[i].tekst, 1, self.color_text)
 
             self.pos[i].pole_rect = self.pos[i].pole.get_rect()
-            przesuniecie = int(self.font_size * 0.2)
+            shift = int(self.font_size * 0.2)
 
             height = self.pos[i].pole_rect.height
-            self.pos[i].pole_rect.left = przesuniecie
-            self.pos[i].pole_rect.top = przesuniecie + (przesuniecie * 2 + height) * i
+            self.pos[i].pole_rect.left = shift
+            self.pos[i].pole_rect.top = shift + (shift * 2 + height) * i
 
-            width = self.pos[i].pole_rect.width + przesuniecie * 2
-            height = self.pos[i].pole_rect.height + przesuniecie * 2
-            left = self.pos[i].pole_rect.left - przesuniecie
-            top = self.pos[i].pole_rect.top - przesuniecie
+            width = self.pos[i].pole_rect.width + shift * 2
+            height = self.pos[i].pole_rect.height + shift * 2
+            left = self.pos[i].pole_rect.left - shift
+            top = self.pos[i].pole_rect.top - shift
 
             self.pos[i].zaznaczenie_rect = (left, top , width, height)
             if width > self.menu_width:
@@ -156,6 +155,8 @@ if __name__ == "__main__":
 
                     if menu.get_position() == 2:
                         main.main("test")
+                    if menu.get_position() == 1:
+                        main.main("load")
                     if menu.get_position() == 0:
                         main.main("generate")
                     if menu.get_position() == 3:
