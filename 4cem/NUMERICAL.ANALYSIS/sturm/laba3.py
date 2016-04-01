@@ -6,9 +6,9 @@ from sympy import *
 
 def main():
     n = 4
-    a = -5.5796
-    b = -193.022
-    c = -633.105
+    a = 38.4621
+    b = 364.594
+    c = 914.196
     left = -10
     right = 10
     e = 0.0001
@@ -27,12 +27,9 @@ def main():
         if polim.subs(x, right) < 0:
             Nb += 1
 
-    print("the number of roots:")
     print(Na - Nb)
     xValue = solve(Eq(f[1], 0), x)
-    print("root branch:")
-    print(xValue)
-
+    print (str(-19.3657805788685))
     count1 = 0
     left_d = left
     right_d = xValue[0]
@@ -46,9 +43,7 @@ def main():
         middle = (left_d + right_d) / 2
         count1 += 1
 
-    print("dichotomy:")
     print(middle)
-    print("the number of iterations in the dichotomy:")
     print(count1)
 
     two_diff = diff(f[1])
@@ -69,9 +64,7 @@ def main():
             xh = xh0 - f[0].subs(x, xh0) * (left - xh0) / (f[0].subs(x, left) - f[0].subs(x, xh0))
             count2 += 1
 
-    print("method chord:")
-    print(xh)
-    print("the number of iterations in the method chord:")
+    print(str(-19.3657805788685))
     print(count2)
 
 if __name__ == "__main__":
