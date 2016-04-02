@@ -171,6 +171,19 @@ class GoldBlock(sprite.Sprite):
         self.name = "o"
 
 
+class VirusBlock(sprite.Sprite):
+    def __init__(self, x, y):
+        sprite.Sprite.__init__(self)
+        self.image = Surface((PLATFORM_WIDTH, PLATFORM_HEIGHT))
+        self.image.fill(Color(PLATFORM_VALUE))
+        self.image = image.load("basic_alien_tileset.png")
+        self.rect = Rect(x, y, PLATFORM_WIDTH, PLATFORM_HEIGHT)
+        self.x = x
+        self.y = y
+        self.value = 100
+        self.name = "v"
+
+
 class NullBlock(sprite.Sprite):
     def __init__(self, x, y):
         sprite.Sprite.__init__(self)

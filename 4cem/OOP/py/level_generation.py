@@ -20,6 +20,8 @@ def random_level():
                     line += "G"
                 if j == 5:
                     line += "U"
+                if j == 25:
+                    line += "v"
                 else:
                     line += " "
             if i == 12:
@@ -110,7 +112,7 @@ def custom_level():
        "b            --                  b",
        "b                                b",
        "b-                               b",
-       "b                                b",
+       "b                     v          b",
        "b                   ----     --- b",
        "b                                b",
        "b-                               b",

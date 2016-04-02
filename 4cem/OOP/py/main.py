@@ -19,6 +19,8 @@ platform_height = 32
 level = []
 platforms = []
 entities = pygame.sprite.Group()
+screen = pygame.display.set_mode(display_dict)  # Создаем окошко
+bg = Surface(display_dict)  # Создание видимой поверхности
 
 
 def level_string(level):
@@ -69,8 +71,8 @@ def level_string(level):
                 pf = block.GoldBlock(x, y)
                 entities.add(pf)
                 platforms.append(pf)
-            if col == "w":
-                pf = block.WallpaperBlock(x, y)
+            if col == "v":
+                pf = block.VirusBlock(x, y)
                 entities.add(pf)
                 platforms.append(pf)
             else:
@@ -80,6 +82,7 @@ def level_string(level):
             x += platform_width
         y += platform_height
         x = 0
+
 
 class Camera(object):
     def __init__(self, camera_func, width, height):
@@ -132,11 +135,89 @@ def load_level_from_file():
     return hero
 
 
+
+
+
+def when_took_a_virus():
+        screen.blit(bg, (0, 0))
+        font = pygame.font.Font('data/coders_crux/coders_crux.ttf', 42)
+        # выводим надпись
+        text_1 = font.render("You tooked an alien technology", 1, (250, 250, 250))
+        text_2 = font.render("it started to infect your ship", 1, (250, 250, 250))
+        text_4 = font.render("be careful...", 1, (250, 250, 250))
+        text_3 = font.render("bring it to base NOW!", 1, (250, 250, 250))
+        lose_image = image.load("rect.png")
+        screen.blit(text_1, (180, 300))
+        pygame.display.update()
+        time.wait(1000)
+        screen.blit(text_2, (180, 320))
+        pygame.display.update()
+        time.wait(1000)
+        screen.blit(text_3, (180, 340))
+        pygame.display.update()
+        time.wait(1000)
+        screen.blit(text_4, (180, 360))
+        pygame.display.update()
+        time.wait(5000)
+
+
+def when_you_win_the_game():
+        screen.blit(bg, (0, 0))
+
+        font = pygame.font.Font('data/coders_crux/coders_crux.ttf', 42)
+        # выводим надпись
+        text_1 = font.render("Nice job", 1, (250, 250, 250))
+        text_2 = font.render("The end is so close", 1, (250, 250, 250))
+        text_3 = font.render("But it is the end?", 1, (250, 250, 250))
+        text_4 = font.render("Answer waits you in the deep...", 1, (250, 250, 250))
+        text_5 = font.render("...in DEEP DECENT", 1, (0, 250, 0))
+        screen.blit(text_1, (180, 300))
+        pygame.display.update()
+        time.wait(2000)
+        screen.blit(text_2, (180, 320))
+        pygame.display.update()
+        time.wait(2000)
+        screen.blit(text_3, (180, 340))
+        pygame.display.update()
+        time.wait(2000)
+        screen.blit(text_4, (180, 360))
+        pygame.display.update()
+        time.wait(2000)
+        screen.blit(text_5, (180, 380))
+        pygame.display.update()
+        time.wait(5000)
+
+
+def when_you_start_the_game():
+        font = pygame.font.Font('data/coders_crux/coders_crux.ttf', 42)
+        # выводим надпись
+        text_1 = font.render("Hello", 1, (250, 250, 250))
+        text_2 = font.render("Your mission is simple", 1, (250, 250, 250))
+        text_3 = font.render("Find the OBJECT", 1, (250, 250, 250))
+        text_4 = font.render("It waits you in the deep...", 1, (250, 250, 250))
+        text_5 = font.render("...in DEEP DECENT", 1, (250, 250, 0))
+        lose_image = image.load("rect.png")
+        screen.blit(text_1, (180, 300))
+        pygame.display.update()
+        time.wait(2000)
+        screen.blit(text_2, (180, 320))
+        pygame.display.update()
+        time.wait(2000)
+        screen.blit(text_3, (180, 340))
+        pygame.display.update()
+        time.wait(2000)
+        screen.blit(text_4, (180, 360))
+        pygame.display.update()
+        time.wait(2000)
+        screen.blit(text_5, (180, 380))
+        pygame.display.update()
+        time.wait(5000)
+
+
 def main(selected_level):
     pygame.init()  # Инициация PyGame, обязательная строчка
     screen = pygame.display.set_mode(display_dict)  # Создаем окошко
     timer = pygame.time.Clock()
-    bg = Surface(display_dict)  # Создание видимой поверхности
     bg.fill(Color(background_color))
     hero = miner.Miner(350, 265)
     left = right = down = up = False
@@ -145,6 +226,11 @@ def main(selected_level):
     # b - border
     # g - gasoline
     # - - ground
+    font = pygame.font.Font('data/coders_crux/coders_crux.ttf', 72)
+    # выводим надпись
+    text = font.render("loading...", 1, (250, 250, 250))
+    screen.blit(text, (300, 300))
+    pygame.display.update()
     if selected_level == "generate":
         level = level_generation.random_level()
         level_string(level)
@@ -159,12 +245,9 @@ def main(selected_level):
         hero = load_level_from_file()
         total_level_height = 150 * platform_height
         total_level_width = 45 * platform_width
+    screen.blit(bg, (0, 0))
 
-    font = pygame.font.Font('data/coders_crux/coders_crux.ttf', 72)
-    # выводим надпись
-    text = font.render("loading...", 1, (250, 250, 250))
-    screen.blit(text, (300, 300))
-    pygame.display.update()
+    when_you_start_the_game()
 
 
     previous_speed = 0
@@ -234,7 +317,10 @@ def main(selected_level):
             hero.current_fuel = 1000
             hero.health = 100
         deep = ((hero.rect.y / 32)-10)*2
-        hero.update(left, right, up, down, platforms)
+        if hero.isinfected:
+            hero.update(right, left, down, up, platforms)
+        else:
+            hero.update(left, right, up, down, platforms)
         interface.update(screen,
                          deep,
                          hero.vertical_speed,

@@ -115,8 +115,6 @@ def save_game_process(hero, platforms):
     h.close()
 
 
-
-
 def main(hero, level):
 
     import sys

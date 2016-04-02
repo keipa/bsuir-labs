@@ -1,0 +1,9 @@
+﻿формируем ряд штурма
+отделяем корни 
+
+применяем нужный метод
+метод хорд - https://www.youtube.com/watch?v=O8GiXdsZmhs
+метод делениЯ отрезка пополам - https://www.youtube.com/watch?v=AVJ6kfyxVBY
+
+
+  

@@ -154,6 +154,8 @@ model small
         fstp x
         fld x
         fld b
+        fld eps
+        fadd
         fsub
 
         ftst
