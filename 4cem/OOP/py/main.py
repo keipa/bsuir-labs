@@ -142,7 +142,7 @@ def when_took_a_virus():
         screen.blit(bg, (0, 0))
         font = pygame.font.Font('data/coders_crux/coders_crux.ttf', 42)
         # выводим надпись
-        text_1 = font.render("You tooked an alien technology", 1, (250, 250, 250))
+        text_1 = font.render("You tooked an strange technology", 1, (250, 250, 250))
         text_2 = font.render("it started to infect your ship", 1, (250, 250, 250))
         text_4 = font.render("be careful...", 1, (250, 250, 250))
         text_3 = font.render("bring it to base NOW!", 1, (250, 250, 250))

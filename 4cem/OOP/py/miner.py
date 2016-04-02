@@ -58,6 +58,7 @@ class Miner(sprite.Sprite):
         self.overheat = 300
         self.teleports = 1
         self.gasoline_tank = 1
+        self.isinfected = False
 
         temp_animation = []
         for frame in ANIMATION_UP:
@@ -161,12 +162,17 @@ class Miner(sprite.Sprite):
                 if vertical_speed > 0:
                     if not isinstance(p, block.NullBlock):
                         if isinstance(p, block.FuelTriggerBlock):
+                            if self.isinfected:
+                                main.when_you_win_the_game()
+                                self.isinfected = False
                             # percentage_lost_fuel = self.current_fuel/self.max_fuel
                             # percentage_lost_health = self.health/100
                             if self.current_fuel/self.max_fuel <= 0.99 or self.health/self.max_fuel <= 0.99:
                                 # self.current_fuel = self.max_fuel
                                 if self.current_fuel < self.max_fuel:
-                                    self.current_fuel += 10
+                                    self.current_fuel += 30
+				    if self.current_fuel>self.max_fuel:
+					self.current_fuel = self.max_fuel
                                 if self.current_capacity > 0:
                                     self.current_capacity -= 1
                                 # self.current_capacity = 0
@@ -202,6 +208,12 @@ class Miner(sprite.Sprite):
                             self.cash += p.value
                             if not isinstance(p, block.Platform):
                                 self.current_capacity += 1
+                            if isinstance(p, block.VirusBlock):
+                                self.isinfected = True
+                                print "I infected"
+                                self.current_capacity = self.max_capacity
+                                main.when_took_a_virus()
+
                             main.delete_level_particles(p)
                         else:
                             self.rect.bottom = p.rect.top
@@ -224,6 +236,12 @@ class Miner(sprite.Sprite):
                             self.cash += p.value
                             if not isinstance(p, block.Platform):
                                 self.current_capacity += 1
+                            if isinstance(p, block.VirusBlock):
+                                self.isinfected = True
+                                print "I infected"
+                                self.current_capacity = self.max_capacity
+                                main.when_took_a_virus()
+
                             main.delete_level_particles(p)
                 if horizontal_speed < 0:
                     if not isinstance(p, block.NullBlock):
@@ -238,6 +256,11 @@ class Miner(sprite.Sprite):
                             self.cash += p.value
                             if not isinstance(p, block.Platform):
                                 self.current_capacity += 1
+                            if isinstance(p, block.VirusBlock):
+                                self.isinfected = True
+                                print "I infected"
+                                self.current_capacity = self.max_capacity
+                                main.when_took_a_virus()
                             main.delete_level_particles(p)
 
                 # if isinstance(p, block.NullBlock):
