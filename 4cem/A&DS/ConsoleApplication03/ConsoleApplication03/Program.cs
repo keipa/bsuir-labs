@@ -9,63 +9,44 @@ namespace ConsoleApplication03
     {
         static void Main(string[] args)
         {
-
+            // рассматриваю три случая abacaba(len-1) - aaaaaaa(1) - asdfghj(len)
+            int isFirstPoly = 0;
             string str = Console.ReadLine();
-            int poly = str.Length;
-            bool brk = false;
-            List<string> sub = showSubstrings(str);
-            for (int i = sub.Count-1; i > 0;i-- )
+            int len = str.Length;
+            bool brk = true;
+            for (int i = 0; i < len / 2; i++)
             {
-                if (!isPoly(sub[i]))
+                if (str[i] != str[len - i - 1])
                 {
-                    Console.WriteLine(sub[i].Length);
-                    brk = true;
+                   ++isFirstPoly;
+                }
+                else if ((str[i] == str[len - i - 1]) && (str[i] != str[i + 1]))
+                {
+                    --isFirstPoly;
+                }
+
+                else if ((str[i] == str[len - i - 1]) && (str[i] == str[i + 1]))
+                {
+                    brk = false;
                     break;
                 }
             }
-            if (!brk)
+
+            if (isFirstPoly > 0)
+            {
+                Console.WriteLine(len);
+            }
+            else if (isFirstPoly < 0)
+            {
+                Console.WriteLine(len - 1);
+            }
+            else if (!brk || len == 1)
             {
                 Console.WriteLine(-1);
             }
-            
-        }
-        public static bool isPoly(string substr)
-        {
-            if (Reverse(substr) == substr)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-        public static List<String> showSubstrings(string str)
-        {
-            List<String> all = new List<string>();
-            int len = 1;
-            while (len <= str.Length)
-            {
-                for (int i = 0; i < str.Length && i+len <= str.Length; i++)
-                {
-                    all.Add(str.Substring(i, len));
-                }
-
-                ++len;
-            }
-                return all;
 
         }
-        public static string Reverse(string text)
-        {
-            char[] cArray = text.ToCharArray();
-            string reverse = String.Empty;
-            for (int i = cArray.Length - 1; i > -1; i--)
-            {
-                reverse += cArray[i];
-            }
-            return reverse;
-        }
+       
 
-    }
+        }
 }
