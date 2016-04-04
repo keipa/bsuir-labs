@@ -16,8 +16,11 @@ model small
            STRING_TAB DB 9, '$'
            STRING_D db 10,13, ' D  = $'
            STRING_CONT db 10,13, ' Continue y/n?    $'
+           STRING_SUCC db 10,13, ' SUCCESS!    $'
+
            STRING_NOTKVADR db 10,13, ' Format error. Enter correct format     $'
 
+           STRING_STACKOVERFLOW db 10,13, ' Error! check the input data or decrease it $'
 
                                                                                 ;рабочие переменные
             a dd ?
@@ -32,6 +35,7 @@ model small
             tmps dd ?
             k dd 0.0
             one dd 1.0
+            forteen dd 14.0
             two dd 2.0
             minusone dd -1.0
             twokplusone dd ?
@@ -53,6 +57,7 @@ model small
         mov  ax,2
         int  10H                                                                ;установка видеорежима 80x25
 
+        restart:
         lea dx,STRING_A                                                         ;вывод
         mov ah,09h	                                                        ;сообщения
         int 21h                                                                 ;INPUT A
@@ -108,6 +113,14 @@ model small
         ;sum goes here
         fld one
         fld k
+
+        fcom forteen
+        fstsw ax                                                                ;сравнение с 14 если равен, то уходим
+        sahf
+        .386
+        je stackover
+        .286
+
         fadd
         fstp k
 
@@ -125,6 +138,7 @@ model small
         fstsw ax
         sahf
         jnc kplusone
+
 
         lea dx,STRING_TAB                                                       ;вывод
         mov ah,09h	                                                        ;сообщения
@@ -169,8 +183,60 @@ model small
         jc xplush
         .286
 
+        lea dx,STRING_SUCC                                                         ;вывод
+        mov ah,09h	                                                        ;сообщения
+        int 21h                                                                 ;INPUT A
+
+        lea dx,STRING_CONT                                                                                                         ;вывод
+        mov ah,09h	                                                                                                        ;сообщения
+        int 21h                                                                                                                 ;INPUT A
+
+        lea dx,STRING_ENT                                                                                                         ;вывод
+        mov ah,09h	                                                                                                        ;сообщения
+        int 21h                                                                                                                 ;INPUT A
+
+        mov ah, 01h                                                                                                    ; Вводим  символ
+        int 21h
+        cmp al, 'y'
+        .386                                                                                     ;сравниваем введённое значение с символом "-"
+        je restart
+        .286
+
+        exit:
         mov ah, 4ch                                                             ;передаём в ah код прерываня для выхода из программы
         int 21h                                                                 ;прерываение
+
+
+
+        stackover:
+        lea dx,STRING_STACKOVERFLOW                                                         ;вывод
+        mov ah,09h	                                                        ;сообщения
+        int 21h
+        lea dx,STRING_ENT                                                                                                         ;вывод
+        mov ah,09h	                                                                                                        ;сообщения
+        int 21h
+        lea dx,STRING_CONT                                                                                                         ;вывод
+        mov ah,09h	                                                                                                        ;сообщения
+        int 21h                                                                                                                 ;INPUT A
+        mov ah, 01h                                                                                                    ; Вводим  символ
+        int 21h
+        cmp al, 'y'
+        jne exit
+        lea dx,STRING_ENT                                                                                                         ;вывод
+        mov ah,09h	                                                                                                        ;сообщения
+        int 21h
+        fldz
+        fstp k  ;обнуляем k
+        .386                                                                                             ;сравниваем введённое значение с символом "-"
+        je restart
+        .286
+
+
+
+
+
+
+
 
         sintail proc ;на входе только K(st0 = k)
         fld k
