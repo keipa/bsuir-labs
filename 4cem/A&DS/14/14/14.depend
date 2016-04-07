@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1459929742 source:d:\labs\bsuir_labs\4cem\a&ds\14\14\main.cpp
+	<vector>
+	<iostream>
+	<algorithm>
+

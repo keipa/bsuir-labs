@@ -15,11 +15,9 @@ model small
            STRING_ENT DB 10, 13, '$'
            STRING_TAB DB 9, '$'
            STRING_D db 10,13, ' D  = $'
-           STRING_CONT db 10,13, ' Continue y/n?    $'
+           STRING_CONT db 10,13, ' Continue ? <PRESS Y>   $'
            STRING_SUCC db 10,13, ' SUCCESS!    $'
-
            STRING_NOTKVADR db 10,13, ' Format error. Enter correct format     $'
-
            STRING_STACKOVERFLOW db 10,13, ' Error! check the input data or decrease it $'
 
                                                                                 ;рабочие переменные
@@ -102,6 +100,7 @@ model small
         lea dx,STRING_TAB                                                       ;вывод
         mov ah,09h	                                                        ;сообщения
         int 21h                                                                 ;tab
+
         lea dx,STRING_YE                                                        ;вывод
         mov ah,09h	                                                        ;сообщения
         int 21h                                                                 ;y =
@@ -183,7 +182,7 @@ model small
         jc xplush
         .286
 
-        lea dx,STRING_SUCC                                                         ;вывод
+        lea dx,STRING_SUCC                                                      ;вывод
         mov ah,09h	                                                        ;сообщения
         int 21h                                                                 ;INPUT A
 

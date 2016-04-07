@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-
 namespace sharp
 {
     class Program
@@ -11,52 +10,25 @@ namespace sharp
         static void Main(string[] args)
         {
             string s = Console.ReadLine();
+            string[] words = s.Split(' ');
+            int[] nums = new int[words.Length];
+            for(int i = 0 ;i<words.Length;i++)
+            {
+                nums[i] = Convert.ToInt32(words[i]);
+            }
             int x1, y1, x2, y2;
-            x1 = Convert.ToInt32(s[4]);
-            y1 = Convert.ToInt32(s[6]);
-            x2 = Convert.ToInt32(s[8]);
-            y2 = Convert.ToInt32(s[10]);
-            if (x1 == x2 || y1 == y2)
+            x1 = nums[2];
+            y1 = nums[3];
+            x2 = nums[4];
+            y2 = nums[5];
+            if (Math.Abs(x1 - x2) == Math.Abs(y1 - y2))
             {
-                Console.WriteLine("YES");
-                return;
-            }
-            else if (x1<x2 && y1<y2)
-            {
-                while (x1 < x2 && y1 < y2)
-                {
-                    ++x1;
-                    ++y1;
-                    if (x1 == x2 && y1 == y2)
-                    {
-                        Console.WriteLine("NO");
-                        return;
-                    }
-                }
-                Console.WriteLine("YES");
-                return;
-            }
-            else if(x2 < x1 && y2 < y1)
-            {
-                while (x2 < x1 && y2 < y1)
-                {
-                    ++x2;
-                    ++y2;
-                    if (x1 == x2 && y1 == y2)
-                    {
-                        Console.WriteLine("NO");
-                        return;
-                    }
-                    
-                }
-                Console.WriteLine("YES");
-                return;
+                Console.WriteLine("NO");
             }
             else
             {
                 Console.WriteLine("YES");
             }
-
         }
     }
 }
