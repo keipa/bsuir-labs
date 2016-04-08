@@ -567,7 +567,7 @@ namespace WpfApplication1
 
 
 
-    public class Test : IEnumerable<Question>, INotifyCollectionChanged
+    public class Test : IEnumerable<T>, INotifyCollectionChanged
     {
         public List<Question> current;
         public bool IsReadOnly { get; set; }
@@ -821,7 +821,7 @@ namespace WpfApplication1
 
 
     }
-    public class Question : IEnumerable<Variant>
+    public class Question : IEnumerable<T>
     {
         public int Count { get; set; }
         public bool IsReadOnly { get; set; }
