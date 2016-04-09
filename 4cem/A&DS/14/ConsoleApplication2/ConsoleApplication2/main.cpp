@@ -1,85 +1,54 @@
-#include <vector>
+
 #include <iostream>
 #include <algorithm>
-
+#include <string>
 using namespace std;
 
-template<typename It>
 
-bool next_permutation(It begin, It end)
+
+int main_1()
 {
-	if (begin == end)
-		return false;
-
-	It i = begin;
-	++i;
-	if (i == end)
-		return false;
-
-	i = end;
-	--i;
-
-	while (true)
-	{
-		It j = i;
-		--i;
-
-		if (*i < *j)
-		{
-			It k = end;
-
-			while (!(*i < *--k))
-				/* pass */;
-
-			iter_swap(i, k);
-			reverse(j, end);
-			return true;
-		}
-
-		if (i == begin)
-		{
-			reverse(begin, end);
-			return false;
-		}
-	}
-}
-
-int main()
-{
-	int num;
-	int save;
-	cin >> num;
+	long long num = 0;
+	long long save;
+	string str;
+	cin >> str;
 	save = num;
-	vector <int> v;
+
 	int  k = 0;
 	int j = 0;
-	int next = 0;
-	while (num % 10 != 0)
-	{
-		v.insert(v.begin(), num % 10);
-		num = (num - num % 10) / 10;
-		++k;
-	}
+	long long next = 0;
+	//while (num % 10 != 0)
+	//{
+	//	//v.insert(v.begin(), num % 10);
+	//	num = (num - num % 10) / 10;
+	//	++k;
+	//}
 
 
-	::next_permutation(v.begin(), v.end());
-
-
-
-	for (int i = k - 1; i >= 0; i--)
-	{
-
-		next += v[i] * pow(10, j);
-		++j;
-	}
-	if (next <= save){
-		cout << -1;
-
+	if (next_permutation(str.begin(), str.end())){
+		cout << str;
 	}
 	else
 	{
-		cout << next;
+		cout << "-1";
 	}
 
+
+
+//	for (int i = k - 1; i >= 0; i--)
+//	{
+//
+////		next += v[i] * pow(10, j);
+//		++j;
+//	}
+//	if (next <= save){
+//		cout << -1;
+//
+//	}
+//	else
+//	{
+//		cout << next;
+//	}
+	return 0;
 
 }
