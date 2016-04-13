@@ -58,8 +58,8 @@
       <file leaf-file-name="miner.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/miner.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.72727275">
-              <caret line="210" column="0" selection-start-line="210" selection-start-column="0" selection-end-line="216" selection-end-column="58" />
+            <state vertical-scroll-proportion="2.7857144">
+              <caret line="200" column="51" selection-start-line="200" selection-start-column="51" selection-end-line="200" selection-end-column="51" />
               <folding>
                 <element signature="e#47#67#0" expanded="true" />
               </folding>
@@ -140,9 +140,9 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
-    <option name="y" value="32" />
+    <option name="y" value="-8" />
     <option name="width" value="1616" />
-    <option name="height" value="876" />
+    <option name="height" value="916" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -185,8 +185,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -207,6 +205,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -214,7 +214,6 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../NUMERICAL.ANALYSIS/sturm" />
-    <property name="FullScreen" value="true" />
   </component>
   <component name="RunManager" selected="Python.menu">
     <configuration default="false" name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
@@ -444,7 +443,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="32" width="1616" height="876" extended-state="6" />
+    <frame x="-8" y="-8" width="1616" height="916" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20912547" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -981,8 +980,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/miner.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.72727275">
-          <caret line="210" column="0" selection-start-line="210" selection-start-column="0" selection-end-line="216" selection-end-column="58" />
+        <state vertical-scroll-proportion="2.7857144">
+          <caret line="200" column="51" selection-start-line="200" selection-start-column="51" selection-end-line="200" selection-end-column="51" />
           <folding>
             <element signature="e#47#67#0" expanded="true" />
           </folding>
