@@ -10,11 +10,11 @@ def create_parser():
     parser.add_argument('-l', "--fixedlines",  default='0')
     parser.add_argument('-s', "--symbols", default='0')
     parser.add_argument('-ls', "--lineseparator", default='\n')
-    parser.add_argument('-bs', "--blockseparator", default='\t')
+    parser.add_argument('-t', "--blockseparator", default='\t')
     return parser
 
 
-def menu():
+def menu(): 
     parser = create_parser()
     namespace = parser.parse_args()
     if namespace.program == "generate":
