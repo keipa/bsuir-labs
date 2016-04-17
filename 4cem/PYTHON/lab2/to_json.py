@@ -1,7 +1,6 @@
 import json
 
 
-
 def my_json(obj, *args):
     string = ""
     # if len(args) != 0:
@@ -9,7 +8,6 @@ def my_json(obj, *args):
     #         print("rise unknown ")
     what_the_obj = str(type(obj))
     print(distributor(what_the_obj, obj, 0))
-    # print(str(type(obj)))
 
 
 def tabstring(ret, deep):
@@ -22,14 +20,14 @@ def tabstring(ret, deep):
     return ret
 
 
-def distributor(objtype, obj, deep):
+def distributor(objtype, obj, deep, *args):
     ret_string = ""
     if objtype == "<class 'dict'>":
         ret_string += "{\n"
         deep += 1
         ret_string += dict_processing(obj, deep)
+        ret_string += "\t"*(deep-1)+"}"
         deep -= 1
-        ret_string += "\n}"
     elif objtype == "<class 'list'>" or objtype == "<class 'tuple'>":
         ret_string += "[\n"
         deep += 1
@@ -43,9 +41,13 @@ def distributor(objtype, obj, deep):
     elif objtype == "<class 'bool'>":
         ret_string += true_false_processing(obj)
     elif objtype == "<class 'NoneType'>":
-
         ret_string += null_processing()
-
+    else:
+        if len(args) != 0:
+            if args[0]:
+                raise TypeError("only python-object expected, user-object not allowed\n"+str(type(obj)))
+        else:
+            ret_string += "<user-obj>"
     return ret_string
 
 
@@ -122,7 +124,7 @@ def main():
     block = MetalBlock()
     # d = {}
     l = [2, 4, 5, 6]
-    t = ["1", ("2", [3, 2, True, "ke", (3, 5.9)]), 3, 4, 5]
+    t = ["1", ("2", [3, 2, True, "ke", (3, 5.9, {2: 3, 4: "4"})]), 3, 4, 5]
     d = {1: "2", 2: True, 3: 9, 4: 16}
 
 
@@ -131,9 +133,9 @@ def main():
     tr = True
     no = None
 
-    my_json(d)
+    # my_json(d)
     # my_json(l)
-    # my_json(t)
+    my_json(block)
     # my_json(s)
     # my_json(n)
     # my_json(tr)
@@ -144,7 +146,7 @@ def main():
 
     #sample
     # print(json.dumps(m, sort_keys=True, indent=4))
-    print(json.dumps(d, sort_keys=True, indent=4))
+    # print(json.dumps(t, sort_keys=True, indent=4))
 
 if __name__ == '__main__':
     main()
