@@ -3,8 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="8bf371b5-260b-4221-9e7a-e388e45678db" name="Default" comment="">
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/stringtest.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vector.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/to_json.py" afterPath="$PROJECT_DIR$/to_json.py" />
     </list>
     <ignored path="lab2.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -57,11 +57,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="to_json.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="to_json.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/to_json.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="450">
               <caret line="47" column="104" selection-start-line="47" selection-start-column="104" selection-end-line="47" selection-end-column="104" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="vector.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/vector.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="216">
+              <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -133,6 +143,7 @@
         <option value="$PROJECT_DIR$/sort.py" />
         <option value="$PROJECT_DIR$/stringtest.py" />
         <option value="$PROJECT_DIR$/to_json.py" />
+        <option value="$PROJECT_DIR$/vector.py" />
       </list>
     </option>
   </component>
@@ -190,7 +201,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../OOP/py/block.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="SearchEverywhereHistoryKey" value="&#9;null&#9;null&#10;toggle full screen&#9;FILE&#9;file:///usr/lib/python3.5/json/encoder.py&#10;set&#9;ACTION&#9;WelcomeScreen.Settings&#10;proje&#9;ACTION&#9;ActivateProjectToolWindow&#10;sett&#9;ACTION&#9;WelcomeScreen.Settings&#10;full&#9;ACTION&#9;ToggleFullScreen&#10;minimap&#9;null&#9;null&#10;te&#9;ACTION&#9;ActivateTerminalToolWindow&#10;ter&#9;ACTION&#9;ActivateTerminalToolWindow" />
     <property name="ToolWindowRun.ShowToolbar" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
@@ -212,7 +223,7 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="1077" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
   </component>
-  <component name="RunManager" selected="Python.to_json">
+  <component name="RunManager" selected="Python.vector">
     <configuration default="false" name="generation_test" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -260,6 +271,23 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="lab2" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/stringtest.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="vector" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="lab2" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/vector.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -432,18 +460,20 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
     </configuration>
-    <list size="5">
+    <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Python.main" />
       <item index="1" class="java.lang.String" itemvalue="Python.sort" />
       <item index="2" class="java.lang.String" itemvalue="Python.generation_test" />
       <item index="3" class="java.lang.String" itemvalue="Python.to_json" />
       <item index="4" class="java.lang.String" itemvalue="Python.stringtest" />
+      <item index="5" class="java.lang.String" itemvalue="Python.vector" />
     </list>
     <recent_temporary>
-      <list size="3">
-        <item index="0" class="java.lang.String" itemvalue="Python.to_json" />
-        <item index="1" class="java.lang.String" itemvalue="Python.stringtest" />
-        <item index="2" class="java.lang.String" itemvalue="Python.generation_test" />
+      <list size="4">
+        <item index="0" class="java.lang.String" itemvalue="Python.vector" />
+        <item index="1" class="java.lang.String" itemvalue="Python.to_json" />
+        <item index="2" class="java.lang.String" itemvalue="Python.stringtest" />
+        <item index="3" class="java.lang.String" itemvalue="Python.generation_test" />
       </list>
     </recent_temporary>
   </component>
@@ -475,7 +505,14 @@
       <option name="project" value="LOCAL" />
       <updated>1460888952196</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="4.py.2 json rise exception">
+      <created>1460897735753</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1460897735753</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -485,19 +522,19 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.235625" sideWeight="0.4947644" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32984293" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32754344" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.7054974" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4725" sideWeight="0.5052356" order="3" side_tool="true" content_ui="tabs" x="494" y="47" width="674" height="806" />
+      <window_info id="Run" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.58375" sideWeight="0.5104712" order="3" side_tool="true" content_ui="tabs" x="494" y="47" width="674" height="806" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22163588" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25452352" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.235625" sideWeight="0.5052356" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39625" sideWeight="0.4947644" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5" sideWeight="0.4895288" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32984293" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -515,7 +552,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="4.py.2 split" />
     <MESSAGE value="4.py.2 json&#10;need to raise_exception" />
-    <option name="LAST_COMMIT_MESSAGE" value="4.py.2 json&#10;need to raise_exception" />
+    <MESSAGE value="4.py.2 json rise exception" />
+    <option name="LAST_COMMIT_MESSAGE" value="4.py.2 json rise exception" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -526,19 +564,11 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="13" />
+      <option name="time" value="17" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/strfiles/tmp/generated2.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/strfiles/tmp/generated3.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -551,7 +581,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="72">
           <caret line="4" column="10" selection-start-line="4" selection-start-column="10" selection-end-line="4" selection-end-column="10" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -559,7 +588,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="612">
           <caret line="34" column="10" selection-start-line="34" selection-start-column="10" selection-end-line="34" selection-end-column="10" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -617,7 +645,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="72">
           <caret line="4" column="10" selection-start-line="4" selection-start-column="10" selection-end-line="4" selection-end-column="10" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -625,7 +652,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="612">
           <caret line="34" column="10" selection-start-line="34" selection-start-column="10" selection-end-line="34" selection-end-column="10" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -828,7 +854,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="612">
           <caret line="34" column="10" selection-start-line="34" selection-start-column="10" selection-end-line="34" selection-end-column="10" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -836,7 +861,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="72">
           <caret line="4" column="10" selection-start-line="4" selection-start-column="10" selection-end-line="4" selection-end-column="10" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -894,7 +918,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-201">
           <caret line="79" column="41" selection-start-line="79" selection-start-column="41" selection-end-line="79" selection-end-column="41" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -902,7 +925,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="341">
           <caret line="236" column="0" selection-start-line="236" selection-start-column="0" selection-end-line="236" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -910,7 +932,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="95" column="0" selection-start-line="95" selection-start-column="0" selection-end-line="106" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -918,7 +939,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="215">
           <caret line="312" column="23" selection-start-line="312" selection-start-column="23" selection-end-line="312" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -942,6 +962,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
           <caret line="47" column="104" selection-start-line="47" selection-start-column="104" selection-end-line="47" selection-end-column="104" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vector.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
           <folding />
         </state>
       </provider>
