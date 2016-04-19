@@ -1,20 +1,19 @@
-class vector:
+class Vector:
     def __init__(self, dimension, fill):
-        if dimension == 1:
-            self.x = [0 for _ in range(fill)]
-        else:
-            self.x = []
         self.dimension = dimension
         self.fill = fill
-        pointer = self.x
-        for i in range(dimension-1):
-            if i == dimension-2:
-                a = [0 for _ in range(self.fill)]
-            else:
-                a = []
-            for _ in range(self.fill):
-                pointer.append(a)
-            pointer = a
+        self.x = []
+        Vector.init(self, self.x, 0)
+
+    def init(self, pointer, deep):
+        deep += 1
+        if deep != self.dimension:
+            for each in range(self.fill):
+                pointer.append([])
+                Vector.init(self, pointer[each], deep)
+        else:
+            for i in range(self.fill):
+                pointer.append(0)
 
     def __str__(self):
         ret = ""
@@ -23,33 +22,45 @@ class vector:
 
     def __add__(self, other):
         if str(type(other)) == "<class 'int'>":
-            vector.plusconst(self, other, 0)
+            Vector.plusconst(self, other, 0)
             return self
         else:
-            vector.plusvector(self, other, 0, 0)
+            Vector.plusvector(self, other, 0, 0)
             return self
+
+    def __getitem__(self, item):
+        return Vector.getitem(self, item, 0, 1)
+
+    def getitem(self, item, pointer, deep):
+        if pointer == 0:
+            pointer = self.x
+        if deep == self.dimension:
+            return pointer[item % self.dimension]
+        else:
+            deep += 1
+            return Vector.getitem(self, item, pointer[(item//self.dimension)-1], deep)
 
     def __sub__(self, other):
         if str(type(other)) == "<class 'int'>":
-            vector.minusconst(self, other, 0)
+            Vector.minusconst(self, other, 0)
             return self
         else:
-            vector.minusvector(self, other, 0, 0)
+            Vector.minusvector(self, other, 0, 0)
             return self
 
     def __mul__(self, other):
         if str(type(other)) == "<class 'int'>":
-            vector.mulconst(self, other, 0)
+            Vector.mulconst(self, other, 0)
             return self
         else:
-            vector.mulvector(self, other, 0, 0)
+            Vector.mulvector(self, other, 0, 0)
             return self
 
     def __eq__(self, other):
-        pass
+        return Vector.equal(self, other, 0, 0, True)
 
     def __len__(self):
-        return vector.length(self, 0)
+        return Vector.length(self, 0)
 
     def length(self, pointer):
         count = 0
@@ -58,20 +69,23 @@ class vector:
         for each in pointer:
             if str(type(each)) != "<class 'list'>":
                 count += 1
-                continue
-            else:
-                count += vector.length(self, each)
-            return count
 
-    def equal(self, what_changing, pointer):
-        if pointer == 0:
-            pointer = self.x
-        for each in range(len(pointer)):
-            if str(type(pointer[each])) != "<class 'list'>":
-                pointer[each] += what_changing
             else:
-                vector.equal(self, what_changing, pointer[each])
+                count += Vector.length(self, each)
+        return count
 
+    def equal(self, p_other, pointer_1, pointer_2, is_eq):
+        if pointer_1 == 0 and pointer_2 == 0:
+            pointer_1 = self.x
+            pointer_2 = p_other.x
+        for each in range(len(pointer_1)):
+            if str(type(pointer_1[each])) != "<class 'list'>":
+                if pointer_1[each] != pointer_2[each]:
+                    is_eq = False
+
+            else:
+                is_eq = Vector.equal(self, p_other, pointer_1[each], pointer_2[each], is_eq)
+        return is_eq
 
     def change(self, what_changing, pointer):
         if pointer == 0:
@@ -80,8 +94,7 @@ class vector:
             if str(type(pointer[each])) != "<class 'list'>":
                 pointer[each] = what_changing
             else:
-                vector.change(self, what_changing, pointer[each])
-
+                Vector.change(self, what_changing, pointer[each])
 
     def plusconst(self, what_changing, pointer):
         if pointer == 0:
@@ -90,8 +103,7 @@ class vector:
             if str(type(pointer[each])) != "<class 'list'>":
                 pointer[each] += what_changing
             else:
-                vector.plusconst(self, what_changing, pointer[each])
-                break
+                Vector.plusconst(self, what_changing, pointer[each])
 
     def plusvector(self, p_other, pointer_1, pointer_2):
         if pointer_1 == 0 and pointer_2 == 0:
@@ -101,8 +113,7 @@ class vector:
             if str(type(pointer_1[each])) != "<class 'list'>":
                 pointer_1[each] += pointer_2[each]
             else:
-                vector.plusvector(self, p_other, pointer_1[each], pointer_2[each])
-                break
+                Vector.plusvector(self, p_other, pointer_1[each], pointer_2[each])
 
     def minusconst(self, what_changing, pointer):
         if pointer == 0:
@@ -111,7 +122,7 @@ class vector:
             if str(type(pointer[each])) != "<class 'list'>":
                 pointer[each] -= what_changing
             else:
-                vector.minusconst(self, what_changing, pointer[each])
+                Vector.minusconst(self, what_changing, pointer[each])
                 break
 
     def minusvector(self, p_other, pointer_1, pointer_2):
@@ -122,9 +133,7 @@ class vector:
             if str(type(pointer_1[each])) != "<class 'list'>":
                 pointer_1[each] -= pointer_2[each]
             else:
-                vector.minusvector(self, p_other, pointer_1[each], pointer_2[each])
-                break
-
+                Vector.minusvector(self, p_other, pointer_1[each], pointer_2[each])
 
     def mulconst(self, what_changing, pointer):
         if pointer == 0:
@@ -133,9 +142,7 @@ class vector:
             if str(type(pointer[each])) != "<class 'list'>":
                 pointer[each] *= what_changing
             else:
-                vector.mulconst(self, what_changing, pointer[each])
-                break
-
+                Vector.mulconst(self, what_changing, pointer[each])
 
     def mulvector(self, p_other, pointer_1, pointer_2):
         if pointer_1 == 0 and pointer_2 == 0:
@@ -145,17 +152,22 @@ class vector:
             if str(type(pointer_1[each])) != "<class 'list'>":
                 pointer_1[each] *= pointer_2[each]
             else:
-                vector.mulvector(self, p_other, pointer_1[each], pointer_2[each])
-                break
+                Vector.mulvector(self, p_other, pointer_1[each], pointer_2[each])
 
 
 def main():
-    n = vector(2, 3)
-    b = vector(2, 3)
-
+    n = Vector(2, 3)
+    b = Vector(2, 3)
+    b += 2
     # n.equal(2, 0)
     n.x[0][0] = 777
-    print(str(n))
+    n += b
+    n *= 2
+    n *= 0
+    b *= 0
+    n.x[1][1] = 5
+    print(n[5])
+    print(len(n))
 
 if __name__ == "__main__":
     main()

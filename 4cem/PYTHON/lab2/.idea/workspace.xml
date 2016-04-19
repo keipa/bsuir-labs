@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8bf371b5-260b-4221-9e7a-e388e45678db" name="Default" comment="">
+    <list default="true" id="8bf371b5-260b-4221-9e7a-e388e45678db" name="Default" comment="4.py.2 vector idescriptors&#10;remove mirror arrays">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/weui.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vector.py" afterPath="$PROJECT_DIR$/vector.py" />
     </list>
@@ -27,7 +28,7 @@
       <file leaf-file-name="generate.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/generate.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
+            <state relative-caret-position="0">
               <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
               <folding />
             </state>
@@ -37,7 +38,7 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
+            <state relative-caret-position="0">
               <caret line="11" column="25" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
@@ -49,7 +50,7 @@
       <file leaf-file-name="sort.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sort.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="414">
+            <state relative-caret-position="0">
               <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
               <folding />
             </state>
@@ -59,7 +60,7 @@
       <file leaf-file-name="to_json.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/to_json.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
+            <state relative-caret-position="0">
               <caret line="47" column="104" selection-start-line="47" selection-start-column="104" selection-end-line="47" selection-end-column="104" />
               <folding />
             </state>
@@ -69,9 +70,28 @@
       <file leaf-file-name="vector.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vector.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
-              <folding />
+            <state relative-caret-position="748">
+              <caret line="160" column="10" selection-start-line="160" selection-start-column="10" selection-end-line="160" selection-end-column="10" />
+              <folding>
+                <element signature="e#63#171#0" expanded="false" />
+                <element signature="e#216#479#0" expanded="false" />
+                <element signature="e#512#572#0" expanded="false" />
+                <element signature="e#612#807#0" expanded="false" />
+                <element signature="e#943#1196#0" expanded="false" />
+                <element signature="e#1236#1433#0" expanded="false" />
+                <element signature="e#1473#1666#0" expanded="false" />
+                <element signature="e#1705#1749#0" expanded="false" />
+                <element signature="e#1782#1811#0" expanded="false" />
+                <element signature="e#1852#2114#0" expanded="false" />
+                <element signature="e#2669#2946#0" expanded="false" />
+                <element signature="e#3353#3713#0" expanded="false" />
+                <element signature="e#3773#4077#0" expanded="false" />
+                <element signature="e#4145#4506#0" expanded="false" />
+                <element signature="e#4564#4844#0" expanded="false" />
+                <element signature="e#4910#5269#0" expanded="false" />
+                <marker date="1461096162820" expanded="false" signature="2174:2613" placeholder="..." />
+                <marker date="1461096162820" expanded="false" signature="2996:3286" placeholder="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -79,8 +99,8 @@
       <file leaf-file-name="codecs.py" pinned="false" current-in-tab="false">
         <entry file="file:///usr/lib/python3.5/codecs.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="188">
-              <caret line="310" column="0" selection-start-line="310" selection-start-column="0" selection-end-line="310" selection-end-column="0" />
+            <state relative-caret-position="187">
+              <caret line="308" column="0" selection-start-line="308" selection-start-column="0" selection-end-line="308" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -89,7 +109,7 @@
       <file leaf-file-name="stringtest.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/stringtest.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
+            <state relative-caret-position="0">
               <caret line="12" column="26" selection-start-line="12" selection-start-column="26" selection-end-line="12" selection-end-column="26" />
               <folding />
             </state>
@@ -99,28 +119,8 @@
       <file leaf-file-name="generated1.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/strfiles/tmp/generated1.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
+            <state relative-caret-position="0">
               <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="generated2.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/strfiles/tmp/generated2.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="generated3.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/strfiles/tmp/generated3.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -152,14 +152,15 @@
         <option value="$PROJECT_DIR$/sort.py" />
         <option value="$PROJECT_DIR$/stringtest.py" />
         <option value="$PROJECT_DIR$/to_json.py" />
+        <option value="$PROJECT_DIR$/weui.py" />
         <option value="$PROJECT_DIR$/vector.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="27" />
+    <option name="y" value="-32" />
     <option name="width" value="1600" />
-    <option name="height" value="873" />
+    <option name="height" value="932" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -202,18 +203,18 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane />
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="SearchEverywhereHistoryKey" value="&#9;null&#9;null&#10;toggle full screen&#9;FILE&#9;file:///usr/lib/python3.5/json/encoder.py&#10;set&#9;ACTION&#9;WelcomeScreen.Settings&#10;proje&#9;ACTION&#9;ActivateProjectToolWindow&#10;sett&#9;ACTION&#9;WelcomeScreen.Settings&#10;full&#9;ACTION&#9;ToggleFullScreen&#10;minimap&#9;null&#9;null&#10;te&#9;ACTION&#9;ActivateTerminalToolWindow&#10;ter&#9;ACTION&#9;ActivateTerminalToolWindow" />
+    <property name="SearchEverywhereHistoryKey" value="sett&#9;ACTION&#9;ShowSettings&#10;full &#9;ACTION&#9;ToggleFullScreen&#10;toggle full screen&#9;FILE&#9;file:///usr/lib/python3.5/json/encoder.py&#10;set&#9;ACTION&#9;WelcomeScreen.Settings&#10;proje&#9;ACTION&#9;ActivateProjectToolWindow&#10;full&#9;ACTION&#9;ToggleFullScreen&#10;minimap&#9;null&#9;null&#10;te&#9;ACTION&#9;ActivateTerminalToolWindow&#10;ter&#9;ACTION&#9;ActivateTerminalToolWindow" />
     <property name="ToolWindowRun.ShowToolbar" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Font" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="146" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
@@ -297,6 +298,23 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="lab2" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/vector.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="weui" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="lab2" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/weui.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -469,20 +487,22 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
     </configuration>
-    <list size="6">
+    <list size="7">
       <item index="0" class="java.lang.String" itemvalue="Python.main" />
       <item index="1" class="java.lang.String" itemvalue="Python.sort" />
       <item index="2" class="java.lang.String" itemvalue="Python.generation_test" />
       <item index="3" class="java.lang.String" itemvalue="Python.to_json" />
       <item index="4" class="java.lang.String" itemvalue="Python.stringtest" />
       <item index="5" class="java.lang.String" itemvalue="Python.vector" />
+      <item index="6" class="java.lang.String" itemvalue="Python.weui" />
     </list>
     <recent_temporary>
-      <list size="4">
+      <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Python.vector" />
-        <item index="1" class="java.lang.String" itemvalue="Python.to_json" />
-        <item index="2" class="java.lang.String" itemvalue="Python.stringtest" />
-        <item index="3" class="java.lang.String" itemvalue="Python.generation_test" />
+        <item index="1" class="java.lang.String" itemvalue="Python.weui" />
+        <item index="2" class="java.lang.String" itemvalue="Python.to_json" />
+        <item index="3" class="java.lang.String" itemvalue="Python.stringtest" />
+        <item index="4" class="java.lang.String" itemvalue="Python.generation_test" />
       </list>
     </recent_temporary>
   </component>
@@ -528,29 +548,45 @@
       <option name="project" value="LOCAL" />
       <updated>1461009318738</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="4.py.2 vector idescriptors&#10;remove mirror arrays">
+      <created>1461075125130</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1461075125130</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="27" width="1600" height="873" extended-state="6" />
+    <frame x="0" y="-32" width="1600" height="932" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.235625" sideWeight="0.4947644" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.235625" sideWeight="0.48739496" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32941177" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32984293" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32754344" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.7054974" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35994765" sideWeight="0.484375" order="9" side_tool="true" content_ui="tabs" x="494" y="47" width="674" height="806" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3" sideWeight="0.486875" order="9" side_tool="false" content_ui="tabs" x="494" y="47" width="674" height="806" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22163588" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25452352" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.235625" sideWeight="0.5052356" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35994765" sideWeight="0.515625" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.235625" sideWeight="0.5126051" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3" sideWeight="0.513125" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32984293" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -570,22 +606,11 @@
     <MESSAGE value="4.py.2 json&#10;need to raise_exception" />
     <MESSAGE value="4.py.2 json rise exception" />
     <MESSAGE value="4.py.2 vector init&#10;need other descriptors" />
-    <option name="LAST_COMMIT_MESSAGE" value="4.py.2 vector init&#10;need other descriptors" />
+    <MESSAGE value="4.py.2 vector idescriptors&#10;remove mirror arrays" />
+    <option name="LAST_COMMIT_MESSAGE" value="4.py.2 vector idescriptors&#10;remove mirror arrays" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/vector.py</url>
-          <line>75</line>
-          <option name="timeStamp" value="29" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/vector.py</url>
-          <line>65</line>
-          <option name="timeStamp" value="31" />
-        </line-breakpoint>
-      </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
           <properties notifyOnTerminate="true" exception="BaseException">
@@ -593,19 +618,16 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="33" />
+      <option name="time" value="40" />
     </breakpoint-manager>
-    <watches-manager />
+    <watches-manager>
+      <configuration name="PythonConfigurationType">
+        <watch expression="is_eq" language="Python" />
+        <watch expression="item % self.dimension" language="Python" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/strfiles/tmp/generated3.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/strfiles/tmp/generated4.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="72">
@@ -871,13 +893,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="16" column="24" selection-start-line="16" selection-start-column="24" selection-end-line="16" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Roaming/Python/Python34/site-packages/sympy/physics/mechanics/tests/test_lagrange.py" />
     <entry file="file://$PROJECT_DIR$/strfiles/genrated.txt">
       <provider selected="true" editor-type-id="text-editor">
@@ -911,7 +926,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/strfiles/tmp/generated1.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
+        <state relative-caret-position="0">
           <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
           <folding />
         </state>
@@ -919,7 +934,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/generate.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
+        <state relative-caret-position="0">
           <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
           <folding />
         </state>
@@ -956,7 +971,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/stringtest.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
+        <state relative-caret-position="0">
           <caret line="12" column="26" selection-start-line="12" selection-start-column="26" selection-end-line="12" selection-end-column="26" />
           <folding />
         </state>
@@ -964,23 +979,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/to_json.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
+        <state relative-caret-position="0">
           <caret line="47" column="104" selection-start-line="47" selection-start-column="104" selection-end-line="47" selection-end-column="104" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/lib/python3.5/codecs.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
-          <caret line="310" column="0" selection-start-line="310" selection-start-column="0" selection-end-line="310" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
+        <state relative-caret-position="0">
           <caret line="11" column="25" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
@@ -990,17 +997,60 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sort.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
+        <state relative-caret-position="0">
           <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/weui.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="4" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/lib/python3.5/codecs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="308" column="0" selection-start-line="308" selection-start-column="0" selection-end-line="308" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vector.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
-          <folding />
+        <state relative-caret-position="748">
+          <caret line="160" column="10" selection-start-line="160" selection-start-column="10" selection-end-line="160" selection-end-column="10" />
+          <folding>
+            <element signature="e#63#171#0" expanded="false" />
+            <element signature="e#216#479#0" expanded="false" />
+            <element signature="e#512#572#0" expanded="false" />
+            <element signature="e#612#807#0" expanded="false" />
+            <element signature="e#943#1196#0" expanded="false" />
+            <element signature="e#1236#1433#0" expanded="false" />
+            <element signature="e#1473#1666#0" expanded="false" />
+            <element signature="e#1705#1749#0" expanded="false" />
+            <element signature="e#1782#1811#0" expanded="false" />
+            <element signature="e#1852#2114#0" expanded="false" />
+            <element signature="e#2669#2946#0" expanded="false" />
+            <element signature="e#3353#3713#0" expanded="false" />
+            <element signature="e#3773#4077#0" expanded="false" />
+            <element signature="e#4145#4506#0" expanded="false" />
+            <element signature="e#4564#4844#0" expanded="false" />
+            <element signature="e#4910#5269#0" expanded="false" />
+            <marker date="1461096162820" expanded="false" signature="2174:2613" placeholder="..." />
+            <marker date="1461096162820" expanded="false" signature="2996:3286" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
