@@ -1,6 +1,3 @@
-import json
-
-
 def my_json(obj, *args):
     string = ""
     # if len(args) != 0:
@@ -127,7 +124,6 @@ def main():
     t = ["1", ("2", [3, 2, True, "ke", (3, 5.9, {2: 3, 4: "4"})]), 3, 4, 5]
     d = {1: "2", 2: True, 3: 9, 4: 16}
 
-
     s = "kek"
     n = 0.0
     tr = True
@@ -142,9 +138,6 @@ def main():
     # my_json(no)
     # my_json(block, True)
 
-
-
-    #sample
     # print(json.dumps(m, sort_keys=True, indent=4))
     # print(json.dumps(t, sort_keys=True, indent=4))
 

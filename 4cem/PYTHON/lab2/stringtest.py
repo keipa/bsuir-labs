@@ -1,5 +1,6 @@
 string  = "weh\nwehw\t woje"
 
+
 def tabstring(ret, deep):
     split = ret.split("\n")
     for each in range(len(split)):
@@ -10,4 +11,4 @@ def tabstring(ret, deep):
     return ret
 
 print(string)
-print(tabstring(string,2))
+print(tabstring(string, 2))

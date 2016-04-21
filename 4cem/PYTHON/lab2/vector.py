@@ -53,8 +53,7 @@ class Vector:
             Vector.mulconst(self, other, 0)
             return self
         else:
-            Vector.mulvector(self, other, 0, 0)
-            return self
+            return Vector.mulvector(self, other, 0, 0)
 
     def __eq__(self, other):
         return Vector.equal(self, other, 0, 0, True)
@@ -145,29 +144,28 @@ class Vector:
                 Vector.mulconst(self, what_changing, pointer[each])
 
     def mulvector(self, p_other, pointer_1, pointer_2):
+        ret_mul = 0
         if pointer_1 == 0 and pointer_2 == 0:
             pointer_1 = self.x
             pointer_2 = p_other.x
         for each in range(len(pointer_1)):
             if str(type(pointer_1[each])) != "<class 'list'>":
-                pointer_1[each] *= pointer_2[each]
+                ret_mul += pointer_1[each] * pointer_2[each]
             else:
-                Vector.mulvector(self, p_other, pointer_1[each], pointer_2[each])
-
+                ret_mul += Vector.mulvector(self, p_other, pointer_1[each], pointer_2[each])
+        return ret_mul
 
 def main():
     n = Vector(2, 3)
     b = Vector(2, 3)
-    b += 2
+
     # n.equal(2, 0)
-    n.x[0][0] = 777
-    n += b
-    n *= 2
-    n *= 0
-    b *= 0
-    n.x[1][1] = 5
-    print(n[5])
-    print(len(n))
+
+    n += 2
+    b += 1
+    # n.x[1][1] = 5
+    print(str(n*b))
+    # print(len(n))
 
 if __name__ == "__main__":
     main()

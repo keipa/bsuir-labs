@@ -1,5 +1,7 @@
 import argparse
 from generate import *
+import to_json
+import vector
 
 
 def create_parser():
@@ -23,6 +25,10 @@ def menu():
                  int(namespace.fixedlines),
                  namespace.lineseparator,
                  namespace.nums, int(namespace.symbols))
+    if namespace.program == "vector":
+        vector.main()
+    if namespace.program == "json":
+        to_json.main()
 
 
 if __name__ == '__main__':
