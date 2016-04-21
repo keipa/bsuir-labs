@@ -121,7 +121,7 @@ def main():
     block = MetalBlock()
     # d = {}
     l = [2, 4, 5, 6]
-    t = ["1", ("2", [3, 2, True, "ke", (3, 5.9, {2: 3, 4: "4"})]), 3, 4, 5]
+    t = ["1", ("2", [3, 2, True, 'k"e', (3, 5.9, {2: 3, 4: "4"})]), 3, 4, 5]
     d = {1: "2", 2: True, 3: 9, 4: 16}
 
     s = "kek"
@@ -131,7 +131,7 @@ def main():
 
     # my_json(d)
     # my_json(l)
-    my_json(block)
+    my_json(t)
     # my_json(s)
     # my_json(n)
     # my_json(tr)

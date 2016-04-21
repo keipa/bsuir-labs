@@ -163,7 +163,6 @@ def when_took_a_virus():
 
 def when_you_win_the_game():
         screen.blit(bg, (0, 0))
-
         font = pygame.font.Font('data/coders_crux/coders_crux.ttf', 42)
         # выводим надпись
         text_1 = font.render("Nice job", 1, (250, 250, 250))

@@ -89,11 +89,11 @@ System.getProperty#microedition.m3g.version=1.1
 Custom.jar.getResourceStream: a (100709)
 openRecordStore generalInfo
 getRecord generalInfo_14
-Custom.jar.getResourceStream: glomoRes/ru.lang (3676)
 Custom.jar.getResourceStream: a (100709)
+Custom.jar.getResourceStream: glomoRes/ru.lang (3676)
 Custom.jar.getResourceStream: /logo.png (48353)
 Custom.jar.getResourceStream: intro.amr (42310)
->>sound loaded: /intro.amr javax.microedition.media.PlayerImpl@197bb7
+>>sound loaded: /intro.amr javax.microedition.media.PlayerImpl@192a848
 Custom.jar.getResourceStream: a (100709)
 Custom.jar.getResourceStream: /menuv.png (1874)
 Custom.jar.getResourceStream: a (100709)
@@ -110,16 +110,15 @@ Custom.jar.getResourceStream: /postr1.png (2049)
 Custom.jar.getResourceStream: /postr2.png (1639)
 Custom.jar.getResourceStream: /postr3.png (1318)
 Custom.jar.getResourceStream: resurs.amr (422)
->>sound loaded: /resurs.amr javax.microedition.media.PlayerImpl@d9cbcb
-Custom.jar.getResourceStream: vibor.amr (614)
->>sound loaded: /vibor.amr javax.microedition.media.PlayerImpl@af8b32
-Custom.jar.getResourceStream: sdacha.amr (486)
->>sound loaded: /sdacha.amr javax.microedition.media.PlayerImpl@1cfad77
+>>sound loaded: /resurs.amr javax.microedition.media.PlayerImpl@916ab8
+Custom.jar.getResourceStream: death.amr (6918)
+>>sound loaded: /death.amr javax.microedition.media.PlayerImpl@8420c8
+Custom.jar.getResourceStream: a (100709)
+Custom.jar.getResourceStream: a (100709)
 Custom.jar.getResourceStream: menu.amr (166)
->>sound loaded: /menu.amr javax.microedition.media.PlayerImpl@1ac7fbb
-Custom.jar.getResourceStream: /fuel.png (3660)
-Custom.jar.getResourceStream: zapravka.amr (2726)
->>sound loaded: /zapravka.amr javax.microedition.media.PlayerImpl@1dbe72f
+>>sound loaded: /menu.amr javax.microedition.media.PlayerImpl@13cae19
+Custom.jar.getResourceStream: vibor.amr (614)
+>>sound loaded: /vibor.amr javax.microedition.media.PlayerImpl@19caedd
 Notify Destroyed
 Exiting Emulator
 Notify Destroyed

@@ -156,7 +156,7 @@ class Vector:
         return ret_mul
 
 def main():
-    n = Vector(2, 3)
+    n = Vector(3, 2)
     b = Vector(2, 3)
 
     # n.equal(2, 0)
