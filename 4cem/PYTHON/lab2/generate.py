@@ -42,6 +42,7 @@ def generate(block_count, block_separator,  line_count, line_separator, isnums, 
             s = ""
 
 
+
 def random_chr(isnums):
     if isnums == '0':
         return str(randint(0, 9))
