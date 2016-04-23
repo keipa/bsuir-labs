@@ -1,24 +1,13 @@
 def benchmark(func):
-    """
-    Декоратор, выводящий время, которое заняло
-    выполнение декорируемой функции.
-    """
-    #import time
-    #startTime = time.
-    from datetime import datetime
+
+    import time
 
     def wrapper(*args, **kwargs):
-        t = datetime.utcnow()
-        print(t)
-        # t = time.clock()
-        # startTime = time.time()
+
+        start_time = time.time()
         res = func(*args, **kwargs)
-        k = datetime.utcnow()
-        print(k)
-        t = k - t
-        print(t)
-        # print(func.__name__, time.clock() - t , "Elapsed time: {:.3f} sec".format(time.time() - startTime))
-        print(func.__name__, "Elapsed time: {:.3f} sec".format(t.total_seconds()))
+
+        print("--- {0} seconds ---".format(time.time() - start_time))
         return res
     return wrapper
 
