@@ -3,10 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="8bf371b5-260b-4221-9e7a-e388e45678db" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decouse.py" afterPath="$PROJECT_DIR$/decouse.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/my_xrange.py" afterPath="$PROJECT_DIR$/my_xrange.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sort.py" afterPath="$PROJECT_DIR$/sort.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/strfiles/genrated.txt" afterPath="$PROJECT_DIR$/strfiles/genrated.txt" />
     </list>
     <ignored path="lab2.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -613,7 +609,13 @@
       <option name="project" value="LOCAL" />
       <updated>1461355426521</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="4.py.2 sort">
+      <created>1461446684705</created>
+      <option name="number" value="00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1461446684705</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TodoView">
