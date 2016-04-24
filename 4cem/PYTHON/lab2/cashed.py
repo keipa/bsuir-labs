@@ -17,15 +17,32 @@ def cashed(func):
     return wrapped
 
 
-# @cashed
+def benchmark(func):
+    import time
+
+    def wrapper(*args, **kwargs):
+        start_time = time.time()
+        res = func(*args, **kwargs)
+        print("--- {0} seconds ---".format(time.time() - start_time))
+        return res
+    return wrapper
+
+
+@benchmark
+@cashed
 def one(q, **kwargs):
     # print(str(kwargs.get('lol')))
     print("computing")
     return q**100000000
 
-# print(one(2, lol=4))
-b = one(2)
-c = one(2)
-d = one(2)
-e = one(2)
-f = one(2)
+
+def main():
+    # print(one(2, lol=4))
+    b = one(2)
+    c = one(2)
+    d = one(2)
+    e = one(2)
+    f = one(2)
+
+if __name__ == "__main__":
+    main()

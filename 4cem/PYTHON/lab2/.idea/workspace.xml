@@ -2,7 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8bf371b5-260b-4221-9e7a-e388e45678db" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/playing.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/stringtest.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/terlog.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/weui.py" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cashed.py" afterPath="$PROJECT_DIR$/cashed.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/generate.py" afterPath="$PROJECT_DIR$/generate.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/logger.py" afterPath="$PROJECT_DIR$/logger.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/my_xrange.py" afterPath="$PROJECT_DIR$/my_xrange.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sort.py" afterPath="$PROJECT_DIR$/sort.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/strfiles/genrated.txt" afterPath="$PROJECT_DIR$/strfiles/genrated.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/strfiles/selfish_sorted.txt" afterPath="$PROJECT_DIR$/strfiles/selfish_sorted.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/strfiles/sorted.txt" afterPath="$PROJECT_DIR$/strfiles/sorted.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vector.py" afterPath="$PROJECT_DIR$/vector.py" />
     </list>
     <ignored path="lab2.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -22,116 +36,53 @@
     <favorites_list name="lab2" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.60013">
-      <split-first>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="to_json.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/to_json.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="126" column="13" selection-start-line="126" selection-start-column="13" selection-end-line="126" selection-end-column="13" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="logger.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/logger.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="cashed.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/cashed.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="21" column="35" selection-start-line="21" selection-start-column="35" selection-end-line="21" selection-end-column="35" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="decouse.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/decouse.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="generate.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/generate.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="12" column="28" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="sort.py" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/sort.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.6147541">
-                  <caret line="24" column="49" selection-start-line="24" selection-start-column="49" selection-end-line="24" selection-end-column="49" />
-                  <folding>
-                    <element signature="e#0#15#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <splitter split-orientation="horizontal" split-proportion="0.5">
-          <split-first>
-            <leaf>
-              <file leaf-file-name="sorted.txt" pinned="false" current-in-tab="true">
-                <entry file="file://$PROJECT_DIR$/strfiles/sorted.txt">
-                  <provider selected="true" editor-type-id="text-editor">
-                    <state vertical-scroll-proportion="4062.951">
-                      <caret line="99136" column="2" selection-start-line="99136" selection-start-column="2" selection-end-line="99136" selection-end-column="2" />
-                      <folding />
-                    </state>
-                  </provider>
-                </entry>
-              </file>
-              <file leaf-file-name="genrated.txt" pinned="false" current-in-tab="false">
-                <entry file="file://$PROJECT_DIR$/strfiles/genrated.txt">
-                  <provider selected="true" editor-type-id="text-editor">
-                    <state vertical-scroll-proportion="0.0">
-                      <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-                      <folding />
-                    </state>
-                  </provider>
-                </entry>
-              </file>
-            </leaf>
-          </split-first>
-          <split-second>
-            <leaf>
-              <file leaf-file-name="selfish_sorted.txt" pinned="false" current-in-tab="true">
-                <entry file="file://$PROJECT_DIR$/strfiles/selfish_sorted.txt">
-                  <provider selected="true" editor-type-id="text-editor">
-                    <state vertical-scroll-proportion="0.0">
-                      <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-                      <folding />
-                    </state>
-                  </provider>
-                </entry>
-              </file>
-            </leaf>
-          </split-second>
-        </splitter>
-      </split-second>
-    </splitter>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+              <folding>
+                <marker date="1461512370604" expanded="true" signature="0:17" placeholder="import ..." />
+                <marker date="1461512370604" expanded="true" signature="1601:1602" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sort.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/sort.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.35679612">
+              <caret line="109" column="8" selection-start-line="109" selection-start-column="8" selection-end-line="109" selection-end-column="8" />
+              <folding>
+                <element signature="e#0#15#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="logger.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/logger.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="25" column="74" selection-start-line="25" selection-start-column="74" selection-end-line="25" selection-end-column="74" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="generate.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/generate.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="13" column="18" selection-start-line="13" selection-start-column="18" selection-end-line="13" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -152,29 +103,27 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/weui.py" />
-        <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/stringtest.py" />
-        <option value="$PROJECT_DIR$/vector.py" />
         <option value="$PROJECT_DIR$/strfiles/genrated.txt" />
         <option value="$PROJECT_DIR$/decodem.py" />
         <option value="$PROJECT_DIR$/вусщгыу.py" />
         <option value="$PROJECT_DIR$/terlog.py" />
-        <option value="$PROJECT_DIR$/logger.py" />
-        <option value="$PROJECT_DIR$/cashed.py" />
-        <option value="$PROJECT_DIR$/generate.py" />
         <option value="$PROJECT_DIR$/playing.py" />
         <option value="$PROJECT_DIR$/to_json.py" />
-        <option value="$PROJECT_DIR$/my_xrange.py" />
         <option value="$PROJECT_DIR$/decouse.py" />
+        <option value="$PROJECT_DIR$/vector.py" />
+        <option value="$PROJECT_DIR$/cashed.py" />
+        <option value="$PROJECT_DIR$/my_xrange.py" />
+        <option value="$PROJECT_DIR$/logger.py" />
+        <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/generate.py" />
         <option value="$PROJECT_DIR$/sort.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="54" />
-    <option name="y" value="-8" />
-    <option name="width" value="1554" />
-    <option name="height" value="916" />
+    <option name="width" value="1600" />
+    <option name="height" value="900" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -203,7 +152,7 @@
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectView">
-    <navigator proportions="" version="1">
+    <navigator currentView="ProjectPane" proportions="" version="1">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -216,11 +165,48 @@
       <manualOrder />
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes />
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lab2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lab2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lab2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lab2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lab2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="strfiles" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
+    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$/main.py" />
-    <property name="SearchEverywhereHistoryKey" value="my&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/PYTHON/lab2/my_xrange.py&#10;vcs&#9;ACTION&#9;Vcs.Show.Log&#10;set&#9;ACTION&#9;WelcomeScreen.Settings&#10;setti&#9;ACTION&#9;WelcomeScreen.Settings&#10;sett&#9;ACTION&#9;WelcomeScreen.Settings&#10;full&#9;ACTION&#9;ToggleFullScreen&#10;full &#9;ACTION&#9;ToggleFullScreen&#10;toggle full screen&#9;FILE&#9;file:///usr/lib/python3.5/json/encoder.py&#10;proje&#9;ACTION&#9;ActivateProjectToolWindow&#10;minimap&#9;null&#9;null&#10;te&#9;ACTION&#9;ActivateTerminalToolWindow&#10;ter&#9;ACTION&#9;ActivateTerminalToolWindow" />
+    <property name="SearchEverywhereHistoryKey" value="gen&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/PYTHON/lab2/generate.py&#10;lo&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/PYTHON/lab2/logger.py&#10;ter&#9;ACTION&#9;ActivateTerminalToolWindow&#10;main&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/PYTHON/lab2/main.py&#10;vec&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/PYTHON/lab2/vector.py&#10;my&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/PYTHON/lab2/my_xrange.py&#10;vcs&#9;ACTION&#9;Vcs.Show.Log&#10;set&#9;ACTION&#9;WelcomeScreen.Settings&#10;setti&#9;ACTION&#9;WelcomeScreen.Settings&#10;sett&#9;ACTION&#9;WelcomeScreen.Settings&#10;full&#9;ACTION&#9;ToggleFullScreen&#10;full &#9;ACTION&#9;ToggleFullScreen&#10;toggle full screen&#9;FILE&#9;file:///usr/lib/python3.5/json/encoder.py&#10;proje&#9;ACTION&#9;ActivateProjectToolWindow&#10;minimap&#9;null&#9;null&#10;te&#9;ACTION&#9;ActivateTerminalToolWindow" />
     <property name="ToolWindowRun.ShowToolbar" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
@@ -259,40 +245,6 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
     </configuration>
-    <configuration default="false" name="decouse" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="lab2" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/decouse.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="terlog" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="lab2" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/terlog.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
     <configuration default="false" name="cashed" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -323,6 +275,40 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="lab2" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/my_xrange.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="vector" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="lab2" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/vector.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="stringtest" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="lab2" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/stringtest.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -449,7 +435,7 @@
       <option name="USE_KEYWORD" value="false" />
       <method />
     </configuration>
-    <configuration default="false" name="main" type="PythonConfigurationType" factoryName="Python">
+    <configuration default="false" name="sort" type="PythonConfigurationType" factoryName="Python">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -462,7 +448,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="lab2" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
-      <option name="PARAMETERS" value="" />
+      <option name="PARAMETERS" value="--program sort" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
     </configuration>
@@ -496,45 +482,27 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="lab2" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
-      <option name="PARAMETERS" value="-p generate -b 3 -l 100000 -s 5 -n 0" />
+      <option name="PARAMETERS" value="-p generate -b 3 -l 30000 -s 5 -n 0" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
     </configuration>
-    <configuration default="false" name="sort" type="PythonConfigurationType" factoryName="Python">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="lab2" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/sort.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
-    <list size="9">
-      <item index="0" class="java.lang.String" itemvalue="Python.main" />
+    <list size="8">
+      <item index="0" class="java.lang.String" itemvalue="Python.sort" />
       <item index="1" class="java.lang.String" itemvalue="Python.generate" />
       <item index="2" class="java.lang.String" itemvalue="Python.generate fixed" />
-      <item index="3" class="java.lang.String" itemvalue="Python.sort" />
-      <item index="4" class="java.lang.String" itemvalue="Python.logger" />
-      <item index="5" class="java.lang.String" itemvalue="Python.decouse" />
-      <item index="6" class="java.lang.String" itemvalue="Python.terlog" />
-      <item index="7" class="java.lang.String" itemvalue="Python.cashed" />
-      <item index="8" class="java.lang.String" itemvalue="Python.my_xrange" />
+      <item index="3" class="java.lang.String" itemvalue="Python.logger" />
+      <item index="4" class="java.lang.String" itemvalue="Python.cashed" />
+      <item index="5" class="java.lang.String" itemvalue="Python.my_xrange" />
+      <item index="6" class="java.lang.String" itemvalue="Python.vector" />
+      <item index="7" class="java.lang.String" itemvalue="Python.stringtest" />
     </list>
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Python.my_xrange" />
-        <item index="1" class="java.lang.String" itemvalue="Python.cashed" />
-        <item index="2" class="java.lang.String" itemvalue="Python.terlog" />
-        <item index="3" class="java.lang.String" itemvalue="Python.logger" />
-        <item index="4" class="java.lang.String" itemvalue="Python.decouse" />
+        <item index="1" class="java.lang.String" itemvalue="Python.stringtest" />
+        <item index="2" class="java.lang.String" itemvalue="Python.logger" />
+        <item index="3" class="java.lang.String" itemvalue="Python.cashed" />
+        <item index="4" class="java.lang.String" itemvalue="Python.vector" />
       </list>
     </recent_temporary>
   </component>
@@ -628,21 +596,21 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="54" y="-8" width="1554" height="916" extended-state="6" />
+    <frame x="0" y="0" width="1600" height="900" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2353706" sideWeight="0.48263028" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.235" sideWeight="0.48263028" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32941177" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287841" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25558314" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.69975185" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3598015" sideWeight="0.486875" order="9" side_tool="false" content_ui="tabs" x="494" y="47" width="674" height="806" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.12568909" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25452352" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2353706" sideWeight="0.51736975" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36724564" sideWeight="0.513125" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286385" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25469485" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.69953054" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24178404" sideWeight="0.486875" order="9" side_tool="false" content_ui="tabs" x="494" y="47" width="674" height="806" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.125625" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36150235" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.235" sideWeight="0.51736975" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36619717" sideWeight="0.513125" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -678,22 +646,6 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/vector.py</url>
-          <line>2</line>
-          <option name="timeStamp" value="41" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/vector.py</url>
-          <line>158</line>
-          <option name="timeStamp" value="42" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/cashed.py</url>
-          <option name="timeStamp" value="54" />
-        </line-breakpoint>
-      </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
           <properties notifyOnTerminate="true" exception="BaseException">
@@ -701,7 +653,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="64" />
+      <option name="time" value="70" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
@@ -726,8 +678,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
           <folding>
-            <marker date="1461136923154" expanded="true" signature="0:38" placeholder="import ..." />
-            <marker date="1461136923154" expanded="true" signature="1038:1039" placeholder="..." />
+            <marker date="1461512370604" expanded="true" signature="0:17" placeholder="import ..." />
+            <marker date="1461512370604" expanded="true" signature="1601:1602" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -736,7 +688,18 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#29#211#0" expanded="false" />
+            <element signature="e#244#424#0" expanded="false" />
+            <element signature="e#475#1511#0" expanded="false" />
+            <element signature="e#1550#1970#0" expanded="false" />
+            <element signature="e#2015#2225#0" expanded="false" />
+            <element signature="e#2268#2338#0" expanded="false" />
+            <element signature="e#2377#2461#0" expanded="false" />
+            <element signature="e#2496#2516#0" expanded="false" />
+            <element signature="e#2548#2563#0" expanded="false" />
+            <element signature="e#2602#2664#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -745,18 +708,13 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="25" column="23" selection-start-line="24" selection-start-column="16" selection-end-line="25" selection-end-column="23" />
           <folding>
-            <element signature="e#512#572#0" expanded="false" />
-            <element signature="e#943#1196#0" expanded="false" />
-            <element signature="e#1236#1433#0" expanded="false" />
-            <element signature="e#1688#1732#0" expanded="false" />
-            <element signature="e#1765#1794#0" expanded="false" />
-            <element signature="e#2166#2596#0" expanded="false" />
-            <element signature="e#2652#2929#0" expanded="false" />
-            <element signature="e#3336#3696#0" expanded="false" />
-            <element signature="e#3756#4060#0" expanded="false" />
-            <element signature="e#4128#4489#0" expanded="false" />
-            <element signature="e#4547#4827#0" expanded="false" />
-            <element signature="e#4893#5316#0" expanded="false" />
+            <element signature="e#1796#1834#0" expanded="false" />
+            <element signature="e#1867#1948#0" expanded="false" />
+            <element signature="e#1988#2392#0" expanded="false" />
+            <element signature="e#2435#2540#0" expanded="false" />
+            <element signature="e#2580#2826#0" expanded="false" />
+            <element signature="e#2865#3042#0" expanded="false" />
+            <element signature="e#3082#7298#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -774,8 +732,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="11" column="25" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
           <folding>
-            <marker date="1461136923154" expanded="true" signature="0:38" placeholder="import ..." />
-            <marker date="1461136923154" expanded="true" signature="1038:1039" placeholder="..." />
+            <marker date="1461512370604" expanded="true" signature="0:17" placeholder="import ..." />
+            <marker date="1461512370604" expanded="true" signature="1601:1602" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -800,8 +758,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="11" column="25" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
           <folding>
-            <marker date="1461136923154" expanded="true" signature="0:38" placeholder="import ..." />
-            <marker date="1461136923154" expanded="true" signature="1038:1039" placeholder="..." />
+            <marker date="1461512370604" expanded="true" signature="0:17" placeholder="import ..." />
+            <marker date="1461512370604" expanded="true" signature="1601:1602" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -826,8 +784,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="11" column="25" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
           <folding>
-            <marker date="1461136923154" expanded="true" signature="0:38" placeholder="import ..." />
-            <marker date="1461136923154" expanded="true" signature="1038:1039" placeholder="..." />
+            <marker date="1461512370604" expanded="true" signature="0:17" placeholder="import ..." />
+            <marker date="1461512370604" expanded="true" signature="1601:1602" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -844,34 +802,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="28" selection-end-column="10" />
           <folding>
-            <marker date="1461136923154" expanded="true" signature="0:38" placeholder="import ..." />
-            <marker date="1461136923154" expanded="true" signature="1038:1039" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/generate.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="19" column="14" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sort.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="28" selection-end-column="10" />
-          <folding>
-            <marker date="1461136923154" expanded="true" signature="0:38" placeholder="import ..." />
-            <marker date="1461136923154" expanded="true" signature="1038:1039" placeholder="..." />
+            <marker date="1461512370604" expanded="true" signature="0:17" placeholder="import ..." />
+            <marker date="1461512370604" expanded="true" signature="1601:1602" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -896,8 +828,34 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="28" selection-end-column="10" />
           <folding>
-            <marker date="1461136923154" expanded="true" signature="0:38" placeholder="import ..." />
-            <marker date="1461136923154" expanded="true" signature="1038:1039" placeholder="..." />
+            <marker date="1461512370604" expanded="true" signature="0:17" placeholder="import ..." />
+            <marker date="1461512370604" expanded="true" signature="1601:1602" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/generate.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="19" column="14" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sort.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="28" selection-end-column="10" />
+          <folding>
+            <marker date="1461512370604" expanded="true" signature="0:17" placeholder="import ..." />
+            <marker date="1461512370604" expanded="true" signature="1601:1602" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -922,8 +880,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="16" column="12" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="12" />
           <folding>
-            <marker date="1461136923154" expanded="true" signature="0:38" placeholder="import ..." />
-            <marker date="1461136923154" expanded="true" signature="1038:1039" placeholder="..." />
+            <marker date="1461512370604" expanded="true" signature="0:17" placeholder="import ..." />
+            <marker date="1461512370604" expanded="true" signature="1601:1602" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -941,8 +899,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="7" column="49" selection-start-line="7" selection-start-column="49" selection-end-line="7" selection-end-column="49" />
           <folding>
-            <marker date="1461136923154" expanded="true" signature="0:38" placeholder="import ..." />
-            <marker date="1461136923154" expanded="true" signature="1038:1039" placeholder="..." />
+            <marker date="1461512370604" expanded="true" signature="0:17" placeholder="import ..." />
+            <marker date="1461512370604" expanded="true" signature="1601:1602" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -970,72 +928,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/weui.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="4" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/stringtest.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="26" column="28" selection-start-line="26" selection-start-column="28" selection-end-line="26" selection-end-column="28" />
-          <folding>
-            <marker date="1461136923154" expanded="true" signature="0:38" placeholder="import ..." />
-            <marker date="1461136923154" expanded="true" signature="1038:1039" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vector.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="104" column="0" selection-start-line="104" selection-start-column="0" selection-end-line="104" selection-end-column="0" />
-          <folding>
-            <element signature="e#512#572#0" expanded="false" />
-            <element signature="e#943#1196#0" expanded="false" />
-            <element signature="e#1236#1433#0" expanded="false" />
-            <element signature="e#1688#1732#0" expanded="false" />
-            <element signature="e#1765#1794#0" expanded="false" />
-            <element signature="e#2166#2596#0" expanded="false" />
-            <element signature="e#2652#2929#0" expanded="false" />
-            <element signature="e#3336#3696#0" expanded="false" />
-            <element signature="e#3756#4060#0" expanded="false" />
-            <element signature="e#4128#4489#0" expanded="false" />
-            <element signature="e#4547#4827#0" expanded="false" />
-            <element signature="e#4893#5316#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/logger.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Python34/Lib/inspect.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.045146726">
           <caret line="92" column="0" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/terlog.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1048,98 +944,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/playing.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.07233273">
-          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/to_json.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="126" column="13" selection-start-line="126" selection-start-column="13" selection-end-line="126" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Python34/Lib/codecs.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="308" column="0" selection-start-line="308" selection-start-column="0" selection-end-line="308" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Python34/Lib/tempfile.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="396" column="0" selection-start-line="396" selection-start-column="0" selection-end-line="396" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Python34/Lib/functools.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cashed.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="21" column="35" selection-start-line="21" selection-start-column="35" selection-end-line="21" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/my_xrange.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5049505">
-          <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/strfiles/genrated.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/strfiles/sorted.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="4062.951">
-          <caret line="99136" column="2" selection-start-line="99136" selection-start-column="2" selection-end-line="99136" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/strfiles/selfish_sorted.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/generate.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="12" column="28" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
           <folding />
         </state>
       </provider>
@@ -1152,10 +960,136 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/strfiles/selfish_sorted.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.54241645">
+          <caret line="45323" column="2" selection-start-line="45323" selection-start-column="0" selection-end-line="45324" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/strfiles/sorted.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.54241645">
+          <caret line="45323" column="20" selection-start-line="45323" selection-start-column="0" selection-end-line="45324" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/strfiles/genrated.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1285347">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vector.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="210" column="0" selection-start-line="210" selection-start-column="0" selection-end-line="210" selection-end-column="0" />
+          <folding>
+            <element signature="e#1796#1834#0" expanded="false" />
+            <element signature="e#1867#1948#0" expanded="false" />
+            <element signature="e#1988#2392#0" expanded="false" />
+            <element signature="e#2435#2540#0" expanded="false" />
+            <element signature="e#2580#2826#0" expanded="false" />
+            <element signature="e#2865#3042#0" expanded="false" />
+            <element signature="e#3082#7298#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cashed.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.76">
+          <caret line="38" column="11" selection-start-line="38" selection-start-column="11" selection-end-line="38" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/my_xrange.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="27" column="30" selection-start-line="27" selection-start-column="29" selection-end-line="27" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/to_json.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5897436">
+          <caret line="123" column="28" selection-start-line="123" selection-start-column="28" selection-end-line="123" selection-end-column="28" />
+          <folding>
+            <element signature="e#29#211#0" expanded="false" />
+            <element signature="e#244#424#0" expanded="false" />
+            <element signature="e#475#1511#0" expanded="false" />
+            <element signature="e#1550#1970#0" expanded="false" />
+            <element signature="e#2015#2225#0" expanded="false" />
+            <element signature="e#2268#2338#0" expanded="false" />
+            <element signature="e#2377#2461#0" expanded="false" />
+            <element signature="e#2496#2516#0" expanded="false" />
+            <element signature="e#2548#2563#0" expanded="false" />
+            <element signature="e#2602#2664#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/logger.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="25" column="74" selection-start-line="25" selection-start-column="74" selection-end-line="25" selection-end-column="74" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <folding>
+            <marker date="1461512370604" expanded="true" signature="0:17" placeholder="import ..." />
+            <marker date="1461512370604" expanded="true" signature="1601:1602" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/generate.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="13" column="18" selection-start-line="13" selection-start-column="18" selection-end-line="13" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3883495">
+          <caret line="16" column="101" selection-start-line="16" selection-start-column="101" selection-end-line="16" selection-end-column="101" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Python34/Lib/tempfile.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="398" column="0" selection-start-line="398" selection-start-column="0" selection-end-line="398" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Python34/Lib/codecs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33203125">
+          <caret line="306" column="0" selection-start-line="306" selection-start-column="0" selection-end-line="306" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/sort.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6147541">
-          <caret line="24" column="49" selection-start-line="24" selection-start-column="49" selection-end-line="24" selection-end-column="49" />
+        <state vertical-scroll-proportion="0.35679612">
+          <caret line="109" column="8" selection-start-line="109" selection-start-column="8" selection-end-line="109" selection-end-column="8" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
           </folding>

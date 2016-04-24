@@ -3,15 +3,19 @@ from random import *
 # default line_separator - \n
 # default block_separator - \t
 # default isfixedblocks = true
+def benchmark(func):
+    import time
 
+    def wrapper(*args, **kwargs):
+        start_time = time.time()
+        res = func(*args, **kwargs)
+        print("--- {0} seconds ---".format(time.time() - start_time))
+        return res
+    return wrapper
+
+
+@benchmark
 def generate(block_count, block_separator,  line_count, line_separator, isnums, letter_count):
-    count_of_strings = 0
-    count_of_blocks = 0
-    count_of_letters = 0
-    # count of strings
-    # count of blocks in strings
-    # count of letters in blocks
-
     if line_separator == "\\n":
         line_separator = "\n"
     if block_separator == "\\t":
@@ -42,9 +46,8 @@ def generate(block_count, block_separator,  line_count, line_separator, isnums, 
             s = ""
 
 
-
-def random_chr(isnums):
-    if isnums == '0':
+def random_chr(is_nums):
+    if is_nums == '0':
         return str(randint(0, 9))
     else:
         return chr(randint(97, 122))

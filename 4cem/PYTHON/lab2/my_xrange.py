@@ -1,14 +1,28 @@
 class xrange(object):
-        def __init__(self):
-            pass
+        def __init__(self, *args):
+            self.arguments = args
+            self.range = []
+            for i in self.gene(*args):
+                self.range.append(i)
+            self.current = 0
+
         def __next__(self):
-            pass
+            self.current += 1
+            return self.range[self.current]
+
+        def __reversed__(self):
+            self.range = reversed(self.range)
+            return self.range
+
         def __getitem__(self, item):
-            pass
+            return self.range[item]
+
         def __get__(self, instance, owner):
+            # self.current += 1
+            # return self.range[self.current - 1]
             pass
 
-        def gene(*args):
+        def gene(self, *args):
             a = 0
             step = 1
             if len(args) == 1:
@@ -39,11 +53,24 @@ class xrange(object):
 
 
 
+def main():
 
-print(str(range(100500)[63]))
-print(str(next(reversed(range(100500)))))
-# for i in range(10, 1, 0):
-#     print(i)
 
-# for i in xrange(2, 10, 0):
-#     print(i)
+
+    # print(str(range(100500)[63]))
+    # print(str(xrange(100500)[63]))
+    #
+    # print(str(next(reversed(range(100500)))))
+    # print(str(next(reversed(xrange(100500)))))
+
+
+    for i in range(10, 1, -1):
+        print(i)
+
+    # a = xrange(2, 10, 0)
+
+    for i in xrange(2, 10, 1):
+        print(i)
+
+if __name__ == '__main__':
+    main()

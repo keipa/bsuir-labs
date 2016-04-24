@@ -1,6 +1,6 @@
 import tempfile
-import os
-import time
+import sys
+import select
 
 def benchmark(func):
     import time
@@ -13,65 +13,91 @@ def benchmark(func):
 
 
 @benchmark
-def main():
-    selfish_sort()
-    # list_of_splitted_tmp = split_file(8500, "\n", "strfiles/genrated.txt")
-    # list_of_sorted_tmp = []
-    # count = 1
-    # for each in range(len(list_of_splitted_tmp)):
-    #     list_of_splitted_tmp[each].seek(0)
-    # for each in range(len(list_of_splitted_tmp)):
-    #     list_of_sorted_tmp.append(sorting(list_of_splitted_tmp[each], "\n", 0))
-    #     print("sorting {0}".format(str(count)))
-    #     count += 1
-    # # for each in list_of_sorted_tmp:
-    # #     show_all_tmp(each)
-    # merging(list_of_sorted_tmp)
+def main(block_separator, line_separator, input_file, output_file, buffer_size):
+    # selfish_sort()
+
+    list_of_split_tmp = split_file(buffer_size, line_separator, input_file)
+    list_of_sorted_tmp = []
+    count = 1
+    for each in range(len(list_of_split_tmp)):
+        list_of_split_tmp[each].seek(0)
+    for each in range(len(list_of_split_tmp)):
+        list_of_sorted_tmp.append(sorting(list_of_split_tmp[each], line_separator, block_separator))
+        print("sorting {0}".format(str(count)))
+        count += 1
+    merging(list_of_sorted_tmp, block_separator, line_separator, output_file)
+
+
+# def sorting(temp_file, line_splitter, block_splitter):
+#     a = next_temp_line(temp_file, line_splitter)
+#     destination = tempfile.TemporaryFile()
+#     original_string = []
+#     while a is not None:
+#         original_string.append(a)
+#         a = next_temp_line(temp_file, line_splitter)
+#     original_string.sort()
+#     for each in original_string:
+#         destination.write(bytes(each, encoding="UTF-8"))
+#     destination.seek(0)
+#     return destination
 
 def sorting(temp_file, line_splitter, block_splitter):
-    a = next_templine(temp_file, line_splitter)
-    dest = tempfile.TemporaryFile()
-    b = []
-    while a != None:
-        b.append(a)
-        a = next_templine(temp_file, line_splitter)
-    b.sort()
-    for each in b:
-        dest.write(bytes(each, encoding="UTF-8"))
-    dest.seek(0)
-    return dest
+    a = next_temp_line(temp_file, line_splitter)
+    destination = tempfile.TemporaryFile()
+    original_string = {}
+    while a is not None:
+        val = a.split(block_splitter)
+        actual_string = ""
+        for each in val:
+            actual_string+=each
+        original_string[a] = actual_string
+        a = next_temp_line(temp_file, line_splitter)
+    original_string = list(original_string.items())
+    original_string.sort(key=lambda tup: tup[1])
+    for each in original_string:
+        destination.write(bytes(each[0], encoding="UTF-8"))
+    destination.seek(0)
+    return destination
 
-
-def next_templine(temp_file, line_splitter):
-    bufString = ""
+def next_temp_line(temp_file, line_splitter):
+    buf_string = ""
     while True:
         symbol = temp_file.read(1)
         symbol = str(symbol, encoding='UTF-8')
         if not symbol:
             return None
         elif symbol != line_splitter:
-            bufString += symbol
+            buf_string += symbol
         else:
-            bufString += symbol
-            return bufString
+            buf_string += symbol
+            return buf_string
+
 
 def show_all_tmp(temp_file, line_splitter):
-    a = next_templine(temp_file, line_splitter)
-    while a != None:
-        a = next_templine(temp_file, line_splitter)
+    a = next_temp_line(temp_file, line_splitter)
+    while a is not None:
+        a = next_temp_line(temp_file, line_splitter)
         print(a)
 
 
 def split_file(buffer_size, string_separator, path):
+    # type
+    # if select.select([sys.stdin,],[],[],0.0)[0]:
+    #     data = sys.stdin.readlines()
+    #     if len(data) != 0 and type(data) is not None:
+    #         with open(path, "w") as f:
+    #             for each in data:
+    #                 f.write(each)
+
     with open(path, "r") as file:
         count_lines = 0
         file_count = 1
         file_list = []
         for line in file:
             if count_lines == 0:
-                dest = tempfile.TemporaryFile()
-                file_list.append(dest)
-            dest.write(bytes(line, encoding="UTF-8"))
+                destination = tempfile.TemporaryFile()
+                file_list.append(destination)
+            destination.write(bytes(line, encoding="UTF-8"))
             count_lines += 1
             if count_lines > buffer_size-1:
                 file_count += 1
@@ -80,16 +106,18 @@ def split_file(buffer_size, string_separator, path):
     return file_list
 
 
-def merging(list_of_sorted_tmp):
+def key_sort():
+    pass
+
+def merging(list_of_sorted_tmp, block_separator, line_separator, output_file):
     big_sort = []
-    # prepearing
     temp = tempfile.TemporaryFile()
     big_sort.append(temp)
     if len(list_of_sorted_tmp) >= 2:
-        line = next_templine(list_of_sorted_tmp[0], "\n")
+        line = next_temp_line(list_of_sorted_tmp[0], line_separator)
         while line is not None:
             big_sort[0].write(bytes(line, encoding="UTF-8"))
-            line = next_templine(list_of_sorted_tmp[0], "\n")
+            line = next_temp_line(list_of_sorted_tmp[0], line_separator)
         big_sort[0].seek(0)
     current = 0
     for tmp_index in range(len(list_of_sorted_tmp)-1):
@@ -97,32 +125,60 @@ def merging(list_of_sorted_tmp):
         current += 1
         new_temp = tempfile.TemporaryFile()
         big_sort.append(new_temp)
-        left_line = next_templine(big_sort[current-1], "\n")
-        right_line = next_templine(list_of_sorted_tmp[tmp_index+1], "\n")
+        left_line = next_temp_line(big_sort[current - 1], line_separator)
+        right_line = next_temp_line(list_of_sorted_tmp[tmp_index + 1], line_separator)
+        val = left_line.split(block_separator)
+        actual_left_string = ""
+        for each in val:
+            actual_left_string += each
+        val = right_line.split(block_separator)
+        actual_right_string = ""
+        for each in val:
+            actual_right_string += each
         while left_line is not None and right_line is not None:
-            if left_line < right_line:
+            if actual_left_string < actual_right_string:
                 big_sort[current].write(bytes(left_line, encoding="UTF-8"))
-                left_line = next_templine(big_sort[current-1], "\n")
+                left_line = next_temp_line(big_sort[current - 1], line_separator)
+                if left_line is not None and right_line is not None:
+                    val = left_line.split(block_separator)
+                    actual_left_string = ""
+                    for each in val:
+                        actual_left_string += each
             else:
                 big_sort[current].write(bytes(right_line, encoding="UTF-8"))
-                right_line = next_templine(list_of_sorted_tmp[tmp_index+1], "\n")
+                right_line = next_temp_line(list_of_sorted_tmp[tmp_index + 1], line_separator)
+                if left_line is not None and right_line is not None:
+                    val = right_line.split(block_separator)
+                    actual_right_string = ""
+                    for each in val:
+                        actual_right_string += each
         if left_line is None:
             while right_line is not None:
                 big_sort[current].write(bytes(right_line, encoding="UTF-8"))
-                right_line = next_templine(list_of_sorted_tmp[tmp_index+1], "\n")
+                right_line = next_temp_line(list_of_sorted_tmp[tmp_index + 1], line_separator)
+                if left_line is not None and right_line is not None:
+                    val = right_line.split(block_separator)
+                    actual_right_string = ""
+                    for each in val:
+                        actual_right_string += each
         if right_line is None:
             while left_line is not None:
                 big_sort[current].write(bytes(left_line, encoding="UTF-8"))
-                left_line = next_templine(big_sort[current-1], "\n")
+                left_line = next_temp_line(big_sort[current - 1], line_separator)
+                if left_line is not None and right_line is not None:
+                    val = left_line.split(block_separator)
+                    actual_left_string = ""
+                    for each in val:
+                        actual_left_string += each
         big_sort[current].seek(0)
     print("merging complete")
-    with open("strfiles/sorted.txt", "w") as f:
-        tmp_line = next_templine(big_sort[current], "\n")
+    with open(output_file, "w") as f:
+        tmp_line = next_temp_line(big_sort[current], line_separator)
         while tmp_line is not None:
             f.write(tmp_line)
-            tmp_line = next_templine(big_sort[len(big_sort)-1], "\n")
-
+            tmp_line = next_temp_line(big_sort[len(big_sort) - 1], line_separator)
     print("Success!")
+
 
 def selfish_sort():
     b = []
