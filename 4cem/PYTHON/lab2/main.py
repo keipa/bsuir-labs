@@ -20,6 +20,8 @@ def create_parser():
     parser.add_argument('-i', "--input", default="strfiles/genrated.txt")
     parser.add_argument('-o', "--output", default="strfiles/sorted.txt")
     parser.add_argument('-bu', "--buffer", default='5000')
+    parser.add_argument('-k', "--keys", nargs="+", default=[])
+    parser.add_argument('-r', "--reverse", action='store_true')
 
     return parser
 
@@ -39,7 +41,9 @@ def menu():
                   namespace.lineseparator,
                   namespace.input,
                   namespace.output,
-                  int(namespace.buffer))
+                  int(namespace.buffer),
+                  namespace.reverse,
+                  namespace.keys,)
     if namespace.program == "vector":
         vector.main()
     if namespace.program == "json":

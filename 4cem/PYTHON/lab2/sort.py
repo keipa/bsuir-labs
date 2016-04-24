@@ -13,20 +13,35 @@ def benchmark(func):
 
 
 @benchmark
-def main(block_separator, line_separator, input_file, output_file, buffer_size):
+def main(block_separator, line_separator, input_file, output_file, buffer_size, reverse ,keys = []):
     # selfish_sort()
+    if len(keys) == 0:
+        list_of_split_tmp = split_file(buffer_size, line_separator, input_file)
+        list_of_sorted_tmp = []
+        count = 1
+        for each in range(len(list_of_split_tmp)):
+            list_of_split_tmp[each].seek(0)
+        for each in range(len(list_of_split_tmp)):
+            list_of_sorted_tmp.append(sorting(list_of_split_tmp[each], line_separator, block_separator))
+            print("sorting {0}".format(str(count)))
+            count += 1
+        merging(list_of_sorted_tmp, block_separator, line_separator, output_file)
+    else:
+        key_sort(block_separator, line_separator, input_file, output_file, keys)
+    if reverse:
+        print("re")
+        reversion(output_file)
 
-    list_of_split_tmp = split_file(buffer_size, line_separator, input_file)
-    list_of_sorted_tmp = []
-    count = 1
-    for each in range(len(list_of_split_tmp)):
-        list_of_split_tmp[each].seek(0)
-    for each in range(len(list_of_split_tmp)):
-        list_of_sorted_tmp.append(sorting(list_of_split_tmp[each], line_separator, block_separator))
-        print("sorting {0}".format(str(count)))
-        count += 1
-    merging(list_of_sorted_tmp, block_separator, line_separator, output_file)
 
+def reversion(output_file):
+    f = open(output_file, "r")
+    s = f.readlines()
+    f.close()
+    f = open(output_file, "w")
+    s.reverse()
+    for item in s:
+        f.write(str(item))
+    f.close()
 
 # def sorting(temp_file, line_splitter, block_splitter):
 #     a = next_temp_line(temp_file, line_splitter)
@@ -106,8 +121,21 @@ def split_file(buffer_size, string_separator, path):
     return file_list
 
 
-def key_sort():
-    pass
+def key_sort(block_separator, line_separator, input_file, output_file, keys):
+    b = []
+    s = []
+    with open(input_file, "r") as file:
+        for line in file:
+            b.append(line)
+    for each in range(len(keys)-1):
+        s.append(b[int(keys[each])-1])
+    s.sort()
+    for each in range(len(s)-1):
+        b[int(keys[each])-1] = s[each]
+    with open(output_file, "w") as f:
+        for each in range(len(b)-1):
+            f.write(b[each])
+
 
 def merging(list_of_sorted_tmp, block_separator, line_separator, output_file):
     big_sort = []
@@ -119,9 +147,21 @@ def merging(list_of_sorted_tmp, block_separator, line_separator, output_file):
             big_sort[0].write(bytes(line, encoding="UTF-8"))
             line = next_temp_line(list_of_sorted_tmp[0], line_separator)
         big_sort[0].seek(0)
+    else:
+        line = next_temp_line(list_of_sorted_tmp[0], line_separator)
+        while line is not None:
+            big_sort[0].write(bytes(line, encoding="UTF-8"))
+            line = next_temp_line(list_of_sorted_tmp[0], line_separator)
+        big_sort[0].seek(0)
+        with open(output_file, "w") as f:
+            tmp_line = next_temp_line(big_sort[0], line_separator)
+            while tmp_line is not None:
+                f.write(tmp_line)
+                tmp_line = next_temp_line(big_sort[len(big_sort) - 1], line_separator)
+        return
     current = 0
     for tmp_index in range(len(list_of_sorted_tmp)-1):
-        print("merging "+str(current))
+        print("merging "+str(current+1))
         current += 1
         new_temp = tempfile.TemporaryFile()
         big_sort.append(new_temp)
