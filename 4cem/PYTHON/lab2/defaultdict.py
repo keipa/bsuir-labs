@@ -47,23 +47,35 @@ class Defaul_dict( object):
         try:
             a = pointer[item]
         except KeyError:
+            pointer[item] = 0
+
+        if pointer[item] == 0:
             pointer[item] = Defaul_dict(self.x)
             return pointer[item]
-
-        if pointer[item] != 0:
+        else:
             return pointer[item]
             # return Defaul_dict.getitem(self,item, pointer[item])
-        # if deep == self.dimension:
-        #     return pointer[item % self.dimension]
-        # else:
-        #     deep += 1
-        #     return Defaul_dict.getitem(self, item, pointer[(item//self.dimension)-1], deep)
-    #
+            # if deep == self.dimension:
+            #     return pointer[item % self.dimension]
+            # else:
+            #     deep += 1
+            #     return Defaul_dict.getitem(self, item, pointer[(item//self.dimension)-1], deep)
+#
     # def __setitem__(self, key, value):
     #     pass
 
     def __str__(self):
-        return str(self.x)
+        ret = "{"
+        length = 0
+        for key in self.d:
+            ret += str(key) + ":" +str(self.d[key])
+            if length < len(self.d)-1 :
+                ret +=", "
+            length += 1
+
+
+        return ret + "}"
+        return str(self.d)
 
 def retx():
     return 0
@@ -80,15 +92,19 @@ def main():
     #
     # print(d[2][2])
 
-
-
     d = Defaul_dict(retx())
-    d[1][2] = 2
-    d[2] = 5
-    d[3][5][1] = 4
+    d["1"] = 2
+    d["2"] = 5
+    d["3"]["5"]["1"] = 4
+    d["3"]["ew2"]["2"] = None
 
+    # print(str(d[3][5][2]))
 
-    print(str(d[3][5][3]))
+    # print(b[2])
+    # d[2] = {2: 4}
+    #
+    # print(d[2][2])    print(str(d[3]["3"][2]))
+    print(str(d))
 
 if __name__ == '__main__':
     main()
