@@ -1,6 +1,7 @@
 import tempfile
 import sys
 import select
+import hashlib
 
 def benchmark(func):
     import time
@@ -12,8 +13,15 @@ def benchmark(func):
     return wrapper
 
 
+def md5(fname):
+    hash_md5 = hashlib.md5()
+    with open(fname, "rb") as f:
+        for chunk in iter(lambda: f.read(4096), b""):
+            hash_md5.update(chunk)
+    return hash_md5.hexdigest()
+
 @benchmark
-def main(block_separator, line_separator, input_file, output_file, buffer_size, reverse ,keys = []):
+def main(block_separator, line_separator, input_file, output_file, buffer_size, reverse, checked,  keys = []):
     # selfish_sort()
     if len(keys) == 0:
         list_of_split_tmp = split_file(buffer_size, line_separator, input_file)
@@ -31,7 +39,11 @@ def main(block_separator, line_separator, input_file, output_file, buffer_size, 
     if reverse:
         print("re")
         reversion(output_file)
-
+    if checked:
+        if md5(output_file) != md5(input_file):
+            print(str(False))
+        else:
+            print(str(True))
 
 def reversion(output_file):
     f = open(output_file, "r")
