@@ -1,5 +1,5 @@
 import argparse
-
+import defaultdict
 import generate
 import to_json
 import vector
@@ -7,6 +7,8 @@ import cashed
 import logger
 import my_xrange
 import sort
+import meta
+
 
 def create_parser():
     parser = argparse.ArgumentParser()
@@ -56,8 +58,10 @@ def menu():
         logger.main()
     if namespace.program == "xrange":
         my_xrange.main()
-
-
+    if namespace.program == "dict":
+        defaultdict.main()
+    if namespace.program == "meta":
+        meta.main()
 
 if __name__ == '__main__':
     menu()
