@@ -29,7 +29,7 @@ def benchmark(func):
 
 
 @benchmark
-@cashed
+# @cashed
 def one(q, **kwargs):
     # print(str(kwargs.get('lol')))
     print("computing")

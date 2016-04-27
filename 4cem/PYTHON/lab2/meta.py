@@ -15,7 +15,7 @@ class UpperAttrMetaclass(type):
         return attrs
 
 
-class Cls(object, metaclass=UpperAttrMetaclass):
+class Cls(object, metaclass=UpperAttrMetaclass("")):
 
     # def __getattr__(self, item):
     #
