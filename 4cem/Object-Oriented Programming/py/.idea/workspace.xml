@@ -70,8 +70,8 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7100671">
-              <caret line="227" column="22" selection-start-line="227" selection-start-column="0" selection-end-line="228" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.68508995">
+              <caret line="226" column="16" selection-start-line="226" selection-start-column="16" selection-end-line="226" selection-end-column="16" />
               <folding>
                 <element signature="e#47#59#0" expanded="true" />
               </folding>
@@ -139,10 +139,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="51" />
-    <option name="y" value="172" />
+    <option name="x" value="54" />
+    <option name="y" value="-8" />
     <option name="width" value="1554" />
-    <option name="height" value="912" />
+    <option name="height" value="916" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -171,7 +171,7 @@
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
+    <navigator proportions="" version="1">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -184,36 +184,13 @@
       <manualOrder />
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="py" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="py" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="py" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
-    </panes>
+    <panes />
   </component>
   <component name="PropertiesComponent">
     <property name="SearchEverywhereHistoryKey" value="str&#9;ACTION&#9;ActivateStructureToolWindow&#10;full&#9;ACTION&#9;ToggleFullScreen&#10;to&#9;ACTION&#9;ActivateTODOToolWindow&#10;up&#9;null&#9;null&#10;pa&#9;null&#9;null&#10;leve&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/OOP/py/level_generation.py&#10;le&#9;null&#9;null&#10;mine&#9;null&#9;null&#10;in&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/OOP/py/interface.py&#10;run&#9;ACTION&#9;ActivateRunToolWindow&#10;rub&#9;null&#9;null&#10;ru&#9;ACTION&#9;ActivateRunToolWindow&#10;m&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/OOP/py/miner.py&#10;sett&#9;ACTION&#9;WelcomeScreen.Settings&#10;plugin&#9;ACTION&#9;WelcomeScreen.Plugins&#10;set&#9;ACTION&#9;WelcomeScreen.Settings&#10;menu&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/OOP/py/menu.py&#10;new &#9;ACTION&#9;NewGroup&#10;ful&#9;ACTION&#9;ToggleFullScreen&#10;settings&#9;ACTION&#9;WelcomeScreen.Settings" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../NUMERICAL.ANALYSIS/gauss" />
   </component>
   <component name="RunManager" selected="Python.menu">
     <configuration default="false" name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
@@ -443,7 +420,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="51" y="172" width="1554" height="912" extended-state="0" />
+    <frame x="54" y="-8" width="1554" height="916" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20871261" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -502,6 +479,13 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/main.py</url>
+          <line>206</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+      </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
           <properties notifyOnTerminate="true" exception="BaseException">
@@ -509,7 +493,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="15" />
+      <option name="time" value="16" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -980,8 +964,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7100671">
-          <caret line="227" column="22" selection-start-line="227" selection-start-column="0" selection-end-line="228" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.68508995">
+          <caret line="226" column="16" selection-start-line="226" selection-start-column="16" selection-end-line="226" selection-end-column="16" />
           <folding>
             <element signature="e#47#59#0" expanded="true" />
           </folding>
