@@ -1,6 +1,6 @@
 object Form1: TForm1
-  Left = 273
-  Top = 71
+  Left = 247
+  Top = 178
   Width = 516
   Height = 319
   Caption = 'MMX Tech'
