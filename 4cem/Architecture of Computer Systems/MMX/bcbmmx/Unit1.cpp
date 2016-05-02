@@ -21,7 +21,7 @@ void __fastcall TForm1::Button2Click(TObject *Sender)
         int B [8] = {0,0,0,0,0,0,0,0};
         int C [8] = {0,0,0,0,0,0,0,0};
         int D [8] = {0,0,0,0,0,0,0,0};
-
+        try{
         A[0] = StrToInt(Edit1->Text);
         A[1] = StrToInt(Edit2->Text);
         A[2] = StrToInt(Edit3->Text);
@@ -64,6 +64,12 @@ void __fastcall TForm1::Button2Click(TObject *Sender)
         D[5] = StrToInt(Edit30->Text);
         D[6] = StrToInt(Edit31->Text);
         D[7] = StrToInt(Edit32->Text);
+        }
+        catch(Exception *ex)
+        {
+        Memo1->Lines->Add("type NUMBERS");
+        return;
+        }
 
   __int8 m64_a0 = A[0];
   __int8 m64_a1 = A[1];
@@ -95,6 +101,22 @@ void __fastcall TForm1::Button2Click(TObject *Sender)
   __int8 m64_c6 = C[6];
   __int8 m64_c7 = C[7];
 
+  for(int i = 0; i<7;i++){
+        if (A[i]<-128 || A[i]>127){
+                Memo1->Lines->Add("A["+IntToStr(i+1)+ "] is out of range");
+                return;   }
+         if (B[i]<-128 || B[i]>127){
+                Memo1->Lines->Add( "B["+IntToStr(i+1)+ "] is out of range");
+                return;    }
+          if (C[i]<-128 || C[i]>127){
+                Memo1->Lines->Add("C["+IntToStr(i+1)+ "] is out of range");
+                return;   }
+          if (D[i]<-16384 || D[i]>16256){
+                Memo1->Lines->Add("D ["+IntToStr(i+1)+ "] is out of range");
+                return;
+
+  }
+  }
   __int16 m64_d0 = D[0];
   __int16 m64_d1 = D[1];
   __int16 m64_d2 = D[2];
@@ -105,7 +127,7 @@ void __fastcall TForm1::Button2Click(TObject *Sender)
   __int16 m64_d6 = D[6];
   __int16 m64_d7 = D[7];
 
-
+  //d = -16384/16256   abc = -128/127
   __int8 masa[8] = {m64_a0, m64_a1, m64_a2, m64_a3, m64_a4, m64_a5, m64_a6, m64_a7};
   __int8 masb[8] = {m64_b0,m64_b1,m64_b2,m64_b3,m64_b4,m64_b5,m64_b6,m64_b7};
   __int8 masc[8] = {m64_c0,m64_c1,m64_c2,m64_c3,m64_c4,m64_c5,m64_c6,m64_c7};
@@ -160,8 +182,8 @@ __asm
         punpckhbw mm3, mm7
         // pmullw mm0, [edi]
 
-        psubd mm2,mm0  // mm2 contains fisrt past of a-b*c
-        psubd mm3,mm1   //mm3 contains second part of a-b*c
+        psubw mm2,mm0  // mm2 contains fisrt past of a-b*c
+        psubw mm3,mm1   //mm3 contains second part of a-b*c
 
         pxor mm0,mm0
         pxor mm1,mm1
@@ -171,25 +193,27 @@ __asm
      //   pxor edi, edi
 
                    //mm2 -> mm5 mm6
-            /* pcmpgtb mm7,mm2
+        /*     pcmpgtb mm7,mm2
              punpcklwd mm5, mm7   //1/4 a-b*c
              // pcmpgtb mm7,mm1
-             punpckhwd mm6, mm7              //2/4 a-b*c   */
+             punpckhwd mm6, mm7              //2/4 a-b*c     */
+
         pxor mm7,mm7
 
         lea ebx, masd
         movq mm0, [ebx] //mm3 mm4
         movq mm1, [ebx+8]
 
-             /*pcmpgtb mm7,mm0
+        /*pcmpgtb mm7,mm0
              punpcklwd mm3, mm7        // 1/4 d
              // pcmpgtb mm7,mm1
-             punpckhwd mm4, mm7        //2/4 d  */
+             punpckhwd mm4, mm7        //2/4 d             */
 
 
-        psubd mm2,mm0  // mm2 contains fisrt past of a-b*c-d
-        psubd mm3,mm1   //mm3 contains second part of a-b*c-d
+        psubw mm2,mm0  // mm2 contains fisrt past of a-b*c-d   1/4
+        psubw mm3,mm1   //mm3 contains second part of a-b*c-d   2/4
         // to c array
+
         lea ecx, masr   //saving first part
         movq [ecx], mm2
         movq [ecx+8], mm3
@@ -199,6 +223,14 @@ __asm
     // mov get, esi
     // paddd mm1, m64_2;
     // movq m64_3, mm1;
+    pxor mm0, mm0
+    pxor mm1, mm1
+    pxor mm2, mm2
+    pxor mm3, mm3
+    pxor mm4, mm4
+    pxor mm5, mm5
+    pxor mm6, mm6
+    pxor mm7, mm7
 
     emms
 }
@@ -212,48 +244,18 @@ Edit38->Text = IntToStr(masr[5]);
 Edit39->Text = IntToStr(masr[6]);
 Edit40->Text = IntToStr(masr[7]);
 Memo1->Text = "assembled";
-
+masr[0] = 0;
+masr[1] = 0;
+masr[2] = 0;
+masr[3] = 0;
+masr[4] = 0;
+masr[5] = 0;
+masr[6] = 0;
+masr[7] = 0;
 }
 
-//---------------------------------------------------------------------------
-void __fastcall TForm1::Button1Click(TObject *Sender)
-{
-        Edit1->Text = StrToInt(rand()%10+1);
-        Edit2->Text = StrToInt(rand()%10+1);
-        Edit3->Text = StrToInt(rand()%10+1);
-        Edit4->Text = StrToInt(rand()%10+1);
-        Edit5->Text = StrToInt(rand()%10+1);
-        Edit6->Text = StrToInt(rand()%10+1);
-        Edit7->Text = StrToInt(rand()%10+1);
-        Edit8->Text = StrToInt(rand()%10+1);
-        Edit9->Text = StrToInt(rand()%10+1);
-        Edit10->Text = StrToInt(rand()%10+1);
-        Edit11->Text = StrToInt(rand()%10+1);
-        Edit12->Text = StrToInt(rand()%10+1);
-        Edit13->Text = StrToInt(rand()%10+1);
-        Edit14->Text = StrToInt(rand()%10+1);
-        Edit15->Text = StrToInt(rand()%10+1);
-        Edit16->Text = StrToInt(rand()%10+1);
-        Edit17->Text = StrToInt(rand()%10+1);
-        Edit18->Text = StrToInt(rand()%10+1);
-        Edit19->Text = StrToInt(rand()%10+1);
-        Edit20->Text = StrToInt(rand()%10+1);
-        Edit21->Text = StrToInt(rand()%10+1);
-        Edit22->Text = StrToInt(rand()%10+1);
-        Edit23->Text = StrToInt(rand()%10+1);
-        Edit24->Text = StrToInt(rand()%10+1);
-        Edit25->Text = StrToInt(rand()%10+1);
-        Edit26->Text = StrToInt(rand()%10+1);
-        Edit27->Text = StrToInt(rand()%10+1);
-        Edit28->Text = StrToInt(rand()%10+1);
-        Edit29->Text = StrToInt(rand()%10+1);
-        Edit30->Text = StrToInt(rand()%10+1);
-        Edit31->Text = StrToInt(rand()%10+1);
-        Edit32->Text = StrToInt(rand()%10+1);
 
 
-}
-//---------------------------------------------------------------------------
 
 
 void __fastcall TForm1::Button3Click(TObject *Sender)
@@ -292,5 +294,48 @@ void __fastcall TForm1::Button3Click(TObject *Sender)
         Edit32->Clear();
 }
 //---------------------------------------------------------------------------
+
+
+
+
+
+void __fastcall TForm1::Button4Click(TObject *Sender)
+{
+        Edit1->Text = StrToInt(rand()%240-120);
+        Edit2->Text = StrToInt(rand()%240-120);
+        Edit3->Text = StrToInt(rand()%240-120);
+        Edit4->Text = StrToInt(rand()%240-120);
+        Edit5->Text = StrToInt(rand()%240-120);
+        Edit6->Text = StrToInt(rand()%240-120);
+        Edit7->Text = StrToInt(rand()%240-120);
+        Edit8->Text = StrToInt(rand()%240-120);
+        Edit9->Text = StrToInt(rand()%240-120);
+        Edit10->Text = StrToInt(rand()%240-120);
+        Edit11->Text = StrToInt(rand()%240-120);
+        Edit12->Text = StrToInt(rand()%240-120);
+        Edit13->Text = StrToInt(rand()%240-120);
+        Edit14->Text = StrToInt(rand()%240-120);
+        Edit15->Text = StrToInt(rand()%240-120);
+        Edit16->Text = StrToInt(rand()%240-120);
+        Edit17->Text = StrToInt(rand()%240-120);
+        Edit18->Text = StrToInt(rand()%240-120);
+        Edit19->Text = StrToInt(rand()%240-120);
+        Edit20->Text = StrToInt(rand()%240-120);
+        Edit21->Text = StrToInt(rand()%240-120);
+        Edit22->Text = StrToInt(rand()%240-120);
+        Edit23->Text = StrToInt(rand()%240-120);
+        Edit24->Text = StrToInt(rand()%240-120);
+        Edit25->Text = StrToInt(rand()%32000-16000);
+        Edit26->Text = StrToInt(rand()%32000-16000);
+        Edit27->Text = StrToInt(rand()%32000-16000);
+        Edit28->Text = StrToInt(rand()%32000-16000);
+        Edit29->Text = StrToInt(rand()%32000-16000);
+        Edit30->Text = StrToInt(rand()%32000-16000);
+        Edit31->Text = StrToInt(rand()%32000-16000);
+        Edit32->Text = StrToInt(rand()%32000-16000);
+}
+//---------------------------------------------------------------------------
+
+
 
 
