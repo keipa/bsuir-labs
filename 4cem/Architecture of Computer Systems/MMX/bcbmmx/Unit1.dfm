@@ -1,7 +1,7 @@
 object Form1: TForm1
-  Left = 247
-  Top = 178
-  Width = 516
+  Left = 280
+  Top = 177
+  Width = 626
   Height = 319
   Caption = 'MMX Tech'
   Color = clBtnFace
@@ -11,7 +11,6 @@ object Form1: TForm1
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
-  OnCreate = Button1Click
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
@@ -857,58 +856,46 @@ object Form1: TForm1
     Enabled = False
     TabOrder = 39
   end
-  object Button1: TButton
-    Left = 8
+  object Button2: TButton
+    Left = 312
     Top = 224
-    Width = 97
+    Width = 169
     Height = 49
-    Caption = 'Generate'
-    Font.Charset = ANSI_CHARSET
+    Caption = 'Compute MMX'
+    Font.Charset = RUSSIAN_CHARSET
     Font.Color = clWindowText
     Font.Height = -20
     Font.Name = 'Helvetica'
     Font.Style = []
     ParentFont = False
     TabOrder = 40
-    OnClick = Button1Click
-  end
-  object Button2: TButton
-    Left = 224
-    Top = 224
-    Width = 145
-    Height = 49
-    Caption = 'Compute'
-    Font.Charset = RUSSIAN_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -20
-    Font.Name = 'Helvetica'
-    Font.Style = []
-    ParentFont = False
-    TabOrder = 41
     OnClick = Button2Click
   end
   object Memo1: TMemo
-    Left = 376
-    Top = 224
+    Left = 496
+    Top = 32
     Width = 105
-    Height = 49
+    Height = 241
     Lines.Strings = (
       '')
+    ScrollBars = ssVertical
+    TabOrder = 41
+  end
+  object Button4: TButton
+    Left = 16
+    Top = 224
+    Width = 289
+    Height = 25
+    Caption = 'Fill'
     TabOrder = 42
+    OnClick = Button4Click
   end
   object Button3: TButton
-    Left = 112
-    Top = 223
-    Width = 105
-    Height = 49
+    Left = 16
+    Top = 256
+    Width = 289
+    Height = 17
     Caption = 'Clear'
-    Font.Charset = RUSSIAN_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -20
-    Font.Name = 'Helvetica'
-    Font.Style = []
-    ParentFont = False
     TabOrder = 43
-    OnClick = Button3Click
   end
 end
