@@ -95,17 +95,16 @@ void __fastcall TForm1::Button2Click(TObject *Sender)
   __int8 m64_c6 = C[6];
   __int8 m64_c7 = C[7];
 
-  __int8 m64_d0 = D[0];
-  __int8 m64_d1 = D[1];
-  __int8 m64_d2 = D[2];
-  __int8 m64_d3 = D[3];
+  __int16 m64_d0 = D[0];
+  __int16 m64_d1 = D[1];
+  __int16 m64_d2 = D[2];
+  __int16 m64_d3 = D[3];
 
-  __int8 m64_d4 = D[4];
-  __int8 m64_d5 = D[5];
-  __int8 m64_d6 = D[6];
-  __int8 m64_d7 = D[7];
-  // __int64 m64_2 = 2222222222222;
-  // __int64 m64_3 = 1111111111111;
+  __int16 m64_d4 = D[4];
+  __int16 m64_d5 = D[5];
+  __int16 m64_d6 = D[6];
+  __int16 m64_d7 = D[7];
+
 
   __int8 masa[8] = {m64_a0, m64_a1, m64_a2, m64_a3, m64_a4, m64_a5, m64_a6, m64_a7};
   __int8 masb[8] = {m64_b0,m64_b1,m64_b2,m64_b3,m64_b4,m64_b5,m64_b6,m64_b7};
@@ -166,17 +165,34 @@ __asm
 
         pxor mm0,mm0
         pxor mm1,mm1
+        pxor mm7, mm7
+        pxor mm6, mm6
+     //   pxor esi, esi
+     //   pxor edi, edi
 
-        lea eax, masd
-        movq mm0, [eax]
-        movq mm1, [eax+8]
+                   //mm2 -> mm5 mm6
+            /* pcmpgtb mm7,mm2
+             punpcklwd mm5, mm7   //1/4 a-b*c
+             // pcmpgtb mm7,mm1
+             punpckhwd mm6, mm7              //2/4 a-b*c   */
+        pxor mm7,mm7
+
+        lea ebx, masd
+        movq mm0, [ebx] //mm3 mm4
+        movq mm1, [ebx+8]
+
+             /*pcmpgtb mm7,mm0
+             punpcklwd mm3, mm7        // 1/4 d
+             // pcmpgtb mm7,mm1
+             punpckhwd mm4, mm7        //2/4 d  */
+
 
         psubd mm2,mm0  // mm2 contains fisrt past of a-b*c-d
         psubd mm3,mm1   //mm3 contains second part of a-b*c-d
         // to c array
-        lea eax, masr
-        movq [eax], mm2
-        movq [eax+8], mm3
+        lea ecx, masr   //saving first part
+        movq [ecx], mm2
+        movq [ecx+8], mm3
 
 
     // movq [esi], mm0
@@ -195,7 +211,6 @@ Edit37->Text = IntToStr(masr[4]);
 Edit38->Text = IntToStr(masr[5]);
 Edit39->Text = IntToStr(masr[6]);
 Edit40->Text = IntToStr(masr[7]);
-
 Memo1->Text = "assembled";
 
 }
@@ -277,3 +292,5 @@ void __fastcall TForm1::Button3Click(TObject *Sender)
         Edit32->Clear();
 }
 //---------------------------------------------------------------------------
+
+

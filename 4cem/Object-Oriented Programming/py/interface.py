@@ -18,9 +18,9 @@ def update(screen,
            cash,
            teleport,
            gasoline_tank):
-    font_32 = pygame.font.Font('data\coders_crux\DS-DIGIB.ttf', 32)
-    font_60 = pygame.font.Font('data\coders_crux\DS-DIGIB.ttf', 60)
-    font_45 = pygame.font.Font('data\coders_crux\DS-DIGIB.ttf', 45)
+    font_32 = pygame.font.Font('data\coders_crux\ds.ttf', 32)
+    font_60 = pygame.font.Font('data\coders_crux\ds.ttf', 60)
+    font_45 = pygame.font.Font('data\coders_crux\ds.ttf', 45)
     deep_text = font_32.render(str(deep)+"m", 1, (255, 0, 0))
     if abs(speed) < 2:
         speed = 0

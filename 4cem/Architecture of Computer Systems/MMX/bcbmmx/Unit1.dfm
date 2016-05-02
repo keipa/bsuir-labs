@@ -11,6 +11,7 @@ object Form1: TForm1
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
+  OnCreate = Button1Click
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
@@ -797,6 +798,7 @@ object Form1: TForm1
     Top = 32
     Width = 57
     Height = 21
+    Enabled = False
     TabOrder = 32
   end
   object Edit34: TEdit
@@ -804,6 +806,7 @@ object Form1: TForm1
     Top = 56
     Width = 57
     Height = 21
+    Enabled = False
     TabOrder = 33
   end
   object Edit35: TEdit
@@ -811,6 +814,7 @@ object Form1: TForm1
     Top = 80
     Width = 57
     Height = 21
+    Enabled = False
     TabOrder = 34
   end
   object Edit36: TEdit
@@ -818,6 +822,7 @@ object Form1: TForm1
     Top = 104
     Width = 57
     Height = 21
+    Enabled = False
     TabOrder = 35
   end
   object Edit37: TEdit
@@ -825,6 +830,7 @@ object Form1: TForm1
     Top = 128
     Width = 57
     Height = 21
+    Enabled = False
     TabOrder = 36
   end
   object Edit38: TEdit
@@ -832,6 +838,7 @@ object Form1: TForm1
     Top = 152
     Width = 57
     Height = 21
+    Enabled = False
     TabOrder = 37
   end
   object Edit39: TEdit
@@ -839,6 +846,7 @@ object Form1: TForm1
     Top = 176
     Width = 57
     Height = 21
+    Enabled = False
     TabOrder = 38
   end
   object Edit40: TEdit
@@ -846,6 +854,7 @@ object Form1: TForm1
     Top = 200
     Width = 57
     Height = 21
+    Enabled = False
     TabOrder = 39
   end
   object Button1: TButton
