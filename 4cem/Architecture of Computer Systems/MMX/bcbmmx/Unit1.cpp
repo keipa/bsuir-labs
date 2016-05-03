@@ -114,7 +114,6 @@ void __fastcall TForm1::Button2Click(TObject *Sender)
           if (D[i]<-16384 || D[i]>16256){
                 Memo1->Lines->Add("D ["+IntToStr(i+1)+ "] is out of range");
                 return;
-
   }
   }
   __int16 m64_d0 = D[0];
@@ -252,6 +251,7 @@ masr[4] = 0;
 masr[5] = 0;
 masr[6] = 0;
 masr[7] = 0;
+
 }
 
 
@@ -338,4 +338,261 @@ void __fastcall TForm1::Button4Click(TObject *Sender)
 
 
 
+
+void __fastcall TForm1::Button1Click(TObject *Sender)
+{
+
+        float A [8] = {0,0,0,0,0,0,0,0};
+        float B [8] = {0,0,0,0,0,0,0,0};
+        float C [8] = {0,0,0,0,0,0,0,0};
+        float D [8] = {0,0,0,0,0,0,0,0};
+        try{
+        A[0] = StrToFloat(Edit1->Text);
+        A[1] = StrToFloat(Edit2->Text);
+        A[2] = StrToFloat(Edit3->Text);
+        A[3] = StrToFloat(Edit4->Text);
+
+        A[4] = StrToFloat(Edit5->Text);
+        A[5] = StrToFloat(Edit6->Text);
+        A[6] = StrToFloat(Edit7->Text);
+        A[7] = StrToFloat(Edit8->Text);
+
+
+        B[0] = StrToFloat(Edit9->Text);
+        B[1] = StrToFloat(Edit10->Text);
+        B[2] = StrToFloat(Edit11->Text);
+        B[3] = StrToFloat(Edit12->Text);
+
+        B[4] = StrToFloat(Edit13->Text);
+        B[5] = StrToFloat(Edit14->Text);
+        B[6] = StrToFloat(Edit15->Text);
+        B[7] = StrToFloat(Edit16->Text);
+
+
+        C[0] = StrToFloat(Edit17->Text);
+        C[1] = StrToFloat(Edit18->Text);
+        C[2] = StrToFloat(Edit19->Text);
+        C[3] = StrToFloat(Edit20->Text);
+
+        C[4] = StrToFloat(Edit21->Text);
+        C[5] = StrToFloat(Edit22->Text);
+        C[6] = StrToFloat(Edit23->Text);
+        C[7] = StrToFloat(Edit24->Text);
+
+
+        D[0] = StrToFloat(Edit25->Text);
+        D[1] = StrToFloat(Edit26->Text);
+        D[2] = StrToFloat(Edit27->Text);
+        D[3] = StrToFloat(Edit28->Text);
+
+        D[4] = StrToFloat(Edit29->Text);
+        D[5] = StrToFloat(Edit30->Text);
+        D[6] = StrToFloat(Edit31->Text);
+        D[7] = StrToFloat(Edit32->Text);
+        }
+        catch(Exception *ex)
+        {
+        Memo1->Lines->Add("type NUMBERS");
+        return;
+        }
+
+  float m64_a0 = A[0];
+  float m64_a1 = A[1];
+  float m64_a2 = A[2];
+  float m64_a3 = A[3];
+
+  float m64_a4 = A[4];
+  float m64_a5 = A[5];
+  float m64_a6 = A[6];
+  float m64_a7 = A[7];
+
+  float m64_b0 = B[0];
+  float m64_b1 = B[1];
+  float m64_b2 = B[2];
+  float m64_b3 = B[3];
+
+  float m64_b4 = B[4];
+  float m64_b5 = B[5];
+  float m64_b6 = B[6];
+  float m64_b7 = B[7];
+
+  float m64_c0 = C[0];
+  float m64_c1 = C[1];
+  float m64_c2 = C[2];
+  float m64_c3 = C[3];
+
+  float m64_c4 = C[4];
+  float m64_c5 = C[5];
+  float m64_c6 = C[6];
+  float m64_c7 = C[7];
+
+  /*for(int i = 0; i<7;i++){
+        if (A[i]<-128 || A[i]>127){
+                Memo1->Lines->Add("A["+IntToStr(i+1)+ "] is out of range");
+                return;   }
+         if (B[i]<-128 || B[i]>127){
+                Memo1->Lines->Add( "B["+IntToStr(i+1)+ "] is out of range");
+                return;    }
+          if (C[i]<-128 || C[i]>127){
+                Memo1->Lines->Add("C["+IntToStr(i+1)+ "] is out of range");
+                return;   }
+          if (D[i]<-16384 || D[i]>16256){
+                Memo1->Lines->Add("D ["+IntToStr(i+1)+ "] is out of range");
+                return;
+  }
+  }*/
+  double m64_d0 = D[0];
+  double m64_d1 = D[1];
+  double m64_d2 = D[2];
+  double m64_d3 = D[3];
+
+  double m64_d4 = D[4];
+  double m64_d5 = D[5];
+  double m64_d6 = D[6];
+  double m64_d7 = D[7];
+
+  //d = -16384/16256   abc = -128/127
+  float masa[8] = {m64_a0, m64_a1, m64_a2, m64_a3, m64_a4, m64_a5, m64_a6, m64_a7};
+  float masb[8] = {m64_b0,m64_b1,m64_b2,m64_b3,m64_b4,m64_b5,m64_b6,m64_b7};
+  float masc[8] = {m64_c0,m64_c1,m64_c2,m64_c3,m64_c4,m64_c5,m64_c6,m64_c7};
+  double masd[8] = {m64_d0,m64_d1,m64_d2,m64_d3,m64_d4,m64_d5,m64_d6,m64_d7};
+  double masr[8] = {0,0,0,0,0,0,0,0};
+  // __int16 masaw[8] = {0,0,0,0,0,0,0,0};
+  // __int16 masbw[8] = {0,0,0,0,0,0,0,0};
+  // __int16 mascw[8] = {0,0,0,0,0,0,0,0};
+__asm
+{
+    lea eax, masb
+    lea ebx, masc
+    lea esi, masa
+    lea edx, masd
+    lea edi, masr
+
+    movups xmm0, [eax]
+    cvtps2pd xmm0, xmm0  //1/4 b - in double
+    movups xmm1, [ebx]
+    cvtps2pd xmm1, xmm1  //1/4 c - in double
+    mulpd xmm0, xmm1   //1/4 b*c
+    movups xmm1, [esi]
+    cvtps2pd xmm1, xmm1  //1/4 a - in double
+    subpd xmm1, xmm0
+    movups xmm0, [edx]
+    subpd xmm1, xmm0
+
+    movups  [edi], xmm1
+//---------------------------------
+    xorps xmm0, xmm0
+    xorps xmm1, xmm1
+
+    movups xmm0, [eax+8]
+    cvtps2pd xmm0, xmm0  //2/4 b - in double
+    movups xmm1, [ebx+8]
+    cvtps2pd xmm1, xmm1  //2/4 c - in double
+    mulpd xmm0, xmm1   //2/4 b*c
+    xorps xmm1, xmm1
+    movups xmm1, [esi+8]
+    cvtps2pd xmm1, xmm1  //2/4 a - in double
+    subpd xmm1, xmm0
+    movups xmm0, [edx+16]
+    subpd xmm1, xmm0
+
+    movups  [edi+16], xmm1
+//-----------------------------
+    xorps xmm0, xmm0
+    xorps xmm1, xmm1
+
+    movups xmm0, [eax+16]
+    cvtps2pd xmm0, xmm0  //3/4 b - in double
+    movups xmm1, [ebx+16]
+    cvtps2pd xmm1, xmm1  //3/4 c - in double
+    mulpd xmm0, xmm1   //3/4 b*c
+    xorps xmm1, xmm1
+    movups xmm1, [esi+16]
+    cvtps2pd xmm1, xmm1  //3/4 a - in double
+    subpd xmm1, xmm0
+    movups xmm0, [edx+32]
+    subpd xmm1, xmm0
+
+    movups  [edi+32], xmm1
+//-----------------------------
+    xorps xmm0, xmm0
+    xorps xmm1, xmm1
+
+    movups xmm0, [eax+24]
+    cvtps2pd xmm0, xmm0  //3/4 b - in double
+    movups xmm1, [ebx+24]
+    cvtps2pd xmm1, xmm1  //3/4 c - in double
+    mulpd xmm0, xmm1   //3/4 b*c
+    xorps xmm1, xmm1
+    movups xmm1, [esi+24]
+    cvtps2pd xmm1, xmm1  //3/4 a - in double
+    subpd xmm1, xmm0
+    movups xmm0, [edx+48]
+    subpd xmm1, xmm0
+
+    movups  [edi+48], xmm1
+
+
+
+}
+
+Edit33->Text = FloatToStr(masr[0]);
+Edit34->Text = FloatToStr(masr[1]);
+Edit35->Text = FloatToStr(masr[2]);
+Edit36->Text = FloatToStr(masr[3]);
+Edit37->Text = FloatToStr(masr[4]);
+Edit38->Text = FloatToStr(masr[5]);
+Edit39->Text = FloatToStr(masr[6]);
+Edit40->Text = FloatToStr(masr[7]);
+Memo1->Lines->Add("sse assembled");
+masr[0] = 0;
+masr[1] = 0;
+masr[2] = 0;
+masr[3] = 0;
+masr[4] = 0;
+masr[5] = 0;
+masr[6] = 0;
+masr[7] = 0;
+
+
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::Button5Click(TObject *Sender)
+{
+        Edit1->Text = (float)((rand() << 15 + rand()) & ((1 << 24) - 1)) / (1 << 24)+ rand()%1000+500;
+        Edit2->Text = (float)((rand() << 15 + rand()) & ((1 << 24) - 1)) / (1 << 24)+ rand()%1000+500;
+        Edit3->Text = (float)((rand() << 15 + rand()) & ((1 << 24) - 1)) / (1 << 24)+ rand()%1000+500;
+        Edit4->Text = (float)((rand() << 15 + rand()) & ((1 << 24) - 1)) / (1 << 24)+ rand()%1000+500;
+        Edit5->Text = (float)((rand() << 15 + rand()) & ((1 << 24) - 1)) / (1 << 24)+ rand()%1000+500;
+        Edit6->Text = (float)((rand() << 15 + rand()) & ((1 << 24) - 1)) / (1 << 24)+ rand()%1000+500;
+        Edit7->Text = (float)((rand() << 15 + rand()) & ((1 << 24) - 1)) / (1 << 24)+ rand()%1000+500;
+        Edit8->Text = (float)((rand() << 15 + rand()) & ((1 << 24) - 1)) / (1 << 24)+ rand()%1000+500;
+        Edit9->Text = (float)((rand() << 15 + rand()) & ((1 << 24) - 1)) / (1 << 24)+ rand()%1000+500;
+        Edit10->Text = (float)((rand() << 15 + rand()) & ((1 << 24) - 1)) / (1 << 24)+ rand()%1000+500;
+        Edit11->Text = (float)((rand() << 15 + rand()) & ((1 << 24) - 1)) / (1 << 24)+ rand()%1000+500;
+        Edit12->Text = (float)((rand() << 15 + rand()) & ((1 << 24) - 1)) / (1 << 24)+ rand()%1000+500;
+        Edit13->Text = (float)((rand() << 15 + rand()) & ((1 << 24) - 1)) / (1 << 24)+ rand()%1000+500;
+        Edit14->Text = (float)((rand() << 15 + rand()) & ((1 << 24) - 1)) / (1 << 24)+ rand()%1000+500;
+        Edit15->Text = (float)((rand() << 15 + rand()) & ((1 << 24) - 1)) / (1 << 24)+ rand()%1000+500;
+        Edit16->Text = (float)((rand() << 15 + rand()) & ((1 << 24) - 1)) / (1 << 24)+ rand()%1000+500;
+        Edit17->Text = (float)((rand() << 15 + rand()) & ((1 << 24) - 1)) / (1 << 24)+ rand()%1000+500;
+        Edit18->Text = (float)((rand() << 15 + rand()) & ((1 << 24) - 1)) / (1 << 24)+ rand()%1000+500;
+        Edit19->Text = (float)((rand() << 15 + rand()) & ((1 << 24) - 1)) / (1 << 24)+ rand()%1000+500;
+        Edit20->Text = (float)((rand() << 15 + rand()) & ((1 << 24) - 1)) / (1 << 24)+ rand()%1000+500;
+        Edit21->Text = (float)((rand() << 15 + rand()) & ((1 << 24) - 1)) / (1 << 24)+ rand()%1000+500;
+        Edit22->Text = (float)((rand() << 15 + rand()) & ((1 << 24) - 1)) / (1 << 24)+ rand()%1000+500;
+        Edit23->Text = (float)((rand() << 15 + rand()) & ((1 << 24) - 1)) / (1 << 24)+ rand()%1000+500;
+        Edit24->Text = (float)((rand() << 15 + rand()) & ((1 << 24) - 1)) / (1 << 24)+ rand()%1000+500;
+        Edit25->Text = (float)((rand() << 15 + rand()) & ((1 << 24) - 1)) / (1 << 24)+ rand()%1000+500;
+        Edit26->Text = (float)((rand() << 15 + rand()) & ((1 << 24) - 1)) / (1 << 24)+ rand()%1000+500;
+        Edit27->Text = (float)((rand() << 15 + rand()) & ((1 << 24) - 1)) / (1 << 24)+ rand()%1000+500;
+        Edit28->Text = (float)((rand() << 15 + rand()) & ((1 << 24) - 1)) / (1 << 24)+ rand()%1000+500;
+        Edit29->Text = (float)((rand() << 15 + rand()) & ((1 << 24) - 1)) / (1 << 24)+ rand()%1000+500;
+        Edit30->Text = (float)((rand() << 15 + rand()) & ((1 << 24) - 1)) / (1 << 24)+ rand()%1000+500;
+        Edit31->Text = (float)((rand() << 15 + rand()) & ((1 << 24) - 1)) / (1 << 24)+ rand()%1000+500;
+        Edit32->Text = (float)((rand() << 15 + rand()) & ((1 << 24) - 1)) / (1 << 24)+ rand()%1000+500;
+
+}
+//---------------------------------------------------------------------------
 

@@ -1,7 +1,7 @@
 object Form1: TForm1
   Left = 280
   Top = 177
-  Width = 626
+  Width = 624
   Height = 319
   Caption = 'MMX Tech'
   Color = clBtnFace
@@ -859,9 +859,9 @@ object Form1: TForm1
   object Button2: TButton
     Left = 312
     Top = 224
-    Width = 169
+    Width = 89
     Height = 49
-    Caption = 'Compute MMX'
+    Caption = 'MMX'
     Font.Charset = RUSSIAN_CHARSET
     Font.Color = clWindowText
     Font.Height = -20
@@ -884,9 +884,9 @@ object Form1: TForm1
   object Button4: TButton
     Left = 16
     Top = 224
-    Width = 289
+    Width = 153
     Height = 25
-    Caption = 'Fill'
+    Caption = 'Fill/MMX'
     TabOrder = 42
     OnClick = Button4Click
   end
@@ -897,5 +897,29 @@ object Form1: TForm1
     Height = 17
     Caption = 'Clear'
     TabOrder = 43
+  end
+  object Button1: TButton
+    Left = 408
+    Top = 224
+    Width = 83
+    Height = 49
+    Caption = 'SSE'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -20
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 44
+    OnClick = Button1Click
+  end
+  object Button5: TButton
+    Left = 176
+    Top = 224
+    Width = 129
+    Height = 25
+    Caption = 'Fill/SSE'
+    TabOrder = 45
+    OnClick = Button5Click
   end
 end
