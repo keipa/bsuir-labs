@@ -1,12 +1,11 @@
-
-#include <iostream>
+﻿#include <iostream>
 #include <algorithm>
 #include <string>
 using namespace std;
 
 
 
-int main_1()
+int main()
 {
 	long long num = 0;
 	long long save;
