@@ -61,7 +61,7 @@ def main():
     # print(str(xrange(100500)[63]))
     #
     # print(str(next(reversed(range(100500)))))
-    # print(str(next(reversed(xrange(100500)))))
+    print(str(next(reversed(xrange(100500)))))
 
 
     for i in range(10, 1, -1):

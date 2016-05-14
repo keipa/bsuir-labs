@@ -4,7 +4,10 @@ def my_json(obj, *args):
     #     if args[0] == True:
     #         print("rise unknown ")
     what_the_obj = str(type(obj))
-    print(distributor(what_the_obj, obj, 0))
+    s = distributor(what_the_obj, obj, 0)
+    with open("strfiles/jsoned3.jsn", "w") as f:
+        f.write(s)
+    return distributor(what_the_obj, obj, 0)
 
 
 def tabstring(ret, deep):
@@ -123,7 +126,7 @@ def main():
     l = [2, 4, 5, 6]
     t = ["1", ("2", [3, 2, True, 'ke', (3, 5.9, {2: 3, 4: "4"})]), 3, 4, 5]
     d = {1: "2", 2: True, 3: 9, 4: 16}
-
+    print(t)
 
     s = "kek"
     n = 0.0

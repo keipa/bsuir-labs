@@ -21,7 +21,7 @@ def generate(block_count, block_separator,  line_count, line_separator, isnums, 
     if block_separator == "\\t":
         block_separator = "\t"
     s = ""
-    with open("strfiles/genrated.txt", "w") as f:
+    with open("strfiles/generated.txt", "w") as f:
         if line_count == 0:
             count_of_strings = randint(10, 100)
         else:

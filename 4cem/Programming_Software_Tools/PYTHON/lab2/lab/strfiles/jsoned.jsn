@@ -1,9 +1,9 @@
 {
-   "firstName": "Иван",
-   "lastName": "Иванов",
+   "firstName": "????",
+   "lastName": "??????",
    "address": {
-       "streetAddress": "Московское ш., 101, кв.101",
-       "city": "Ленинград",
+       "streetAddress": "?????????? ?., 101, ??.101",
+       "city": "?????????",
        "postalCode": 101101
    },
    "phoneNumbers": [

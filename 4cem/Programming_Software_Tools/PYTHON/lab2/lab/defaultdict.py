@@ -9,41 +9,19 @@ class Defaul_dict( object):
     def __setitem__(self, key, value):
         self.d[key] = value
 
-    # def __get__(self, item):
-    #     pass
+
     def __get__(self, instance, owner):
         return self.d
-    # def __init__(self, dimension, fill):
-    #     self.dimension = dimension
-    #     self.fill = fill
-    #     self.x = {}
-    #     Defaul_dict.init(self, self.x, 0)
-    #
-    # # def init(self, pointer, deep):
-    # #     deep += 1
-    # #     if deep != self.dimension:
-    # #         for each in range(self.fill):
-    # #             pointer[])
-    # #             Defaul_dict.init(self, pointer[each], deep)
-    # #     else:
-    # #         for i in range(self.fill):
-    # #             pointer.append(0)
-    #
-    # def __str__(self):
-    #     return str(self.x)
+
 
 
     def __getitem__(self, item):
         return Defaul_dict.getitem(self, item, 0)
-    #
-    # def __get__(self, instance, owner):
-    #     return self.x
-    #
+
 
     def getitem(self, item, pointer):
         if pointer == 0:
             pointer = self.d
-            # print(str(pointer))
         try:
             a = pointer[item]
         except KeyError:
@@ -54,15 +32,7 @@ class Defaul_dict( object):
             return pointer[item]
         else:
             return pointer[item]
-            # return Defaul_dict.getitem(self,item, pointer[item])
-            # if deep == self.dimension:
-            #     return pointer[item % self.dimension]
-            # else:
-            #     deep += 1
-            #     return Defaul_dict.getitem(self, item, pointer[(item//self.dimension)-1], deep)
-#
-    # def __setitem__(self, key, value):
-    #     pass
+
 
     def __str__(self):
         ret = "{"

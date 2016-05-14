@@ -1,13 +1,13 @@
 import argparse
-import defaultdict
-import generate
-import to_json
-import vector
-import cashed
-import logger
-import my_xrange
-import sort
-import meta
+import lab.defaultdict
+import lab.generate
+import lab.to_json
+import lab.vector
+import lab.cashed
+import lab.logger
+import lab.my_xrange
+import lab.sort
+# import lab.meta
 
 
 def create_parser():
@@ -33,14 +33,14 @@ def menu():
     parser = create_parser()
     namespace = parser.parse_args()
     if namespace.program == "generate":
-        generate.generate(int(namespace.fixedblocks),
+        lab.generate.generate(int(namespace.fixedblocks),
                           namespace.blockseparator,
                           int(namespace.fixedlines),
                           namespace.lineseparator,
                           namespace.nums,
                           int(namespace.symbols))
     if namespace.program == "sort":
-        sort.main(namespace.blockseparator,
+        lab.sort.main(namespace.blockseparator,
                   namespace.lineseparator,
                   namespace.input,
                   namespace.output,
@@ -49,19 +49,19 @@ def menu():
                   namespace.checked,
                   namespace.keys)
     if namespace.program == "vector":
-        vector.main()
+        lab.vector.main()
     if namespace.program == "json":
-        to_json.main()
+        lab.to_json.main()
     if namespace.program == "cashed":
-        cashed.main()
+        lab.cashed.main()
     if namespace.program == "logger":
-        logger.main()
+        lab.logger.main()
     if namespace.program == "xrange":
-        my_xrange.main()
+        lab.my_xrange.main()
     if namespace.program == "dict":
-        defaultdict.main()
+        lab.defaultdict.main()
     if namespace.program == "meta":
-        meta.main()
+        lab.meta.main()
 
 if __name__ == '__main__':
     menu()

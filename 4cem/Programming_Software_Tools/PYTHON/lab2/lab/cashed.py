@@ -29,7 +29,7 @@ def benchmark(func):
 
 
 @benchmark
-# @cashed
+@cashed
 def one(q, **kwargs):
     # print(str(kwargs.get('lol')))
     print("computing")
@@ -40,9 +40,7 @@ def main():
     # print(one(2, lol=4))
     b = one(2)
     c = one(2)
-    d = one(2)
-    e = one(2)
-    f = one(2)
+
 
 if __name__ == "__main__":
     main()

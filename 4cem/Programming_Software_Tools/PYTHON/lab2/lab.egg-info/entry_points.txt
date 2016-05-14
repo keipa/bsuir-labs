@@ -1,15 +1,15 @@
 [console_scripts]
 lab_sort = lab.sort:main
-lab_metastring = lab.metastring:main
-lab_meta = lab.meta:main
 lab_fromjson = lab.from_json:main
-lab_xrange = lab.my_xrange:main
-lab_vector = lab.vector:main
-lab_singleton = lab.singleton:main
-lab_cashed = lab.cashed:main
-lab_dict = lab.defaultdict:main
 lab_genarate = lab.generate:main
-lab_tojson = lab.to_json:main
-lab_logger = lab.logger:main
+lab_cashed = lab.cashed:main
+lab_singleton = lab.singleton:main
 lab_seq = lab.seq:main
+lab_dict = lab.defaultdict:main
+lab_logger = lab.logger:main
+lab_metastring = lab.metastring:main
+lab_tojson = lab.to_json:main
+lab_vector = lab.vector:main
+lab_meta = lab.meta:main
+lab_xrange = lab.my_xrange:main
 
