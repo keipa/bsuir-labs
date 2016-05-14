@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8bf371b5-260b-4221-9e7a-e388e45678db" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/singleton.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/from_json.py" afterPath="$PROJECT_DIR$/from_json.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/logger.py" afterPath="$PROJECT_DIR$/logger.py" />
     </list>
     <ignored path="lab2.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -19,6 +18,7 @@
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/lab2$from_json.coverage" NAME="from_json Coverage Results" MODIFIED="1463231860710" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/lab2$logger.coverage" NAME="logger Coverage Results" MODIFIED="1463235144646" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/lab2$singleton.coverage" NAME="singleton Coverage Results" MODIFIED="1463233456038" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/lab2$meta.coverage" NAME="meta Coverage Results" MODIFIED="1463155671265" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
@@ -41,11 +41,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="singleton.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="singleton.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/singleton.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="360">
               <caret line="18" column="9" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="logger.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/logger.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="164">
+              <caret line="41" column="95" selection-start-line="41" selection-start-column="95" selection-end-line="41" selection-end-column="95" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="inspect.py" pinned="false" current-in-tab="false">
+        <entry file="file://C:/Python34/Lib/inspect.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="181">
+              <caret line="92" column="0" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -80,7 +100,6 @@
         <option value="$PROJECT_DIR$/playing.py" />
         <option value="$PROJECT_DIR$/decouse.py" />
         <option value="$PROJECT_DIR$/my_xrange.py" />
-        <option value="$PROJECT_DIR$/logger.py" />
         <option value="$PROJECT_DIR$/generate.py" />
         <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/to_json.py" />
@@ -92,6 +111,7 @@
         <option value="$PROJECT_DIR$/meta.py" />
         <option value="$PROJECT_DIR$/from_json.py" />
         <option value="$PROJECT_DIR$/singleton.py" />
+        <option value="$PROJECT_DIR$/logger.py" />
       </list>
     </option>
   </component>
@@ -155,7 +175,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="SearchEverywhereHistoryKey" value="seq&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/Programming_Software_Еools/PYTHON/lab2/strfiles/seq.py&#10;set&#9;ACTION&#9;ShowSettings&#10;sett&#9;ACTION&#9;ShowSettings&#10;xra&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/PYTHON/lab2/my_xrange.py&#10;ve&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/PYTHON/lab2/vector.py&#10;js&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/PYTHON/lab2/to_json.py&#10;xran&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/PYTHON/lab2/my_xrange.py&#10;main&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/PYTHON/lab2/main.py&#10;full&#9;ACTION&#9;ToggleFullScreen&#10;meta&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/PYTHON/lab2/meta.py&#10;gen&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/PYTHON/lab2/generate.py&#10;lo&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/PYTHON/lab2/logger.py&#10;ter&#9;ACTION&#9;ActivateTerminalToolWindow&#10;vec&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/PYTHON/lab2/vector.py&#10;my&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/PYTHON/lab2/my_xrange.py&#10;vcs&#9;ACTION&#9;Vcs.Show.Log&#10;setti&#9;ACTION&#9;WelcomeScreen.Settings&#10;full &#9;ACTION&#9;ToggleFullScreen&#10;toggle full screen&#9;FILE&#9;file:///usr/lib/python3.5/json/encoder.py&#10;proje&#9;ACTION&#9;ActivateProjectToolWindow&#10;minimap&#9;null&#9;null&#10;te&#9;ACTION&#9;ActivateTerminalToolWindow" />
+    <property name="SearchEverywhereHistoryKey" value="log&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/Programming_Software_Tools/PYTHON/lab2/logger.py&#10;seq&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/Programming_Software_Еools/PYTHON/lab2/strfiles/seq.py&#10;set&#9;ACTION&#9;ShowSettings&#10;sett&#9;ACTION&#9;ShowSettings&#10;xra&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/PYTHON/lab2/my_xrange.py&#10;ve&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/PYTHON/lab2/vector.py&#10;js&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/PYTHON/lab2/to_json.py&#10;xran&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/PYTHON/lab2/my_xrange.py&#10;main&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/PYTHON/lab2/main.py&#10;full&#9;ACTION&#9;ToggleFullScreen&#10;meta&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/PYTHON/lab2/meta.py&#10;gen&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/PYTHON/lab2/generate.py&#10;lo&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/PYTHON/lab2/logger.py&#10;ter&#9;ACTION&#9;ActivateTerminalToolWindow&#10;vec&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/PYTHON/lab2/vector.py&#10;my&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/PYTHON/lab2/my_xrange.py&#10;vcs&#9;ACTION&#9;Vcs.Show.Log&#10;setti&#9;ACTION&#9;WelcomeScreen.Settings&#10;full &#9;ACTION&#9;ToggleFullScreen&#10;toggle full screen&#9;FILE&#9;file:///usr/lib/python3.5/json/encoder.py&#10;proje&#9;ACTION&#9;ActivateProjectToolWindow&#10;minimap&#9;null&#9;null&#10;te&#9;ACTION&#9;ActivateTerminalToolWindow" />
     <property name="ToolWindowRun.ShowToolbar" value="false" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
@@ -183,25 +203,7 @@
       <recent name="D:\LABS\BSUIR_labs\4cem\Programming_Software_Еools\PYTHON\lab2" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.singleton">
-    <configuration default="false" name="seq" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/strfiles" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="lab2" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="D:\LABS\BSUIR_labs\4cem\Programming_Software_Еools\PYTHON\lab2\seq.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Python.logger">
     <configuration default="false" name="to_json" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -270,6 +272,24 @@
       <module name="lab2" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/singleton.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="logger" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="lab2" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/logger.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -540,19 +560,19 @@
       <item index="0" class="java.lang.String" itemvalue="Python.sort" />
       <item index="1" class="java.lang.String" itemvalue="Python.generate" />
       <item index="2" class="java.lang.String" itemvalue="Python.generate fixed" />
-      <item index="3" class="java.lang.String" itemvalue="Python.seq" />
-      <item index="4" class="java.lang.String" itemvalue="Python.to_json" />
-      <item index="5" class="java.lang.String" itemvalue="Python.from_json" />
-      <item index="6" class="java.lang.String" itemvalue="Python.meta" />
-      <item index="7" class="java.lang.String" itemvalue="Python.singleton" />
+      <item index="3" class="java.lang.String" itemvalue="Python.to_json" />
+      <item index="4" class="java.lang.String" itemvalue="Python.from_json" />
+      <item index="5" class="java.lang.String" itemvalue="Python.meta" />
+      <item index="6" class="java.lang.String" itemvalue="Python.singleton" />
+      <item index="7" class="java.lang.String" itemvalue="Python.logger" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.singleton" />
-        <item index="1" class="java.lang.String" itemvalue="Python.from_json" />
-        <item index="2" class="java.lang.String" itemvalue="Python.meta" />
-        <item index="3" class="java.lang.String" itemvalue="Python.to_json" />
-        <item index="4" class="java.lang.String" itemvalue="Python.seq" />
+        <item index="0" class="java.lang.String" itemvalue="Python.logger" />
+        <item index="1" class="java.lang.String" itemvalue="Python.singleton" />
+        <item index="2" class="java.lang.String" itemvalue="Python.from_json" />
+        <item index="3" class="java.lang.String" itemvalue="Python.meta" />
+        <item index="4" class="java.lang.String" itemvalue="Python.to_json" />
       </list>
     </recent_temporary>
   </component>
@@ -696,7 +716,14 @@
       <option name="project" value="LOCAL" />
       <updated>1463227689118</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="4.py.2 singleton&#10;">
+      <created>1463233505887</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1463233505887</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TodoView">
@@ -718,11 +745,11 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25469485" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6960094" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3298122" sideWeight="0.486875" order="9" side_tool="false" content_ui="tabs" x="494" y="47" width="674" height="806" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298122" sideWeight="0.486875" order="9" side_tool="false" content_ui="tabs" x="494" y="47" width="674" height="806" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.125625" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36150235" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.235" sideWeight="0.51736975" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32375" sideWeight="0.513125" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32375" sideWeight="0.513125" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -763,7 +790,8 @@
     <MESSAGE value="4.py.2 defaultdict + features" />
     <MESSAGE value="4.py.2 meta &#10;need argument send to meta" />
     <MESSAGE value="4.py.2 from_json" />
-    <option name="LAST_COMMIT_MESSAGE" value="4.py.2 from_json" />
+    <MESSAGE value="4.py.2 singleton&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="4.py.2 singleton&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -786,13 +814,12 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="118" />
+      <option name="time" value="119" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
-        <watch expression="s" language="Python" />
-        <watch expression="end" language="Python" />
-        <watch expression="toclean" language="Python" />
+        <watch expression="self.logformat" language="Python" />
+        <watch expression="sam.logformat" language="Python" />
       </configuration>
     </watches-manager>
   </component>
@@ -1003,7 +1030,6 @@
       </provider>
     </entry>
     <entry file="file://C:/Python34/Lib/tempfile.py" />
-    <entry file="file://C:/Python34/Lib/inspect.py" />
     <entry file="file://$PROJECT_DIR$/generate.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1050,13 +1076,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="480">
           <caret line="24" column="26" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/logger.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="920">
-          <caret line="46" column="22" selection-start-line="46" selection-start-column="21" selection-end-line="46" selection-end-column="22" />
         </state>
       </provider>
     </entry>
@@ -1147,6 +1166,22 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
           <caret line="18" column="9" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Python34/Lib/inspect.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="181">
+          <caret line="92" column="0" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/logger.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="164">
+          <caret line="41" column="95" selection-start-line="41" selection-start-column="95" selection-end-line="41" selection-end-column="95" />
           <folding />
         </state>
       </provider>
