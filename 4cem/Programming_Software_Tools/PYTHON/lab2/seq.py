@@ -5,7 +5,7 @@ class Seq(object):
             self.current = 0
 
         def __next__(self):
-            try:
+            try:    
                 return self.seq[self.current]
             except:
                 raise IndexError
