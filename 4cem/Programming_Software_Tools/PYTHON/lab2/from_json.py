@@ -27,7 +27,7 @@ def dictproc(index, s):
         value = collector(index, s)
         index = value[0]
         d[key[1]] = value[1]
-    return (index, d)
+    return (index+1, d)
 
 
 def strproc(index, s):

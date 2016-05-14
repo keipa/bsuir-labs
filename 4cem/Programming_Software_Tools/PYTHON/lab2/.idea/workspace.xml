@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8bf371b5-260b-4221-9e7a-e388e45678db" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../../Programming_Software_Еools/PYTHON/lab2/strfiles/seq.py" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/singleton.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/from_json.py" afterPath="$PROJECT_DIR$/from_json.py" />
     </list>
     <ignored path="lab2.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -16,7 +18,8 @@
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/lab2$from_json.coverage" NAME="from_json Coverage Results" MODIFIED="1463227645885" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/lab2$from_json.coverage" NAME="from_json Coverage Results" MODIFIED="1463231860710" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/lab2$singleton.coverage" NAME="singleton Coverage Results" MODIFIED="1463233456038" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/lab2$meta.coverage" NAME="meta Coverage Results" MODIFIED="1463155671265" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="CreatePatchCommitExecutor">
@@ -28,41 +31,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="from_json.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="from_json.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/from_json.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="63">
-              <caret line="94" column="0" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
+            <state relative-caret-position="301">
+              <caret line="130" column="0" selection-start-line="130" selection-start-column="0" selection-end-line="130" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="cp1251.py" pinned="false" current-in-tab="false">
-        <entry file="file://C:/Python34/Lib/encodings/cp1251.py">
+      <file leaf-file-name="singleton.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/singleton.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="440">
-              <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="codecs.py" pinned="false" current-in-tab="false">
-        <entry file="file://C:/Python34/Lib/codecs.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6120">
-              <caret line="306" column="0" selection-start-line="306" selection-start-column="0" selection-end-line="306" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_bootlocale.py" pinned="false" current-in-tab="false">
-        <entry file="file://C:/Python34/Lib/_bootlocale.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+            <state relative-caret-position="360">
+              <caret line="18" column="9" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -108,6 +91,7 @@
         <option value="$PROJECT_DIR$/strfiles/seq.py" />
         <option value="$PROJECT_DIR$/meta.py" />
         <option value="$PROJECT_DIR$/from_json.py" />
+        <option value="$PROJECT_DIR$/singleton.py" />
       </list>
     </option>
   </component>
@@ -199,25 +183,7 @@
       <recent name="D:\LABS\BSUIR_labs\4cem\Programming_Software_Еools\PYTHON\lab2" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.from_json">
-    <configuration default="false" name="cashed" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="lab2" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/cashed.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Python.singleton">
     <configuration default="false" name="seq" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -286,6 +252,24 @@
       <module name="lab2" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/meta.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="singleton" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="lab2" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/singleton.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -556,19 +540,19 @@
       <item index="0" class="java.lang.String" itemvalue="Python.sort" />
       <item index="1" class="java.lang.String" itemvalue="Python.generate" />
       <item index="2" class="java.lang.String" itemvalue="Python.generate fixed" />
-      <item index="3" class="java.lang.String" itemvalue="Python.cashed" />
-      <item index="4" class="java.lang.String" itemvalue="Python.seq" />
-      <item index="5" class="java.lang.String" itemvalue="Python.to_json" />
-      <item index="6" class="java.lang.String" itemvalue="Python.from_json" />
-      <item index="7" class="java.lang.String" itemvalue="Python.meta" />
+      <item index="3" class="java.lang.String" itemvalue="Python.seq" />
+      <item index="4" class="java.lang.String" itemvalue="Python.to_json" />
+      <item index="5" class="java.lang.String" itemvalue="Python.from_json" />
+      <item index="6" class="java.lang.String" itemvalue="Python.meta" />
+      <item index="7" class="java.lang.String" itemvalue="Python.singleton" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.from_json" />
-        <item index="1" class="java.lang.String" itemvalue="Python.meta" />
-        <item index="2" class="java.lang.String" itemvalue="Python.to_json" />
-        <item index="3" class="java.lang.String" itemvalue="Python.seq" />
-        <item index="4" class="java.lang.String" itemvalue="Python.cashed" />
+        <item index="0" class="java.lang.String" itemvalue="Python.singleton" />
+        <item index="1" class="java.lang.String" itemvalue="Python.from_json" />
+        <item index="2" class="java.lang.String" itemvalue="Python.meta" />
+        <item index="3" class="java.lang.String" itemvalue="Python.to_json" />
+        <item index="4" class="java.lang.String" itemvalue="Python.seq" />
       </list>
     </recent_temporary>
   </component>
@@ -726,15 +710,15 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1600" height="900" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.469375" sideWeight="0.48263028" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32941177" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25469485" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.6960094" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298122" sideWeight="0.486875" order="9" side_tool="false" content_ui="tabs" x="494" y="47" width="674" height="806" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6960094" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3298122" sideWeight="0.486875" order="9" side_tool="false" content_ui="tabs" x="494" y="47" width="674" height="806" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.125625" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36150235" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.235" sideWeight="0.51736975" order="2" side_tool="true" content_ui="tabs" />
@@ -789,6 +773,11 @@
           <line>72</line>
           <option name="timeStamp" value="111" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/from_json.py</url>
+          <line>18</line>
+          <option name="timeStamp" value="117" />
+        </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
@@ -797,7 +786,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="117" />
+      <option name="time" value="118" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
@@ -808,13 +797,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/to_json.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vector.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1155,8 +1137,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/from_json.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="63">
-          <caret line="94" column="0" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
+        <state relative-caret-position="301">
+          <caret line="130" column="0" selection-start-line="130" selection-start-column="0" selection-end-line="130" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/singleton.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="18" column="9" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="9" />
           <folding />
         </state>
       </provider>
