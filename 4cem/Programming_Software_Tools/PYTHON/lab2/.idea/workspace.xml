@@ -1,23 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8bf371b5-260b-4221-9e7a-e388e45678db" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lab/strfiles/jsoned3.jsn" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lab/test_generate.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/lab-0.1.tar.gz" afterPath="$PROJECT_DIR$/dist/lab-0.1.tar.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
+    <list default="true" id="8bf371b5-260b-4221-9e7a-e388e45678db" name="Default" comment="4.py.2 unittest&#10;">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab.egg-info/entry_points.txt" afterPath="$PROJECT_DIR$/lab.egg-info/entry_points.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab/cashed.py" afterPath="$PROJECT_DIR$/lab/cashed.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab/defaultdict.py" afterPath="$PROJECT_DIR$/lab/defaultdict.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab/generate.py" afterPath="$PROJECT_DIR$/lab/generate.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab/main.py" afterPath="$PROJECT_DIR$/lab/main.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab/my_xrange.py" afterPath="$PROJECT_DIR$/lab/my_xrange.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab/sort.py" afterPath="$PROJECT_DIR$/lab/sort.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab/strfiles/genrated.txt" afterPath="$PROJECT_DIR$/lab/strfiles/genrated.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab/strfiles/jsoned.jsn" afterPath="$PROJECT_DIR$/lab/strfiles/jsoned.jsn" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab/to_json.py" afterPath="$PROJECT_DIR$/lab/to_json.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab/vector.py" afterPath="$PROJECT_DIR$/lab/vector.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab/strfiles/jsoned3.jsn" afterPath="$PROJECT_DIR$/lab/strfiles/jsoned3.jsn" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab/test_generate.py" afterPath="$PROJECT_DIR$/lab/test_generate.py" />
     </list>
     <ignored path="lab2.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -31,12 +19,12 @@
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/lab2$from_json.coverage" NAME="from_json Coverage Results" MODIFIED="1463231860710" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/lab2$logger.coverage" NAME="logger Coverage Results" MODIFIED="1463260595358" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lab" />
     <SUITE FILE_PATH="coverage/lab2$to_json.coverage" NAME="to_json Coverage Results" MODIFIED="1463262620383" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lab" />
+    <SUITE FILE_PATH="coverage/lab2$from_json.coverage" NAME="from_json Coverage Results" MODIFIED="1463270033651" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lab" />
     <SUITE FILE_PATH="coverage/lab2$sort.coverage" NAME="sort Coverage Results" MODIFIED="1463259173500" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lab" />
     <SUITE FILE_PATH="coverage/lab2$metastring.coverage" NAME="metastring Coverage Results" MODIFIED="1463242367511" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/lab2$Unnamed.coverage" NAME="Unnamed Coverage Results" MODIFIED="1463264438356" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/lab2$Unnamed.coverage" NAME="Unnamed Coverage Results" MODIFIED="1463270086820" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/lab2$Unittest_TestGenerate_test_generat.coverage" NAME="Unittest TestGenerate.test_generat Coverage Results" MODIFIED="1463252356989" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lab" />
     <SUITE FILE_PATH="coverage/lab2$setup.coverage" NAME="setup Coverage Results" MODIFIED="1463244359798" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/lab2$singleton.coverage" NAME="singleton Coverage Results" MODIFIED="1463233456038" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -56,11 +44,21 @@
       <file leaf-file-name="test_generate.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lab/test_generate.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="538">
-              <caret line="138" column="17" selection-start-line="138" selection-start-column="17" selection-end-line="138" selection-end-column="17" />
+            <state relative-caret-position="238">
+              <caret line="117" column="22" selection-start-line="117" selection-start-column="22" selection-end-line="117" selection-end-column="22" />
               <folding>
                 <element signature="e#0#29#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="from_json.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lab/from_json.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2680">
+              <caret line="134" column="0" selection-start-line="134" selection-start-column="0" selection-end-line="134" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -242,29 +240,6 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
     </configuration>
-    <configuration default="false" name="Unittest TestGenerate.test_generate" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/lab" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="lab2" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/lab/test_generate.py" />
-      <option name="CLASS_NAME" value="TestGenerate" />
-      <option name="METHOD_NAME" value="test_generate" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_METHOD" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <option name="PUREUNITTEST" value="true" />
-      <option name="PARAMS" value="" />
-      <option name="USE_PARAM" value="false" />
-      <method />
-    </configuration>
     <configuration default="false" name="Unittest TestGenerate.test_generat" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -320,6 +295,24 @@
       <module name="lab2" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/lab/to_json.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="from_json" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/lab" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="lab2" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/lab/from_json.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -615,18 +608,18 @@
       <item index="2" class="java.lang.String" itemvalue="Python.generate fixed" />
       <item index="3" class="java.lang.String" itemvalue="Python.vector" />
       <item index="4" class="java.lang.String" itemvalue="Python tests.Unnamed" />
-      <item index="5" class="java.lang.String" itemvalue="Python tests.Unittest TestGenerate.test_generate" />
-      <item index="6" class="java.lang.String" itemvalue="Python tests.Unittest TestGenerate.test_generat" />
-      <item index="7" class="java.lang.String" itemvalue="Python.logger" />
-      <item index="8" class="java.lang.String" itemvalue="Python.to_json" />
+      <item index="5" class="java.lang.String" itemvalue="Python tests.Unittest TestGenerate.test_generat" />
+      <item index="6" class="java.lang.String" itemvalue="Python.logger" />
+      <item index="7" class="java.lang.String" itemvalue="Python.to_json" />
+      <item index="8" class="java.lang.String" itemvalue="Python.from_json" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.to_json" />
-        <item index="1" class="java.lang.String" itemvalue="Python.logger" />
-        <item index="2" class="java.lang.String" itemvalue="Python.vector" />
-        <item index="3" class="java.lang.String" itemvalue="Python tests.Unittest TestGenerate.test_generat" />
-        <item index="4" class="java.lang.String" itemvalue="Python tests.Unittest TestGenerate.test_generate" />
+        <item index="0" class="java.lang.String" itemvalue="Python.from_json" />
+        <item index="1" class="java.lang.String" itemvalue="Python.to_json" />
+        <item index="2" class="java.lang.String" itemvalue="Python.logger" />
+        <item index="3" class="java.lang.String" itemvalue="Python.vector" />
+        <item index="4" class="java.lang.String" itemvalue="Python tests.Unittest TestGenerate.test_generat" />
       </list>
     </recent_temporary>
   </component>
@@ -791,13 +784,17 @@
       <option name="project" value="LOCAL" />
       <updated>1463264479516</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="4.py.2 unittest&#10;">
+      <created>1463264515969</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1463264515969</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unnamed - 2016.05.15 at 01h 16m 45s.xml">
-      <configuration name="Unnamed" configurationId="tests" />
-    </history-entry>
     <history-entry file="Unnamed - 2016.05.15 at 01h 17m 02s.xml">
       <configuration name="Unnamed" configurationId="tests" />
     </history-entry>
@@ -825,6 +822,9 @@
     <history-entry file="Unnamed - 2016.05.15 at 01h 20m 39s.xml">
       <configuration name="Unnamed" configurationId="tests" />
     </history-entry>
+    <history-entry file="Unnamed - 2016.05.15 at 02h 54m 47s.xml">
+      <configuration name="Unnamed" configurationId="tests" />
+    </history-entry>
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -837,14 +837,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="32" width="1616" height="876" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32898173" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25469485" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.6958225" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28851175" sideWeight="0.486875" order="9" side_tool="false" content_ui="tabs" x="494" y="47" width="674" height="806" />
-      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32375" sideWeight="0.50091743" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6958225" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28851175" sideWeight="0.486875" order="9" side_tool="false" content_ui="tabs" x="494" y="47" width="674" height="806" />
+      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32375" sideWeight="0.50091743" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36150235" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3075" sideWeight="0.48263028" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1168,14 +1168,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lab/from_json.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1683">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lab/seq.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-88">
@@ -1184,10 +1176,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/lab/from_json.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2680">
+          <caret line="134" column="0" selection-start-line="134" selection-start-column="0" selection-end-line="134" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/lab/test_generate.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="538">
-          <caret line="138" column="17" selection-start-line="138" selection-start-column="17" selection-end-line="138" selection-end-column="17" />
+        <state relative-caret-position="238">
+          <caret line="117" column="22" selection-start-line="117" selection-start-column="22" selection-end-line="117" selection-end-column="22" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
           </folding>

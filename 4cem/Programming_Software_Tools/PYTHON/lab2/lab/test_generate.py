@@ -115,7 +115,7 @@ class TestGenerate(TestCase):
 
 
     def test_tojson2(self):
-        t = [1,2,"kwwwwq", {"1":True}]
+        t = [1,2,"kww'wwq", {"1":True}]
         lab.to_json.my_json(t)
         print(t)
         print(lab.from_json.get_obj("strfiles/jsoned3.jsn"))

@@ -1,0 +1,1643 @@
+Index: lab/strfiles/genrated.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- lab/strfiles/genrated.txt	(revision 382d86e1293b42dd8f18ceeb34befd791a62f4a0)
++++ lab/strfiles/genrated.txt	(revision )
+@@ -1,30 +1,2 @@
+-98680	59876	43207
+-86431	56783	80658
+-78339	27446	85863
+-62122	60904	44279
+-01682	40668	39140
+-74864	78386	59362
+-64915	48220	11600
+-81117	29727	67854
+-50433	45042	09892
+-07653	96955	18424
+-95780	15087	45887
+-74804	47437	22547
+-32242	74284	15015
+-39185	79237	86184
+-01119	60267	49494
+-52223	51351	21625
+-71431	03815	72004
+-15958	53424	37408
+-35744	86005	93193
+-84899	63639	46333
+-84097	69394	20703
+-29740	39890	82293
+-30872	18950	26508
+-66935	35238	37500
+-13172	38627	13455
+-37943	33347	94613
+-23370	99996	45082
+-49660	93903	99110
+-34276	99779	13794
+-37154	46925	60194
++vyn ffo xsd dqi oej
++saj jvm ols vee ith
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/workspace.xml	(revision 382d86e1293b42dd8f18ceeb34befd791a62f4a0)
++++ .idea/workspace.xml	(revision )
+@@ -2,30 +2,22 @@
+ <project version="4">
+   <component name="ChangeListManager">
+     <list default="true" id="8bf371b5-260b-4221-9e7a-e388e45678db" name="Default" comment="">
+-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/setup.py" />
+-      <change type="DELETED" beforePath="$PROJECT_DIR$/cashed.py" afterPath="" />
+-      <change type="DELETED" beforePath="$PROJECT_DIR$/decodem.py" afterPath="" />
+-      <change type="DELETED" beforePath="$PROJECT_DIR$/decouse.py" afterPath="" />
+-      <change type="DELETED" beforePath="$PROJECT_DIR$/defaultdict.py" afterPath="" />
+-      <change type="DELETED" beforePath="$PROJECT_DIR$/from_json.py" afterPath="" />
+-      <change type="DELETED" beforePath="$PROJECT_DIR$/generate.py" afterPath="" />
+-      <change type="DELETED" beforePath="$PROJECT_DIR$/lab002.pdf" afterPath="" />
+-      <change type="DELETED" beforePath="$PROJECT_DIR$/logger.py" afterPath="" />
+-      <change type="DELETED" beforePath="$PROJECT_DIR$/main.py" afterPath="" />
+-      <change type="DELETED" beforePath="$PROJECT_DIR$/meta.py" afterPath="" />
+-      <change type="DELETED" beforePath="$PROJECT_DIR$/my_xrange.py" afterPath="" />
+-      <change type="DELETED" beforePath="$PROJECT_DIR$/newtext.txt" afterPath="" />
+-      <change type="DELETED" beforePath="$PROJECT_DIR$/seq.py" afterPath="" />
+-      <change type="DELETED" beforePath="$PROJECT_DIR$/singleton.py" afterPath="" />
+-      <change type="DELETED" beforePath="$PROJECT_DIR$/sort.py" afterPath="" />
+-      <change type="DELETED" beforePath="$PROJECT_DIR$/strfiles/attr.txt" afterPath="" />
+-      <change type="DELETED" beforePath="$PROJECT_DIR$/strfiles/genrated.txt" afterPath="" />
+-      <change type="DELETED" beforePath="$PROJECT_DIR$/strfiles/jsoned.jsn" afterPath="" />
+-      <change type="DELETED" beforePath="$PROJECT_DIR$/strfiles/selfish_sorted.txt" afterPath="" />
+-      <change type="DELETED" beforePath="$PROJECT_DIR$/strfiles/sorted.txt" afterPath="" />
+-      <change type="DELETED" beforePath="$PROJECT_DIR$/to_json.py" afterPath="" />
+-      <change type="DELETED" beforePath="$PROJECT_DIR$/vector.py" afterPath="" />
++      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lab/strfiles/jsoned3.jsn" />
++      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lab/test_generate.py" />
++      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/lab-0.1.tar.gz" afterPath="$PROJECT_DIR$/dist/lab-0.1.tar.gz" />
++      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
+       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
++      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab.egg-info/entry_points.txt" afterPath="$PROJECT_DIR$/lab.egg-info/entry_points.txt" />
++      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab/cashed.py" afterPath="$PROJECT_DIR$/lab/cashed.py" />
++      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab/defaultdict.py" afterPath="$PROJECT_DIR$/lab/defaultdict.py" />
++      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab/generate.py" afterPath="$PROJECT_DIR$/lab/generate.py" />
++      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab/main.py" afterPath="$PROJECT_DIR$/lab/main.py" />
++      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab/my_xrange.py" afterPath="$PROJECT_DIR$/lab/my_xrange.py" />
++      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab/sort.py" afterPath="$PROJECT_DIR$/lab/sort.py" />
++      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab/strfiles/genrated.txt" afterPath="$PROJECT_DIR$/lab/strfiles/genrated.txt" />
++      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab/strfiles/jsoned.jsn" afterPath="$PROJECT_DIR$/lab/strfiles/jsoned.jsn" />
++      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab/to_json.py" afterPath="$PROJECT_DIR$/lab/to_json.py" />
++      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab/vector.py" afterPath="$PROJECT_DIR$/lab/vector.py" />
+     </list>
+     <ignored path="lab2.iws" />
+     <ignored path=".idea/workspace.xml" />
+@@ -40,11 +32,17 @@
+   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+   <component name="CoverageDataManager">
+     <SUITE FILE_PATH="coverage/lab2$from_json.coverage" NAME="from_json Coverage Results" MODIFIED="1463231860710" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+-    <SUITE FILE_PATH="coverage/lab2$logger.coverage" NAME="logger Coverage Results" MODIFIED="1463235144646" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
++    <SUITE FILE_PATH="coverage/lab2$logger.coverage" NAME="logger Coverage Results" MODIFIED="1463260595358" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lab" />
++    <SUITE FILE_PATH="coverage/lab2$to_json.coverage" NAME="to_json Coverage Results" MODIFIED="1463262620383" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lab" />
++    <SUITE FILE_PATH="coverage/lab2$sort.coverage" NAME="sort Coverage Results" MODIFIED="1463259173500" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lab" />
+     <SUITE FILE_PATH="coverage/lab2$metastring.coverage" NAME="metastring Coverage Results" MODIFIED="1463242367511" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
++    <SUITE FILE_PATH="coverage/lab2$Unnamed.coverage" NAME="Unnamed Coverage Results" MODIFIED="1463264438356" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
++    <SUITE FILE_PATH="coverage/lab2$Unittest_TestGenerate_test_generat.coverage" NAME="Unittest TestGenerate.test_generat Coverage Results" MODIFIED="1463252356989" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lab" />
+     <SUITE FILE_PATH="coverage/lab2$setup.coverage" NAME="setup Coverage Results" MODIFIED="1463244359798" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+     <SUITE FILE_PATH="coverage/lab2$singleton.coverage" NAME="singleton Coverage Results" MODIFIED="1463233456038" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
++    <SUITE FILE_PATH="coverage/lab2$Unittest_TestGenerate_test_generate.coverage" NAME="Unittest TestGenerate.test_generate Coverage Results" MODIFIED="1463252318000" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lab" />
+     <SUITE FILE_PATH="coverage/lab2$meta.coverage" NAME="meta Coverage Results" MODIFIED="1463155671265" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
++    <SUITE FILE_PATH="coverage/lab2$vector.coverage" NAME="vector Coverage Results" MODIFIED="1463257252273" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lab" />
+   </component>
+   <component name="CreatePatchCommitExecutor">
+     <option name="PATCH_PATH" value="" />
+@@ -55,18 +53,28 @@
+   </component>
+   <component name="FileEditorManager">
+     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+-      <file leaf-file-name="setup.py" pinned="false" current-in-tab="true">
+-        <entry file="file://$PROJECT_DIR$/setup.py">
++      <file leaf-file-name="test_generate.py" pinned="false" current-in-tab="true">
++        <entry file="file://$PROJECT_DIR$/lab/test_generate.py">
+           <provider selected="true" editor-type-id="text-editor">
+-            <state relative-caret-position="420">
+-              <caret line="23" column="40" selection-start-line="23" selection-start-column="40" selection-end-line="23" selection-end-column="40" />
++            <state relative-caret-position="417">
++              <caret line="141" column="51" selection-start-line="141" selection-start-column="51" selection-end-line="141" selection-end-column="51" />
+               <folding>
+-                <element signature="e#0#43#0" expanded="true" />
++                <element signature="e#0#29#0" expanded="true" />
+               </folding>
+             </state>
+           </provider>
+         </entry>
+       </file>
++      <file leaf-file-name="seq.py" pinned="false" current-in-tab="false">
++        <entry file="file://$PROJECT_DIR$/lab/seq.py">
++          <provider selected="true" editor-type-id="text-editor">
++            <state relative-caret-position="-88">
++              <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
++              <folding />
++            </state>
++          </provider>
++        </entry>
++      </file>
+     </leaf>
+   </component>
+   <component name="FileTemplateManagerImpl">
+@@ -110,6 +118,18 @@
+         <option value="$PROJECT_DIR$/meta.py" />
+         <option value="$PROJECT_DIR$/vector.py" />
+         <option value="$PROJECT_DIR$/setup.py" />
++        <option value="$PROJECT_DIR$/lab/vector.py" />
++        <option value="$PROJECT_DIR$/lab/cashed.py" />
++        <option value="$PROJECT_DIR$/lab/defaultdict.py" />
++        <option value="$PROJECT_DIR$/lab/sort.py" />
++        <option value="$PROJECT_DIR$/lab/main.py" />
++        <option value="$PROJECT_DIR$/lab/meta.py" />
++        <option value="$PROJECT_DIR$/lab/generate.py" />
++        <option value="$PROJECT_DIR$/lab/my_xrange.py" />
++        <option value="$PROJECT_DIR$/lab/strfiles/jsoned.jsn" />
++        <option value="$PROJECT_DIR$/lab/to_json.py" />
++        <option value="$PROJECT_DIR$/lab/seq.py" />
++        <option value="$PROJECT_DIR$/lab/test_generate.py" />
+       </list>
+     </option>
+   </component>
+@@ -120,8 +140,10 @@
+     <sorting>DEFINITION_ORDER</sorting>
+   </component>
+   <component name="ProjectFrameBounds">
+-    <option name="width" value="1600" />
+-    <option name="height" value="900" />
++    <option name="x" value="-8" />
++    <option name="y" value="32" />
++    <option name="width" value="1616" />
++    <option name="height" value="876" />
+   </component>
+   <component name="ProjectInspectionProfilesVisibleTreeState">
+     <entry key="Project Default">
+@@ -164,47 +186,16 @@
+       <foldersAlwaysOnTop value="true" />
+     </navigator>
+     <panes>
+-      <pane id="Scratches" />
+-      <pane id="Scope" />
+       <pane id="ProjectPane">
+-        <subPane>
+-          <PATH>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="lab2" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+-            </PATH_ELEMENT>
+-          </PATH>
+-          <PATH>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="lab2" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+-            </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="lab2" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+-          </PATH>
+-          <PATH>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="lab2" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+-            </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="lab2" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="lab" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+-          </PATH>
+-        </subPane>
++        <subPane />
+       </pane>
++      <pane id="Scratches" />
++      <pane id="Scope" />
+     </panes>
+   </component>
+   <component name="PropertiesComponent">
+-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+-    <property name="SearchEverywhereHistoryKey" value="meta&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/Programming_Software_Tools/PYTHON/lab2/meta.py&#10;log&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/Programming_Software_Tools/PYTHON/lab2/logger.py&#10;seq&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/Programming_Software_Еools/PYTHON/lab2/strfiles/seq.py&#10;set&#9;ACTION&#9;ShowSettings&#10;sett&#9;ACTION&#9;ShowSettings&#10;xra&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/PYTHON/lab2/my_xrange.py&#10;ve&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/PYTHON/lab2/vector.py&#10;js&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/PYTHON/lab2/to_json.py&#10;xran&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/PYTHON/lab2/my_xrange.py&#10;main&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/PYTHON/lab2/main.py&#10;full&#9;ACTION&#9;ToggleFullScreen&#10;gen&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/PYTHON/lab2/generate.py&#10;lo&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/PYTHON/lab2/logger.py&#10;ter&#9;ACTION&#9;ActivateTerminalToolWindow&#10;vec&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/PYTHON/lab2/vector.py&#10;my&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/PYTHON/lab2/my_xrange.py&#10;vcs&#9;ACTION&#9;Vcs.Show.Log&#10;setti&#9;ACTION&#9;WelcomeScreen.Settings&#10;full &#9;ACTION&#9;ToggleFullScreen&#10;toggle full screen&#9;FILE&#9;file:///usr/lib/python3.5/json/encoder.py&#10;proje&#9;ACTION&#9;ActivateProjectToolWindow&#10;minimap&#9;null&#9;null&#10;te&#9;ACTION&#9;ActivateTerminalToolWindow" />
++    <property name="last_opened_file_path" value="$PROJECT_DIR$/lab/main.py" />
++    <property name="SearchEverywhereHistoryKey" value="gene&#9;null&#9;null&#10;main&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/Programming_Software_Tools/PYTHON/lab2/lab/main.py&#10;so&#9;null&#9;null&#10;sor&#9;RUN_CONFIGURATION&#9;sort&#10;meta&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/Programming_Software_Tools/PYTHON/lab2/meta.py&#10;log&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/Programming_Software_Tools/PYTHON/lab2/logger.py&#10;seq&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/Programming_Software_Еools/PYTHON/lab2/strfiles/seq.py&#10;set&#9;ACTION&#9;ShowSettings&#10;sett&#9;ACTION&#9;ShowSettings&#10;xra&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/PYTHON/lab2/my_xrange.py&#10;ve&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/PYTHON/lab2/vector.py&#10;js&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/PYTHON/lab2/to_json.py&#10;xran&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/PYTHON/lab2/my_xrange.py&#10;full&#9;ACTION&#9;ToggleFullScreen&#10;gen&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/PYTHON/lab2/generate.py&#10;lo&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/PYTHON/lab2/logger.py&#10;ter&#9;ACTION&#9;ActivateTerminalToolWindow&#10;vec&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/PYTHON/lab2/vector.py&#10;my&#9;FILE&#9;file://D:/LABS/BSUIR_labs/4cem/PYTHON/lab2/my_xrange.py&#10;vcs&#9;ACTION&#9;Vcs.Show.Log&#10;setti&#9;ACTION&#9;WelcomeScreen.Settings&#10;full &#9;ACTION&#9;ToggleFullScreen&#10;toggle full screen&#9;FILE&#9;file:///usr/lib/python3.5/json/encoder.py&#10;proje&#9;ACTION&#9;ActivateProjectToolWindow&#10;minimap&#9;null&#9;null&#10;te&#9;ACTION&#9;ActivateTerminalToolWindow" />
+     <property name="ToolWindowRun.ShowToolbar" value="false" />
+     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+     <property name="settings.editor.splitter.proportion" value="0.2" />
+@@ -232,93 +223,103 @@
+       <recent name="D:\LABS\BSUIR_labs\4cem\Programming_Software_Еools\PYTHON\lab2" />
+     </key>
+   </component>
+-  <component name="RunManager" selected="Python.setup">
+-    <configuration default="false" name="from_json" type="PythonConfigurationType" factoryName="Python" temporary="true">
++  <component name="RunManager" selected="Python tests.Unnamed">
++    <configuration default="false" name="vector" type="PythonConfigurationType" factoryName="Python" temporary="true">
+       <option name="INTERPRETER_OPTIONS" value="" />
+       <option name="PARENT_ENVS" value="true" />
+       <envs>
+         <env name="PYTHONUNBUFFERED" value="1" />
+       </envs>
+       <option name="SDK_HOME" value="" />
+-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
++      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/lab" />
+       <option name="IS_MODULE_SDK" value="true" />
+       <option name="ADD_CONTENT_ROOTS" value="true" />
+       <option name="ADD_SOURCE_ROOTS" value="true" />
+       <module name="lab2" />
+       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/from_json.py" />
++      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/lab/vector.py" />
+       <option name="PARAMETERS" value="" />
+       <option name="SHOW_COMMAND_LINE" value="false" />
+       <method />
+     </configuration>
+-    <configuration default="false" name="singleton" type="PythonConfigurationType" factoryName="Python" temporary="true">
++    <configuration default="false" name="Unittest TestGenerate.test_generate" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+       <option name="INTERPRETER_OPTIONS" value="" />
+       <option name="PARENT_ENVS" value="true" />
+-      <envs>
+-        <env name="PYTHONUNBUFFERED" value="1" />
+-      </envs>
++      <envs />
+       <option name="SDK_HOME" value="" />
+-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
++      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/lab" />
+       <option name="IS_MODULE_SDK" value="true" />
+       <option name="ADD_CONTENT_ROOTS" value="true" />
+       <option name="ADD_SOURCE_ROOTS" value="true" />
+       <module name="lab2" />
+       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/singleton.py" />
+-      <option name="PARAMETERS" value="" />
+-      <option name="SHOW_COMMAND_LINE" value="false" />
++      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/lab/test_generate.py" />
++      <option name="CLASS_NAME" value="TestGenerate" />
++      <option name="METHOD_NAME" value="test_generate" />
++      <option name="FOLDER_NAME" value="" />
++      <option name="TEST_TYPE" value="TEST_METHOD" />
++      <option name="PATTERN" value="" />
++      <option name="USE_PATTERN" value="false" />
++      <option name="PUREUNITTEST" value="true" />
++      <option name="PARAMS" value="" />
++      <option name="USE_PARAM" value="false" />
+       <method />
+     </configuration>
+-    <configuration default="false" name="logger" type="PythonConfigurationType" factoryName="Python" temporary="true">
++    <configuration default="false" name="Unittest TestGenerate.test_generat" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+       <option name="INTERPRETER_OPTIONS" value="" />
+       <option name="PARENT_ENVS" value="true" />
+-      <envs>
+-        <env name="PYTHONUNBUFFERED" value="1" />
+-      </envs>
++      <envs />
+       <option name="SDK_HOME" value="" />
+-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
++      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/lab" />
+       <option name="IS_MODULE_SDK" value="true" />
+       <option name="ADD_CONTENT_ROOTS" value="true" />
+       <option name="ADD_SOURCE_ROOTS" value="true" />
+       <module name="lab2" />
+       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/logger.py" />
+-      <option name="PARAMETERS" value="" />
+-      <option name="SHOW_COMMAND_LINE" value="false" />
++      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/lab/test_generate.py" />
++      <option name="CLASS_NAME" value="TestGenerate" />
++      <option name="METHOD_NAME" value="test_generat" />
++      <option name="FOLDER_NAME" value="" />
++      <option name="TEST_TYPE" value="TEST_METHOD" />
++      <option name="PATTERN" value="" />
++      <option name="USE_PATTERN" value="false" />
++      <option name="PUREUNITTEST" value="true" />
++      <option name="PARAMS" value="" />
++      <option name="USE_PARAM" value="false" />
+       <method />
+     </configuration>
+-    <configuration default="false" name="metastring" type="PythonConfigurationType" factoryName="Python" temporary="true">
++    <configuration default="false" name="logger" type="PythonConfigurationType" factoryName="Python" temporary="true">
+       <option name="INTERPRETER_OPTIONS" value="" />
+       <option name="PARENT_ENVS" value="true" />
+       <envs>
+         <env name="PYTHONUNBUFFERED" value="1" />
+       </envs>
+       <option name="SDK_HOME" value="" />
+-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
++      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/lab" />
+       <option name="IS_MODULE_SDK" value="true" />
+       <option name="ADD_CONTENT_ROOTS" value="true" />
+       <option name="ADD_SOURCE_ROOTS" value="true" />
+       <module name="lab2" />
+       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/metastring.py" />
++      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/lab/logger.py" />
+       <option name="PARAMETERS" value="" />
+       <option name="SHOW_COMMAND_LINE" value="false" />
+       <method />
+     </configuration>
+-    <configuration default="false" name="setup" type="PythonConfigurationType" factoryName="Python" temporary="true">
++    <configuration default="false" name="to_json" type="PythonConfigurationType" factoryName="Python" temporary="true">
+       <option name="INTERPRETER_OPTIONS" value="" />
+       <option name="PARENT_ENVS" value="true" />
+       <envs>
+         <env name="PYTHONUNBUFFERED" value="1" />
+       </envs>
+       <option name="SDK_HOME" value="" />
+-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
++      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/lab" />
+       <option name="IS_MODULE_SDK" value="true" />
+       <option name="ADD_CONTENT_ROOTS" value="true" />
+       <option name="ADD_SOURCE_ROOTS" value="true" />
+       <module name="lab2" />
+       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/setup.py" />
++      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/lab/to_json.py" />
+       <option name="PARAMETERS" value="" />
+       <option name="SHOW_COMMAND_LINE" value="false" />
+       <method />
+@@ -538,14 +539,14 @@
+         <env name="PYTHONUNBUFFERED" value="1" />
+       </envs>
+       <option name="SDK_HOME" value="" />
+-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
++      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/lab" />
+       <option name="IS_MODULE_SDK" value="true" />
+       <option name="ADD_CONTENT_ROOTS" value="true" />
+       <option name="ADD_SOURCE_ROOTS" value="true" />
+       <module name="lab2" />
+       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+-      <option name="PARAMETERS" value="--program vector" />
++      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/lab/main.py" />
++      <option name="PARAMETERS" value="--program sort --check" />
+       <option name="SHOW_COMMAND_LINE" value="false" />
+       <method />
+     </configuration>
+@@ -585,23 +586,47 @@
+       <option name="SHOW_COMMAND_LINE" value="false" />
+       <method />
+     </configuration>
+-    <list size="8">
++    <configuration default="false" name="Unnamed" type="tests" factoryName="Unittests">
++      <option name="INTERPRETER_OPTIONS" value="" />
++      <option name="PARENT_ENVS" value="true" />
++      <envs />
++      <option name="SDK_HOME" value="C:\Python34\python.exe" />
++      <option name="WORKING_DIRECTORY" value="" />
++      <option name="IS_MODULE_SDK" value="false" />
++      <option name="ADD_CONTENT_ROOTS" value="true" />
++      <option name="ADD_SOURCE_ROOTS" value="true" />
++      <module name="lab2" />
++      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
++      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/lab/test_generate.py" />
++      <option name="CLASS_NAME" value="" />
++      <option name="METHOD_NAME" value="" />
++      <option name="FOLDER_NAME" value="" />
++      <option name="TEST_TYPE" value="TEST_SCRIPT" />
++      <option name="PATTERN" value="" />
++      <option name="USE_PATTERN" value="false" />
++      <option name="PUREUNITTEST" value="true" />
++      <option name="PARAMS" value="" />
++      <option name="USE_PARAM" value="false" />
++      <method />
++    </configuration>
++    <list size="9">
+       <item index="0" class="java.lang.String" itemvalue="Python.sort" />
+       <item index="1" class="java.lang.String" itemvalue="Python.generate" />
+       <item index="2" class="java.lang.String" itemvalue="Python.generate fixed" />
+-      <item index="3" class="java.lang.String" itemvalue="Python.from_json" />
+-      <item index="4" class="java.lang.String" itemvalue="Python.singleton" />
+-      <item index="5" class="java.lang.String" itemvalue="Python.logger" />
+-      <item index="6" class="java.lang.String" itemvalue="Python.metastring" />
+-      <item index="7" class="java.lang.String" itemvalue="Python.setup" />
++      <item index="3" class="java.lang.String" itemvalue="Python.vector" />
++      <item index="4" class="java.lang.String" itemvalue="Python tests.Unnamed" />
++      <item index="5" class="java.lang.String" itemvalue="Python tests.Unittest TestGenerate.test_generate" />
++      <item index="6" class="java.lang.String" itemvalue="Python tests.Unittest TestGenerate.test_generat" />
++      <item index="7" class="java.lang.String" itemvalue="Python.logger" />
++      <item index="8" class="java.lang.String" itemvalue="Python.to_json" />
+     </list>
+     <recent_temporary>
+       <list size="5">
+-        <item index="0" class="java.lang.String" itemvalue="Python.setup" />
+-        <item index="1" class="java.lang.String" itemvalue="Python.metastring" />
+-        <item index="2" class="java.lang.String" itemvalue="Python.logger" />
+-        <item index="3" class="java.lang.String" itemvalue="Python.singleton" />
+-        <item index="4" class="java.lang.String" itemvalue="Python.from_json" />
++        <item index="0" class="java.lang.String" itemvalue="Python.to_json" />
++        <item index="1" class="java.lang.String" itemvalue="Python.logger" />
++        <item index="2" class="java.lang.String" itemvalue="Python.vector" />
++        <item index="3" class="java.lang.String" itemvalue="Python tests.Unittest TestGenerate.test_generat" />
++        <item index="4" class="java.lang.String" itemvalue="Python tests.Unittest TestGenerate.test_generate" />
+       </list>
+     </recent_temporary>
+   </component>
+@@ -762,6 +787,38 @@
+     <option name="localTasksCounter" value="21" />
+     <servers />
+   </component>
++  <component name="TestHistory">
++    <history-entry file="Unnamed - 2016.05.15 at 01h 16m 45s.xml">
++      <configuration name="Unnamed" configurationId="tests" />
++    </history-entry>
++    <history-entry file="Unnamed - 2016.05.15 at 01h 17m 02s.xml">
++      <configuration name="Unnamed" configurationId="tests" />
++    </history-entry>
++    <history-entry file="Unnamed - 2016.05.15 at 01h 17m 46s.xml">
++      <configuration name="Unnamed" configurationId="tests" />
++    </history-entry>
++    <history-entry file="Unnamed - 2016.05.15 at 01h 18m 30s.xml">
++      <configuration name="Unnamed" configurationId="tests" />
++    </history-entry>
++    <history-entry file="Unnamed - 2016.05.15 at 01h 18m 52s.xml">
++      <configuration name="Unnamed" configurationId="tests" />
++    </history-entry>
++    <history-entry file="Unnamed - 2016.05.15 at 01h 19m 25s.xml">
++      <configuration name="Unnamed" configurationId="tests" />
++    </history-entry>
++    <history-entry file="Unnamed - 2016.05.15 at 01h 19m 41s.xml">
++      <configuration name="Unnamed" configurationId="tests" />
++    </history-entry>
++    <history-entry file="Unnamed - 2016.05.15 at 01h 19m 59s.xml">
++      <configuration name="Unnamed" configurationId="tests" />
++    </history-entry>
++    <history-entry file="Unnamed - 2016.05.15 at 01h 20m 11s.xml">
++      <configuration name="Unnamed" configurationId="tests" />
++    </history-entry>
++    <history-entry file="Unnamed - 2016.05.15 at 01h 20m 39s.xml">
++      <configuration name="Unnamed" configurationId="tests" />
++    </history-entry>
++  </component>
+   <component name="TodoView">
+     <todo-panel id="selected-file">
+       <is-autoscroll-to-source value="true" />
+@@ -772,30 +829,52 @@
+     </todo-panel>
+   </component>
+   <component name="ToolWindowManager">
+-    <frame x="0" y="0" width="1600" height="900" extended-state="6" />
++    <frame x="-8" y="32" width="1616" height="876" extended-state="6" />
+     <editor active="true" />
+     <layout>
+-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.308125" sideWeight="0.48263028" order="0" side_tool="false" content_ui="combo" />
+-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32941177" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
++      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32898173" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25469485" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6960094" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3298122" sideWeight="0.486875" order="9" side_tool="false" content_ui="tabs" x="494" y="47" width="674" height="806" />
+-      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.125625" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
++      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28851175" sideWeight="0.486875" order="9" side_tool="false" content_ui="tabs" x="494" y="47" width="674" height="806" />
++      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32375" sideWeight="0.50091743" order="4" side_tool="true" content_ui="tabs" />
+       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36150235" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
++      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3075" sideWeight="0.48263028" order="0" side_tool="false" content_ui="combo" />
++      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
++      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286385" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
++      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.125625" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.235" sideWeight="0.51736975" order="2" side_tool="true" content_ui="tabs" />
+-      <window_info id="Debug" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32375" sideWeight="0.513125" order="4" side_tool="false" content_ui="tabs" />
++      <window_info id="Debug" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32375" sideWeight="0.49908257" order="4" side_tool="false" content_ui="tabs" />
+       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286385" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+     </layout>
++    <layout-to-restore>
++      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32941177" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
++      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
++      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
++      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
++      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
++      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
++      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
++      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25469485" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
++      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6960094" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
++      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22454308" sideWeight="0.486875" order="9" side_tool="false" content_ui="tabs" x="494" y="47" width="674" height="806" />
++      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32375" sideWeight="0.4938704" order="4" side_tool="true" content_ui="tabs" />
++      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36150235" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
++      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3075" sideWeight="0.48263028" order="0" side_tool="false" content_ui="combo" />
++      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
++      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
++      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286385" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
++      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.125625" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
++      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
++      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.235" sideWeight="0.51736975" order="2" side_tool="true" content_ui="tabs" />
++      <window_info id="Debug" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32375" sideWeight="0.5061296" order="5" side_tool="false" content_ui="tabs" />
++    </layout-to-restore>
+   </component>
+   <component name="Vcs.Log.UiProperties">
+     <option name="RECENTLY_FILTERED_USER_GROUPS">
+@@ -840,7 +919,7 @@
+           </properties>
+         </breakpoint>
+       </default-breakpoints>
+-      <option name="time" value="128" />
++      <option name="time" value="136" />
+     </breakpoint-manager>
+     <watches-manager>
+       <configuration name="PythonConfigurationType">
+@@ -850,347 +929,230 @@
+     </watches-manager>
+   </component>
+   <component name="editorHistoryManager">
+-    <entry file="file://$PROJECT_DIR$/main.py">
++    <entry file="file://$PROJECT_DIR$/../lab1/lab1.py">
+       <provider selected="true" editor-type-id="text-editor">
+         <state relative-caret-position="0">
+-          <caret line="11" column="25" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
++          <caret line="57" column="26" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="26" />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/sort.py">
+-      <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="0">
+-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
++    <entry file="file://$USER_HOME$/AppData/Roaming/Python/Python34/site-packages/sympy/physics/mechanics/tests/test_lagrange.py" />
++    <entry file="file://$PROJECT_DIR$/decodem.py" />
++    <entry file="file://C:/Python34/Lib/functools.py" />
++    <entry file="file://$PROJECT_DIR$/decouse.py" />
++    <entry file="file://$PROJECT_DIR$/strfiles/selfish_sorted.txt" />
++    <entry file="file://$PROJECT_DIR$/strfiles/sorted.txt" />
++    <entry file="file://$PROJECT_DIR$/strfiles/genrated.txt" />
++    <entry file="file://C:/Python34/Lib/tempfile.py" />
++    <entry file="file://$PROJECT_DIR$/main.py" />
++    <entry file="file://$PROJECT_DIR$/defaultdict.py" />
++    <entry file="file://$PROJECT_DIR$/my_xrange.py" />
++    <entry file="file://$PROJECT_DIR$/to_json.py" />
++    <entry file="uml://Python/#D:/LABS/BSUIR_labs/4cem/Programming_Software_Еools/PYTHON/lab2/meta.py">
++      <provider selected="true" editor-type-id="UmlEditorProvider">
++        <state>
++          <ID>Python</ID>
++          <OriginalElement>#D:/LABS/BSUIR_labs/4cem/Programming_Software_Еools/PYTHON/lab2/meta.py</OriginalElement>
++          <nodes>
++            <node x="" y="">meta.Cls</node>
++            <node x="" y="">metaclass</node>
++            <node x="" y="">_collections_abc.Hashable</node>
++            <node x="" y="">_collections_abc.Callable</node>
++            <node x="" y="">type</node>
++            <node x="" y="">meta.UpperAttrMetaclass</node>
++            <node x="" y="">object</node>
++          </nodes>
++          <notes />
++          <edges />
++          <settings layout="Hierarchic Group" zoom="1.0" x="138.0" y="133.0" />
++          <SelectedNodes />
++          <Categories />
++          <SCOPE>All</SCOPE>
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/generate.py">
++    <entry file="file://$PROJECT_DIR$/seq.py" />
++    <entry file="file://$PROJECT_DIR$/sort.py" />
++    <entry file="file://C:/Python34/Lib/_bootlocale.py">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="0">
+-          <caret line="2" column="19" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="19" />
++        <state relative-caret-position="200">
++          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/main.py">
++    <entry file="file://C:/Python34/Lib/encodings/cp1251.py">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="0">
+-          <caret line="11" column="25" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
++        <state relative-caret-position="440">
++          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/sort.py">
++    <entry file="file://C:/Python34/Lib/inspect.py">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="0">
+-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
++        <state relative-caret-position="181">
++          <caret line="92" column="0" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/main.py">
++    <entry file="file://$PROJECT_DIR$/logger.py" />
++    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="0">
+-          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="28" selection-end-column="10" />
++        <state relative-caret-position="380">
++          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/generate.py">
++    <entry file="file://$PROJECT_DIR$/singleton.py" />
++    <entry file="file://$PROJECT_DIR$/from_json.py" />
++    <entry file="file://$PROJECT_DIR$/metastring.py" />
++    <entry file="file://$PROJECT_DIR$/meta.py" />
++    <entry file="file://$PROJECT_DIR$/vector.py" />
++    <entry file="file://$PROJECT_DIR$/generate.py" />
++    <entry file="file://$PROJECT_DIR$/cashed.py" />
++    <entry file="file://C:/Python34/Lib/site-packages/setuptools/__init__.py">
+       <provider selected="true" editor-type-id="text-editor">
+         <state relative-caret-position="0">
+-          <caret line="19" column="14" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="37" />
+-        </state>
+-      </provider>
+-    </entry>
+-    <entry file="file://$PROJECT_DIR$/sort.py">
+-      <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="0">
+           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/main.py">
++    <entry file="file://$PROJECT_DIR$/lab2-scripts/decouse.py" />
++    <entry file="file://$PROJECT_DIR$/lab2-scripts/decodem.py" />
++    <entry file="file://$PROJECT_DIR$/setup.py">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="0">
+-          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="28" selection-end-column="10" />
++        <state relative-caret-position="460">
++          <caret line="23" column="40" selection-start-line="23" selection-start-column="40" selection-end-line="23" selection-end-column="40" />
++          <folding>
++            <element signature="e#0#43#0" expanded="false" />
++          </folding>
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/generate.py">
++    <entry file="file://$PROJECT_DIR$/lab/decodem.py">
+       <provider selected="true" editor-type-id="text-editor">
+         <state relative-caret-position="0">
+-          <caret line="19" column="14" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="37" />
+-        </state>
+-      </provider>
+-    </entry>
+-    <entry file="file://$PROJECT_DIR$/sort.py">
+-      <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="0">
+           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
++          <folding />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/main.py">
++    <entry file="file://$PROJECT_DIR$/lab/decouse.py">
+       <provider selected="true" editor-type-id="text-editor">
+         <state relative-caret-position="0">
+-          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="28" selection-end-column="10" />
+-        </state>
+-      </provider>
+-    </entry>
+-    <entry file="file://$PROJECT_DIR$/generate.py">
+-      <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="0">
+-          <caret line="19" column="14" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="37" />
+-        </state>
+-      </provider>
+-    </entry>
+-    <entry file="file://$PROJECT_DIR$/sort.py">
+-      <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="0">
+           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
++          <folding />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/main.py">
++    <entry file="file://C:/Python34/Lib/codecs.py">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="0">
+-          <caret line="16" column="12" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="12" />
+-        </state>
+-      </provider>
+-    </entry>
+-    <entry file="file://$PROJECT_DIR$/generate.py">
+-      <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="0">
+-          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+-        </state>
+-      </provider>
+-    </entry>
+-    <entry file="file://$PROJECT_DIR$/main.py">
+-      <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="0">
+-          <caret line="7" column="49" selection-start-line="7" selection-start-column="49" selection-end-line="7" selection-end-column="49" />
+-        </state>
+-      </provider>
+-    </entry>
+-    <entry file="file://$PROJECT_DIR$/generate.py">
+-      <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="0">
+-          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+-        </state>
+-      </provider>
+-    </entry>
+-    <entry file="file://$PROJECT_DIR$/../lab1/lab1.py">
+-      <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="0">
+-          <caret line="57" column="26" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="26" />
+-        </state>
+-      </provider>
+-    </entry>
+-    <entry file="file://$USER_HOME$/AppData/Roaming/Python/Python34/site-packages/sympy/physics/mechanics/tests/test_lagrange.py" />
+-    <entry file="file://$PROJECT_DIR$/decodem.py">
+-      <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="0">
+-          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+-        </state>
+-      </provider>
+-    </entry>
+-    <entry file="file://C:/Python34/Lib/functools.py" />
+-    <entry file="file://$PROJECT_DIR$/decouse.py">
+-      <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="0">
+-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+-        </state>
+-      </provider>
+-    </entry>
+-    <entry file="file://$PROJECT_DIR$/strfiles/selfish_sorted.txt">
+-      <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="0">
+-          <caret line="45323" column="2" selection-start-line="45323" selection-start-column="0" selection-end-line="45324" selection-end-column="0" />
+-        </state>
+-      </provider>
+-    </entry>
+-    <entry file="file://$PROJECT_DIR$/strfiles/sorted.txt">
+-      <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="0">
+-          <caret line="45323" column="20" selection-start-line="45323" selection-start-column="0" selection-end-line="45324" selection-end-column="0" />
+-        </state>
+-      </provider>
+-    </entry>
+-    <entry file="file://$PROJECT_DIR$/strfiles/genrated.txt">
+-      <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="0">
+-          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+-        </state>
+-      </provider>
+-    </entry>
+-    <entry file="file://C:/Python34/Lib/tempfile.py" />
+-    <entry file="file://$PROJECT_DIR$/main.py">
+-      <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="0">
+-          <caret line="49" column="32" selection-start-line="49" selection-start-column="32" selection-end-line="49" selection-end-column="32" />
+-        </state>
+-      </provider>
+-    </entry>
+-    <entry file="file://$PROJECT_DIR$/defaultdict.py">
+-      <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="2000">
+-          <caret line="100" column="4" selection-start-line="100" selection-start-column="4" selection-end-line="100" selection-end-column="4" />
+-        </state>
+-      </provider>
+-    </entry>
+-    <entry file="file://$PROJECT_DIR$/my_xrange.py">
+-      <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="480">
+-          <caret line="24" column="26" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
+-        </state>
+-      </provider>
+-    </entry>
+-    <entry file="file://$PROJECT_DIR$/to_json.py">
+-      <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="2360">
+-          <caret line="118" column="0" selection-start-line="118" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
+-        </state>
+-      </provider>
+-    </entry>
+-    <entry file="uml://Python/#D:/LABS/BSUIR_labs/4cem/Programming_Software_Еools/PYTHON/lab2/meta.py">
+-      <provider selected="true" editor-type-id="UmlEditorProvider">
+-        <state>
+-          <ID>Python</ID>
+-          <OriginalElement>#D:/LABS/BSUIR_labs/4cem/Programming_Software_Еools/PYTHON/lab2/meta.py</OriginalElement>
+-          <nodes>
+-            <node x="" y="">meta.Cls</node>
+-            <node x="" y="">metaclass</node>
+-            <node x="" y="">_collections_abc.Hashable</node>
+-            <node x="" y="">_collections_abc.Callable</node>
+-            <node x="" y="">type</node>
+-            <node x="" y="">meta.UpperAttrMetaclass</node>
+-            <node x="" y="">object</node>
+-          </nodes>
+-          <notes />
+-          <edges />
+-          <settings layout="Hierarchic Group" zoom="1.0" x="138.0" y="133.0" />
+-          <SelectedNodes />
+-          <Categories />
+-          <SCOPE>All</SCOPE>
+-        </state>
+-      </provider>
+-    </entry>
+-    <entry file="file://$PROJECT_DIR$/seq.py">
+-      <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="20">
+-          <caret line="7" column="20" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
+-        </state>
+-      </provider>
+-    </entry>
+-    <entry file="file://$PROJECT_DIR$/sort.py">
+-      <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="43">
+-          <caret line="228" column="35" selection-start-line="228" selection-start-column="35" selection-end-line="228" selection-end-column="35" />
+-        </state>
+-      </provider>
+-    </entry>
+-    <entry file="file://C:/Python34/Lib/_bootlocale.py">
+-      <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="200">
+-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
++        <state relative-caret-position="523">
++          <caret line="306" column="0" selection-start-line="306" selection-start-column="0" selection-end-line="306" selection-end-column="0" />
+           <folding />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://C:/Python34/Lib/encodings/cp1251.py">
++    <entry file="file://$PROJECT_DIR$/lab/vector.py">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="440">
+-          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
++        <state relative-caret-position="403">
++          <caret line="73" column="14" selection-start-line="73" selection-start-column="14" selection-end-line="73" selection-end-column="14" />
+           <folding />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://C:/Python34/Lib/codecs.py">
++    <entry file="file://$PROJECT_DIR$/lab/cashed.py">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="6120">
+-          <caret line="306" column="0" selection-start-line="306" selection-start-column="0" selection-end-line="306" selection-end-column="0" />
++        <state relative-caret-position="363">
++          <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+           <folding />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://C:/Python34/Lib/inspect.py">
++    <entry file="file://$PROJECT_DIR$/lab/defaultdict.py">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="181">
+-          <caret line="92" column="0" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
++        <state relative-caret-position="484">
++          <caret line="68" column="0" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="29" />
+           <folding />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/logger.py">
++    <entry file="file://$PROJECT_DIR$/lab/sort.py">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="920">
+-          <caret line="46" column="22" selection-start-line="46" selection-start-column="22" selection-end-line="46" selection-end-column="22" />
+-          <folding />
++        <state relative-caret-position="-880">
++          <caret line="23" column="106" selection-start-line="23" selection-start-column="106" selection-end-line="23" selection-end-column="106" />
++          <folding>
++            <element signature="e#0#15#0" expanded="true" />
++          </folding>
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
++    <entry file="file://$PROJECT_DIR$/lab/meta.py">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="380">
+-          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
++        <state relative-caret-position="320">
++          <caret line="16" column="34" selection-start-line="16" selection-start-column="34" selection-end-line="16" selection-end-column="34" />
+           <folding />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/singleton.py">
++    <entry file="file://$PROJECT_DIR$/lab/main.py">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="100">
+-          <caret line="5" column="12" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
+-          <folding />
++        <state relative-caret-position="220">
++          <caret line="22" column="71" selection-start-line="22" selection-start-column="50" selection-end-line="22" selection-end-column="71" />
++          <folding>
++            <element signature="e#0#15#0" expanded="true" />
++          </folding>
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/from_json.py">
++    <entry file="file://$PROJECT_DIR$/lab/generate.py">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="441">
+-          <caret line="130" column="0" selection-start-line="130" selection-start-column="0" selection-end-line="130" selection-end-column="0" />
++        <state relative-caret-position="140">
++          <caret line="23" column="28" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
+           <folding />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/metastring.py">
++    <entry file="file://$PROJECT_DIR$/lab/logger.py">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="584">
+-          <caret line="81" column="12" selection-start-line="81" selection-start-column="12" selection-end-line="81" selection-end-column="12" />
++        <state relative-caret-position="1360">
++          <caret line="65" column="19" selection-start-line="65" selection-start-column="19" selection-end-line="65" selection-end-column="19" />
+           <folding />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/meta.py">
++    <entry file="file://$PROJECT_DIR$/lab/my_xrange.py">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="120">
+-          <caret line="6" column="39" selection-start-line="6" selection-start-column="39" selection-end-line="6" selection-end-column="39" />
++        <state relative-caret-position="146">
++          <caret line="60" column="4" selection-start-line="60" selection-start-column="4" selection-end-line="60" selection-end-column="36" />
+           <folding />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/vector.py">
++    <entry file="file://$PROJECT_DIR$/lab/strfiles/jsoned.jsn">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="20">
+-          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
++        <state relative-caret-position="240">
++          <caret line="12" column="1" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
+           <folding />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/generate.py">
++    <entry file="file://$PROJECT_DIR$/lab/strfiles/jsoned2.jsn">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="244">
+-          <caret line="30" column="11" selection-start-line="30" selection-start-column="11" selection-end-line="30" selection-end-column="11" />
++        <state relative-caret-position="0">
++          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+           <folding />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/cashed.py">
++    <entry file="file://$PROJECT_DIR$/lab/to_json.py">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="503">
+-          <caret line="32" column="9" selection-start-line="32" selection-start-column="9" selection-end-line="32" selection-end-column="9" />
++        <state relative-caret-position="300">
++          <caret line="45" column="26" selection-start-line="45" selection-start-column="26" selection-end-line="45" selection-end-column="26" />
+           <folding />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://C:/Python34/Lib/site-packages/setuptools/__init__.py">
++    <entry file="file://$PROJECT_DIR$/lab/strfiles/jsoned3.jsn">
+       <provider selected="true" editor-type-id="text-editor">
+         <state relative-caret-position="0">
+           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+@@ -1198,28 +1160,28 @@
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/lab2-scripts/decouse.py">
++    <entry file="file://$PROJECT_DIR$/lab/from_json.py">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="0">
++        <state relative-caret-position="-1683">
+           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+           <folding />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/lab2-scripts/decodem.py">
++    <entry file="file://$PROJECT_DIR$/lab/seq.py">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="220">
+-          <caret line="11" column="28" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
++        <state relative-caret-position="-88">
++          <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+           <folding />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/setup.py">
++    <entry file="file://$PROJECT_DIR$/lab/test_generate.py">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="420">
+-          <caret line="23" column="40" selection-start-line="23" selection-start-column="40" selection-end-line="23" selection-end-column="40" />
++        <state relative-caret-position="417">
++          <caret line="141" column="51" selection-start-line="141" selection-start-column="51" selection-end-line="141" selection-end-column="51" />
+           <folding>
+-            <element signature="e#0#43#0" expanded="true" />
++            <element signature="e#0#29#0" expanded="true" />
+           </folding>
+         </state>
+       </provider>
+\ No newline at end of file
+Index: lab/defaultdict.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- lab/defaultdict.py	(revision 382d86e1293b42dd8f18ceeb34befd791a62f4a0)
++++ lab/defaultdict.py	(revision )
+@@ -9,41 +9,19 @@
+     def __setitem__(self, key, value):
+         self.d[key] = value
+ 
+-    # def __get__(self, item):
+-    #     pass
++
+     def __get__(self, instance, owner):
+         return self.d
+-    # def __init__(self, dimension, fill):
+-    #     self.dimension = dimension
+-    #     self.fill = fill
+-    #     self.x = {}
+-    #     Defaul_dict.init(self, self.x, 0)
+-    #
+-    # # def init(self, pointer, deep):
+-    # #     deep += 1
+-    # #     if deep != self.dimension:
+-    # #         for each in range(self.fill):
+-    # #             pointer[])
+-    # #             Defaul_dict.init(self, pointer[each], deep)
+-    # #     else:
+-    # #         for i in range(self.fill):
+-    # #             pointer.append(0)
+-    #
+-    # def __str__(self):
+-    #     return str(self.x)
+ 
+ 
++
+     def __getitem__(self, item):
+         return Defaul_dict.getitem(self, item, 0)
+-    #
+-    # def __get__(self, instance, owner):
+-    #     return self.x
+-    #
+ 
++
+     def getitem(self, item, pointer):
+         if pointer == 0:
+             pointer = self.d
+-            # print(str(pointer))
+         try:
+             a = pointer[item]
+         except KeyError:
+@@ -54,15 +32,7 @@
+             return pointer[item]
+         else:
+             return pointer[item]
+-            # return Defaul_dict.getitem(self,item, pointer[item])
+-            # if deep == self.dimension:
+-            #     return pointer[item % self.dimension]
+-            # else:
+-            #     deep += 1
+-            #     return Defaul_dict.getitem(self, item, pointer[(item//self.dimension)-1], deep)
+-#
+-    # def __setitem__(self, key, value):
+-    #     pass
++
+ 
+     def __str__(self):
+         ret = "{"
+\ No newline at end of file
+Index: lab/main.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- lab/main.py	(revision 382d86e1293b42dd8f18ceeb34befd791a62f4a0)
++++ lab/main.py	(revision )
+@@ -1,13 +1,13 @@
+ import argparse
+-import defaultdict
+-import generate
+-import to_json
+-import vector
+-import cashed
+-import logger
+-import my_xrange
+-import sort
+-import meta
++import lab.defaultdict
++import lab.generate
++import lab.to_json
++import lab.vector
++import lab.cashed
++import lab.logger
++import lab.my_xrange
++import lab.sort
++# import lab.meta
+ 
+ 
+ def create_parser():
+@@ -33,14 +33,14 @@
+     parser = create_parser()
+     namespace = parser.parse_args()
+     if namespace.program == "generate":
+-        generate.generate(int(namespace.fixedblocks),
++        lab.generate.generate(int(namespace.fixedblocks),
+                           namespace.blockseparator,
+                           int(namespace.fixedlines),
+                           namespace.lineseparator,
+                           namespace.nums,
+                           int(namespace.symbols))
+     if namespace.program == "sort":
+-        sort.main(namespace.blockseparator,
++        lab.sort.main(namespace.blockseparator,
+                   namespace.lineseparator,
+                   namespace.input,
+                   namespace.output,
+@@ -49,19 +49,19 @@
+                   namespace.checked,
+                   namespace.keys)
+     if namespace.program == "vector":
+-        vector.main()
++        lab.vector.main()
+     if namespace.program == "json":
+-        to_json.main()
++        lab.to_json.main()
+     if namespace.program == "cashed":
+-        cashed.main()
++        lab.cashed.main()
+     if namespace.program == "logger":
+-        logger.main()
++        lab.logger.main()
+     if namespace.program == "xrange":
+-        my_xrange.main()
++        lab.my_xrange.main()
+     if namespace.program == "dict":
+-        defaultdict.main()
++        lab.defaultdict.main()
+     if namespace.program == "meta":
+-        meta.main()
++        lab.meta.main()
+ 
+ if __name__ == '__main__':
+     menu()
+\ No newline at end of file
+Index: .idea/encodings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/encodings.xml	(revision 382d86e1293b42dd8f18ceeb34befd791a62f4a0)
++++ .idea/encodings.xml	(revision )
+@@ -1,6 +1,7 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="Encoding">
++    <file url="file://$PROJECT_DIR$/lab/strfiles/jsoned.jsn" charset="ISO-8859-1" />
+     <file url="PROJECT" charset="UTF-8" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: lab/strfiles/jsoned3.jsn
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- lab/strfiles/jsoned3.jsn	(revision )
++++ lab/strfiles/jsoned3.jsn	(revision )
+@@ -0,0 +1,8 @@
++[
++	1,
++	2,
++	"kwwwwq",
++	{
++		"1": true
++	}
++]
+\ No newline at end of file
+Index: lab/vector.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- lab/vector.py	(revision 382d86e1293b42dd8f18ceeb34befd791a62f4a0)
++++ lab/vector.py	(revision )
+@@ -4,8 +4,10 @@
+ 
+     def __str__(self):
+         ret = ""
+-        for i in range(len(self.x)-1):
+-            return str(self.x[i])
++        # for i in range(len(self.x)-1):
++        #     return str(self.x[i])
++        #
++        return str(self.x)
+ 
+     def __add__(self, other):
+         if type(self) == type(other):
+@@ -16,13 +18,17 @@
+                 raise ValueError("You can't complete the operation with different dimentions")
+                 return self
+         else:
+-            for each in range(len(self.x)-1):
++            for each in range(len(self.x)):
+                 self.x[each] += other
+ 
++            return self
++
+     def __getitem__(self, item):
+         if item >= len(self.x):
+             raise Exception("Out of range Exception")
+         return self.x[item]
++    def __len__(self):
++        return len(self.x)
+ 
+     def __sub__(self, other):
+         if len(self) == len(other):
+@@ -42,27 +48,32 @@
+             return False
+ 
+     def __mul__(self, other):
+-        if type(self) == type(other):
++        if isinstance(other, Vector):
+             ret = 0
+-            if len(self) == len(other):
+-                for each in range(len(self)-1):
++            if len(self.x) == len(other.x):
++                for each in range(len(self.x)):
+-                    ret += self.x[each] * other.x[each]
++                    ret += self.x[each] *other.x[each]
+-                return ret**0.5
++                return ret ** 0.5
+-        else:
++            else:
+-            for each in range(len(self)-1):
++                raise TypeError("Different dimensions")
++        else:
++            for each in range(len(self.x)):
+                 self.x[each] *= other
++            return self
+ 
+ 
++
+ def main():
+     n = Vector(4)
+-    b = Vector(2)
++    b = Vector(4)
+     # print(str(n))
+     # n.equal(2, 0)
+ 
+-    n += 2
++    n += 3
+     b += 1
++    print(n.x)
+     # n.x[1][1] = 5
+-    # print(str(n*b))
++    print(str(n*b))
+     # print(len(n))
+ 
+ if __name__ == "__main__":
+Index: lab/sort.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- lab/sort.py	(revision 382d86e1293b42dd8f18ceeb34befd791a62f4a0)
++++ lab/sort.py	(revision )
+@@ -23,6 +23,9 @@
+ @benchmark
+ def main(block_separator, line_separator, input_file, output_file, buffer_size, reverse, checked,  keys = []):
+     # selfish_sort()
++    if checked:
++        print(checking(input_file))
++        return
+     if len(keys) == 0:
+         list_of_split_tmp = split_file(buffer_size, line_separator, input_file)
+         list_of_sorted_tmp = []
+@@ -39,11 +42,18 @@
+     if reverse:
+         print("re")
+         reversion(output_file)
+-    if checked:
+-        if md5(output_file) != md5(input_file):
+-            print(str(False))
+-        else:
+-            print(str(True))
++
++
++def checking(input_file):
++    prev_line = ""
++    fine = True
++    with open(input_file, "r") as f:
++        for line in f:
++            if not line >= prev_line:
++                fine = False
++            prev_line = line
++    return fine
++
+ 
+ def reversion(output_file):
+     f = open(output_file, "r")
+Index: lab/cashed.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- lab/cashed.py	(revision 382d86e1293b42dd8f18ceeb34befd791a62f4a0)
++++ lab/cashed.py	(revision )
+@@ -29,7 +29,7 @@
+ 
+ 
+ @benchmark
+-# @cashed
++@cashed
+ def one(q, **kwargs):
+     # print(str(kwargs.get('lol')))
+     print("computing")
+@@ -40,9 +40,7 @@
+     # print(one(2, lol=4))
+     b = one(2)
+     c = one(2)
+-    d = one(2)
+-    e = one(2)
+-    f = one(2)
++
+ 
+ if __name__ == "__main__":
+     main()
+\ No newline at end of file
+Index: lab/my_xrange.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- lab/my_xrange.py	(revision 382d86e1293b42dd8f18ceeb34befd791a62f4a0)
++++ lab/my_xrange.py	(revision )
+@@ -61,7 +61,7 @@
+     # print(str(xrange(100500)[63]))
+     #
+     # print(str(next(reversed(range(100500)))))
+-    # print(str(next(reversed(xrange(100500)))))
++    print(str(next(reversed(xrange(100500)))))
+ 
+ 
+     for i in range(10, 1, -1):
+\ No newline at end of file
+Index: lab.egg-info/entry_points.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- lab.egg-info/entry_points.txt	(revision 382d86e1293b42dd8f18ceeb34befd791a62f4a0)
++++ lab.egg-info/entry_points.txt	(revision )
+@@ -1,15 +1,15 @@
+ [console_scripts]
+ lab_sort = lab.sort:main
+-lab_metastring = lab.metastring:main
+-lab_meta = lab.meta:main
+ lab_fromjson = lab.from_json:main
+-lab_xrange = lab.my_xrange:main
+-lab_vector = lab.vector:main
+-lab_singleton = lab.singleton:main
++lab_genarate = lab.generate:main
+ lab_cashed = lab.cashed:main
++lab_singleton = lab.singleton:main
++lab_seq = lab.seq:main
+ lab_dict = lab.defaultdict:main
+-lab_genarate = lab.generate:main
+-lab_tojson = lab.to_json:main
+ lab_logger = lab.logger:main
+-lab_seq = lab.seq:main
++lab_metastring = lab.metastring:main
++lab_tojson = lab.to_json:main
++lab_vector = lab.vector:main
++lab_meta = lab.meta:main
++lab_xrange = lab.my_xrange:main
+ 
+Index: lab/to_json.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- lab/to_json.py	(revision 382d86e1293b42dd8f18ceeb34befd791a62f4a0)
++++ lab/to_json.py	(revision )
+@@ -4,7 +4,10 @@
+     #     if args[0] == True:
+     #         print("rise unknown ")
+     what_the_obj = str(type(obj))
+-    print(distributor(what_the_obj, obj, 0))
++    s = distributor(what_the_obj, obj, 0)
++    with open("strfiles/jsoned3.jsn", "w") as f:
++        f.write(s)
++    return distributor(what_the_obj, obj, 0)
+ 
+ 
+ def tabstring(ret, deep):
+@@ -123,7 +126,7 @@
+     l = [2, 4, 5, 6]
+     t = ["1", ("2", [3, 2, True, 'ke', (3, 5.9, {2: 3, 4: "4"})]), 3, 4, 5]
+     d = {1: "2", 2: True, 3: 9, 4: 16}
+-
++    print(t)
+ 
+     s = "kek"
+     n = 0.0
+Index: lab/generate.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- lab/generate.py	(revision 382d86e1293b42dd8f18ceeb34befd791a62f4a0)
++++ lab/generate.py	(revision )
+@@ -21,7 +21,7 @@
+     if block_separator == "\\t":
+         block_separator = "\t"
+     s = ""
+-    with open("strfiles/genrated.txt", "w") as f:
++    with open("strfiles/generated.txt", "w") as f:
+         if line_count == 0:
+             count_of_strings = randint(10, 100)
+         else:
+Index: lab/test_generate.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- lab/test_generate.py	(revision )
++++ lab/test_generate.py	(revision )
+@@ -0,0 +1,142 @@
++from unittest import TestCase
++import lab.generate
++import lab.cashed
++import lab.vector
++import time
++import lab.defaultdict
++import lab.sort
++import lab.meta
++import lab.logger
++import lab.my_xrange
++import lab.to_json
++import lab.from_json
++import lab.seq
++
++class TestGenerate(TestCase):
++    def test_generate_correct(self):
++        line_count = 2
++        lab.generate.generate(3, " ", line_count, "\n", "a", 3)
++        with open("strfiles/genrated.txt", "r") as f:
++            for line in f:
++                line_count -= 1
++        self.assertTrue(line_count == 0)
++
++    def test_generate_incorrect(self):
++        line_count = 2
++        lab.generate.generate(5, " ", line_count, "\n", "a", 3)
++        with open("strfiles/genrated.txt", "r") as f:
++            for line in f:
++                line_count -= 1
++        self.assertTrue(line_count == 0)
++
++    def test_cashed1(self):
++        start_time = time.time()
++        i = lab.cashed.one(2)
++        one_execute = time.time()
++        j = lab.cashed.one(2)
++        now = time.time()
++        print(now - start_time)
++        print((now - one_execute)*2)
++        self.assertTrue(now - one_execute < (one_execute - start_time)*2)
++
++
++    def test_cashed2(self):
++        start_time = time.time()
++        i = lab.cashed.one(2)
++        one_execute = time.time()
++        j = lab.cashed.main()
++        now = time.time()
++        self.assertTrue(now - now <= (one_execute - start_time)*2)
++
++    def test_vector(self):
++        a = lab.vector.Vector(4)
++        b = lab.vector.Vector(3)
++        with self.assertRaises(TypeError):
++            a = a*b
++
++
++    def test_vector2(self):
++        a = lab.vector.Vector(4)
++        a += 3
++        self.assertTrue(a.x == [3, 3, 3, 3])
++
++    def test_default(self):
++        d = lab.defaultdict.Defaul_dict(0)
++        d["3"]["ew2"]["2"] = None
++        self.assertFalse(d["3"]["ew2"]["2"] == "kek")
++
++
++    def test_default2(self):
++        d = lab.defaultdict.Defaul_dict(0)
++        d["1"] = 2
++        d["2"] = 5
++        self.assertTrue(d["1"] + d["2"] == 7)
++
++    def test_sort(self):
++        self.assertTrue(lab.sort.checking("strfiles/sorted.txt"))
++
++
++    def test_sort2(self):
++        self.assertFalse(lab.sort.checking("strfiles/genrated.txt"))
++
++    def test_meta(self):
++            self.assertFalse(lab.meta.Cls.a != 1)
++
++    def test_meta2(self):
++        self.assertTrue(lab.meta.Cls.b == 2)
++
++    def test_logger(self):
++        sam = lab.logger.Sample()
++        sam.set_logger_format(name=True, ret=True)
++        sam.sample(3, 3)
++        sam.sample(3, 1)
++        sam.sample(3, 2)
++        print(str(sam.log_array))
++        self.assertTrue(len(sam.log_array) == 3)
++
++    def test_logger2(self):
++        sam = lab.logger.Sample()
++        sam.sample(3, 3)
++        print(str(sam.log_array))
++        self.assertTrue(len(sam.log_array) == 1)
++
++    def test_xrange(self):
++        self.assertTrue(next(reversed(lab.my_xrange.xrange(100500))) == 100499)
++
++    def test_xrange2(self):
++        self.assertTrue(lab.my_xrange.xrange(100500)[63] == 63)
++
++    def test_tojson(self):
++        t = ["1", ["2", [3, 2, True, 'ke', [3, 5]]], 3, 4, 5]
++        lab.to_json.my_json(t)
++        print(t)
++        print(lab.from_json.get_obj("strfiles/jsoned3.jsn"))
++        self.assertTrue(lab.from_json.get_obj("strfiles/jsoned3.jsn") == t)
++
++
++    def test_tojson2(self):
++        t = [1,2,"kwwwwq", {"1":True}]
++        lab.to_json.my_json(t)
++        print(t)
++        print(lab.from_json.get_obj("strfiles/jsoned3.jsn"))
++        self.assertTrue(lab.from_json.get_obj("strfiles/jsoned3.jsn") == t)
++
++    def test_seq1(self):
++        a = lab.seq.Seq([ 1, 2, 5, 7, 8])
++        def custom_2(x):
++            if x < 2:
++                return False
++            else:
++                return True
++        self.assertTrue(a.custom_filter(custom_2) == [2,5,7,8])
++
++    def test_seq2(self):
++        a = lab.seq.Seq([i for i in range(10)])
++
++        def custom_2(x):
++            if x % 2:
++                return False
++            else:
++                return True
++        print(a.custom_filter(custom_2))
++        self.assertTrue(a.custom_filter(custom_2) == [0, 2, 4, 6, 8])
+Index: lab/strfiles/jsoned.jsn
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>ISO-8859-1
+===================================================================
+--- lab/strfiles/jsoned.jsn	(revision 382d86e1293b42dd8f18ceeb34befd791a62f4a0)
++++ lab/strfiles/jsoned.jsn	(revision )
+@@ -1,9 +1,9 @@
+ {
+-   "firstName": "Èâàí",
+-   "lastName": "Èâàíîâ",
++   "firstName": "????",
++   "lastName": "??????",
+    "address": {
+-       "streetAddress": "Ìîñêîâñêîå ø., 101, êâ.101",
+-       "city": "Ëåíèíãðàä",
++       "streetAddress": "?????????? ?., 101, ??.101",
++       "city": "?????????",
+        "postalCode": 101101
+    },
+    "phoneNumbers": [
+\ No newline at end of file
