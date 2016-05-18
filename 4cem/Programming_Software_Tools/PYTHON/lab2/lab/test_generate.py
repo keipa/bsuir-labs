@@ -12,6 +12,7 @@ import lab.to_json
 import lab.from_json
 import lab.seq
 
+
 class TestGenerate(TestCase):
     def test_generate_correct(self):
         line_count = 2
@@ -39,7 +40,6 @@ class TestGenerate(TestCase):
         print((now - one_execute)*2)
         self.assertTrue(now - one_execute < (one_execute - start_time)*2)
 
-
     def test_cashed2(self):
         start_time = time.time()
         i = lab.cashed.one(2)
@@ -54,7 +54,6 @@ class TestGenerate(TestCase):
         with self.assertRaises(TypeError):
             a = a*b
 
-
     def test_vector2(self):
         a = lab.vector.Vector(4)
         a += 3
@@ -65,7 +64,6 @@ class TestGenerate(TestCase):
         d["3"]["ew2"]["2"] = None
         self.assertFalse(d["3"]["ew2"]["2"] == "kek")
 
-
     def test_default2(self):
         d = lab.defaultdict.Defaul_dict(0)
         d["1"] = 2
@@ -74,7 +72,6 @@ class TestGenerate(TestCase):
 
     def test_sort(self):
         self.assertTrue(lab.sort.checking("strfiles/sorted.txt"))
-
 
     def test_sort2(self):
         self.assertFalse(lab.sort.checking("strfiles/genrated.txt"))
@@ -122,13 +119,14 @@ class TestGenerate(TestCase):
         self.assertTrue(lab.from_json.get_obj("strfiles/jsoned3.jsn") == t)
 
     def test_seq1(self):
-        a = lab.seq.Seq([ 1, 2, 5, 7, 8])
+        a = lab.seq.Seq([1, 2, 5, 7, 8])
+
         def custom_2(x):
             if x < 2:
                 return False
             else:
                 return True
-        self.assertTrue(a.custom_filter(custom_2) == [2,5,7,8])
+        self.assertTrue(a.custom_filter(custom_2) == [2, 5, 7, 8])
 
     def test_seq2(self):
         a = lab.seq.Seq([i for i in range(10)])

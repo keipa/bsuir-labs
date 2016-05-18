@@ -19,11 +19,11 @@ class Seq(object):
             #         self.seq.remove(self.seq[each])
             # return self.seq
             #generator fail
+
             for each in self.seq:
                 if not filtration_func(each):
                     self.seq.remove(each)
             return self.seq
-
 
     def __init__(self, some_object):
         if hasattr(some_object, "__iter__"):
@@ -39,13 +39,12 @@ class Seq(object):
         return Seq.Iterable(self.seq).filter(filtration_func)
 
 
-
-
 def custom_5(x):
     if x>5:
         return False
     else:
         return True
+
 
 def custom_2(x):
     if x<2:
@@ -53,13 +52,13 @@ def custom_2(x):
     else:
         return True
 
+
 def fib(num):
     a = 0
     b = 1
     while a < num:
         yield a
         a, b = b, a + b
-
 
 
 b = Seq(fib(8))

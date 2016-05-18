@@ -28,15 +28,12 @@ int *merge(int *ar, int *tmp, int left_border, int right_border) {
 			
 			// cutting while elements excist in both arrs 
 			if (left_cut[i] < right_cut[j]) {
-
 				sorted[k] = left_cut[i++];
 				count_for_invert++;
 			}
 			else
 			{
-				inv += center - left_border - count_for_invert;
-				inv = inv + 1;
-
+				inv += center - left_border - count_for_invert +1;
 				sorted[k] = right_cut[j++];
 
 			}

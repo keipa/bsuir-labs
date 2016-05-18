@@ -15,6 +15,7 @@ def arrproc(index, s):
         index = tup[0]
     return (index+1, arr)
 
+
 def dictproc(index, s):
     d = {}
     while s[index] != "}":
@@ -35,16 +36,15 @@ def strproc(index, s):
     index += 1
     while index < len(s):
 
-        if s[index] == "\"":
+        if s[index] == "\\" and s[index+1] == "\"":
             if index + 1 < len(s):
-                if s[index+1] in string.ascii_letters or s[index + 1] in string.digits:
-                    str_collecting += s[index]
-                    index += 1
+                    str_collecting += "\""
+                    index += 2
                     continue
-                else:
-                    return (index+1, str_collecting)
             else:
                 return (index+1, str_collecting)
+        if s[index]=="\"":
+            return (index +1, str_collecting)
         str_collecting += s[index]
         index += 1
 
@@ -114,6 +114,10 @@ def cleaning(s):
         while s[index] != "\"":
             end += s[index]
             index += 1
+            if s[index]=="\\" and s[index+1]=="\"":
+                end += s[index]+s[index+1]
+                index += 2
+                continue
             if index >= len(s):
                 break
         end += s[index]
@@ -142,7 +146,7 @@ def whatis(s):
 
 
 def main():
-    print(get_obj("strfiles/jsoned.jsn"))
+    print(get_obj("strfiles/jsoned3.jsn"))
 
 
 

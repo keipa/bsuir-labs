@@ -94,6 +94,7 @@ def is_last_in_list(each, obj):
 
 
 def string_processing(obj):
+    obj.replace("\"", "\\\"")
     return '\"'+obj+'\"'
 
 

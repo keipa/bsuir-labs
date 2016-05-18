@@ -53,7 +53,7 @@ class Vector:
             if len(self.x) == len(other.x):
                 for each in range(len(self.x)):
                     ret += self.x[each] *other.x[each]
-                return ret ** 0.5
+                return ret
             else:
                 raise TypeError("Different dimensions")
         else:
