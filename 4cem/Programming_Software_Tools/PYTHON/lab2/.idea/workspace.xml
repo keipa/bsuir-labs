@@ -3,17 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="8bf371b5-260b-4221-9e7a-e388e45678db" name="Default" comment="4.py.2 unittest&#10;">
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lab/metava.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../Algorithms_and_Data_Structure/4.cpp" afterPath="$PROJECT_DIR$/../../../Algorithms_and_Data_Structure/4.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lab1/lab1.py" afterPath="$PROJECT_DIR$/../lab1/lab1.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab/from_json.py" afterPath="$PROJECT_DIR$/lab/from_json.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab/metastring.py" afterPath="$PROJECT_DIR$/lab/metastring.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab/seq.py" afterPath="$PROJECT_DIR$/lab/seq.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab/strfiles/generated.txt" afterPath="$PROJECT_DIR$/lab/strfiles/generated.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab/strfiles/jsoned3.jsn" afterPath="$PROJECT_DIR$/lab/strfiles/jsoned3.jsn" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab/test_generate.py" afterPath="$PROJECT_DIR$/lab/test_generate.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab/to_json.py" afterPath="$PROJECT_DIR$/lab/to_json.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab/vector.py" afterPath="$PROJECT_DIR$/lab/vector.py" />
     </list>
     <ignored path="lab2.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -31,7 +22,7 @@
     <SUITE FILE_PATH="coverage/lab2$logger.coverage" NAME="logger Coverage Results" MODIFIED="1463260595358" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lab" />
     <SUITE FILE_PATH="coverage/lab2$from_json.coverage" NAME="from_json Coverage Results" MODIFIED="1463561425147" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lab" />
     <SUITE FILE_PATH="coverage/lab2$sort.coverage" NAME="sort Coverage Results" MODIFIED="1463259173500" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lab" />
-    <SUITE FILE_PATH="coverage/lab2$metastring.coverage" NAME="metastring Coverage Results" MODIFIED="1463564725390" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lab" />
+    <SUITE FILE_PATH="coverage/lab2$metastring.coverage" NAME="metastring Coverage Results" MODIFIED="1463575031243" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lab" />
     <SUITE FILE_PATH="coverage/lab2$Unittest_TestGenerate_test_generat.coverage" NAME="Unittest TestGenerate.test_generat Coverage Results" MODIFIED="1463252356989" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lab" />
     <SUITE FILE_PATH="coverage/lab2$Unittest_TestGenerate_test_default2__1_.coverage" NAME="Unittest TestGenerate.test_default2 (1) Coverage Results" MODIFIED="1463557931380" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lab" />
     <SUITE FILE_PATH="coverage/lab2$Unittest_TestGenerate_test_generate.coverage" NAME="Unittest TestGenerate.test_generate Coverage Results" MODIFIED="1463252318000" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lab" />
@@ -88,8 +79,8 @@
       <file leaf-file-name="metastring.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lab/metastring.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1004">
-              <caret line="52" column="36" selection-start-line="52" selection-start-column="36" selection-end-line="52" selection-end-column="36" />
+            <state relative-caret-position="200">
+              <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -99,7 +90,7 @@
         <entry file="file://$PROJECT_DIR$/lab/metava.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="354">
-              <caret line="59" column="25" selection-start-line="59" selection-start-column="25" selection-end-line="59" selection-end-column="25" />
+              <caret line="62" column="30" selection-start-line="62" selection-start-column="30" selection-end-line="62" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -278,13 +269,14 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="1077" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="FullScreen" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\LABS\BSUIR_labs\4cem\Programming_Software_Еools\PYTHON\lab2" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.metava">
+  <component name="RunManager" selected="Python.metastring">
     <configuration default="false" name="metastring" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -683,8 +675,8 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.metava" />
-        <item index="1" class="java.lang.String" itemvalue="Python.metastring" />
+        <item index="0" class="java.lang.String" itemvalue="Python.metastring" />
+        <item index="1" class="java.lang.String" itemvalue="Python.metava" />
         <item index="2" class="java.lang.String" itemvalue="Python.from_json" />
         <item index="3" class="java.lang.String" itemvalue="Python tests.Unittest TestGenerate.test_default2 (1)" />
         <item index="4" class="java.lang.String" itemvalue="Python tests.Unittest TestGenerate.test_default2" />
@@ -859,7 +851,14 @@
       <option name="project" value="LOCAL" />
       <updated>1463264515969</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="4.py.1-2 1-allpassed&#10;2 - all i need is modelcreator and checking with parameters and sorting due colomn">
+      <created>1463565365559</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1463565365559</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -905,7 +904,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1600" height="900" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.236875" sideWeight="0.48263028" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286385" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -918,7 +917,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.125625" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36150235" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.235" sideWeight="0.51736975" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.300625" sideWeight="0.49908257" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.300625" sideWeight="0.49908257" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1002,13 +1001,18 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/lab/metastring.py</url>
-          <line>110</line>
+          <line>119</line>
           <option name="timeStamp" value="143" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/lab/metava.py</url>
           <line>101</line>
           <option name="timeStamp" value="146" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/lab/metastring.py</url>
+          <line>55</line>
+          <option name="timeStamp" value="147" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -1018,7 +1022,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="147" />
+      <option name="time" value="148" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
@@ -1271,15 +1275,15 @@
     <entry file="file://$PROJECT_DIR$/lab/metava.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="354">
-          <caret line="59" column="25" selection-start-line="59" selection-start-column="25" selection-end-line="59" selection-end-column="25" />
+          <caret line="62" column="30" selection-start-line="62" selection-start-column="30" selection-end-line="62" selection-end-column="30" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lab/metastring.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1004">
-          <caret line="52" column="36" selection-start-line="52" selection-start-column="36" selection-end-line="52" selection-end-column="36" />
+        <state relative-caret-position="200">
+          <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
           <folding />
         </state>
       </provider>

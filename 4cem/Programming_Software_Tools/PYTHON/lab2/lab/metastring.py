@@ -25,34 +25,43 @@ class StringField(object):
         return ""
 
 
+class IntField(object):
+    def __init__(self):
+        self.default = 0
+
+    def set_default(self, value):
+        if isinstance(value, int):
+            self.default = value
+        else:
+            raise TypeError("your entered value is not")
+
+    def __set__(self, instance, value):
+        if isinstance(instance, int):
+            self.default = value
+        else:
+            raise TypeError
+
+    # def __get__(self, instance, owner):
+    #     return self.default
+
+
 class ModelCreator(type):
-    class IntField(object):
-        def __init__(self):
-            self.default = 0
-
-        def set_default(self, value):
-            if isinstance(value, int):
-                self.default = value
-            else:
-                raise TypeError("your entered value is not")
-
-        def __set__(self, instance, value):
-            if isinstance(instance, int):
-                self.default = value
-            else:
-                raise TypeError
-
-        def __get__(self, instance, owner):
-            return self.default
 
     def __new__(cls, name, bases, attrs):
+        def getcustom(self, instance, owner):
+            if isinstance(instance, IntField):
+                print("ok")
+            return 5
 
-        def _setcustom(self, attr, value):
-            pass
+        def setcustom(self, attr, value):
+            if isinstance(attr, IntField):
+                print("ok")
 
-        cls.__setattr__ = _setcustom
+        cls = type.__new__(cls, name, bases, attrs)
+        cls.__setattr__ = setcustom
+        cls.__getattr__ = getcustom
 
-        return super(ModelCreator, cls).__new__(cls, name, bases, attrs)
+        return cls
 
 
     # def __getattr__(self, key, value):
@@ -96,7 +105,7 @@ class ModelCreator(type):
     # def __getattr__(self, item):
     #     return 0
 class Cls(object, metaclass=ModelCreator):
-    i = ModelCreator.IntField()
+    i = IntField()
     s = StringField()
     l = ListField()
     t = TupleField()
