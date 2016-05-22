@@ -44,6 +44,7 @@ def generate(block_count, block_separator,  line_count, line_separator, isnums, 
                     s += block_separator
             f.write(s)
             s = ""
+    print("done")
 
 
 def random_chr(is_nums):

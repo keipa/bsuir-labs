@@ -21,37 +21,50 @@ def md5(fname):
     return hash_md5.hexdigest()
 
 @benchmark
-def main(block_separator, line_separator, input_file, output_file, buffer_size, reverse, checked,  keys = []):
+def main(block_separator, line_separator, input_file, output_file, buffer_size, reverse, checked,  keys = [1]):
     # selfish_sort()
     if checked:
-        print(checking(input_file))
+        print(checking(input_file,  block_separator, reverse, keys))
         return
-    if len(keys) == 0:
-        list_of_split_tmp = split_file(buffer_size, line_separator, input_file)
-        list_of_sorted_tmp = []
-        count = 1
-        for each in range(len(list_of_split_tmp)):
-            list_of_split_tmp[each].seek(0)
-        for each in range(len(list_of_split_tmp)):
-            list_of_sorted_tmp.append(sorting(list_of_split_tmp[each], line_separator, block_separator))
-            print("sorting {0}".format(str(count)))
-            count += 1
-        merging(list_of_sorted_tmp, block_separator, line_separator, output_file)
-    else:
-        key_sort(block_separator, line_separator, input_file, output_file, keys)
+
+    list_of_split_tmp = split_file(buffer_size, line_separator, input_file)
+    list_of_sorted_tmp = []
+    count = 1
+    for each in range(len(list_of_split_tmp)):
+        list_of_split_tmp[each].seek(0)
+    for each in range(len(list_of_split_tmp)):
+        list_of_sorted_tmp.append(sorting(list_of_split_tmp[each], line_separator, block_separator))
+        print("sorting {0}".format(str(count)))
+        count += 1
+    merging(list_of_sorted_tmp, block_separator, line_separator, output_file, keys)
+    # key_sort(block_separator, line_separator, input_file, output_file, keys)
+
     if reverse:
         print("re")
         reversion(output_file)
+            
 
 
-def checking(input_file):
+def checking(input_file, block_separator, reverse, keys):
     prev_line = ""
     fine = True
+    line_index = 0
     with open(input_file, "r") as f:
-        for line in f:
-            if not line >= prev_line:
-                fine = False
-            prev_line = line
+        if not reverse:
+            for line in f:
+                if line_index == 0:
+                    prev_line = line
+                    line_index += 1
+                    continue
+                if not line.split(block_separator)[int(keys[0])-1] >= prev_line.split(block_separator)[int(keys[0])-1]:
+                    fine = False
+                prev_line = line
+                line_index += 1
+        else:
+            for line in f:
+                if not line.split(block_separator)[int(keys[0])-1] <= prev_line.split(block_separator)[int(keys[0])-1]:
+                    fine = False
+                prev_line = line
     return fine
 
 
@@ -86,7 +99,7 @@ def sorting(temp_file, line_splitter, block_splitter):
         val = a.split(block_splitter)
         actual_string = ""
         for each in val:
-            actual_string+=each
+            actual_string += each
         original_string[a] = actual_string
         a = next_temp_line(temp_file, line_splitter)
     original_string = list(original_string.items())
@@ -159,7 +172,7 @@ def key_sort(block_separator, line_separator, input_file, output_file, keys):
             f.write(b[each])
 
 
-def merging(list_of_sorted_tmp, block_separator, line_separator, output_file):
+def merging(list_of_sorted_tmp, block_separator, line_separator, output_file, keys):
     big_sort = []
     temp = tempfile.TemporaryFile()
     big_sort.append(temp)
@@ -198,7 +211,7 @@ def merging(list_of_sorted_tmp, block_separator, line_separator, output_file):
         for each in val:
             actual_right_string += each
         while left_line is not None and right_line is not None:
-            if actual_left_string < actual_right_string:
+            if actual_left_string.split(block_separator)[keys[0]] < actual_right_string.split(block_separator)[keys[0]]:
                 big_sort[current].write(bytes(left_line, encoding="UTF-8"))
                 left_line = next_temp_line(big_sort[current - 1], line_separator)
                 if left_line is not None and right_line is not None:
