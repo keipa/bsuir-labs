@@ -24,7 +24,7 @@ def md5(fname):
 def main(block_separator, line_separator, input_file, output_file, buffer_size, reverse, checked,  keys = []):
     # selfish_sort()
     if checked:
-        print(checking(input_file))
+        print(checking(input_file, keys = []))
         return
     if len(keys) == 0:
         list_of_split_tmp = split_file(buffer_size, line_separator, input_file)
@@ -44,7 +44,7 @@ def main(block_separator, line_separator, input_file, output_file, buffer_size, 
         reversion(output_file)
 
 
-def checking(input_file):
+def checking(input_file, keys):
     prev_line = ""
     fine = True
     with open(input_file, "r") as f:
