@@ -61,7 +61,6 @@ class ModelCreator(type):
                     raise TypeError
             else:
                 setattr(obj, attr, value)
-
         return obj
 
 
