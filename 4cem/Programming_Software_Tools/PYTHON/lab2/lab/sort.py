@@ -21,11 +21,12 @@ def md5(fname):
     return hash_md5.hexdigest()
 
 @benchmark
-def main(block_separator, line_separator, input_file, output_file, buffer_size, reverse, checked,  keys = [1]):
+def main(block_separator, line_separator, input_file, output_file, buffer_size, reverse, checked,  keys = []):
     # selfish_sort()
     if checked:
-        print(checking(input_file,  block_separator, reverse, keys))
+        print(checking(input_file, keys = []))
         return
+
 
     list_of_split_tmp = split_file(buffer_size, line_separator, input_file)
     list_of_sorted_tmp = []
@@ -39,32 +40,20 @@ def main(block_separator, line_separator, input_file, output_file, buffer_size, 
     merging(list_of_sorted_tmp, block_separator, line_separator, output_file, keys)
     # key_sort(block_separator, line_separator, input_file, output_file, keys)
 
+
     if reverse:
         print("re")
         reversion(output_file)
-            
 
 
-def checking(input_file, block_separator, reverse, keys):
+def checking(input_file, keys):
     prev_line = ""
     fine = True
-    line_index = 0
     with open(input_file, "r") as f:
-        if not reverse:
-            for line in f:
-                if line_index == 0:
-                    prev_line = line
-                    line_index += 1
-                    continue
-                if not line.split(block_separator)[int(keys[0])-1] >= prev_line.split(block_separator)[int(keys[0])-1]:
-                    fine = False
-                prev_line = line
-                line_index += 1
-        else:
-            for line in f:
-                if not line.split(block_separator)[int(keys[0])-1] <= prev_line.split(block_separator)[int(keys[0])-1]:
-                    fine = False
-                prev_line = line
+        for line in f:
+            if not line >= prev_line:
+                fine = False
+            prev_line = line
     return fine
 
 
@@ -99,7 +88,7 @@ def sorting(temp_file, line_splitter, block_splitter,reverse, keys = [1]):
         val = a.split(block_splitter)
         actual_string = ""
         for each in val:
-            actual_string += each
+            actual_string+=each
         original_string[a] = actual_string
         a = next_temp_line(temp_file, line_splitter)
     original_string = list(original_string.items())
@@ -178,7 +167,7 @@ def key_sort(block_separator, line_separator, input_file, output_file, keys):
             f.write(b[each])
 
 
-def merging(list_of_sorted_tmp, block_separator, line_separator, output_file, keys):
+def merging(list_of_sorted_tmp, block_separator, line_separator, output_file):
     big_sort = []
     temp = tempfile.TemporaryFile()
     big_sort.append(temp)
@@ -217,7 +206,7 @@ def merging(list_of_sorted_tmp, block_separator, line_separator, output_file, ke
         for each in val:
             actual_right_string += each
         while left_line is not None and right_line is not None:
-            if actual_left_string.split(block_separator)[keys[0]] < actual_right_string.split(block_separator)[keys[0]]:
+            if actual_left_string < actual_right_string:
                 big_sort[current].write(bytes(left_line, encoding="UTF-8"))
                 left_line = next_temp_line(big_sort[current - 1], line_separator)
                 if left_line is not None and right_line is not None:
