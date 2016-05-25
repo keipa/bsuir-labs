@@ -33,7 +33,7 @@ def main(block_separator, line_separator, input_file, output_file, buffer_size, 
     for each in range(len(list_of_split_tmp)):
         list_of_split_tmp[each].seek(0)
     for each in range(len(list_of_split_tmp)):
-        list_of_sorted_tmp.append(sorting(list_of_split_tmp[each], line_separator, block_separator))
+        list_of_sorted_tmp.append(sorting(list_of_split_tmp[each], line_separator, block_separator,  reverse, keys))
         print("sorting {0}".format(str(count)))
         count += 1
     merging(list_of_sorted_tmp, block_separator, line_separator, output_file, keys)
@@ -91,7 +91,7 @@ def reversion(output_file):
 #     destination.seek(0)
 #     return destination
 
-def sorting(temp_file, line_splitter, block_splitter):
+def sorting(temp_file, line_splitter, block_splitter,reverse, keys = [1]):
     a = next_temp_line(temp_file, line_splitter)
     destination = tempfile.TemporaryFile()
     original_string = {}
@@ -103,7 +103,21 @@ def sorting(temp_file, line_splitter, block_splitter):
         original_string[a] = actual_string
         a = next_temp_line(temp_file, line_splitter)
     original_string = list(original_string.items())
-    original_string.sort(key=lambda tup: tup[1])
+
+    for xline in range(len(original_string)-1):
+        min_str = original_string[xline]
+        ind_to_change = xline
+        for yline in range(xline, len(original_string)-1):
+            if min_str[0].split(block_splitter)[int(keys[0])-1] > original_string[yline][0].split(block_splitter)[int(keys[0])-1]:
+                min_str = original_string[yline]
+                ind_to_change = yline
+        buf = original_string[xline]
+        original_string[xline] = min_str
+        original_string[ind_to_change] = buf
+
+    if reverse:
+        original_string.reverse()
+    del original_string[len(original_string)-1]
     for each in original_string:
         destination.write(bytes(each[0], encoding="UTF-8"))
     destination.seek(0)
@@ -131,14 +145,6 @@ def show_all_tmp(temp_file, line_splitter):
 
 
 def split_file(buffer_size, string_separator, path):
-    # type
-    # if select.select([sys.stdin,],[],[],0.0)[0]:
-    #     data = sys.stdin.readlines()
-    #     if len(data) != 0 and type(data) is not None:
-    #         with open(path, "w") as f:
-    #             for each in data:
-    #                 f.write(each)
-
     with open(path, "r") as file:
         count_lines = 0
         file_count = 1
