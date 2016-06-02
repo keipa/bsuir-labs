@@ -46,7 +46,6 @@ def main():
             if ind == len(yi)-1:
                 break
         cur += length_of_interval
-
         try:
             av = len(average_on_the_go)/(len(yi)*length_of_interval)
         except:
@@ -69,6 +68,8 @@ def main():
         plot_y_gist.append(cur)
         plot_x_pol.append((probability_density[each]+previous)/2)
         previous = probability_density[each]
+    plot_x_gist.append(0)
+    plot_y_gist.append(cur)
     plt.plot(plot_x_gist, plot_y_gist, 'k')
     plt.plot(plot_x_pol, plot_y_pol, 'r')
     plt.axis([0, 4, 0, 1])
@@ -78,8 +79,6 @@ def main():
     xlist = np.arange(xmin, xmax, dx)
     ylist = [0.03 * ((i-0.1) ** (-0.99)) for i in xlist]
     plt.plot(xlist, ylist, "b")
-
-
     plt.show()
 
 
