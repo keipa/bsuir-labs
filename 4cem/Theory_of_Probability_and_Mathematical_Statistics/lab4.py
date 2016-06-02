@@ -124,10 +124,8 @@ def main():
                 indmax = plot_y[each]
         except:
             continue
-    omega = findmax*(30**.5)
-    print("lambda: ", omega, indmax)
-
-
+    lam= findmax*(30**.5)
+    print("lambda: ", lam/10, indmax)
     mizes = RandomSet(50)
     k = 1 / len(mizes)
     cur = 0
@@ -149,15 +147,13 @@ def main():
         plot_b.append(cur)
         cur += o
     findmax = 0
-    indmax = 0
-    ind = 0
     for each in range(len(plot_y)-1):
         ind = 0
         while plot_b[ind] < plot_y[each]:
             ind += 1
         findmax += abs(plot_a[ind]-plot_x[each])
     omega = findmax + (1/(12*50))
-    print("omega: ", omega, indmax)
+    print("omega: ", omega/100)
 
 
 
