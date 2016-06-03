@@ -4,8 +4,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-def f(t):
-    return np.exp(-t) * np.cos(2*np.pi*t)
+# def f(t):
+#     return np.exp(-t) * np.cos(2*np.pi*t)
 
 
 def func(x):
@@ -27,7 +27,17 @@ def main():
         yi.append(func(each*(b-a)+a))
         results.append([each*(b-a)+a, func(each*(b-a)+a)])
         table.add_row([each*(b-a)+a, func(each*(b-a)+a)])
+    mo = 0
+    m20 = 0
+    for i in yi:
+        mo += i/len(yi)
+        m20 += i*i/len(yi)
+
+
+    print("M: ", mo)
+    print("D: ", m20-mo*mo)
     print(table)
+    print()
     yi.sort()
     k = 1/len(yi)
     cur = 0
@@ -41,6 +51,8 @@ def main():
         plot_y.append(cur)
     plot_y.append(cur)
     plot_x.append(4)
+    plt.xlabel("x")
+    plt.ylabel("y")
     plt.plot(plot_x, plot_y, 'k')
     na = []
     gi = []

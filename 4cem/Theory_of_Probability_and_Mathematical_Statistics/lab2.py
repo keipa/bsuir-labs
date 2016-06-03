@@ -63,22 +63,22 @@ def main():
         plot_x_gist.append(probability_density[each])
         plot_x_gist.append(probability_density[each])
         plot_y_gist.append(cur)
-        plot_y_pol.append(cur)
+        plot_y_pol.append(cur+length_of_interval/2)
         cur += length_of_interval
         plot_y_gist.append(cur)
-        plot_x_pol.append((probability_density[each]+previous)/2)
+        plot_x_pol.append(probability_density[each])
         previous = probability_density[each]
     plot_x_gist.append(0)
     plot_y_gist.append(cur)
-    plt.plot(plot_x_gist, plot_y_gist, 'k')
-    plt.plot(plot_x_pol, plot_y_pol, 'r')
-    plt.axis([0, 4, 0, 1])
+    plt.plot(plot_y_gist, plot_x_gist, 'k')
+    plt.plot(plot_y_pol, plot_x_pol, 'r')
+    # plt.axis([0, 4, 0, 1])
     xmin = 0.01
     xmax = 4
     dx = 0.01
     xlist = np.arange(xmin, xmax, dx)
     ylist = [0.03 * ((i-0.1) ** (-0.99)) for i in xlist]
-    plt.plot(xlist, ylist, "b")
+    plt.plot(ylist, xlist, "b")
     plt.show()
 
 
