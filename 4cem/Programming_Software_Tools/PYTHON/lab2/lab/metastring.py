@@ -71,13 +71,12 @@ class Cls(object, metaclass=ModelCreator):
     t = TupleField()
     b = BoolField()
     d = DictField()
-
     # def __getattr__(self, item):
     #     return 5
 
 
 def main():
-    f = Cls(i=5, s = "h")
+    f = Cls(i=5, s="h")
     f.s = 2
     f.i = "h"
 

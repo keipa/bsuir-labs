@@ -26,7 +26,7 @@ def generate(block_count, block_separator,  line_count, line_separator, isnums, 
             count_of_strings = randint(10, 100)
         else:
             count_of_strings = int(line_count)
-        for string in range(count_of_strings):
+        for _ in range(count_of_strings):
             if block_count == 0:
                 count_of_blocks = randint(1, 10)
             else:
@@ -36,7 +36,7 @@ def generate(block_count, block_separator,  line_count, line_separator, isnums, 
                     count_of_letters = randint(1, 10)
                 else:
                     count_of_letters = int(letter_count)
-                for letter in range(count_of_letters):
+                for _ in range(count_of_letters):
                     s += random_chr(isnums)
                 if block == count_of_blocks-1:
                     s += line_separator

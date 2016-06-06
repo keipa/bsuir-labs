@@ -14,12 +14,6 @@ class Seq(object):
                 self.current += 1
 
         def filter(self, filtration_func):
-            # for each in range(len(self.seq)-1):
-            #     if not filtration_func(self.seq[each]):
-            #         self.seq.remove(self.seq[each])
-            # return self.seq
-            #generator fail
-
             for each in self.seq:
                 if not filtration_func(each):
                     self.seq.remove(each)
@@ -40,14 +34,14 @@ class Seq(object):
 
 
 def custom_5(x):
-    if x>5:
+    if x > 5:
         return False
     else:
         return True
 
 
 def custom_2(x):
-    if x<2:
+    if x < 2:
         return False
     else:
         return True

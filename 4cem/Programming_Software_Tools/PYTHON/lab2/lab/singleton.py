@@ -13,6 +13,7 @@ class Singleton:
 @Singleton
 class Foo:
     g = 0
+
     def __init__(self):
         print('Foo created')
 

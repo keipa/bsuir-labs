@@ -3,10 +3,6 @@ class Vector:
         self.x = [0 for _ in range(dimension)]
 
     def __str__(self):
-        ret = ""
-        # for i in range(len(self.x)-1):
-        #     return str(self.x[i])
-        #
         return str(self.x)
 
     def __add__(self, other):

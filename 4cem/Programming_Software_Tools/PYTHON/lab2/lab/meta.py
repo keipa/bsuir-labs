@@ -9,14 +9,13 @@ class UpperAttrMetaclass(type):
             for line in f:
                 try:
                     attr[line.split("_")[0]] = int(line.split("_")[1].replace("\n", ""))
-                except:
+                except e:
                     attr[line.split("_")[0]] = line.split("_")[1].replace("\n", "")
         return attr
 
 
 class Cls(object, metaclass=UpperAttrMetaclass):
     path = "strfiles/attr.txt"
-
     def __setattr__(self, key, value):
         Cls.attrs[key] = value
 

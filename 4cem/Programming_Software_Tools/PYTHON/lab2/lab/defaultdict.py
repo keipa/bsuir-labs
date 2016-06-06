@@ -3,21 +3,14 @@ class Defaul_dict( object):
         self.d = {}
         self.x = default_factory
 
-    # def __set__(self, instance, value):
-    #     self.d[instance] = value
-    #
     def __setitem__(self, key, value):
         self.d[key] = value
-
 
     def __get__(self, instance, owner):
         return self.d
 
-
-
     def __getitem__(self, item):
         return Defaul_dict.getitem(self, item, 0)
-
 
     def getitem(self, item, pointer):
         if pointer == 0:
@@ -33,7 +26,6 @@ class Defaul_dict( object):
         else:
             return pointer[item]
 
-
     def __str__(self):
         ret = "{"
         length = 0
@@ -42,8 +34,6 @@ class Defaul_dict( object):
             if length < len(self.d)-1 :
                 ret +=", "
             length += 1
-
-
         return ret + "}"
         return str(self.d)
 

@@ -110,7 +110,6 @@ class TestGenerate(TestCase):
         print(lab.from_json.get_obj("strfiles/jsoned3.jsn"))
         self.assertTrue(lab.from_json.get_obj("strfiles/jsoned3.jsn") == t)
 
-
     def test_tojson2(self):
         t = [1,2,"kww'wwq", {"1":True}]
         lab.to_json.my_json(t)

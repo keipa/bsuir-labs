@@ -18,8 +18,6 @@ class xrange(object):
             return self.range[item]
 
         def __get__(self, instance, owner):
-            # self.current += 1
-            # return self.range[self.current - 1]
             pass
 
         def gene(self, *args):
@@ -54,16 +52,10 @@ class xrange(object):
 
 
 def main():
-
-
-
     # print(str(range(100500)[63]))
     # print(str(xrange(100500)[63]))
-    #
     # print(str(next(reversed(range(100500)))))
     print(str(next(reversed(xrange(100500)))))
-
-
     for i in range(10, 1, -1):
         print(i)
 

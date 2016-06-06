@@ -25,7 +25,6 @@ def create_parser():
     parser.add_argument('-k', "--keys", nargs="+", default=[])
     parser.add_argument('-r', "--reverse", action='store_true')
     parser.add_argument("--checked", action='store_true')
-
     return parser
 
 
@@ -34,20 +33,20 @@ def menu():
     namespace = parser.parse_args()
     if namespace.program == "generate":
         lab.generate.generate(int(namespace.fixedblocks),
-                          namespace.blockseparator,
-                          int(namespace.fixedlines),
-                          namespace.lineseparator,
-                          namespace.nums,
-                          int(namespace.symbols))
+                              namespace.blockseparator,
+                              int(namespace.fixedlines),
+                              namespace.lineseparator,
+                              namespace.nums,
+                              int(namespace.symbols))
     if namespace.program == "sort":
         lab.sort.main(namespace.blockseparator,
-                  namespace.lineseparator,
-                  namespace.input,
-                  namespace.output,
-                  int(namespace.buffer),
-                  namespace.reverse,
-                  namespace.checked,
-                  namespace.keys)
+                      namespace.lineseparator,
+                      namespace.input,
+                      namespace.output,
+                      int(namespace.buffer),
+                      namespace.reverse,
+                      namespace.checked,
+                      namespace.keys)
     if namespace.program == "vector":
         lab.vector.main()
     if namespace.program == "json":

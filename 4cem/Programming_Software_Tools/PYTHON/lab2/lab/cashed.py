@@ -1,13 +1,10 @@
 def cashed(func):
     cash = {}
     def wrapped(*args, **kwargs):
-        # create_key = (args,)
-        # for each in kwargs:
         b = [(x, kwargs[x]) for x in kwargs.keys() ]
         b.append(args)
         b = tuple(b)
         value = cash.get(b)
-        # print("decorating")
         if value is not None:
             print("restoring")
             return value
@@ -19,7 +16,6 @@ def cashed(func):
 
 def benchmark(func):
     import time
-
     def wrapper(*args, **kwargs):
         start_time = time.time()
         res = func(*args, **kwargs)
@@ -31,7 +27,6 @@ def benchmark(func):
 @benchmark
 @cashed
 def one(q, **kwargs):
-    # print(str(kwargs.get('lol')))
     print("computing")
     return q**100000000
 

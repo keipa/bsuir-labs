@@ -1,8 +1,4 @@
 def my_json(obj, *args):
-    string = ""
-    # if len(args) != 0:
-    #     if args[0] == True:
-    #         print("rise unknown ")
     what_the_obj = str(type(obj))
     s = distributor(what_the_obj, obj, 0)
     with open("strfiles/jsoned3.jsn", "w") as f:

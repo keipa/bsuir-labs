@@ -1,4 +1,5 @@
-import string, random
+import string
+import random
 
 
 def get_name():
@@ -126,23 +127,14 @@ def cleaning(s):
 
 def get_obj(path):
     s = ""
-    index = 0
-
     with open(path, "r") as f:
         for line in f:
             s += line
-
-
-
     return collector(0, cleaning(s))[1]
 
 
 def whatis(s):
     pass
-
-    # print(s)
-
-
 
 
 def main():

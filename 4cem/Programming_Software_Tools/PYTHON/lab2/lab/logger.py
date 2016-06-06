@@ -4,25 +4,25 @@ import inspect
 class Logger(object):
     def __init__(self):
         self.log_array = []
-        self.logformat = ""
+        self.log_format = ""
         Logger.set_logger_format(self)
 
     def __str__(self):
         res_str = ""
         count = 1
         for call in self.log_array:
-            res_str += self.logformat.format(count,
-                                            call[0],
-                                            call[1],
-                                            call[2],
-                                            call[3])
+            res_str += self.log_format.format(count,
+                                              call[0],
+                                              call[1],
+                                              call[2],
+                                              call[3])
             count += 1
         return str(res_str)
 
     def set_logger_format(self, **kwargs):
         s = "{0})"
         if len(kwargs) == 0:
-            self.logformat = "{0})Name: {1}," \
+            self.log_format = "{0})Name: {1}," \
                    " *args: {2}," \
                    " **kwargs: {3}," \
                    " returned: {4} \n"
@@ -35,8 +35,7 @@ class Logger(object):
         if "ret" in kwargs:
             s += " returned: {4} "
         s += "\n"
-        self.logformat = s
-
+        self.log_format = s
 
     def __getattribute__(self, name, *args, **kwargs):
         if inspect.ismethod(object.__getattribute__(self, name)) and name != "set_logger_format":
@@ -53,6 +52,7 @@ class Sample(Logger):
     def sample(self, lol, ke, **kwargs):
         print("sample")
         return lol+ke
+
 
 def main():
     sam = Sample()

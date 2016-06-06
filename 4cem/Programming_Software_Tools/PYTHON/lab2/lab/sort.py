@@ -112,6 +112,7 @@ def sorting(temp_file, line_splitter, block_splitter,reverse, keys = [1]):
     destination.seek(0)
     return destination
 
+
 def next_temp_line(temp_file, line_splitter):
     buf_string = ""
     while True:
