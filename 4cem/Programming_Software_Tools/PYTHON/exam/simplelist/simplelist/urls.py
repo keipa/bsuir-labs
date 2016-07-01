@@ -16,8 +16,10 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 import listnums.views as l
+import rawforms.views as r
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^contactform/', r.contact),
     url(r'^list/(?P<kek>\d+)', l.simple_num, name="kek")
 ]

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+{% block content %}
+
+{% if success %}
+{{ success }}
+{% endif %}
+
+<div>
+
+<form action="/contactform/" method="post">{% csrf_token %}
+<input type="text" name="name" placeholder="Name" /><br>
+    <textarea name="message"></textarea>
+<input type="submit" placeholder="Message" value="Submit Feedback"  />
+
+</form>
+
+</div>
+
+
+
+{% endblock %}
+
+
+
+</body>
+</html>
