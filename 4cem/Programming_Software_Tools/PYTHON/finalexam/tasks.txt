@@ -1,0 +1,100 @@
+count_even	1	10
+is_prime	21
+is_prime	7
+is_prime	2
+count_even	5	100
+is_prime	7
+is_prime	9
+is_prime	5
+count_even	2	15
+is_prime	45
+is_prime	3
+is_prime	6
+count_even	6	34
+is_prime	23
+is_prime	235
+is_prime	10000
+count_even	53	100
+is_prime	34
+is_prime	32
+is_prime	5
+count_even	12	50
+is_prime	26
+count_even	1	10
+is_prime	7
+is_prime	2
+count_even	1	10
+is_prime	21
+is_prime	7
+is_prime	2
+count_even	5	100
+is_prime	7
+is_prime	9
+is_prime	5
+count_even	2	15
+is_prime	45
+is_prime	3
+is_prime	6
+count_even	6	34
+is_prime	23
+is_prime	235
+is_prime	2
+count_even	53	100
+is_prime	34
+is_prime	32
+is_prime	5
+count_even	12	50
+is_prime	26
+count_even	1	10
+is_prime	7
+is_prime	2
+count_even	1	10
+is_prime	21
+is_prime	7
+is_prime	2
+count_even	5	100
+is_prime	7
+is_prime	9
+is_prime	5
+count_even	2	15
+is_prime	45
+is_prime	3
+is_prime	6
+count_even	6	34
+is_prime	23
+is_prime	235
+is_prime	2
+count_even	53	100
+is_prime	34
+is_prime	32
+is_prime	5
+count_even	12	50
+is_prime	26
+count_even	1	10
+is_prime	7
+is_prime	2
+count_even	1	10
+is_prime	21
+is_prime	7
+is_prime	2
+count_even	5	100
+is_prime	7
+is_prime	9
+is_prime	5
+count_even	2	15
+is_prime	45
+is_prime	3
+is_prime	6
+count_even	6	34
+is_prime	23
+is_prime	235
+is_prime	2
+count_even	53	100
+is_prime	34
+is_prime	32
+is_prime	5
+count_even	12	50
+is_prime	26
+count_even	1	10
+is_prime	7
+is_prime	2

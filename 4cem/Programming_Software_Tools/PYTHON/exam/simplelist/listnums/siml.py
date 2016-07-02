@@ -33,6 +33,7 @@ class MyProcess(Process):
     def run(self):
         while self.event.is_set():
             try:
+
                 value = self.queue.get_nowait()
                 print(self.func(value))
             except queue.Empty:
