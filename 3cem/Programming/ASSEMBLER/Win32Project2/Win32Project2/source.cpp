@@ -70,11 +70,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam){
 
 
 	SetPixel(hDC, 10, 100, RGB(0, 0, 255));
-	//
-	//for (int i = 0; i < 50; i++)
-	//{
-	//	// SetPixel(HDC hdc, int x, int y, COLORREF color)
-	//}
+
 
 
 
