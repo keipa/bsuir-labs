@@ -1,3 +1,5 @@
+
+
 #include <windows.h>
 #include <stdlib.h>
 #include <string.h>
@@ -10,7 +12,7 @@
 int nTimerID;
 
 TCHAR czClassName[] = "myClass";
-TCHAR czFormName[] = "Лабораторная работа 6: Приожения Windows с использованием Win 32 API";
+TCHAR czFormName[] = "Лабораторная работа 1: Приожения Windows с использованием Win 32 API";
 TCHAR mainMessage[] = "SAMPLE TEXT";
 HWND hwndA;
 HINSTANCE Hinst;
@@ -198,8 +200,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 	HCURSOR hCurs1;
 
-
-
 	HICON hIcon1 = CreateIcon(
 		Hinst,
 		32,
@@ -238,28 +238,14 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 			break;
 		}
 
-	//case WM_COMMAND:
-	//	switch (LOWORD(wParam))
-	//	{
-	//	case BN_CLICKED:
-	//		istextshow = false;
 
-	//	}
 
 	case WM_COMMAND:
 		switch (HIWORD(wParam))
 		{
 		case BN_CLICKED:
-			// see which button was clicked
-			if (wParam == 0)
-			{
-				istextshow = true;
-			}
-		
-			if (wParam == 1)
-			{
-				istextshow = false;
-			}
+			if (wParam == 0) istextshow = true;
+			if (wParam == 1) istextshow = false;
 			break;
 		}
 		break;
