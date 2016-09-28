@@ -1,0 +1,2531 @@
+Turbo Assembler	 Version 4.1	    09/23/16 06:55:18	    Page 1
+2.ASM
+
+
+
+      1					 ;Ассемблировать в TASM	с параметрами /x /3
+      2
+      3					 ;Линковать в TLINK с параметром /m
+      4
+      5					 ;Запускать в dosbox или в dos без драйверов памяти
+      6
+      7
+      8					 .386p
+      9					 INCLUDE STRUCT.ASM
+1    10		  =007E			 SIZE_TSS	 EQU 7Eh
+1    11		  =0080			 ACS_PRESENT	 EQU 10000000B			 ;PXXXXXXX - бит присутствия, сегмент	    +
+     12					 присутствует в	оперативной памяти
+1    13		  =0018			 ACS_CSEG	 EQU 00011000B			 ;XXXXIXXX - тип сегмента, для данных =	0,  +
+     14					 для кода 1
+1    15		  =0010			 ACS_DSEG	 EQU 00010000B			 ;XXXSXXXX - бит сегмента, данный объект    +
+     16					 сегмент(системные объекты могут быть не сегменты)
+1    17		  =0002			 ACS_READ	 EQU 00000010B			 ;XXXXXXRX - бит чтения, возможность чтения +
+     18					 из другого сегмента
+1    19		  =0002			 ACS_WRITE	 EQU 00000010B			 ;XXXXXXWX - бит записи, для сегмента данных+
+     20					 разершает запись
+1    21		  =0098			 ACS_CODE	 =   ACS_PRESENT or ACS_CSEG	 ;AR сегмента кода
+1    22		  =0092			 ACS_DATA =  ACS_PRESENT or ACS_DSEG or	ACS_WRITE;AR сегмента данных
+1    23		  =0092			 ACS_STACK=  ACS_PRESENT or ACS_DSEG or	ACS_WRITE;AR сегмента стека
+1    24		  =000E			 ACS_INT_GATE	 EQU 00001110B
+1    25		  =000F			 ACS_TRAP_GATE	 EQU 00001111B			 ;XXXXSICR - сегмент, подчиненный сегмент   +
+     26					 кода, доступен	для чтения
+1    27					 ACS_IDT	 EQU ACS_DATA			 ;AR таблицы IDT
+1    28		  =008E			 ACS_INT	 EQU ACS_PRESENT or ACS_INT_GATE
+1    29		  =008F			 ACS_TRAP	 EQU ACS_PRESENT or ACS_TRAP_GATE
+1    30		  =0089			 ACS_TSS	 EQU ACS_PRESENT OR 00001001B
+1    31		  =0060			 ACS_DPL_3	 EQU 01100000B
+1    32
+1    33					 ;Структуры данных
+1    34	00000000			 S_DESC	 struc			       ;Структура сегментного дескриптора
+1    35	00000000  01*(0000)		     LIMIT	 dw 0		       ;Лимит сегмента (15:00)
+1    36	00000002  01*(0000)		     BASE_L	 dw 0		       ;Адрес базы, младшая часть (15:0)
+1    37	00000004  01*(00)		     BASE_M	 db 0		       ;Адрес базы, средняя часть (23:16)
+1    38	00000005  01*(00)		     ACCESS	 db 0		       ;Байт доступа
+1    39	00000006  01*(00)		     ATTRIBS	 db 0		       ;Лимит сегмента (19:16) и атрибуты
+1    40	00000007  01*(00)		     BASE_H	 db 0		       ;Адрес базы, старшая часть
+1    41	00000008			 S_DESC	 ends
+1    42	00000000			 I_DESC	 struc			       ;Структура дескриптора таблицы прерываний
+1    43	00000000  01*(0000)		     OFFS_L	 dw 0		       ;Адрес обработчика (0:15)
+1    44	00000002  01*(0000)		     SEL	 dw 0		       ;Селектор кода, содержащего код обработчика
+1    45	00000004  01*(00)		     PARAM_CNT	 db 0		       ;Параметры
+1    46	00000005  01*(00)		     ACCESS	 db 0		       ;Уровень	доступа
+1    47	00000006  01*(0000)		     OFFS_H	 dw 0		       ;Адрес обработчика (31:16)
+1    48	00000008			 I_DESC	 ends
+1    49	00000000			 R_IDTR	 struc			       ;Структура IDTR
+1    50	00000000  01*(0000)		     LIMIT	 dw 0
+1    51	00000002  01*(0000)		     IDT_L	 dw 0		       ;Смещение биты (0-15)
+1    52	00000004  01*(0000)		     IDT_H	 dw 0		       ;Смещение биты (31-16)
+1    53	00000006			 R_IDTR	 ends
+1    54	00000000			 S_TSS	 STRUC
+1    55	00000000  01*(0000 0000)	     LINK	 dw	 0, 0	       ;Дескриптор предыдущей задачи
+1    56	00000004  01*(00000000)		     ESP0	 dd	 0	       ;Указатели на стек различных уровней превилегий
+1    57	00000008  01*(0000 0000)	     SS0	 dw	 0, 0	       ;Необходимы для разделения стека	на разные уровни    +
+Turbo Assembler	 Version 4.1	    09/23/16 06:55:18	    Page 2
+2.ASM
+
+
+
+     58					 доступа
+1    59	0000000C  01*(00000000)		     ESP1	 dd	 0	       ;НЕЛЬЗЯ ИЗМЕНИТЬ(!)
+1    60	00000010  01*(0000 0000)	     SS1	 dw	 0, 0	       ;
+1    61	00000014  01*(00000000)		     ESP2	 dd	 0	       ;
+1    62	00000018  01*(0000 0000)	     SS2	 dw	 0, 0	       ;
+1    63	0000001C  01*(00000000)		     R_CR3	 dd	 0	       ;Регистр	CR3 - параметры	страницы задачи
+1    64	00000020  01*(00000000)		     R_EIP	 dd	 0	       ;
+1    65	00000024  01*(00000000)		     R_EFLAGS	 dd	 0	       ;
+1    66	00000028  01*(00000000)		     R_EAX	 dd	 0	       ;Регистры общего	назначения
+1    67	0000002C  01*(00000000)		     R_ECX	 dd	 0	       ;
+1    68	00000030  01*(00000000)		     R_EDX	 dd	 0	       ;
+1    69	00000034  01*(00000000)		     R_EBX	 dd	 0	       ;
+1    70	00000038  01*(00000000)		     R_ESP	 dd	 0	       ;
+1    71	0000003C  01*(00000000)		     R_EBP	 dd	 0	       ;
+1    72	00000040  01*(00000000)		     R_ESI	 dd	 0	       ;
+1    73	00000044  01*(00000000)		     R_EDI	 dd	 0	       ;
+1    74	00000048  01*(0000 0000)	     R_ES	 dw	 0, 0	       ;Сегментные регистры
+1    75	0000004C  01*(0000 0000)	     R_CS	 dw	 0, 0	       ;
+1    76	00000050  01*(0000 0000)	     R_SS	 dw	 0, 0	       ;
+1    77	00000054  01*(0000 0000)	     R_DS	 dw	 0, 0	       ;
+1    78	00000058  01*(0000 0000)	     R_FS	 dw	 0, 0	       ;
+1    79	0000005C  01*(0000 0000)	     R_GS	 dw	 0, 0	       ;
+1    80	00000060  01*(0000 0000)	     R_LDTR	 dw	 0, 0	       ;Дескриптор LDT
+1    81	00000064  01*(0000)		     TRACE	 dw	 0	       ;Флаг трассировки сброшен - не надо генерировать	    +
+     82					 прерывание 1
+1    83	00000066  01*(0068)		     IO_MAP_ADDR dw	 68h	       ;Адрес карты ввода/вывода - доступ к портам
+1    84	00000068  01*(14*(00))		     IO_MAP	 db	 14h dup (0)   ;Все биты сброшены - доступны все порты
+1    85	0000007C			 S_TSS	 ENDS
+1    86
+     87					 ;Флаги	уровней	доступа	сегментов
+     88	    0000			 CODE_RM segment para use16			 ;Сегмент кода реального режима
+     89		  =CODE_RM:0000		 CODE_RM_BEGIN	 = $
+     90					     assume cs:CODE_RM,DS:DATA,ES:DATA		 ;Инициализация	регистров для ассемблирования
+     91	    0000			 START:
+     92	    0000  B8 0000s		     mov ax,DATA				 ;Инициализиция	сегментных регистров
+     93	    0003  8E D8			     mov ds,ax
+     94	    0005  8E C0			     mov es,ax
+     95	    0007  BA 055Cr		     lea dx,MSG_ENTER
+     96	    000A  B4 09			     mov ah,9h
+     97	    000C  CD 21			     int 21h
+     98	    000E  E8 05F5		     call INPUT					 ;Ввод времени
+     99	    0011  A2 05A4r		     mov ds:[TIME], al
+    100	    0014  BA 0382r		     lea dx,MSG_HELLO
+    101	    0017  B4 09			     mov ah,9h
+    102	    0019  CD 21			     int 21h
+    103	    001B  B4 07			     mov ah,7h
+    104	    001D  CD 21			     int 21h					 ;Ожидание подтверждения
+    105	    001F			 PREPARE_RTC:					 ;Подготовка часов RTC
+    106	    001F  B0 0B			     mov al,0Bh
+    107	    0021  E6 70			     out 70h,al					 ;Выбрать регистр состояния 0Bh
+    108	    0023  E4 71			     in	 al,71h					 ;Получить значение регистра 0Bh
+    109	    0025  0C 04			     or	 al,00000100b				 ;Установить бит DM в 1	- формат	    +
+    110					 представления время в двоичном	виде
+    111	    0027  E6 71			     out 71h,al					 ;Записать измененное значение
+    112	    0029			 ENABLE_A20:					 ;Открыть линию	A20
+    113	    0029  E4 92			     in	 al,92h
+    114	    002B  0C 02			     or	 al,2					 ;Установить бит 1 в 1
+Turbo Assembler	 Version 4.1	    09/23/16 06:55:18	    Page 3
+2.ASM
+
+
+
+    115	    002D  E6 92			     out 92h,al
+    116					     ;Или так для старых компьютеров
+    117					     ;mov    al, 0D1h
+    118					     ;out    64h, al
+    119					     ;mov    al, 0DFh
+    120					     ;out    60h, al
+    121	    002F			 SAVE_MASK:					 ;Сохранить маски прерываний
+    122	    002F  E4 21			     in	     al,21h
+    123	    0031  A2 059Fr		     mov     INT_MASK_M,al
+    124	    0034  E4 A1			     in	     al,0A1h
+    125	    0036  A2 05A0r		     mov     INT_MASK_S,al
+    126	    0039			 DISABLE_INTERRUPTS:				 ;Запрет маскируемых и немаскируемых	    +
+    127					 прерываний
+    128	    0039  FA			     cli					 ;Запрет маскирумых прерываний
+    129	    003A  E4 70			     in	 al,70h
+    130	    003C  0C 80				 or	 al,10000000b				 ;Установить 7 бит в 1 для запрета  +
+    131					 немаскируемых прерываний
+    132	    003E  E6 70				 out	 70h,al
+    133	    0040  90				 nop
+    134	    0041			 LOAD_GDT:					 ;Заполнить глобальную таблицу дескрипторов
+    135	    0041  B8 0000s		     mov ax,DATA
+    136	    0044  8A D4			     mov dl,ah
+    137	    0046  32 F6			     xor dh,dh
+    138	    0048  C1 E0	04		     shl ax,4
+    139	    004B  C1 EA	04		     shr dx,4
+    140	    004E  8B F0			     mov si,ax
+    141	    0050  8B FA			     mov di,dx
+    142	    0052			 WRITE_GDT:					 ;Заполнить дескриптор GDT
+    143	    0052  BB 0008r		     lea bx,GDT_GDT
+    144	    0055  8B C6			     mov ax,si
+    145	    0057  8B D7			     mov dx,di
+    146	    0059  05 0000r		     add ax,offset GDT
+    147	    005C  83 D2	00		     adc dx,0
+    148	    005F  89 47	02		     mov [bx][S_DESC.BASE_L],ax
+    149	    0062  88 57	04		     mov [bx][S_DESC.BASE_M],dl
+    150	    0065  88 77	07		     mov [bx][S_DESC.BASE_H],dh
+    151	    0068			 WRITE_CODE_RM:					 ;Заполнить дескриптор сегмента	кода	    +
+    152					 реального режима
+    153	    0068  BB 0010r		     lea bx,GDT_CODE_RM
+    154	    006B  8C C8			     mov ax,cs
+    155	    006D  32 F6			     xor dh,dh
+    156	    006F  8A D4			     mov dl,ah
+    157	    0071  C1 E0	04		     shl ax,4
+    158	    0074  C1 EA	04		     shr dx,4
+    159	    0077  89 47	02		     mov [bx][S_DESC.BASE_L],ax
+    160	    007A  88 57	04		     mov [bx][S_DESC.BASE_M],dl
+    161	    007D  88 77	07		     mov [bx][S_DESC.BASE_H],dh
+    162	    0080			 WRITE_DATA:					 ;Записать дескриптор сегмента данных
+    163	    0080  BB 0018r		     lea bx,GDT_DATA
+    164	    0083  8B C6			     mov ax,si
+    165	    0085  8B D7			     mov dx,di
+    166	    0087  89 47	02		     mov [bx][S_DESC.BASE_L],ax
+    167	    008A  88 57	04		     mov [bx][S_DESC.BASE_M],dl
+    168	    008D  88 77	07		     mov [bx][S_DESC.BASE_H],dh
+    169	    0090			 WRITE_STACK:					 ;Записать дескриптор сегмента стека
+    170	    0090  BB 0020r		     lea bx, GDT_STACK
+    171	    0093  8C D0			     mov ax,ss
+Turbo Assembler	 Version 4.1	    09/23/16 06:55:18	    Page 4
+2.ASM
+
+
+
+    172	    0095  32 F6			     xor dh,dh
+    173	    0097  8A D4			     mov dl,ah
+    174	    0099  C1 E0	04		     shl ax,4
+    175	    009C  C1 EA	04		     shr dx,4
+    176	    009F  89 47	02		     mov [bx][S_DESC.BASE_L],ax
+    177	    00A2  88 57	04		     mov [bx][S_DESC.BASE_M],dl
+    178	    00A5  88 77	07		     mov [bx][S_DESC.BASE_H],dh
+    179	    00A8			 WRITE_CODE_PM:					 ;Записать дескриптор кода защищенного режима
+    180	    00A8  BB 0030r		     lea bx,GDT_CODE_PM
+    181	    00AB  B8 0000s		     mov ax,CODE_PM
+    182	    00AE  32 F6			     xor dh,dh
+    183	    00B0  8A D4			     mov dl,ah
+    184	    00B2  C1 E0	04		     shl ax,4
+    185	    00B5  C1 EA	04		     shr dx,4
+    186	    00B8  89 47	02		     mov [bx][S_DESC.BASE_L],ax
+    187	    00BB  88 57	04		     mov [bx][S_DESC.BASE_M],dl
+    188	    00BE  88 77	07		     mov [bx][S_DESC.BASE_H],dh
+    189	    00C1  80 4F	06 40		     or	 [bx][S_DESC.ATTRIBS],40h
+    190	    00C5			 WRITE_IDT:					 ;Записать дескриптор IDT
+    191	    00C5  BB 0038r		     lea bx,GDT_IDT
+    192	    00C8  8B C6			     mov ax,si
+    193	    00CA  8B D7			     mov dx,di
+    194	    00CC  05 0202r		     add ax,offset IDT
+    195	    00CF  83 D2	00		     adc dx,0
+    196	    00D2  89 47	02		     mov [bx][S_DESC.BASE_L],ax
+    197	    00D5  88 57	04		     mov [bx][S_DESC.BASE_M],dl
+    198	    00D8  88 77	07		     mov [bx][S_DESC.BASE_H],dh
+    199	    00DB  A3 01FEr		     mov IDTR.IDT_L,ax
+    200	    00DE  89 16	0200r		     mov IDTR.IDT_H,dx
+    201	    00E2			 WRITE_TASK_CODE:				 ;Записать дескриптор кода второй и третей  +
+    202					 задачи
+    203	    00E2  BB 0040r		     lea bx,GDT_CS_2
+    204	    00E5  B8 0000s		     mov ax,CODE_2
+    205	    00E8  32 F6			     xor dh,dh
+    206	    00EA  8A D4			     mov dl,ah
+    207	    00EC  C1 E0	04		     shl ax,4
+    208	    00EF  C1 EA	04		     shr dx,4
+    209	    00F2  89 47	02		     mov [bx][S_DESC.BASE_L],ax
+    210	    00F5  88 57	04		     mov [bx][S_DESC.BASE_M],dl
+    211	    00F8  88 77	07		     mov [bx][S_DESC.BASE_H],dh
+    212	    00FB  80 4F	06 40		     or	 [bx][S_DESC.ATTRIBS],40H		 ;32-битный сегмент
+    213	    00FF  BB 0048r		     lea bx, GDT_CS_3
+    214	    0102  B8 0000s		     mov ax, CODE_3
+    215	    0105  32 F6			     xor dh,dh
+    216	    0107  8A D4			     mov dl,ah
+    217	    0109  C1 E0	04		     shl ax, 4
+    218	    010C  C1 EA	04		     shr dx, 4
+    219	    010F  89 47	02		     mov [bx][S_DESC.BASE_L],ax
+    220	    0112  88 57	04		     mov [bx][S_DESC.BASE_M],dl
+    221	    0115  88 77	07		     mov [bx][S_DESC.BASE_H],dh
+    222	    0118  80 4F	06 40		     or	 [bx][S_DESC.ATTRIBS],40H
+    223	    011C			 WRITE_TASK_STACK:				 ;Записать дескрипторы сегментов стека	    +
+    224					 дополнительных	задач
+    225	    011C  BB 0050r		     lea bx,GDT_SS_2
+    226	    011F  B8 0000s		     mov ax,STCK_2
+    227	    0122  32 F6			     xor dh,dh
+    228	    0124  8A D4			     mov dl,ah
+Turbo Assembler	 Version 4.1	    09/23/16 06:55:18	    Page 5
+2.ASM
+
+
+
+    229	    0126  C1 E0	04		     shl ax,4
+    230	    0129  C1 EA	04		     shr dx,4
+    231	    012C  89 47	02		     mov [bx][S_DESC.BASE_L],ax
+    232	    012F  88 57	04		     mov [bx][S_DESC.BASE_M],dl
+    233	    0132  88 77	07		     mov [bx][S_DESC.BASE_H],dh
+    234	    0135  BB 0058r		     lea bx,GDT_SS_3
+    235	    0138  B8 0000s		     mov ax,STCK_3
+    236	    013B  32 F6			     xor dh,dh
+    237	    013D  8A D4			     mov dl,ah
+    238	    013F  C1 E0	04		     shl ax,4
+    239	    0142  C1 EA	04		     shr dx,4
+    240	    0145  89 47	02		     mov [bx][S_DESC.BASE_L],ax
+    241	    0148  88 57	04		     mov [bx][S_DESC.BASE_M],dl
+    242	    014B  88 77	07		     mov [bx][S_DESC.BASE_H],dh
+    243	    014E			 WRITE_TSS:					 ;Записать TSS задач		      ;
+    244	    014E  BB 0060r		     LEA bx,GDT_TSS_MAIN
+    245	    0151  8B C6			     MOV ax,si
+    246	    0153  8B D7			     MOV dx,di
+    247	    0155  05 0078r		     ADD ax,offset TSS_MAIN
+    248	    0158  83 D2	00		     ADC dx,0
+    249	    015B  89 47	02		     MOV [bx][S_DESC.BASE_L],ax
+    250	    015E  88 57	04		     MOV [bx][S_DESC.BASE_M],dl
+    251	    0161  88 77	07		     MOV [bx][S_DESC.BASE_H],dh
+    252	    0164  BB 0068r		     lea BX, GDT_TSS_2
+    253	    0167  8B C6			     mov AX, SI
+    254	    0169  8B D7			     mov DX, DI
+    255	    016B  05 00F4r		     add AX, offset TSS_2
+    256	    016E  83 D2	00		     adc DX, 0
+    257	    0171  89 47	02		     mov [bx][S_DESC.BASE_L],ax
+    258	    0174  88 57	04		     mov [bx][S_DESC.BASE_M],dl
+    259	    0177  88 77	07		     mov [bx][S_DESC.BASE_H],dh
+    260	    017A  BB 0070r		     lea bx,GDT_TSS_3
+    261	    017D  8B C6			     mov ax,si
+    262	    017F  8B D7			     mov dx,di
+    263	    0181  05 0170r		     add ax,offset TSS_3
+    264	    0184  83 D2	00		     adc dx,0
+    265	    0187  89 47	02		     mov [bx][S_DESC.BASE_L],ax
+    266	    018A  88 57	04		     mov [bx][S_DESC.BASE_M],dl
+    267	    018D  88 77	07		     mov [bx][S_DESC.BASE_H],dh
+    268	    0190			 FILL_IDT:					 ;Заполнить таблицу дескрипторов шлюзов	    +
+    269					 прерываний
+    270					     irpc    N,	0123456789ABCDEF		 ;Заполнить шлюзы 00-0F	исключениями
+    271						 lea eax, EXC_0&N
+    272						 mov IDT_0&N.OFFS_L,ax
+    273						 shr eax, 16
+    274						 mov IDT_0&N.OFFS_H,ax
+    275					     endm
+1   276	    0190  66| B8 000000F7r		 lea eax, EXC_00
+**Error** 2.ASM(191) IRPC(1) Forward reference needs override
+1   277	    0195  A3 0202r			 mov IDT_00.OFFS_L,ax
+1   278	    0198  66| C1 E8 10			 shr eax, 16
+1   279	    019C  A3 0208r			 mov IDT_00.OFFS_H,ax
+1   280	    019F  66| B8 000000FDr		 lea eax, EXC_01
+**Error** 2.ASM(191) IRPC(5) Forward reference needs override
+1   281	    01A4  A3 020Ar			 mov IDT_01.OFFS_L,ax
+1   282	    01A7  66| C1 E8 10			 shr eax, 16
+1   283	    01AB  A3 0210r			 mov IDT_01.OFFS_H,ax
+Turbo Assembler	 Version 4.1	    09/23/16 06:55:18	    Page 6
+2.ASM
+
+
+
+1   284	    01AE  66| B8 00000103r		 lea eax, EXC_02
+**Error** 2.ASM(191) IRPC(9) Forward reference needs override
+1   285	    01B3  A3 0212r			 mov IDT_02.OFFS_L,ax
+1   286	    01B6  66| C1 E8 10			 shr eax, 16
+1   287	    01BA  A3 0218r			 mov IDT_02.OFFS_H,ax
+1   288	    01BD  66| B8 00000109r		 lea eax, EXC_03
+**Error** 2.ASM(191) IRPC(13) Forward reference	needs override
+1   289	    01C2  A3 021Ar			 mov IDT_03.OFFS_L,ax
+1   290	    01C5  66| C1 E8 10			 shr eax, 16
+1   291	    01C9  A3 0220r			 mov IDT_03.OFFS_H,ax
+1   292	    01CC  66| B8 0000010Fr		 lea eax, EXC_04
+**Error** 2.ASM(191) IRPC(17) Forward reference	needs override
+1   293	    01D1  A3 0222r			 mov IDT_04.OFFS_L,ax
+1   294	    01D4  66| C1 E8 10			 shr eax, 16
+1   295	    01D8  A3 0228r			 mov IDT_04.OFFS_H,ax
+1   296	    01DB  66| B8 00000115r		 lea eax, EXC_05
+**Error** 2.ASM(191) IRPC(21) Forward reference	needs override
+1   297	    01E0  A3 022Ar			 mov IDT_05.OFFS_L,ax
+1   298	    01E3  66| C1 E8 10			 shr eax, 16
+1   299	    01E7  A3 0230r			 mov IDT_05.OFFS_H,ax
+1   300	    01EA  66| B8 0000011Br		 lea eax, EXC_06
+**Error** 2.ASM(191) IRPC(25) Forward reference	needs override
+1   301	    01EF  A3 0232r			 mov IDT_06.OFFS_L,ax
+1   302	    01F2  66| C1 E8 10			 shr eax, 16
+1   303	    01F6  A3 0238r			 mov IDT_06.OFFS_H,ax
+1   304	    01F9  66| B8 00000121r		 lea eax, EXC_07
+**Error** 2.ASM(191) IRPC(29) Forward reference	needs override
+1   305	    01FE  A3 023Ar			 mov IDT_07.OFFS_L,ax
+1   306	    0201  66| C1 E8 10			 shr eax, 16
+1   307	    0205  A3 0240r			 mov IDT_07.OFFS_H,ax
+1   308	    0208  66| B8 00000127r		 lea eax, EXC_08
+**Error** 2.ASM(191) IRPC(33) Forward reference	needs override
+1   309	    020D  A3 0242r			 mov IDT_08.OFFS_L,ax
+1   310	    0210  66| C1 E8 10			 shr eax, 16
+1   311	    0214  A3 0248r			 mov IDT_08.OFFS_H,ax
+1   312	    0217  66| B8 0000012Dr		 lea eax, EXC_09
+**Error** 2.ASM(191) IRPC(37) Forward reference	needs override
+1   313	    021C  A3 024Ar			 mov IDT_09.OFFS_L,ax
+1   314	    021F  66| C1 E8 10			 shr eax, 16
+1   315	    0223  A3 0250r			 mov IDT_09.OFFS_H,ax
+1   316	    0226  66| B8 00000133r		 lea eax, EXC_0A
+**Error** 2.ASM(191) IRPC(41) Forward reference	needs override
+1   317	    022B  A3 0252r			 mov IDT_0A.OFFS_L,ax
+1   318	    022E  66| C1 E8 10			 shr eax, 16
+1   319	    0232  A3 0258r			 mov IDT_0A.OFFS_H,ax
+1   320	    0235  66| B8 00000139r		 lea eax, EXC_0B
+**Error** 2.ASM(191) IRPC(45) Forward reference	needs override
+1   321	    023A  A3 025Ar			 mov IDT_0B.OFFS_L,ax
+1   322	    023D  66| C1 E8 10			 shr eax, 16
+1   323	    0241  A3 0260r			 mov IDT_0B.OFFS_H,ax
+1   324	    0244  66| B8 0000013Fr		 lea eax, EXC_0C
+**Error** 2.ASM(191) IRPC(49) Forward reference	needs override
+1   325	    0249  A3 0262r			 mov IDT_0C.OFFS_L,ax
+1   326	    024C  66| C1 E8 10			 shr eax, 16
+1   327	    0250  A3 0268r			 mov IDT_0C.OFFS_H,ax
+1   328	    0253  66| B8 00000145r		 lea eax, EXC_0D
+**Error** 2.ASM(191) IRPC(53) Forward reference	needs override
+Turbo Assembler	 Version 4.1	    09/23/16 06:55:18	    Page 7
+2.ASM
+
+
+
+1   329	    0258  A3 026Ar			 mov IDT_0D.OFFS_L,ax
+1   330	    025B  66| C1 E8 10			 shr eax, 16
+1   331	    025F  A3 0270r			 mov IDT_0D.OFFS_H,ax
+1   332	    0262  66| B8 0000014Br		 lea eax, EXC_0E
+**Error** 2.ASM(191) IRPC(57) Forward reference	needs override
+1   333	    0267  A3 0272r			 mov IDT_0E.OFFS_L,ax
+1   334	    026A  66| C1 E8 10			 shr eax, 16
+1   335	    026E  A3 0278r			 mov IDT_0E.OFFS_H,ax
+1   336	    0271  66| B8 00000151r		 lea eax, EXC_0F
+**Error** 2.ASM(191) IRPC(61) Forward reference	needs override
+1   337	    0276  A3 027Ar			 mov IDT_0F.OFFS_L,ax
+1   338	    0279  66| C1 E8 10			 shr eax, 16
+1   339	    027D  A3 0280r			 mov IDT_0F.OFFS_H,ax
+    340					     irpc    N,	0123456789ABCDEF		 ;Заполнить шлюзы 10-1F	исключениями
+    341						 lea eax, EXC_1&N
+    342						 mov IDT_1&N.OFFS_L,ax
+    343						 shr eax, 16
+    344						 mov IDT_1&N.OFFS_H,ax
+    345					     endm
+1   346	    0280  66| B8 00000157r		 lea eax, EXC_10
+**Error** 2.ASM(197) IRPC(1) Forward reference needs override
+1   347	    0285  A3 0282r			 mov IDT_10.OFFS_L,ax
+1   348	    0288  66| C1 E8 10			 shr eax, 16
+1   349	    028C  A3 0288r			 mov IDT_10.OFFS_H,ax
+1   350	    028F  66| B8 0000015Dr		 lea eax, EXC_11
+**Error** 2.ASM(197) IRPC(5) Forward reference needs override
+1   351	    0294  A3 028Ar			 mov IDT_11.OFFS_L,ax
+1   352	    0297  66| C1 E8 10			 shr eax, 16
+1   353	    029B  A3 0290r			 mov IDT_11.OFFS_H,ax
+1   354	    029E  66| B8 00000163r		 lea eax, EXC_12
+**Error** 2.ASM(197) IRPC(9) Forward reference needs override
+1   355	    02A3  A3 0292r			 mov IDT_12.OFFS_L,ax
+1   356	    02A6  66| C1 E8 10			 shr eax, 16
+1   357	    02AA  A3 0298r			 mov IDT_12.OFFS_H,ax
+1   358	    02AD  66| B8 00000169r		 lea eax, EXC_13
+**Error** 2.ASM(197) IRPC(13) Forward reference	needs override
+1   359	    02B2  A3 029Ar			 mov IDT_13.OFFS_L,ax
+1   360	    02B5  66| C1 E8 10			 shr eax, 16
+1   361	    02B9  A3 02A0r			 mov IDT_13.OFFS_H,ax
+1   362	    02BC  66| B8 0000016Fr		 lea eax, EXC_14
+**Error** 2.ASM(197) IRPC(17) Forward reference	needs override
+1   363	    02C1  A3 02A2r			 mov IDT_14.OFFS_L,ax
+1   364	    02C4  66| C1 E8 10			 shr eax, 16
+1   365	    02C8  A3 02A8r			 mov IDT_14.OFFS_H,ax
+1   366	    02CB  66| B8 00000175r		 lea eax, EXC_15
+**Error** 2.ASM(197) IRPC(21) Forward reference	needs override
+1   367	    02D0  A3 02AAr			 mov IDT_15.OFFS_L,ax
+1   368	    02D3  66| C1 E8 10			 shr eax, 16
+1   369	    02D7  A3 02B0r			 mov IDT_15.OFFS_H,ax
+1   370	    02DA  66| B8 0000017Br		 lea eax, EXC_16
+**Error** 2.ASM(197) IRPC(25) Forward reference	needs override
+1   371	    02DF  A3 02B2r			 mov IDT_16.OFFS_L,ax
+1   372	    02E2  66| C1 E8 10			 shr eax, 16
+1   373	    02E6  A3 02B8r			 mov IDT_16.OFFS_H,ax
+1   374	    02E9  66| B8 00000181r		 lea eax, EXC_17
+**Error** 2.ASM(197) IRPC(29) Forward reference	needs override
+1   375	    02EE  A3 02BAr			 mov IDT_17.OFFS_L,ax
+Turbo Assembler	 Version 4.1	    09/23/16 06:55:18	    Page 8
+2.ASM
+
+
+
+1   376	    02F1  66| C1 E8 10			 shr eax, 16
+1   377	    02F5  A3 02C0r			 mov IDT_17.OFFS_H,ax
+1   378	    02F8  66| B8 00000187r		 lea eax, EXC_18
+**Error** 2.ASM(197) IRPC(33) Forward reference	needs override
+1   379	    02FD  A3 02C2r			 mov IDT_18.OFFS_L,ax
+1   380	    0300  66| C1 E8 10			 shr eax, 16
+1   381	    0304  A3 02C8r			 mov IDT_18.OFFS_H,ax
+1   382	    0307  66| B8 0000018Dr		 lea eax, EXC_19
+**Error** 2.ASM(197) IRPC(37) Forward reference	needs override
+1   383	    030C  A3 02CAr			 mov IDT_19.OFFS_L,ax
+1   384	    030F  66| C1 E8 10			 shr eax, 16
+1   385	    0313  A3 02D0r			 mov IDT_19.OFFS_H,ax
+1   386	    0316  66| B8 00000193r		 lea eax, EXC_1A
+**Error** 2.ASM(197) IRPC(41) Forward reference	needs override
+1   387	    031B  A3 02D2r			 mov IDT_1A.OFFS_L,ax
+1   388	    031E  66| C1 E8 10			 shr eax, 16
+1   389	    0322  A3 02D8r			 mov IDT_1A.OFFS_H,ax
+1   390	    0325  66| B8 00000199r		 lea eax, EXC_1B
+**Error** 2.ASM(197) IRPC(45) Forward reference	needs override
+1   391	    032A  A3 02DAr			 mov IDT_1B.OFFS_L,ax
+1   392	    032D  66| C1 E8 10			 shr eax, 16
+1   393	    0331  A3 02E0r			 mov IDT_1B.OFFS_H,ax
+1   394	    0334  66| B8 0000019Fr		 lea eax, EXC_1C
+**Error** 2.ASM(197) IRPC(49) Forward reference	needs override
+1   395	    0339  A3 02E2r			 mov IDT_1C.OFFS_L,ax
+1   396	    033C  66| C1 E8 10			 shr eax, 16
+1   397	    0340  A3 02E8r			 mov IDT_1C.OFFS_H,ax
+1   398	    0343  66| B8 000001A5r		 lea eax, EXC_1D
+**Error** 2.ASM(197) IRPC(53) Forward reference	needs override
+1   399	    0348  A3 02EAr			 mov IDT_1D.OFFS_L,ax
+1   400	    034B  66| C1 E8 10			 shr eax, 16
+1   401	    034F  A3 02F0r			 mov IDT_1D.OFFS_H,ax
+1   402	    0352  66| B8 000001ABr		 lea eax, EXC_1E
+**Error** 2.ASM(197) IRPC(57) Forward reference	needs override
+1   403	    0357  A3 02F2r			 mov IDT_1E.OFFS_L,ax
+1   404	    035A  66| C1 E8 10			 shr eax, 16
+1   405	    035E  A3 02F8r			 mov IDT_1E.OFFS_H,ax
+1   406	    0361  66| B8 000001B1r		 lea eax, EXC_1F
+**Error** 2.ASM(197) IRPC(61) Forward reference	needs override
+1   407	    0366  A3 02FAr			 mov IDT_1F.OFFS_L,ax
+1   408	    0369  66| C1 E8 10			 shr eax, 16
+1   409	    036D  A3 0300r			 mov IDT_1F.OFFS_H,ax
+    410	    0370  66| B8 000001E1r	     lea eax, TIMER_HANDLER			 ;Поместить обработчик прерывания таймера на+
+    411					 20 шлюз
+**Error** 2.ASM(198) Forward reference needs override
+    412	    0375  A3 0302r		     mov IDT_TIMER.OFFS_L,ax
+    413	    0378  66| C1 E8 10		     shr eax, 16
+    414	    037C  A3 0308r		     mov IDT_TIMER.OFFS_H,ax
+    415	    037F  66| B8 000002EEr	     lea eax, KEYBOARD_HANDLER			 ;Поместить обработчик прерывания клавиатуры+
+    416					 на 21 шлюз
+**Error** 2.ASM(202) Forward reference needs override
+    417	    0384  A3 030Ar		     mov IDT_KEYBOARD.OFFS_L,ax
+    418	    0387  66| C1 E8 10		     shr eax, 16
+    419	    038B  A3 0310r		     mov IDT_KEYBOARD.OFFS_H,ax
+    420					     irpc    N,	234567				 ;Заполнить вектора 22-27 заглушками
+    421						 lea eax,DUMMY_IRQ_MASTER
+    422						 mov IDT_2&N.OFFS_L, AX
+Turbo Assembler	 Version 4.1	    09/23/16 06:55:18	    Page 9
+2.ASM
+
+
+
+    423						 shr eax,16
+    424						 mov IDT_2&N.OFFS_H, AX
+    425					     endm
+1   426	    038E  66| B8 000001D1r		 lea eax,DUMMY_IRQ_MASTER
+**Error** 2.ASM(211) IRPC(1) Forward reference needs override
+1   427	    0393  A3 0312r			 mov IDT_22.OFFS_L, AX
+1   428	    0396  66| C1 E8 10			 shr eax,16
+1   429	    039A  A3 0318r			 mov IDT_22.OFFS_H, AX
+1   430	    039D  66| B8 000001D1r		 lea eax,DUMMY_IRQ_MASTER
+**Error** 2.ASM(211) IRPC(5) Forward reference needs override
+1   431	    03A2  A3 031Ar			 mov IDT_23.OFFS_L, AX
+1   432	    03A5  66| C1 E8 10			 shr eax,16
+1   433	    03A9  A3 0320r			 mov IDT_23.OFFS_H, AX
+1   434	    03AC  66| B8 000001D1r		 lea eax,DUMMY_IRQ_MASTER
+**Error** 2.ASM(211) IRPC(9) Forward reference needs override
+1   435	    03B1  A3 0322r			 mov IDT_24.OFFS_L, AX
+1   436	    03B4  66| C1 E8 10			 shr eax,16
+1   437	    03B8  A3 0328r			 mov IDT_24.OFFS_H, AX
+1   438	    03BB  66| B8 000001D1r		 lea eax,DUMMY_IRQ_MASTER
+**Error** 2.ASM(211) IRPC(13) Forward reference	needs override
+1   439	    03C0  A3 032Ar			 mov IDT_25.OFFS_L, AX
+1   440	    03C3  66| C1 E8 10			 shr eax,16
+1   441	    03C7  A3 0330r			 mov IDT_25.OFFS_H, AX
+1   442	    03CA  66| B8 000001D1r		 lea eax,DUMMY_IRQ_MASTER
+**Error** 2.ASM(211) IRPC(17) Forward reference	needs override
+1   443	    03CF  A3 0332r			 mov IDT_26.OFFS_L, AX
+1   444	    03D2  66| C1 E8 10			 shr eax,16
+1   445	    03D6  A3 0338r			 mov IDT_26.OFFS_H, AX
+1   446	    03D9  66| B8 000001D1r		 lea eax,DUMMY_IRQ_MASTER
+**Error** 2.ASM(211) IRPC(21) Forward reference	needs override
+1   447	    03DE  A3 033Ar			 mov IDT_27.OFFS_L, AX
+1   448	    03E1  66| C1 E8 10			 shr eax,16
+1   449	    03E5  A3 0340r			 mov IDT_27.OFFS_H, AX
+    450					     irpc    N,	89ABCDEF			 ;Заполнить вектора 28-2F заглушками
+    451						 lea eax,DUMMY_IRQ_SLAVE
+    452						 mov IDT_2&N.OFFS_L,ax
+    453						 shr eax,16
+    454						 mov IDT_2&N.OFFS_H,ax
+    455					     endm
+1   456	    03E8  66| B8 000001D8r		 lea eax,DUMMY_IRQ_SLAVE
+**Error** 2.ASM(217) IRPC(1) Forward reference needs override
+1   457	    03ED  A3 0342r			 mov IDT_28.OFFS_L,ax
+1   458	    03F0  66| C1 E8 10			 shr eax,16
+1   459	    03F4  A3 0348r			 mov IDT_28.OFFS_H,ax
+1   460	    03F7  66| B8 000001D8r		 lea eax,DUMMY_IRQ_SLAVE
+**Error** 2.ASM(217) IRPC(5) Forward reference needs override
+1   461	    03FC  A3 034Ar			 mov IDT_29.OFFS_L,ax
+1   462	    03FF  66| C1 E8 10			 shr eax,16
+1   463	    0403  A3 0350r			 mov IDT_29.OFFS_H,ax
+1   464	    0406  66| B8 000001D8r		 lea eax,DUMMY_IRQ_SLAVE
+**Error** 2.ASM(217) IRPC(9) Forward reference needs override
+1   465	    040B  A3 0352r			 mov IDT_2A.OFFS_L,ax
+1   466	    040E  66| C1 E8 10			 shr eax,16
+1   467	    0412  A3 0358r			 mov IDT_2A.OFFS_H,ax
+1   468	    0415  66| B8 000001D8r		 lea eax,DUMMY_IRQ_SLAVE
+**Error** 2.ASM(217) IRPC(13) Forward reference	needs override
+1   469	    041A  A3 035Ar			 mov IDT_2B.OFFS_L,ax
+Turbo Assembler	 Version 4.1	    09/23/16 06:55:18	    Page 10
+2.ASM
+
+
+
+1   470	    041D  66| C1 E8 10			 shr eax,16
+1   471	    0421  A3 0360r			 mov IDT_2B.OFFS_H,ax
+1   472	    0424  66| B8 000001D8r		 lea eax,DUMMY_IRQ_SLAVE
+**Error** 2.ASM(217) IRPC(17) Forward reference	needs override
+1   473	    0429  A3 0362r			 mov IDT_2C.OFFS_L,ax
+1   474	    042C  66| C1 E8 10			 shr eax,16
+1   475	    0430  A3 0368r			 mov IDT_2C.OFFS_H,ax
+1   476	    0433  66| B8 000001D8r		 lea eax,DUMMY_IRQ_SLAVE
+**Error** 2.ASM(217) IRPC(21) Forward reference	needs override
+1   477	    0438  A3 036Ar			 mov IDT_2D.OFFS_L,ax
+1   478	    043B  66| C1 E8 10			 shr eax,16
+1   479	    043F  A3 0370r			 mov IDT_2D.OFFS_H,ax
+1   480	    0442  66| B8 000001D8r		 lea eax,DUMMY_IRQ_SLAVE
+**Error** 2.ASM(217) IRPC(25) Forward reference	needs override
+1   481	    0447  A3 0372r			 mov IDT_2E.OFFS_L,ax
+1   482	    044A  66| C1 E8 10			 shr eax,16
+1   483	    044E  A3 0378r			 mov IDT_2E.OFFS_H,ax
+1   484	    0451  66| B8 000001D8r		 lea eax,DUMMY_IRQ_SLAVE
+**Error** 2.ASM(217) IRPC(29) Forward reference	needs override
+1   485	    0456  A3 037Ar			 mov IDT_2F.OFFS_L,ax
+1   486	    0459  66| C1 E8 10			 shr eax,16
+1   487	    045D  A3 0380r			 mov IDT_2F.OFFS_H,ax
+    488	    0460  0F 01	16 0008r	     lgdt fword	ptr GDT_GDT			 ;Загрузить регистр GDTR
+    489	    0465  0F 01	1E 01FCr	     lidt fword	ptr IDTR			 ;Загрузить регистр IDTR
+    490	    046A  0F 20	C0		     mov eax,cr0				 ;Получить управляющий регистр cr0
+    491	    046D  0C 01			     or	 al,00000001b				 ;Установить бит PE в 1
+    492	    046F  0F 22	C0		     mov cr0,eax				 ;Записать измененный cr0 и тем	самым	    +
+    493					 включить защищенный режим
+    494	    0472			 OVERLOAD_CS:					 ;Перезагрузить	сегмент	кода на	его	    +
+    495					 дескриптор
+    496	    0472  EA			     db	 0EAH
+    497	    0473  0477r			     dw	 $+4
+    498	    0475  0010			     dw	 CODE_RM_DESC
+    499	    0477			 OVERLOAD_SEGMENT_REGISTERS:			 ;Переинициализировать остальные сегментные +
+    500					 регистры на дескрипторы
+    501	    0477  B8 001B		     mov ax,DATA_DESC
+    502	    047A  8E D8			     mov ds,ax
+    503	    047C  8E C0			     mov es,ax
+    504	    047E  B8 0020		     mov ax,STACK_DESC
+    505	    0481  8E D0			     mov ss,ax
+    506	    0483  33 C0			     xor ax,ax
+    507	    0485  8E E0			     mov fs,ax					 ;Обнулить регистр fs
+    508	    0487  8E E8			     mov gs,ax					 ;Обнулить регистр gs
+    509	    0489  0F 00	D0		     lldt ax					 ;Обнулить регистр LDTR	- не использовать   +
+    510					 таблицы локальных дескрипторов
+    511	    048C			 PREPARE_TO_RETURN:
+    512	    048C  0E			     push cs					 ;Сегмент кода
+    513	    048D  68 0555r		     push offset BACK_TO_RM			 ;Смещение точки возврата
+    514	    0490  66| BF 00000000r	     lea  edi,ENTER_PM				 ;Получить точку входа в защищенный режим
+**Error** 2.ASM(240) Forward reference needs override
+    515	    0495  66| B8 00000030	     mov  eax,CODE_PM_DESC			 ;Получить дескриптор кода защищенного режима
+**Error** 2.ASM(241) Forward reference needs override
+    516	    0499  66| 50		     push eax					 ;Занести их в стек
+    517	    049B  66| 57		     push edi
+    518	    049D			 PREPARE_TSS:					 ;Подготавливаю	TSS для	дополнительных задач
+    519	    049D  66| 81 0E 0118r     +	     or	 TSS_2.R_EFLAGS, 3200H			 ;Установить 3 уровень привелегий и	    +
+    520		  00003200		 разрешить аппаратные прерывания
+Turbo Assembler	 Version 4.1	    09/23/16 06:55:18	    Page 11
+2.ASM
+
+
+
+    521	    04A6  C7 06	0140r 0043	     mov TSS_2.R_CS,CS_2_DESC			 ;Установить регистр сегмента кода
+    522	    04AC  66| C7 06 0114r     +	     mov TSS_2.R_EIP,offset TASK_2		 ;Установить регистр команд на точку входа в+
+    523		  00000000r		 задачу
+    524	    04B5  C7 06	0144r 0053	     mov TSS_2.R_SS, SS_2_DESC			 ;Установить сегмент стека задачи
+    525	    04BB  66| C7 06 012Cr     +	     mov TSS_2.R_ESP,0				 ;Установить указатель стека на	начало стека
+    526		  00000000
+    527	    04C4  B8 0000		     mov ax, 0					 ;Обнулить сегментные регистры
+    528	    04C7  A3 0148r		     mov TSS_2.R_DS, AX
+    529	    04CA  A3 013Cr		     mov TSS_2.R_ES, AX
+    530	    04CD  A3 014Cr		     mov TSS_2.R_FS, AX
+    531	    04D0  A3 0150r		     mov TSS_2.R_GS, AX
+    532	    04D3  C7 06	00FCr 0020	     mov TSS_2.SS0, STACK_DESC			 ;Установить сегмент стека 0 уровня доступа
+    533	    04D9  66| C7 06 00F8r     +	     mov TSS_2.ESP0, 500h			 ;И указатель в	стеке
+    534		  00000500
+    535	    04E2  66| 81 0E 0194r     +	     or	 TSS_3.R_EFLAGS,3200H			 ;Установить 3 уровень привелегий и	    +
+    536		  00003200		 разрешить аппаратные прерывания
+    537	    04EB  C7 06	01BCr 004B	     mov TSS_3.R_CS,CS_3_DESC
+    538	    04F1  66| C7 06 0190r     +	     mov TSS_3.R_EIP,offset TASK_3
+    539		  00000000r
+    540	    04FA  C7 06	01C0r 005B	     mov TSS_3.R_SS, SS_3_DESC
+    541	    0500  66| C7 06 01A8r     +	     mov TSS_3.R_ESP,0
+    542		  00000000
+    543	    0509  B8 0000		     mov ax, 0
+    544	    050C  A3 01C4r		     mov TSS_3.R_DS, AX
+    545	    050F  A3 01B8r		     mov TSS_3.R_ES, AX
+    546	    0512  A3 01C8r		     mov TSS_3.R_FS, AX
+    547	    0515  A3 01CCr		     mov TSS_3.R_GS, AX
+    548	    0518  C7 06	0178r 0020	     mov TSS_3.SS0, STACK_DESC
+    549	    051E  66| C7 06 0174r     +	     mov TSS_3.ESP0, 600h
+    550		  00000600
+    551	    0527			 REINITIALIAZE_CONTROLLER_FOR_PM:		 ;Переинициализировать контроллер прерываний+
+    552					 на вектора 20h, 28h
+    553	    0527  B0 11			     mov al,00010001b				 ;ICW1 - переинициализация контроллера	    +
+    554					 прерываний
+    555	    0529  E6 20			     out 20h,al					 ;Переинициализируем ведущий контроллер
+    556	    052B  E6 A0			     out 0A0h,al				 ;Переинициализируем ведомый контроллер
+    557	    052D  B0 20			     mov al,20h					 ;ICW2 - номер базового	вектора	прерываний
+    558	    052F  E6 21			     out 21h,al					 ;ведущего контроллера
+    559	    0531  B0 28			     mov al,28h					 ;ICW2 - номер базового	вектора	прерываний
+    560	    0533  E6 A1			     out 0A1h,al				 ;ведомого контроллера
+    561	    0535  B0 04			     mov al,04h					 ;ICW3 - ведущий контроллер подключен к	3   +
+    562					 линии
+    563	    0537  E6 21			     out 21h,al
+    564	    0539  B0 02			     mov al,02h					 ;ICW3 - ведомый контроллер подключен к	3   +
+    565					 линии
+    566	    053B  E6 A1			     out 0A1h,al
+    567	    053D  B0 11			     mov al,11h					 ;ICW4 - режим специальной полной	    +
+    568					 вложенности для ведущего контроллера
+    569	    053F  E6 21			     out 21h,al
+    570	    0541  B0 01			     mov al,01h					 ;ICW4 - режим обычной полной вложенности   +
+    571					 для ведомого контроллера
+    572	    0543  E6 A1			     out 0A1h,al
+    573	    0545  B0 00			     mov al, 0					 ;Размаскировать прерывания
+    574	    0547  E6 21			     out 21h,al					 ;Ведущего контроллера
+    575	    0549  E6 A1			     out 0A1h,al				 ;Ведомого контроллера
+    576	    054B			 ENABLE_INTERRUPTS_0:				 ;Разрешить маскируемые	и немаскируемые	    +
+    577					 прерывания
+Turbo Assembler	 Version 4.1	    09/23/16 06:55:18	    Page 12
+2.ASM
+
+
+
+    578	    054B  E4 70			     in	 al,70h
+    579	    054D  24 7F				 and	 al,01111111b				 ;Установить 7 бит в 0 для запрета  +
+    580					 немаскируемых прерываний
+    581	    054F  E6 70				 out	 70h,al
+    582	    0551  90				 nop
+    583	    0552  FB			     sti					 ;Разрешить маскируемые	прерывания
+    584	    0553			 GO_TO_CODE_PM:					 ;Переход к сегменту кода защищенного режима
+    585	    0553  66			     db	66h
+    586	    0554  CB			     retf
+    587	    0555			 BACK_TO_RM:					 ;Точка	возврата в реальный режим
+    588	    0555  FA			     cli					 ;Запрет маскируемых прерываний
+    589	    0556  E4 70			     in	 al,70h					 ;И не маскируемых прерываний
+    590	    0558  0C 80				 or	 AL,10000000b				 ;Установить 7 бит в 1 для запрета  +
+    591					 немаскируемых прерываний
+    592	    055A  E6 70				 out	 70h,AL
+    593	    055C  90				 nop
+    594	    055D			 REINITIALISE_CONTROLLER:			 ;Переиницализация контроллера прерываний
+    595	    055D  B0 11			     mov al,00010001b				 ;ICW1 - переинициализация контроллера	    +
+    596					 прерываний
+    597	    055F  E6 20			     out 20h,al					 ;Переинициализируем ведущий контроллер
+    598	    0561  E6 A0			     out 0A0h,al				 ;Переинициализируем ведомый контроллер
+    599	    0563  B0 08			     mov al,8h					 ;ICW2 - номер базового	вектора	прерываний
+    600	    0565  E6 21			     out 21h,al					 ;ведущего контроллера
+    601	    0567  B0 70			     mov al,70h					 ;ICW2 - номер базового	вектора	прерываний
+    602	    0569  E6 A1			     out 0A1h,al				 ;ведомого контроллера
+    603	    056B  B0 04			     mov al,04h					 ;ICW3 - ведущий контроллер подключен к	3   +
+    604					 линии
+    605	    056D  E6 21			     out 21h,al
+    606	    056F  B0 02			     mov al,02h					 ;ICW3 - ведомый контроллер подключен к	3   +
+    607					 линии
+    608	    0571  E6 A1			     out 0A1h,al
+    609	    0573  B0 11			     mov al,11h					 ;ICW4 - режим специальной полной	    +
+    610					 вложенности для ведущего контроллера
+    611	    0575  E6 21			     out 21h,al
+    612	    0577  B0 01			     mov al,01h					 ;ICW4 - режим обычной полной вложенности   +
+    613					 для ведомого контроллера
+    614	    0579  E6 A1			     out 0A1h,al
+    615	    057B			 PREPARE_SEGMENTS:				 ;Подготовка сегментных	регистров для	    +
+    616					 возврата в реальный режим
+    617	    057B  C7 06	0010r FFFF	     mov GDT_CODE_RM.LIMIT,0FFFFh		 ;Установка лимита сегмента кода в 64KB
+    618	    0581  C7 06	0018r FFFF	     mov GDT_DATA.LIMIT,0FFFFh			 ;Установка лимита сегмента данных в 64KB
+    619	    0587  C7 06	0020r FFFF	     mov GDT_STACK.LIMIT,0FFFFh			 ;Установка лимита сегмента стека в 64KB
+    620	    058D  EA			     db	 0EAH					 ;Перезагрузить	регистр	cs
+    621	    058E  0592r			     dw	 $+4
+    622	    0590  0010			     dw	 CODE_RM_DESC				 ;На сегмент кода реального режима
+    623	    0592  B8 001B		     mov ax,DATA_DESC				 ;Загрузим сегментные регистры дескриптором +
+    624					 сегмента данных
+    625	    0595  8E D8			     mov ds,ax
+    626	    0597  8E C0			     mov es,ax
+    627	    0599  8E E0			     mov fs,ax
+    628	    059B  8E E8			     mov gs,ax
+    629	    059D  B8 0020		     mov ax,STACK_DESC
+    630	    05A0  8E D0			     mov ss,ax					 ;Загрузим регистр стека дескриптором стека
+    631	    05A2			 ENABLE_REAL_MODE:				 ;Включим реальный режим
+    632	    05A2  0F 20	C0		     mov eax,cr0
+    633	    05A5  24 FE			     and al,11111110b				 ;Обнулим 0 бит	регистра cr0
+    634	    05A7  0F 22	C0		     mov cr0,eax
+Turbo Assembler	 Version 4.1	    09/23/16 06:55:18	    Page 13
+2.ASM
+
+
+
+    635	    05AA  EA			     db	 0EAH
+    636	    05AB  05AFr			     dw	 $+4
+    637	    05AD  0000s			     dw	 CODE_RM				 ;Перезагрузим регистр кода
+    638	    05AF  B0 20			     mov  al,20h
+    639	    05B1  E6 20			     out  20h,al
+    640	    05B3  B8 0000s		     mov ax,STACK_A
+    641	    05B6  8E D0			     mov ss,ax
+    642	    05B8  B8 0000s		     mov ax,DATA
+    643	    05BB  8E D8			     mov ds,ax
+    644	    05BD  8E C0			     mov es,ax
+    645	    05BF  33 C0			     xor ax,ax
+    646	    05C1  8E E0			     mov fs,ax
+    647	    05C3  8E E8			     mov gs,ax
+    648	    05C5  C7 06	01FCr 03FF	     mov IDTR.LIMIT, 3FFH
+    649	    05CB  66| C7 06 01FEr     +	     mov dword ptr  IDTR+2, 0
+    650		  00000000
+    651	    05D4  0F 01	1E 01FCr	     lidt fword	ptr IDTR
+    652	    05D9			 REPEAIR_MASK:					 ;Восстановить маски прерываний
+    653	    05D9  B0 20			     mov  al,20h
+    654	    05DB  E6 20			     out  20h,al
+    655	    05DD  A0 059Fr		     mov al,INT_MASK_M
+    656	    05E0  E6 21			     out 21h,al					 ;Ведущего контроллера
+    657	    05E2  A0 05A0r		     mov al,INT_MASK_S
+    658	    05E5  E6 A1			     out 0A1h,al				 ;Ведомого контроллера
+    659	    05E7			 ENABLE_INTERRUPTS:				 ;Разрешить маскируемые	и немаскируемые	    +
+    660					 прерывания
+    661	    05E7  E4 70			     in	 al,70h
+    662	    05E9  24 7F				 and	 al,01111111b				 ;Установить 7 бит в 0 для	    +
+    663					 разрешения немаскируемых прерываний
+    664	    05EB  E6 70				 out	 70h,al
+    665	    05ED  90			     nop
+    666	    05EE  FB			     sti					 ;Разрешить маскируемые	прерывания
+    667	    05EF			 DISABLE_A20:					 ;Закрыть вентиль A20
+    668	    05EF  E4 92			     in	 al,92h
+    669	    05F1  24 FD			     and al,11111101b				 ;Обнулить 1 бит - запретить линию A20
+    670	    05F3  E6 92			     out 92h, al
+    671	    05F5			 EXIT:						 ;Выход	из программы
+    672	    05F5  B8 0003		     mov ax,3h
+    673	    05F8  CD 10			     int 10H					 ;Очистить видео-режим
+    674	    05FA  BA 03D5r		     lea dx,MSG_EXIT
+    675	    05FD  B4 09			     mov ah,9h
+    676	    05FF  CD 21			     int 21h					 ;Вывести сообщение
+    677	    0601  B8 4C00		     mov ax,4C00h
+    678	    0604  CD 21			     int 21H					 ;Выход	в dos
+    679	    0606			 INPUT proc near				 ;Процедура ввода время-нахождения в	    +
+    680					 защищенном режиме
+    681	    0606  B4 0A			     mov ah,0ah
+    682	    0608  33 FF			     xor di,di
+    683	    060A  BA 05C3r		     mov dx,offset ds:[INPUT_TIME]
+    684	    060D  CD 21			     int 21h
+    685	    060F  B2 0A			     mov dl,0ah
+    686	    0611  B4 02			     mov ah,02
+    687	    0613  CD 21			     int 21h
+    688	    0615  BE 05C5r		     mov si,offset INPUT_TIME+2
+    689	    0618  80 3C	2D		     cmp byte ptr [si],"-"
+    690	    061B  75 06	90 90		     jnz ii1
+    691	    061F  BF 0001		     mov di,1
+Turbo Assembler	 Version 4.1	    09/23/16 06:55:18	    Page 14
+2.ASM
+
+
+
+    692	    0622  46			     inc si
+    693	    0623			 II1:
+    694	    0623  33 C0			     xor ax,ax
+    695	    0625  BB 000A		     mov bx,10
+    696	    0628			 II2:
+    697	    0628  8A 0C			     mov cl,[si]
+    698	    062A  80 F9	0D		     cmp cl,0dh
+    699	    062D  74 23	90 90		     jz	ii3
+    700	    0631  80 F9	30		     cmp cl,'0'
+    701	    0634  7C 13	90 90		     jl	er
+    702	    0638  80 F9	39		     cmp cl,'9'
+    703	    063B  77 0C	90 90		     ja	er
+    704	    063F  80 E9	30		     sub cl,'0'
+    705	    0642  F7 E3			     mul bx
+    706	    0644  03 C1			     add ax,cx
+    707	    0646  46			     inc si
+    708	    0647  EB DF			     jmp ii2
+    709	    0649			 ER:
+    710	    0649  BA 057Br		     mov dx, offset MSG_ERROR
+    711	    064C  B4 09			     mov ah,09
+    712	    064E  CD 21			     int 21h
+    713	    0650  CD 20			     int 20h
+    714	    0652			 II3:
+    715	    0652  C3			     ret
+    716	    0653			 INPUT endp
+    717		  =0653			 SIZE_CODE_RM	 = ($ -	CODE_RM_BEGIN)		 ;Лимит	сегмента кода
+    718	    0653			 CODE_RM ends
+    719					 ;Сегмент кода реального режима
+    720	00000000			 CODE_PM  segment para use32
+    721		  =CODE_PM:0000		 CODE_PM_BEGIN	 = $
+    722					     assume cs:CODE_PM,ds:DATA,es:DATA		 ;Указание сегментов для компиляции
+    723	00000000			 ENTER_PM:					 ;Точка	входа в	защищенный режим
+    724	00000000  E8 0000034F		     call CLRSCR				 ;Процедура очистки экрана
+    725	00000005  66| B8 0060 90 90	     MOV  ax,TSS_MAIN_DESC
+    726	0000000B  0F 00	D8		     ltr  ax					 ;Загрузить регистр tr и заполнить TSS для  +
+    727					 главной задачи
+    728	0000000E  33 FF			     xor  edi,edi				 ;В edi	смещение на экране
+    729	00000010  67| 8D 36 03AEr	     lea  esi,MSG_HELLO_PM			 ;В esi	адрес буфера
+    730	00000015  E8 0000036F		     call BUFFER_OUTPUT				 ;Вывести строку-приветствие в защищенном   +
+    731					 режиме
+    732	0000001A  81 C7	000000A0	     add  edi,160				 ;Перевести курсор на следующую	строку
+    733	00000020  67| 8D 36 03F2r	     lea  esi,MSG_KEYBOARD
+    734	00000025  E8 0000035F		     call BUFFER_OUTPUT				 ;Вывести поле для вывода скан-кода	    +
+    735					 клавиатуры
+    736	0000002A  BF 00000140		     mov edi,320
+    737	0000002F  67| 8D 36 0443r	     lea esi,MSG_TIME
+    738	00000034  E8 00000350		     call BUFFER_OUTPUT				 ;Вывести поле для вывода время
+    739	00000039  BF 000001E0		     mov edi,480
+    740	0000003E  66| 67| C7 06	05A5r +	     mov DS:[COUNT],0
+    741		  0000 90 90
+    742	00000048  BF 000001E0		     mov edi,480
+    743	0000004D  67| 8D 36 048Cr	     lea esi,MSG_TASK_1				 ;Подготовить место для	задач
+    744	00000052  E8 00000332		     call BUFFER_OUTPUT
+    745	00000057  BF 00000280		     mov edi,640
+    746	0000005C  67| 8D 36 04CBr	     lea esi,MSG_TASK_2
+    747	00000061  E8 00000323		     call Buffer_OUTPUT
+    748	00000066  BF 00000320		     mov edi,800
+Turbo Assembler	 Version 4.1	    09/23/16 06:55:18	    Page 15
+2.ASM
+
+
+
+    749	0000006B  67| 8D 36 050Ar	     lea esi,MSG_TASK_3
+    750	00000070  E8 00000314		     call BUFFER_OUTPUT
+    751	00000075  BF 000001E0		     mov edi,480
+    752	0000007A  66| B8 002B 90 90	     mov ax,TEXT_DESC
+    753	00000080  8E C0			     mov es,ax
+    754	00000082			 WAITING_ESC:					 ;Ожидание нажатия кнопки выхода из	    +
+    755					 защищенного режима
+    756	00000082  B0 0A			     mov al,10
+    757	00000084  67| 80 3E 05A2r 00  +	     cmp ds:[KEY_PRESSED],0
+    758		  90
+    759	0000008B  74 5D	90 90 90 90	     je	NO_KEY
+    760	00000091  67| A0 05A2r 90	     mov al,ds:[KEY_PRESSED]
+    761	00000096  FE C8			     dec al
+    762	00000098  04 30			     add al,'0'
+    763	0000009A  26: 67| 88 05		     mov es:[di],al
+    764	0000009E  67| C6 06 05A2r 00  +	     mov ds:[KEY_PRESSED],0
+    765		  90 90	90 90
+    766	000000A8  66| 83 C7 02		     add di,2
+    767	000000AC  66| 81 FF 022A	     cmp di,554
+    768	000000B1  75 37	90 90 90 90	     jne NO_KEY
+    769	000000B7  66| B9 0025		     mov cx,37
+    770	000000BB  66| BF 01E0		     mov di,480
+    771	000000BF			 FFLUSH:
+    772	000000BF  B0 20			     mov al,' '
+    773	000000C1  26: 67| 88 05		     mov es:[di],al
+    774	000000C5  66| 83 C7 02		     add di,2
+    775	000000C9  E2 F4			     loop FFLUSH
+    776	000000CB  66| BF 01E0		     mov di,480
+    777	000000CF  67| A0 05A2r 90	     mov al,ds:[KEY_PRESSED]
+    778	000000D4  FE C8			     dec al
+    779	000000D6  04 30			     add al,'0'
+    780	000000D8  26: 67| 88 05		     mov es:[di],al
+    781	000000DC  67| C6 06 05A2r 00  +	     mov ds:[KEY_PRESSED],0
+    782		  90 90	90 90
+    783	000000E6  66| 83 C7 02		     add di,2
+    784
+    785	000000EA			 NO_KEY:
+    786
+    787	000000EA  EB 96			     jmp  WAITING_ESC				 ;Если был нажат не ESC
+    788	000000EC			 EXIT_PM:					 ;Точка	выхода из 32-битного сегмента кода
+    789	000000EC  66			     db	66H
+    790	000000ED  CB			     retf					 ;Переход в 16-битный сегмент кода
+    791	000000EE			 EXIT_FROM_INTERRUPT:				 ;Точка	выхода для выхода напрямую из	    +
+    792					 обработчика прерываний
+    793	000000EE  61			     popad
+    794	000000EF  07			     pop es
+    795	000000F0  1F			     pop ds
+    796	000000F1  58			     pop eax					 ;Снять	со стека старый	EIP
+    797	000000F2  58			     pop eax					 ;CS
+    798	000000F3  58			     pop eax					 ;И EFLAGS
+    799	000000F4  FB			     sti					 ;Обязательно, без этого обработка	    +
+    800					 аппаратных прерываний отключена
+    801	000000F5  66			     db	66H
+    802	000000F6  CB			     retf					 ;Переход в 16-битный сегмент кода
+    803					 INCLUDE IRQ.ASM				 ;Файл с обработчиками аппаратных прерываний
+1   804		  =0000			 M = 0
+1   805					 IRPC N, 0123456789ABCDEF
+Turbo Assembler	 Version 4.1	    09/23/16 06:55:18	    Page 16
+2.ASM
+
+
+
+1   806					 EXC_0&N label word				 ;Обработчики исключений
+1   807					     cli
+1   808					     jmp EXC_HANDLER
+1   809					 endm
+2   810	000000F7			 EXC_00	label word				;Обработчики исключений
+2   811	000000F7  FA			     cli
+2   812	000000F8  E9 000000BA		     jmp EXC_HANDLER
+2   813	000000FD			 EXC_01	label word				;Обработчики исключений
+2   814	000000FD  FA			     cli
+2   815	000000FE  E9 000000B4		     jmp EXC_HANDLER
+2   816	00000103			 EXC_02	label word				;Обработчики исключений
+2   817	00000103  FA			     cli
+2   818	00000104  E9 000000AE		     jmp EXC_HANDLER
+2   819	00000109			 EXC_03	label word				;Обработчики исключений
+2   820	00000109  FA			     cli
+2   821	0000010A  E9 000000A8		     jmp EXC_HANDLER
+2   822	0000010F			 EXC_04	label word				;Обработчики исключений
+2   823	0000010F  FA			     cli
+2   824	00000110  E9 000000A2		     jmp EXC_HANDLER
+2   825	00000115			 EXC_05	label word				;Обработчики исключений
+2   826	00000115  FA			     cli
+2   827	00000116  E9 0000009C		     jmp EXC_HANDLER
+2   828	0000011B			 EXC_06	label word				;Обработчики исключений
+2   829	0000011B  FA			     cli
+2   830	0000011C  E9 00000096		     jmp EXC_HANDLER
+2   831	00000121			 EXC_07	label word				;Обработчики исключений
+2   832	00000121  FA			     cli
+2   833	00000122  E9 00000090		     jmp EXC_HANDLER
+2   834	00000127			 EXC_08	label word				;Обработчики исключений
+2   835	00000127  FA			     cli
+2   836	00000128  E9 0000008A		     jmp EXC_HANDLER
+2   837	0000012D			 EXC_09	label word				;Обработчики исключений
+2   838	0000012D  FA			     cli
+2   839	0000012E  E9 00000084		     jmp EXC_HANDLER
+2   840	00000133			 EXC_0A	label word				;Обработчики исключений
+2   841	00000133  FA			     cli
+2   842	00000134  E9 0000007E		     jmp EXC_HANDLER
+2   843	00000139			 EXC_0B	label word				;Обработчики исключений
+2   844	00000139  FA			     cli
+2   845	0000013A  EB 7B	90 90 90	     jmp EXC_HANDLER
+2   846	0000013F			 EXC_0C	label word				;Обработчики исключений
+2   847	0000013F  FA			     cli
+2   848	00000140  EB 75	90 90 90	     jmp EXC_HANDLER
+2   849	00000145			 EXC_0D	label word				;Обработчики исключений
+2   850	00000145  FA			     cli
+2   851	00000146  EB 6F	90 90 90	     jmp EXC_HANDLER
+2   852	0000014B			 EXC_0E	label word				;Обработчики исключений
+2   853	0000014B  FA			     cli
+2   854	0000014C  EB 69	90 90 90	     jmp EXC_HANDLER
+2   855	00000151			 EXC_0F	label word				;Обработчики исключений
+2   856	00000151  FA			     cli
+2   857	00000152  EB 63	90 90 90	     jmp EXC_HANDLER
+1   858		  =0010			 M = 010H
+1   859					 IRPC N, 0123456789ABCDEF			 ;Обработчики исключений
+1   860					 EXC_1&N label word
+1   861					     cli
+1   862					     jmp EXC_HANDLER
+Turbo Assembler	 Version 4.1	    09/23/16 06:55:18	    Page 17
+2.ASM
+
+
+
+1   863					 endm
+2   864	00000157			 EXC_10	label word
+2   865	00000157  FA			     cli
+2   866	00000158  EB 5D	90 90 90	     jmp EXC_HANDLER
+2   867	0000015D			 EXC_11	label word
+2   868	0000015D  FA			     cli
+2   869	0000015E  EB 57	90 90 90	     jmp EXC_HANDLER
+2   870	00000163			 EXC_12	label word
+2   871	00000163  FA			     cli
+2   872	00000164  EB 51	90 90 90	     jmp EXC_HANDLER
+2   873	00000169			 EXC_13	label word
+2   874	00000169  FA			     cli
+2   875	0000016A  EB 4B	90 90 90	     jmp EXC_HANDLER
+2   876	0000016F			 EXC_14	label word
+2   877	0000016F  FA			     cli
+2   878	00000170  EB 45	90 90 90	     jmp EXC_HANDLER
+2   879	00000175			 EXC_15	label word
+2   880	00000175  FA			     cli
+2   881	00000176  EB 3F	90 90 90	     jmp EXC_HANDLER
+2   882	0000017B			 EXC_16	label word
+2   883	0000017B  FA			     cli
+2   884	0000017C  EB 39	90 90 90	     jmp EXC_HANDLER
+2   885	00000181			 EXC_17	label word
+2   886	00000181  FA			     cli
+2   887	00000182  EB 33	90 90 90	     jmp EXC_HANDLER
+2   888	00000187			 EXC_18	label word
+2   889	00000187  FA			     cli
+2   890	00000188  EB 2D	90 90 90	     jmp EXC_HANDLER
+2   891	0000018D			 EXC_19	label word
+2   892	0000018D  FA			     cli
+2   893	0000018E  EB 27	90 90 90	     jmp EXC_HANDLER
+2   894	00000193			 EXC_1A	label word
+2   895	00000193  FA			     cli
+2   896	00000194  EB 21	90 90 90	     jmp EXC_HANDLER
+2   897	00000199			 EXC_1B	label word
+2   898	00000199  FA			     cli
+2   899	0000019A  EB 1B	90 90 90	     jmp EXC_HANDLER
+2   900	0000019F			 EXC_1C	label word
+2   901	0000019F  FA			     cli
+2   902	000001A0  EB 15	90 90 90	     jmp EXC_HANDLER
+2   903	000001A5			 EXC_1D	label word
+2   904	000001A5  FA			     cli
+2   905	000001A6  EB 0F	90 90 90	     jmp EXC_HANDLER
+2   906	000001AB			 EXC_1E	label word
+2   907	000001AB  FA			     cli
+2   908	000001AC  EB 09	90 90 90	     jmp EXC_HANDLER
+2   909	000001B1			 EXC_1F	label word
+2   910	000001B1  FA			     cli
+2   911	000001B2  EB 03	90 90 90	     jmp EXC_HANDLER
+1   912	000001B7			 EXC_HANDLER proc near				 ;Процедура вывода обработки исключений
+1   913	000001B7  E8 00000198		     call CLRSCR				 ;Очистка экрана
+1   914	000001BC  67| 8D 36 054Er	     lea  esi, MSG_EXC
+1   915	000001C1  BF 00000050		     mov  edi, 40*2
+1   916	000001C6  E8 000001BE		     call BUFFER_OUTPUT				 ;Вывод	предупреждения
+1   917	000001CB  58			     pop eax					 ;Снять	со стека старый	EIP
+1   918	000001CC  58			     pop eax					 ;CS
+1   919	000001CD  58			     pop eax					 ;И EFLAGS
+Turbo Assembler	 Version 4.1	    09/23/16 06:55:18	    Page 18
+2.ASM
+
+
+
+1   920	000001CE  FB			     sti					 ;Обязательно, без этого обработка	    +
+    921					 аппаратных прерываний отключена
+1   922	000001CF  66			     db	66H
+1   923	000001D0  CB			     retf					 ;Переход в 16-битный сегмент кода
+1   924	000001D1			 EXC_HANDLER	 ENDP
+1   925	000001D1			 DUMMY_IRQ_MASTER proc near			 ;Заглушка для аппаратных прерываний	    +
+    926					 ведущего контроллера
+1   927	000001D1  50			     push eax
+1   928	000001D2  B0 20			     mov  al,20h
+1   929	000001D4  E6 20			     out  20h,al
+1   930	000001D6  58			     pop  eax
+1   931	000001D7  CF			     iretd
+1   932	000001D8			 DUMMY_IRQ_MASTER endp
+1   933	000001D8			 DUMMY_IRQ_SLAVE  proc near			 ;Заглушка для аппаратных прерываний	    +
+    934					 ведомого контроллера
+1   935	000001D8  50			     push eax
+1   936	000001D9  B0 20			     mov  al,20h
+1   937	000001DB  E6 20			     out  20h,al
+1   938	000001DD  E6 A0			     out  0A0h,al
+1   939	000001DF  58			     pop  eax
+1   940	000001E0  CF			     iretd
+1   941	000001E1			 DUMMY_IRQ_SLAVE  endp
+1   942	000001E1			 TIMER_HANDLER proc near			 ;Обработчик прерываний	системного таймера
+1   943	000001E1  1E			     push ds
+1   944	000001E2  06			     push es
+1   945	000001E3  60			     pushad					 ;Занести в стек расширенные регистры общего+
+    946					 назначения
+1   947	000001E4  66| B8 001B 90 90	     mov  ax,DATA_DESC				 ;Переинициализировать сегментные регистры
+1   948	000001EA  8E D8			     mov  ds,ax
+1   949	000001EC  66| 67| FF 06	05A5r	     inc  ds:[COUNT]				 ;Увеличить значение счетчика
+1   950	000001F2  67| 8D 3E 05A8r	     lea  edi,ds:[BUFFER_COUNT]
+1   951	000001F7  66| 67| A1 05A5r 90	     mov  ax,ds:[COUNT]
+1   952	000001FD  E8 000001A1		     call WORD_TO_DEC				 ;Преобразовать	счётчик	в строку
+1   953	00000202  BF 0000017A		     mov  edi,378
+1   954	00000207  67| 8D 36 05A8r	     lea  esi,BUFFER_COUNT
+1   955	0000020C  E8 00000178		     call BUFFER_OUTPUT				 ;Вывести значение счетчика
+1   956	00000211			 SHOW_TIMER:
+1   957	00000211  67| A0 05A4r 90	     mov  al,ds:[TIME]				 ;Получить значение оставшегося	время
+1   958	00000216  67| 80 3E 05A4r 00  +	     cmp  ds:[TIME],0				 ;Если время подошло к концу
+    959		  90
+1   960	0000021D  76 50	90 90 90 90	     jbe   DISABLE_PM				  ;То на выход из защищенного режима
+1   961	00000223  B0 00			     mov  al,0h					 ;Выбрать регистр секунд cmos
+1   962	00000225  E6 70			     out  70h,al
+1   963	00000227  E4 71			     in	  al,71h				 ;Прочитать значение секунд
+1   964	00000229  67| 3A 06 05A3r 90	     cmp  al,ds:[SECOND]			 ;Если секунда та же самая
+1   965	0000022F  74 5C	90 90 90 90	     je	  SKIP_SECOND				 ;То пропустить	вывод
+1   966	00000235  67| A2 05A3r 90	     mov  ds:[SECOND],al			 ;Иначе	записать значение новой	секунды
+1   967	0000023A  67| A0 05A4r 90	     mov  al,ds:[TIME]				 ;Получить значение оставшегося	время
+1   968	0000023F  32 E4			     xor  ah,ah
+1   969	00000241  67| 8D 3E 05BAr	     lea  edi,ds:[BUFFER_TIME]
+1   970	00000246  E8 00000158		     call WORD_TO_DEC				 ;Преобразовать	его в строку
+1   971	0000024B  BF 000001B0		     mov  edi,432
+1   972	00000250  67| 8D 36 05BAr	     lea  esi,BUFFER_TIME
+1   973	00000255  E8 0000012F		     call BUFFER_OUTPUT				 ;Вывести значение оставшегося время
+1   974	0000025A  67| FE 0E 05A4r 90	     dec  ds:[TIME]				 ;Уменьшить значение оставшегося времени
+1   975	00000260  67| 8D 36 05BAr	     lea  esi,BUFFER_TIME
+1   976	00000265  E8 00000105		     call BUFFER_CLEAR				 ;Очистка буфера
+Turbo Assembler	 Version 4.1	    09/23/16 06:55:18	    Page 19
+2.ASM
+
+
+
+1   977	0000026A  EB 21	90 90 90	     jmp  SKIP_SECOND				 ;На выход из обработки	время
+1   978	0000026F			 DISABLE_PM:					 ;Выход	из защищенного режима
+1   979	0000026F  66| BB 0060		     mov bx,offset ds:[TSS_MAIN_DESC]
+1   980	00000273  67| 8A 47 05		     mov al,byte ptr [ bx + 5 ]
+1   981	00000277  A8 02			     test al,00000010b
+1   982	00000279  75 0B	90 90 90 90	     jnz GO
+1   983	0000027F  EA			     db	0eah
+1   984	00000280  00000000		     dd	0
+1   985	00000284  0060			     dw	TSS_MAIN_DESC
+1   986	00000286			 GO:
+1   987	00000286  EA			     db	0eah					 ;Дальний jmp
+1   988	00000287  000000EEr		     dd	OFFSET EXIT_FROM_INTERRUPT		 ;На метку
+1   989	0000028B  0030			     dw	CODE_PM_DESC				 ;В сегменте
+1   990	0000028D			 SKIP_SECOND:					 ;Секунда та же, не надо производить никаких+
+    991					 действий
+1   992	0000028D  B0 20			     mov     al,20h
+1   993	0000028F  E6 20			     out     20h,al
+1   994	00000291  66| BB 0060		     mov     bx,offset TSS_MAIN_DESC
+1   995	00000295  67| 80 67 05 FD		 and	     byte ptr [bx+5],11111101b		 ;Обнулить флаг	занятости главной   +
+    996					 задачи
+1   997	0000029A  66| BB 0068			 mov	     bx,offset TSS_2_DESC
+1   998	0000029E  67| 80 67 05 FD		 and	     byte ptr [bx+5],11111101b		 ;Обнулить флаг	занятости 0 задачи
+1   999	000002A3  66| BB 0070			 mov	     bx,offset TSS_3_DESC
+1  1000	000002A7  67| 80 67 05 FD		 and	     byte ptr [bx+5],11111101b		 ;Обнулить флаг	занятости 1 задачи
+1  1001	000002AC  67| 0F B7 06 01F4r  +		 movzx	 eax,ds:[TASK_INDEX]		     ;Получить номер текущей задачи
+   1002		  90
+1  1003	000002B3  66| 67| 83 06	01F4r +	     add     ds:[TASK_INDEX],2
+   1004		  02
+1  1005	000002BA  0F B7	80 000001ECr	     movzx   eax,ds:[TASK_LIST+eax]		 ;Получить дескриптор следующей	задачи
+1  1006	000002C1  0B C0			     or	     eax,eax
+1  1007	000002C3  75 15	90 90 90 90	     jnz     TIMER_NEXT_TASK			 ;Перейти к следующей задаче
+1  1008	000002C9  67| 0F B7 06 01ECr  +	     movzx   eax,ds:[TASK_LIST]
+   1009		  90
+1  1010	000002D0  66| 67| C7 06	01F4r +	     mov     ds:[TASK_INDEX],0			 ;Перейти к первой задаче
+   1011		  0000 90 90
+1  1012	000002DA			 TIMER_NEXT_TASK:
+1  1013	000002DA  66| 67| A3 01FAr 90	     mov     word  ptr ds:[TASK_ADDR+4],ax	 ;Записать в поле дескриптор задачи
+1  1014	000002E0  67| FF 2E 01F6r 90	     jmp     fword ptr ds:[TASK_ADDR]		 ;Переключиться	на новую задачу
+1  1015	000002E6  B0 20			     mov  al,20h
+1  1016	000002E8  E6 20			     out  20h,al
+1  1017	000002EA  61			     popad
+1  1018	000002EB  07			     pop es
+1  1019	000002EC  1F			     pop ds
+1  1020	000002ED  CF			     iretd
+1  1021	000002EE			 TIMER_HANDLER endp
+1  1022	000002EE			 KEYBOARD_HANDLER proc near			 ;Обработчик прерывания	клавиатуры
+1  1023	000002EE  1E			     push ds
+1  1024	000002EF  06			     push es
+1  1025	000002F0  60			     pushad					 ;Сохранить расширенные	регистры общего	    +
+   1026					 назначения
+1  1027	000002F1  66| B8 001B 90 90	     mov  ax,DATA_DESC
+1  1028	000002F7  8E D8			     mov  ds,ax
+1  1029	000002F9  E4 60			     in	  al,60h				 ;Считать скан код последней нажатой клавиши+
+   1030					 ;
+1  1031	000002FB  3C 01			     cmp  al,1					 ;Если был нажат 'ESC'
+1  1032	000002FD  74 43	90 90 90 90	     je	  KEYBOARD_EXIT				 ;Тогда	на выход из защищенного	режима
+1  1033	00000303  3C 51			     cmp  al,81
+Turbo Assembler	 Version 4.1	    09/23/16 06:55:18	    Page 20
+2.ASM
+
+
+
+1  1034	00000305  74 3B	90 90 90 90	     je	  KEYBOARD_EXIT
+1  1035	0000030B  3C 0B			     cmp  al,11					 ;Если клавишу отпустили
+1  1036	0000030D  73 09	90 90 90 90	     jae   KEY_UP
+1  1037	00000313  67| A2 05A2r 90	     mov  ds:[KEY_PRESSED],al
+1  1038	00000318			 KEY_UP:
+1  1039	00000318  67| A2 05A1r 90	     mov  ds:[KEY_SCAN_CODE],al			 ;Записать его в память
+1  1040	0000031D  67| 8D 3E 05B1r	     lea  edi,ds:[BUFFER_SCAN_CODE]
+1  1041	00000322  67| A0 05A1r 90	     mov  al,ds:[KEY_SCAN_CODE]
+1  1042	00000327  32 E4			     xor  ah,ah
+1  1043	00000329  E8 000000AA		     call BYTE_TO_HEX				 ;Преобразовать	скан-код в строку
+1  1044	0000032E  BF 000000C8		     mov  edi,200
+1  1045	00000333  67| 8D 36 05B1r	     lea  esi,BUFFER_SCAN_CODE
+1  1046	00000338  E8 0000004C		     call BUFFER_OUTPUT				 ;Вывести строку со скан-кодом
+1  1047	0000033D  EB 0D	90 90 90	     jmp  KEYBOARD_RETURN
+1  1048	00000342			 KEYBOARD_EXIT:
+1  1049	00000342  67| C6 06 05A4r 00  +	     mov ds:[TIME],0				 ;Установить оставшееся	время в	0 - выход   +
+   1050		  90 90	90 90		 будет по прерыванию таймера
+1  1051	0000034C			 KEYBOARD_RETURN:
+1  1052	0000034C  B0 20			     mov  al,20h
+1  1053	0000034E  E6 20			     out  20h,al				 ;Отпарвка сигнала контроллеру прерываний
+1  1054	00000350  61			     popad					 ;Восстановить значения	регистров
+1  1055	00000351  07			     pop es
+1  1056	00000352  1F			     pop ds
+1  1057	00000353  CF			     iretd					 ;Выход	из прерывания
+1  1058	00000354			 KEYBOARD_HANDLER endp
+   1059					 INCLUDE PROC.ASM				 ;Файл с процедурами главной задачи	    +
+   1060					 защищенного режима
+1  1061	00000354			 CLRSCR	 proc near				 ;Процедура очистки консоли
+1  1062	00000354  06			     push es
+1  1063	00000355  60			     pushad
+1  1064	00000356  66| B8 002B 90 90	     mov  ax,TEXT_DESC				 ;Поместить в ax дескриптор текста
+1  1065	0000035C  8E C0			     mov  es,ax
+1  1066	0000035E  33 FF			     xor  edi,edi
+1  1067	00000360  B9 000007D0		     mov  ecx,80*25				 ;Количество символов в	окне
+1  1068	00000365  66| B8 0700		     mov  ax,700h
+1  1069	00000369  F3> 66| AB		     rep  stosw
+1  1070	0000036C  61			     popad
+1  1071	0000036D  07			     pop  es
+1  1072	0000036E  C3			     ret
+1  1073	0000036F			 CLRSCR	 endp
+1  1074	0000036F			 BUFFER_CLEAR  proc near			 ;Процедура очистки буфера
+1  1075	0000036F  B0 20			     mov al,' '
+1  1076	00000371  88 06			     mov [esi+0],al
+1  1077	00000373  88 46	01		     mov [esi+1],al
+1  1078	00000376  88 46	02		     mov [esi+2],al
+1  1079	00000379  88 46	03		     mov [esi+3],al
+1  1080	0000037C  88 46	04		     mov [esi+4],al
+1  1081	0000037F  88 46	05		     mov [esi+5],al
+1  1082	00000382  88 46	06		     mov [esi+6],al
+1  1083	00000385  88 46	07		     mov [esi+7],al
+1  1084	00000388  C3			     ret
+1  1085	00000389			 BUFFER_CLEAR  endp
+1  1086	00000389			 BUFFER_OUTPUT proc near			 ;Процедура вывода текстового буфера,	    +
+   1087					 оканчивающегося 0
+1  1088	00000389  06			     push es
+1  1089	0000038A  60			     PUSHAD
+1  1090	0000038B  66| B8 002B 90 90	     mov  ax,TEXT_DESC				 ;Поместить в es селектор текста
+Turbo Assembler	 Version 4.1	    09/23/16 06:55:18	    Page 21
+2.ASM
+
+
+
+1  1091	00000391  8E C0			     mov  es,ax
+1  1092	00000393			 OUTPUT_LOOP:					 ;Цикл по выводу буфера
+1  1093	00000393  AC			     lodsb
+1  1094	00000394  0A C0			     or	  al,al
+1  1095	00000396  74 08	90 90 90 90	     jz	  OUTPUT_EXIT				 ;Если дошло до	0, то конец выхода
+1  1096	0000039C  AA			     stosb
+1  1097	0000039D  47			     inc  edi
+1  1098	0000039E  EB F3			     jmp  OUTPUT_LOOP
+1  1099	000003A0			 OUTPUT_EXIT:					 ;Выход	из процедуры вывода
+1  1100	000003A0  61			     popad
+1  1101	000003A1  07			     pop  es
+1  1102	000003A2  C3			     ret
+1  1103	000003A3			 BUFFER_OUTPUT ENDP
+1  1104	000003A3			 WORD_TO_DEC proc near				 ;Процедура перевода слова в строку
+1  1105	000003A3  60			     pushad
+1  1106	000003A4  0F B7	C0		     movzx eax,ax
+1  1107	000003A7  66| 33 C9		     xor cx,cx
+1  1108	000003AA  66| BB 000A		     mov bx,10
+1  1109	000003AE			 LOOP1:						 ;Цикл по извлечению цифры
+1  1110	000003AE  66| 33 D2		     xor dx,dx
+1  1111	000003B1  66| F7 F3		     div bx
+1  1112	000003B4  80 C2	30		     add dl,'0'
+1  1113	000003B7  66| 52		     push dx
+1  1114	000003B9  66| 41		     inc cx
+1  1115	000003BB  66| 85 C0		     test ax,ax
+1  1116	000003BE  75 EE			     jnz LOOP1
+1  1117	000003C0			 LOOP2:						 ;Цикл по заполнению буфера
+1  1118	000003C0  66| 5A		     pop dx
+1  1119	000003C2  67| 88 15		     mov [di],dl
+1  1120	000003C5  66| 47		     inc di
+1  1121	000003C7  E2 F7			     loop LOOP2
+1  1122	000003C9  61			     popad
+1  1123	000003CA  C3			     ret
+1  1124	000003CB			 WORD_TO_DEC endp
+1  1125	000003CB			 DIGIT_TO_HEX proc near				 ;Процедура перевода цифры в		    +
+   1126					 шеснадцатеричный вид
+1  1127	000003CB  04 30			     add al,'0'
+1  1128	000003CD  3C 39			     cmp al,'9'
+1  1129	000003CF  7E 06	90 90 90 90	     jle DTH_END
+1  1130	000003D5  04 07			     add al,7
+1  1131	000003D7			 DTH_END:
+1  1132	000003D7  C3			     ret
+1  1133	000003D8			 DIGIT_TO_HEX endp
+1  1134	000003D8			 BYTE_TO_HEX proc near				 ;Процедура перевода числа в		    +
+   1135					 шеснадцатеричный вид
+1  1136	000003D8  66| 50		     push ax
+1  1137	000003DA  8A E0			     mov ah,al
+1  1138	000003DC  C0 E8	04		     shr al,4
+1  1139	000003DF  E8 FFFFFFE7		     call DIGIT_TO_HEX
+1  1140	000003E4  67| 88 05		     mov [di],al
+1  1141	000003E7  66| 47		     inc di
+1  1142	000003E9  8A C4			     mov al,ah
+1  1143	000003EB  24 0F			     and al,0Fh
+1  1144	000003ED  E8 FFFFFFD9		     call DIGIT_TO_HEX
+1  1145	000003F2  67| 88 05		     mov [di],al
+1  1146	000003F5  66| 47		     inc di
+1  1147	000003F7  66| 58		     pop ax
+Turbo Assembler	 Version 4.1	    09/23/16 06:55:18	    Page 22
+2.ASM
+
+
+
+1  1148	000003F9  C3			     ret
+1  1149	000003FA			 BYTE_TO_HEX endp
+   1150		  =03FA			 SIZE_CODE_PM	  =	  ($ - CODE_PM_BEGIN)
+   1151	000003FA			 CODE_PM  ENDS
+   1152					 ;Сегмент данных реального/защищенного режима
+   1153	    0000			 DATA	 segment para use16			 ;Сегмент данных реального/защищенного режима
+   1154		  =DATA:0000		 DATA_BEGIN	 = $
+   1155					     ;GDT - глобальная таблица дескрипторов
+   1156		  =DATA:0000		     GDT_BEGIN	 = $
+   1157	    0000			     GDT label	     word			 ;Метка	начала GDT (GDT: не работает)
+   1158	    0000  0000 0000 00 00 00  +	     GDT_0	     S_DESC <0,0,0,0,0,0>
+   1159		  00
+   1160	    0008  0077 0000 00 92 00  +	     GDT_GDT	     S_DESC <GDT_SIZE-1,,,ACS_DATA,0,>
+   1161		  00
+   1162	    0010  0652 0000 00 98 00  +	     GDT_CODE_RM     S_DESC <SIZE_CODE_RM-1,,,ACS_CODE,0,>
+   1163		  00
+   1164	    0018  05CA 0000 00 F2 00  +	     GDT_DATA	     S_DESC <SIZE_DATA-1,,,ACS_DATA+ACS_DPL_3,0,>
+   1165		  00
+   1166	    0020  0FFF 0000 00 92 00  +	     GDT_STACK	     S_DESC <1000h-1,,,ACS_DATA,0,>
+   1167		  00
+   1168	    0028  1FFF 8000 0B F2 00  +	     GDT_TEXT	     S_DESC <2000h-1,8000h,0Bh,ACS_DATA+ACS_DPL_3,0,0>
+   1169		  00
+   1170	    0030  03F9 0000 00 9A 00  +	     GDT_CODE_PM     S_DESC <SIZE_CODE_PM-1,,,ACS_CODE+ACS_READ,0,>
+   1171		  00
+   1172	    0038  017F 0000 00 92 00  +	     GDT_IDT	     S_DESC <SIZE_IDT-1,,,ACS_IDT,0,>
+   1173		  00
+   1174	    0040  0114 0000 00 F8 00  +	     GDT_CS_2	     S_DESC <SIZE_CS_2-1,,,ACS_CODE+ACS_DPL_3,0,>		     ; 58
+   1175		  00
+   1176	    0048  0118 0000 00 F8 00  +	     GDT_CS_3	     S_DESC <SIZE_CS_3-1,,,ACS_CODE+ACS_DPL_3,0,>		     ; 60
+   1177		  00
+   1178	    0050  0FFF 0000 00 F2 00  +	     GDT_SS_2	     S_DESC <1000h-1,,,ACS_DATA+ACS_DPL_3,0,>			; 68
+   1179		  00
+   1180	    0058  0FFF 0000 00 F2 00  +	     GDT_SS_3	     S_DESC <1000h-1,,,ACS_DATA+ACS_DPL_3,0,>			; 70
+   1181		  00
+   1182	    0060  007D 0000 00 89 00  +	     GDT_TSS_MAIN    S_DESC <SIZE_TSS-1,,,ACS_TSS,0,>				     ; 78
+   1183		  00
+   1184	    0068  007D 0000 00 89 00  +	     GDT_TSS_2	     S_DESC <SIZE_TSS-1,,,ACS_TSS,0,>				     ; 80
+   1185		  00
+   1186	    0070  007D 0000 00 89 00  +	     GDT_TSS_3	     S_DESC <SIZE_TSS-1,,,ACS_TSS,0,>				     ; 88
+   1187		  00
+   1188		  =0078			     GDT_SIZE	     = ($ - GDT_BEGIN)		     ;Размер GDT
+   1189					     ;Селлекторы сегментов
+   1190		  =0010			     CODE_RM_DESC    = (GDT_CODE_RM - GDT_0)
+   1191		  =001B			     DATA_DESC	     = (GDT_DATA - GDT_0)+ 3
+   1192		  =0020			     STACK_DESC	     = (GDT_STACK - GDT_0)
+   1193		  =002B			     TEXT_DESC	     = (GDT_TEXT - GDT_0)+ 3
+   1194		  =0030			     CODE_PM_DESC    = (GDT_CODE_PM - GDT_0)
+   1195		  =0038			     IDT_DESC	     = (GDT_IDT	- GDT_0)
+   1196		  =0043			     CS_2_DESC	     = (GDT_CS_2 - GDT_0)+ 3
+   1197		  =004B			     CS_3_DESC	     = (GDT_CS_3 - GDT_0)+ 3
+   1198		  =0053			     SS_2_DESC	     = (GDT_SS_2 - GDT_0)+ 3
+   1199		  =005B			     SS_3_DESC	     = (GDT_SS_3 - GDT_0) + 3
+   1200		  =0060			     TSS_MAIN_DESC   = (GDT_TSS_MAIN - GDT_0)
+   1201		  =0068			     TSS_2_DESC	     = (GDT_TSS_2 - GDT_0)
+   1202		  =0070			     TSS_3_DESC	     = (GDT_TSS_3 - GDT_0)
+   1203					     ;Дескрипторы задач
+   1204	    0078  0000 0000 00000000  +	     TSS_MAIN	     S_TSS   <>
+Turbo Assembler	 Version 4.1	    09/23/16 06:55:18	    Page 23
+2.ASM
+
+
+
+   1205		  0000 0000 00000000  +
+   1206		  0000 0000 00000000  +
+   1207		  0000 0000 00000000  +
+   1208		  00000000 00000000   +
+   1209		  00000000 00000000   +
+   1210		  00000000 00000000   +
+   1211		  00000000 00000000   +
+   1212		  00000000 00000000   +
+   1213		  0000 0000 0000 0000 +
+   1214		  0000 0000 0000 0000 +
+   1215		  0000 0000 0000 0000 +
+   1216		  0000 0000 0000 0068 +
+   1217		  14*(00)
+   1218	    00F4  0000 0000 00000000  +	     TSS_2	     S_TSS   <>
+   1219		  0000 0000 00000000  +
+   1220		  0000 0000 00000000  +
+   1221		  0000 0000 00000000  +
+   1222		  00000000 00000000   +
+   1223		  00000000 00000000   +
+   1224		  00000000 00000000   +
+   1225		  00000000 00000000   +
+   1226		  00000000 00000000   +
+   1227		  0000 0000 0000 0000 +
+   1228		  0000 0000 0000 0000 +
+   1229		  0000 0000 0000 0000 +
+   1230		  0000 0000 0000 0068 +
+   1231		  14*(00)
+   1232	    0170  0000 0000 00000000  +	     TSS_3	     S_TSS   <>
+   1233		  0000 0000 00000000  +
+   1234		  0000 0000 00000000  +
+   1235		  0000 0000 00000000  +
+   1236		  00000000 00000000   +
+   1237		  00000000 00000000   +
+   1238		  00000000 00000000   +
+   1239		  00000000 00000000   +
+   1240		  00000000 00000000   +
+   1241		  0000 0000 0000 0000 +
+   1242		  0000 0000 0000 0000 +
+   1243		  0000 0000 0000 0000 +
+   1244		  0000 0000 0000 0068 +
+   1245		  14*(00)
+   1246					     ;Список задач
+   1247	    01EC  0060 0068 0070 0000	     TASK_LIST	dw   TSS_MAIN_DESC, TSS_2_DESC,	TSS_3_DESC, 0
+   1248	    01F4  0002			     TASK_INDEX	dw   2				     ;Номер включаемой задачи
+   1249	    01F6  01*(000000000000)	     TASK_ADDR	df   1 dup(0)			     ;6-байтный	адрес для jmp far на задачу
+   1250					     ;IDT - таблица дескрипторов прерываний
+   1251	    01FC  0180 0000 0000	     IDTR    R_IDTR  <SIZE_IDT,0,0>		     ;Формат регистра ITDR
+   1252	    0202			     IDT label	 word				     ;Метка начала IDT
+   1253		  =DATA:0202		     IDT_BEGIN	 = $
+   1254					     IRPC    N,	0123456789ABCDEF
+   1255						 IDT_0&N I_DESC	<0, CODE_PM_DESC,0,ACS_TRAP,0>		  ; 00...0F
+   1256					     ENDM
+1  1257	    0202  0000 0030 00 8F 0000		 IDT_00	I_DESC <0, CODE_PM_DESC,0,ACS_TRAP,0>		 ; 00...0F
+1  1258	    020A  0000 0030 00 8F 0000		 IDT_01	I_DESC <0, CODE_PM_DESC,0,ACS_TRAP,0>		 ; 00...0F
+1  1259	    0212  0000 0030 00 8F 0000		 IDT_02	I_DESC <0, CODE_PM_DESC,0,ACS_TRAP,0>		 ; 00...0F
+1  1260	    021A  0000 0030 00 8F 0000		 IDT_03	I_DESC <0, CODE_PM_DESC,0,ACS_TRAP,0>		 ; 00...0F
+1  1261	    0222  0000 0030 00 8F 0000		 IDT_04	I_DESC <0, CODE_PM_DESC,0,ACS_TRAP,0>		 ; 00...0F
+Turbo Assembler	 Version 4.1	    09/23/16 06:55:18	    Page 24
+2.ASM
+
+
+
+1  1262	    022A  0000 0030 00 8F 0000		 IDT_05	I_DESC <0, CODE_PM_DESC,0,ACS_TRAP,0>		 ; 00...0F
+1  1263	    0232  0000 0030 00 8F 0000		 IDT_06	I_DESC <0, CODE_PM_DESC,0,ACS_TRAP,0>		 ; 00...0F
+1  1264	    023A  0000 0030 00 8F 0000		 IDT_07	I_DESC <0, CODE_PM_DESC,0,ACS_TRAP,0>		 ; 00...0F
+1  1265	    0242  0000 0030 00 8F 0000		 IDT_08	I_DESC <0, CODE_PM_DESC,0,ACS_TRAP,0>		 ; 00...0F
+1  1266	    024A  0000 0030 00 8F 0000		 IDT_09	I_DESC <0, CODE_PM_DESC,0,ACS_TRAP,0>		 ; 00...0F
+1  1267	    0252  0000 0030 00 8F 0000		 IDT_0A	I_DESC <0, CODE_PM_DESC,0,ACS_TRAP,0>		 ; 00...0F
+1  1268	    025A  0000 0030 00 8F 0000		 IDT_0B	I_DESC <0, CODE_PM_DESC,0,ACS_TRAP,0>		 ; 00...0F
+1  1269	    0262  0000 0030 00 8F 0000		 IDT_0C	I_DESC <0, CODE_PM_DESC,0,ACS_TRAP,0>		 ; 00...0F
+1  1270	    026A  0000 0030 00 8F 0000		 IDT_0D	I_DESC <0, CODE_PM_DESC,0,ACS_TRAP,0>		 ; 00...0F
+1  1271	    0272  0000 0030 00 8F 0000		 IDT_0E	I_DESC <0, CODE_PM_DESC,0,ACS_TRAP,0>		 ; 00...0F
+1  1272	    027A  0000 0030 00 8F 0000		 IDT_0F	I_DESC <0, CODE_PM_DESC,0,ACS_TRAP,0>		 ; 00...0F
+   1273					     IRPC    N,	0123456789ABCDEF
+   1274						 IDT_1&N I_DESC	<0, CODE_PM_DESC, 0, ACS_TRAP, 0>	  ; 10...1F
+   1275					     ENDM
+1  1276	    0282  0000 0030 00 8F 0000		 IDT_10	I_DESC <0, CODE_PM_DESC, 0, ACS_TRAP, 0>	 ; 10...1F
+1  1277	    028A  0000 0030 00 8F 0000		 IDT_11	I_DESC <0, CODE_PM_DESC, 0, ACS_TRAP, 0>	 ; 10...1F
+1  1278	    0292  0000 0030 00 8F 0000		 IDT_12	I_DESC <0, CODE_PM_DESC, 0, ACS_TRAP, 0>	 ; 10...1F
+1  1279	    029A  0000 0030 00 8F 0000		 IDT_13	I_DESC <0, CODE_PM_DESC, 0, ACS_TRAP, 0>	 ; 10...1F
+1  1280	    02A2  0000 0030 00 8F 0000		 IDT_14	I_DESC <0, CODE_PM_DESC, 0, ACS_TRAP, 0>	 ; 10...1F
+1  1281	    02AA  0000 0030 00 8F 0000		 IDT_15	I_DESC <0, CODE_PM_DESC, 0, ACS_TRAP, 0>	 ; 10...1F
+1  1282	    02B2  0000 0030 00 8F 0000		 IDT_16	I_DESC <0, CODE_PM_DESC, 0, ACS_TRAP, 0>	 ; 10...1F
+1  1283	    02BA  0000 0030 00 8F 0000		 IDT_17	I_DESC <0, CODE_PM_DESC, 0, ACS_TRAP, 0>	 ; 10...1F
+1  1284	    02C2  0000 0030 00 8F 0000		 IDT_18	I_DESC <0, CODE_PM_DESC, 0, ACS_TRAP, 0>	 ; 10...1F
+1  1285	    02CA  0000 0030 00 8F 0000		 IDT_19	I_DESC <0, CODE_PM_DESC, 0, ACS_TRAP, 0>	 ; 10...1F
+1  1286	    02D2  0000 0030 00 8F 0000		 IDT_1A	I_DESC <0, CODE_PM_DESC, 0, ACS_TRAP, 0>	 ; 10...1F
+1  1287	    02DA  0000 0030 00 8F 0000		 IDT_1B	I_DESC <0, CODE_PM_DESC, 0, ACS_TRAP, 0>	 ; 10...1F
+1  1288	    02E2  0000 0030 00 8F 0000		 IDT_1C	I_DESC <0, CODE_PM_DESC, 0, ACS_TRAP, 0>	 ; 10...1F
+1  1289	    02EA  0000 0030 00 8F 0000		 IDT_1D	I_DESC <0, CODE_PM_DESC, 0, ACS_TRAP, 0>	 ; 10...1F
+1  1290	    02F2  0000 0030 00 8F 0000		 IDT_1E	I_DESC <0, CODE_PM_DESC, 0, ACS_TRAP, 0>	 ; 10...1F
+1  1291	    02FA  0000 0030 00 8F 0000		 IDT_1F	I_DESC <0, CODE_PM_DESC, 0, ACS_TRAP, 0>	 ; 10...1F
+   1292	    0302  0000 0030 00 8E 0000	     IDT_TIMER	  I_DESC <0,CODE_PM_DESC,0,ACS_INT,0>		  ;IRQ 0 - прерывание	    +
+   1293					 системного таймера
+   1294	    030A  0000 0030 00 8E 0000	     IDT_KEYBOARD I_DESC <0,CODE_PM_DESC,0,ACS_INT,0>		  ;IRQ 1 - прерывание	    +
+   1295					 клавиатуры
+   1296					     IRPC    N,	23456789ABCDEF
+   1297						 IDT_2&N	 I_DESC	<0, CODE_PM_DESC, 0, ACS_INT, 0>  ; 22...2F
+   1298					     ENDM
+1  1299	    0312  0000 0030 00 8E 0000		 IDT_22		I_DESC <0, CODE_PM_DESC, 0, ACS_INT, 0>	 ; 22...2F
+1  1300	    031A  0000 0030 00 8E 0000		 IDT_23		I_DESC <0, CODE_PM_DESC, 0, ACS_INT, 0>	 ; 22...2F
+1  1301	    0322  0000 0030 00 8E 0000		 IDT_24		I_DESC <0, CODE_PM_DESC, 0, ACS_INT, 0>	 ; 22...2F
+1  1302	    032A  0000 0030 00 8E 0000		 IDT_25		I_DESC <0, CODE_PM_DESC, 0, ACS_INT, 0>	 ; 22...2F
+1  1303	    0332  0000 0030 00 8E 0000		 IDT_26		I_DESC <0, CODE_PM_DESC, 0, ACS_INT, 0>	 ; 22...2F
+1  1304	    033A  0000 0030 00 8E 0000		 IDT_27		I_DESC <0, CODE_PM_DESC, 0, ACS_INT, 0>	 ; 22...2F
+1  1305	    0342  0000 0030 00 8E 0000		 IDT_28		I_DESC <0, CODE_PM_DESC, 0, ACS_INT, 0>	 ; 22...2F
+1  1306	    034A  0000 0030 00 8E 0000		 IDT_29		I_DESC <0, CODE_PM_DESC, 0, ACS_INT, 0>	 ; 22...2F
+1  1307	    0352  0000 0030 00 8E 0000		 IDT_2A		I_DESC <0, CODE_PM_DESC, 0, ACS_INT, 0>	 ; 22...2F
+1  1308	    035A  0000 0030 00 8E 0000		 IDT_2B		I_DESC <0, CODE_PM_DESC, 0, ACS_INT, 0>	 ; 22...2F
+1  1309	    0362  0000 0030 00 8E 0000		 IDT_2C		I_DESC <0, CODE_PM_DESC, 0, ACS_INT, 0>	 ; 22...2F
+1  1310	    036A  0000 0030 00 8E 0000		 IDT_2D		I_DESC <0, CODE_PM_DESC, 0, ACS_INT, 0>	 ; 22...2F
+1  1311	    0372  0000 0030 00 8E 0000		 IDT_2E		I_DESC <0, CODE_PM_DESC, 0, ACS_INT, 0>	 ; 22...2F
+1  1312	    037A  0000 0030 00 8E 0000		 IDT_2F		I_DESC <0, CODE_PM_DESC, 0, ACS_INT, 0>	 ; 22...2F
+   1313		  =0180			     SIZE_IDT	     =	     ($	- IDT_BEGIN)
+   1314	    0382  70 72	65 73 73 20 61+	     MSG_HELLO		 db "press any key to go to the	protected mode",13,10,"$"
+   1315		  6E 79	20 6B 65 79 20+
+   1316		  74 6F	20 67 6F 20 74+
+   1317		  6F 20	74 68 65 20 70+
+   1318		  72 6F	74 65 63 74 65+
+Turbo Assembler	 Version 4.1	    09/23/16 06:55:18	    Page 25
+2.ASM
+
+
+
+   1319		  64 20	6D 6F 64 65 0D+
+   1320		  0A 24
+   1321	    03AE  77 65	6C 6C 63 6F 6D+	     MSG_HELLO_PM	 db "wellcome in protected mode		  |",0
+   1322		  65 20	69 6E 20 70 72+
+   1323		  6F 74	65 63 74 65 64+
+   1324		  20 6D	6F 64 65 20 20+
+   1325		  20 20	20 20 20 20 20+
+   1326		  20 20	7C 00
+   1327	    03D5  77 65	6C 6C 63 6F 6D+	     MSG_EXIT		 db "wellcome back to real mode",13,10,"$"
+   1328		  65 20	62 61 63 6B 20+
+   1329		  74 6F	20 72 65 61 6C+
+   1330		  20 6D	6F 64 65 0D 0A+
+   1331		  24
+   1332	    03F2  6B 65	79 62 6F 61 72+	     MSG_KEYBOARD	 db "keyboard scan code:		  | press 'ESC'	to come	back+
+   1333		  64 20	73 63 61 6E 20+	 to the	real mode",0
+   1334		  63 6F	64 65 3A 20 20+
+   1335		  20 20	20 20 20 20 20+
+   1336		  20 20	20 20 20 20 20+
+   1337		  20 20	7C 20 70 72 65+
+   1338		  73 73	20 27 45 53 43+
+   1339		  27 20	74 6F 20 63 6F+
+   1340		  6D 65	20 62 61 63 6B+
+   1341		  20 74	6F 20 74 68 65+
+   1342		  20 72	65 61 6C 20 6D+
+   1343		  6F 64	65 00
+   1344	    0443  71 75	61 6E 74 69 74+	     MSG_TIME		 db "quantity of interrupt calls:	  | go back to RM in	    +
+   1345		  79 20	6F 66 20 69 6E+	 XXXXXXX seconds",0
+   1346		  74 65	72 72 75 70 74+
+   1347		  20 63	61 6C 6C 73 3A+
+   1348		  20 20	20 20 20 20 20+
+   1349		  20 20	7C 20 67 6F 20+
+   1350		  62 61	63 6B 20 74 6F+
+   1351		  20 52	4D 20 69 6E 20+
+   1352		  20 58	58 58 58 58 58+
+   1353		  58 20	73 65 63 6F 6E+
+   1354		  64 73	00
+   1355	    048C  20 20	20 20 20 20 20+	     MSG_TASK_1		 db "					  | here is line for task   +
+   1356		  20 20	20 20 20 20 20+	 1",0
+   1357		  20 20	20 20 20 20 20+
+   1358		  20 20	20 20 20 20 20+
+   1359		  20 20	20 20 20 20 20+
+   1360		  20 20	7C 20 68 65 72+
+   1361		  65 20	69 73 20 6C 69+
+   1362		  6E 65	20 66 6F 72 20+
+   1363		  74 61	73 6B 20 31 00
+   1364	    04CB  20 20	20 20 20 20 20+	     MSG_TASK_2		 db "					  | here is line for task   +
+   1365		  20 20	20 20 20 20 20+	 2",0
+   1366		  20 20	20 20 20 20 20+
+   1367		  20 20	20 20 20 20 20+
+   1368		  20 20	20 20 20 20 20+
+   1369		  20 20	7C 20 68 65 72+
+   1370		  65 20	69 73 20 6C 69+
+   1371		  6E 65	20 66 6F 72 20+
+   1372		  74 61	73 6B 20 32 00
+   1373	    050A  20 20	20 20 20 20 20+	     MSG_TASK_3		 db "					  | here is line for task   +
+   1374		  20 20	20 20 20 20 20+	 3",0
+   1375		  20 20	20 20 20 20 20+
+Turbo Assembler	 Version 4.1	    09/23/16 06:55:18	    Page 26
+2.ASM
+
+
+
+   1376		  20 20	20 20 20 20 20+
+   1377		  20 20	20 20 20 20 20+
+   1378		  20 20	7C 20 68 65 72+
+   1379		  65 20	69 73 20 6C 69+
+   1380		  6E 65	20 66 6F 72 20+
+   1381		  74 61	73 6B 20 33 00
+   1382	    0549  DB 00			     MSG_OUTPUT_TASK_1	 db 0DBh,0
+   1383	    054B  20 20	00		     MSG_OUTPUT_TASK_2	 db "  ",0
+   1384	    054E  65 78	63 65 70 74 69+	     MSG_EXC		 db "exception:	XX",0
+   1385		  6F 6E	3A 20 58 58 00
+   1386	    055C  65 6E	74 65 72 20 74+	     MSG_ENTER		 db "enter time	in protected mode: $"
+   1387		  69 6D	65 20 69 6E 20+
+   1388		  70 72	6F 74 65 63 74+
+   1389		  65 64	20 6D 6F 64 65+
+   1390		  3A 20	24
+   1391	    057B  69 6E	63 6F 72 72 65+	     MSG_ERROR		 db "incorrect error$"
+   1392		  63 74	20 65 72 72 6F+
+   1393		  72 24
+   1394	    058B  30 31	32 33 34 35 36+	     HEX_TAB		 db "0123456789ABCDEF"	 ;Таблица номеров исключений
+   1395		  37 38	39 41 42 43 44+
+   1396		  45 46
+   1397	    059B  01*(????????)		     ESP32		 dd  1 dup(?)		 ;Указатель на вершину стека
+   1398	    059F  01*(??)		     INT_MASK_M		 db  1 dup(?)		 ;Значение регистра масок ведущего	    +
+   1399					 контроллера
+   1400	    05A0  01*(??)		     INT_MASK_S		 db  1 dup(?)		 ;Значение регистра масок ведомого	    +
+   1401					 контроллера
+   1402	    05A1  01*(??)		     KEY_SCAN_CODE	 db  1 dup(?)		 ;Ска-код последней нажатой клавиши
+   1403	    05A2  01*(00)		     KEY_PRESSED	 db  1 dup(0)		 ;Последняя нажатая клавиша
+   1404	    05A3  01*(??)		     SECOND		 db  1 dup(?)		 ;Текущее значение секунд
+   1405	    05A4  01*(0A)		     TIME		 db  1 dup(10)		 ;Время	нахождения в зазищенном	режиме
+   1406	    05A5  01*(0000)		     COUNT		 dw  1 dup(0)		 ;Количество вызовов прерывания	(диапазон от+
+   1407					 0 до 65535)
+   1408	    05A7  01*(00)		     INTERVAL		 db  1 dup(0)		 ;Интервал между переключениями
+   1409	    05A8  08*(20)		     BUFFER_COUNT	 db  8 dup(' ')		 ;Буфер	для вывода количества вызовов	    +
+   1410					 прерываинй
+   1411	    05B0  01*(00)					 db  1 dup(0)
+   1412	    05B1  08*(20)		     BUFFER_SCAN_CODE	 db  8 dup(' ')		 ;Буфер	для вывода скан-кода клавиатуры
+   1413	    05B9  01*(00)					 db  1 dup(0)
+   1414	    05BA  08*(20)		     BUFFER_TIME	 db  8 dup(' ')		 ;Буфер	для вывода оставшегося время в	    +
+   1415					 защищенном режиме
+   1416	    05C2  01*(00)					 db  1 dup(0)
+   1417	    05C3  06 07*(??)		     INPUT_TIME		 db  6,7 dup(?)		 ;Буфер	для ввода время
+   1418		  =05CB			 SIZE_DATA   = ($ - DATA_BEGIN)			 ;Размер сегмента данных
+   1419	    05CB			 DATA	 ends
+   1420					 ;Сегмент стека	реального/защищенного режима
+   1421	00000000			 STACK_A segment para stack
+   1422	00000000  1000*(??)		     db	 1000h dup(?)
+   1423	00001000			 STACK_A  ends
+   1424					 INCLUDE TASKS.ASM				 ;Файл с двумя дополнительными задачами
+1  1425	00000000			 CODE_2	 segment para use32	     ;Сегмент кода второй задачи - выводит красно-белую	    +
+   1426					 полосу	слева-направо
+1  1427						 assume	 cs:CODE_2
+1  1428		  =CODE_2:0000		 CS_2_BEGIN  = $
+1  1429	00000000			 TASK_2	 proc
+1  1430	00000000  66| B8 001B		     mov ax,DATA_DESC
+1  1431	00000004  8E D8			     mov ds,ax
+1  1432	00000006  66| B8 002B		     mov ax,TEXT_DESC
+Turbo Assembler	 Version 4.1	    09/23/16 06:55:18	    Page 27
+2.ASM
+
+
+
+1  1433	0000000A  8E C0			     mov es,ax
+1  1434	0000000C			 TASK_2_START:
+1  1435	0000000C  BF 00000280		     mov edi,640
+1  1436	00000011  B9 00000025		     mov ecx,37
+1  1437	00000016			 TASK_2_LOOP_FILL:		     ;Цикл по выводу красной полосы
+1  1438	00000016  B0 DB			     mov al,0DBh
+1  1439	00000018  26: 67| 88 05		     mov es:[di],al
+1  1440	0000001C  66| 47		     inc di
+1  1441	0000001E  B0 74			     mov al,74h
+1  1442	00000020  26: 67| 88 05		     mov es:[di],al
+1  1443	00000024  66| 47		     inc di
+1  1444	00000026  66| 8B D9		     mov bx,cx
+1  1445	00000029  66| B9 EA60		     mov cx,60000
+1  1446	0000002D			     TASK_2_SLEEP_0:
+1  1447						 rept	 90
+1  1448						     nop
+1  1449						 endm
+2  1450	0000002D  90				     nop
+2  1451	0000002E  90				     nop
+2  1452	0000002F  90				     nop
+2  1453	00000030  90				     nop
+2  1454	00000031  90				     nop
+2  1455	00000032  90				     nop
+2  1456	00000033  90				     nop
+2  1457	00000034  90				     nop
+2  1458	00000035  90				     nop
+2  1459	00000036  90				     nop
+2  1460	00000037  90				     nop
+2  1461	00000038  90				     nop
+2  1462	00000039  90				     nop
+2  1463	0000003A  90				     nop
+2  1464	0000003B  90				     nop
+2  1465	0000003C  90				     nop
+2  1466	0000003D  90				     nop
+2  1467	0000003E  90				     nop
+2  1468	0000003F  90				     nop
+2  1469	00000040  90				     nop
+2  1470	00000041  90				     nop
+2  1471	00000042  90				     nop
+2  1472	00000043  90				     nop
+2  1473	00000044  90				     nop
+2  1474	00000045  90				     nop
+2  1475	00000046  90				     nop
+2  1476	00000047  90				     nop
+2  1477	00000048  90				     nop
+2  1478	00000049  90				     nop
+2  1479	0000004A  90				     nop
+2  1480	0000004B  90				     nop
+2  1481	0000004C  90				     nop
+2  1482	0000004D  90				     nop
+2  1483	0000004E  90				     nop
+2  1484	0000004F  90				     nop
+2  1485	00000050  90				     nop
+2  1486	00000051  90				     nop
+2  1487	00000052  90				     nop
+2  1488	00000053  90				     nop
+2  1489	00000054  90				     nop
+Turbo Assembler	 Version 4.1	    09/23/16 06:55:18	    Page 28
+2.ASM
+
+
+
+2  1490	00000055  90				     nop
+2  1491	00000056  90				     nop
+2  1492	00000057  90				     nop
+2  1493	00000058  90				     nop
+2  1494	00000059  90				     nop
+2  1495	0000005A  90				     nop
+2  1496	0000005B  90				     nop
+2  1497	0000005C  90				     nop
+2  1498	0000005D  90				     nop
+2  1499	0000005E  90				     nop
+2  1500	0000005F  90				     nop
+2  1501	00000060  90				     nop
+2  1502	00000061  90				     nop
+2  1503	00000062  90				     nop
+2  1504	00000063  90				     nop
+2  1505	00000064  90				     nop
+2  1506	00000065  90				     nop
+2  1507	00000066  90				     nop
+2  1508	00000067  90				     nop
+2  1509	00000068  90				     nop
+2  1510	00000069  90				     nop
+2  1511	0000006A  90				     nop
+2  1512	0000006B  90				     nop
+2  1513	0000006C  90				     nop
+2  1514	0000006D  90				     nop
+2  1515	0000006E  90				     nop
+2  1516	0000006F  90				     nop
+2  1517	00000070  90				     nop
+2  1518	00000071  90				     nop
+2  1519	00000072  90				     nop
+2  1520	00000073  90				     nop
+2  1521	00000074  90				     nop
+2  1522	00000075  90				     nop
+2  1523	00000076  90				     nop
+2  1524	00000077  90				     nop
+2  1525	00000078  90				     nop
+2  1526	00000079  90				     nop
+2  1527	0000007A  90				     nop
+2  1528	0000007B  90				     nop
+2  1529	0000007C  90				     nop
+2  1530	0000007D  90				     nop
+2  1531	0000007E  90				     nop
+2  1532	0000007F  90				     nop
+2  1533	00000080  90				     nop
+2  1534	00000081  90				     nop
+2  1535	00000082  90				     nop
+2  1536	00000083  90				     nop
+2  1537	00000084  90				     nop
+2  1538	00000085  90				     nop
+2  1539	00000086  90				     nop
+1  1540	00000087  E2 A4			     loop TASK_2_SLEEP_0
+1  1541	00000089  66| 8B CB		     mov cx,bx
+1  1542	0000008C  E2 88			 loop TASK_2_LOOP_FILL
+1  1543	0000008E  BF 00000280		     mov edi,640
+1  1544	00000093  B9 00000025		     mov ecx,37
+1  1545	00000098			 TASK_2_LOOP_CLEAN:		     ;Цикл по выводу белой полосы
+1  1546	00000098  B0 20			     mov al,' '
+Turbo Assembler	 Version 4.1	    09/23/16 06:55:18	    Page 29
+2.ASM
+
+
+
+1  1547	0000009A  26: 67| 88 05		     mov es:[di],al
+1  1548	0000009E  66| 47		     inc di
+1  1549	000000A0  B0 74			     mov al,74h
+1  1550	000000A2  26: 67| 88 05		     mov es:[di],al
+1  1551	000000A6  66| 47		     inc di
+1  1552	000000A8  66| 8B D9		     mov bx,cx
+1  1553	000000AB  66| B9 EA60		     mov cx,60000
+1  1554	000000AF			     TASK_2_SLEEP_1:
+1  1555						 rept	 90
+1  1556						     nop
+1  1557						 endm
+2  1558	000000AF  90				     nop
+2  1559	000000B0  90				     nop
+2  1560	000000B1  90				     nop
+2  1561	000000B2  90				     nop
+2  1562	000000B3  90				     nop
+2  1563	000000B4  90				     nop
+2  1564	000000B5  90				     nop
+2  1565	000000B6  90				     nop
+2  1566	000000B7  90				     nop
+2  1567	000000B8  90				     nop
+2  1568	000000B9  90				     nop
+2  1569	000000BA  90				     nop
+2  1570	000000BB  90				     nop
+2  1571	000000BC  90				     nop
+2  1572	000000BD  90				     nop
+2  1573	000000BE  90				     nop
+2  1574	000000BF  90				     nop
+2  1575	000000C0  90				     nop
+2  1576	000000C1  90				     nop
+2  1577	000000C2  90				     nop
+2  1578	000000C3  90				     nop
+2  1579	000000C4  90				     nop
+2  1580	000000C5  90				     nop
+2  1581	000000C6  90				     nop
+2  1582	000000C7  90				     nop
+2  1583	000000C8  90				     nop
+2  1584	000000C9  90				     nop
+2  1585	000000CA  90				     nop
+2  1586	000000CB  90				     nop
+2  1587	000000CC  90				     nop
+2  1588	000000CD  90				     nop
+2  1589	000000CE  90				     nop
+2  1590	000000CF  90				     nop
+2  1591	000000D0  90				     nop
+2  1592	000000D1  90				     nop
+2  1593	000000D2  90				     nop
+2  1594	000000D3  90				     nop
+2  1595	000000D4  90				     nop
+2  1596	000000D5  90				     nop
+2  1597	000000D6  90				     nop
+2  1598	000000D7  90				     nop
+2  1599	000000D8  90				     nop
+2  1600	000000D9  90				     nop
+2  1601	000000DA  90				     nop
+2  1602	000000DB  90				     nop
+2  1603	000000DC  90				     nop
+Turbo Assembler	 Version 4.1	    09/23/16 06:55:18	    Page 30
+2.ASM
+
+
+
+2  1604	000000DD  90				     nop
+2  1605	000000DE  90				     nop
+2  1606	000000DF  90				     nop
+2  1607	000000E0  90				     nop
+2  1608	000000E1  90				     nop
+2  1609	000000E2  90				     nop
+2  1610	000000E3  90				     nop
+2  1611	000000E4  90				     nop
+2  1612	000000E5  90				     nop
+2  1613	000000E6  90				     nop
+2  1614	000000E7  90				     nop
+2  1615	000000E8  90				     nop
+2  1616	000000E9  90				     nop
+2  1617	000000EA  90				     nop
+2  1618	000000EB  90				     nop
+2  1619	000000EC  90				     nop
+2  1620	000000ED  90				     nop
+2  1621	000000EE  90				     nop
+2  1622	000000EF  90				     nop
+2  1623	000000F0  90				     nop
+2  1624	000000F1  90				     nop
+2  1625	000000F2  90				     nop
+2  1626	000000F3  90				     nop
+2  1627	000000F4  90				     nop
+2  1628	000000F5  90				     nop
+2  1629	000000F6  90				     nop
+2  1630	000000F7  90				     nop
+2  1631	000000F8  90				     nop
+2  1632	000000F9  90				     nop
+2  1633	000000FA  90				     nop
+2  1634	000000FB  90				     nop
+2  1635	000000FC  90				     nop
+2  1636	000000FD  90				     nop
+2  1637	000000FE  90				     nop
+2  1638	000000FF  90				     nop
+2  1639	00000100  90				     nop
+2  1640	00000101  90				     nop
+2  1641	00000102  90				     nop
+2  1642	00000103  90				     nop
+2  1643	00000104  90				     nop
+2  1644	00000105  90				     nop
+2  1645	00000106  90				     nop
+2  1646	00000107  90				     nop
+2  1647	00000108  90				     nop
+1  1648	00000109  E2 A4			     loop TASK_2_SLEEP_1
+1  1649	0000010B  66| 8B CB		     mov cx,bx
+1  1650	0000010E  E2 88			 loop TASK_2_LOOP_CLEAN
+1  1651	00000110			 TASK_2_END:
+1  1652	00000110  E9 FFFFFEF7		     jmp TASK_2_START
+1  1653	00000115			 TASK_2	 endp
+1  1654		  =0115			 SIZE_CS_2   = ($ - CS_2_BEGIN)
+1  1655	00000115			 CODE_2	 ends
+1  1656	00000000			 CODE_3	 segment para use32	     ;Сегмент кода 3 задачи - выводит зелено-желтую полосу  +
+   1657					 справа-налево
+1  1658						 assume	cs:CODE_3
+1  1659		  =CODE_3:0000		 CS_3_BEGIN  = $
+1  1660	00000000			 TASK_3	 proc near
+Turbo Assembler	 Version 4.1	    09/23/16 06:55:18	    Page 31
+2.ASM
+
+
+
+1  1661	00000000  66| B8 001B		     mov ax,DATA_DESC
+1  1662	00000004  8E D8			     mov ds,ax
+1  1663	00000006  66| B8 002B		     mov ax,TEXT_DESC
+1  1664	0000000A  8E C0			     mov es,ax
+1  1665	0000000C			 TASK_3_START:
+1  1666	0000000C  BF 00000368		     mov edi,872
+1  1667	00000011  B9 00000025		     mov ecx,37
+1  1668	00000016			 TASK_3_LOOP_FILL:		     ;Цикл по выводу зеленой полосы
+1  1669	00000016  B0 DB			     mov al,0DBh
+1  1670	00000018  26: 67| 88 05		     mov es:[di],al
+1  1671	0000001C  66| 47		     inc di
+1  1672	0000001E  B0 2E			     mov al,46
+1  1673	00000020  26: 67| 88 05		     mov es:[di],al
+1  1674	00000024  66| 83 EF 03		     sub di,3
+1  1675	00000028  66| 8B D9		     mov bx,cx
+1  1676	0000002B  66| B9 EA60		     mov cx,60000
+1  1677	0000002F			     TASK_3_SLEEP_0:
+1  1678						 rept	 90
+1  1679						     nop
+1  1680						 endm
+2  1681	0000002F  90				     nop
+2  1682	00000030  90				     nop
+2  1683	00000031  90				     nop
+2  1684	00000032  90				     nop
+2  1685	00000033  90				     nop
+2  1686	00000034  90				     nop
+2  1687	00000035  90				     nop
+2  1688	00000036  90				     nop
+2  1689	00000037  90				     nop
+2  1690	00000038  90				     nop
+2  1691	00000039  90				     nop
+2  1692	0000003A  90				     nop
+2  1693	0000003B  90				     nop
+2  1694	0000003C  90				     nop
+2  1695	0000003D  90				     nop
+2  1696	0000003E  90				     nop
+2  1697	0000003F  90				     nop
+2  1698	00000040  90				     nop
+2  1699	00000041  90				     nop
+2  1700	00000042  90				     nop
+2  1701	00000043  90				     nop
+2  1702	00000044  90				     nop
+2  1703	00000045  90				     nop
+2  1704	00000046  90				     nop
+2  1705	00000047  90				     nop
+2  1706	00000048  90				     nop
+2  1707	00000049  90				     nop
+2  1708	0000004A  90				     nop
+2  1709	0000004B  90				     nop
+2  1710	0000004C  90				     nop
+2  1711	0000004D  90				     nop
+2  1712	0000004E  90				     nop
+2  1713	0000004F  90				     nop
+2  1714	00000050  90				     nop
+2  1715	00000051  90				     nop
+2  1716	00000052  90				     nop
+2  1717	00000053  90				     nop
+Turbo Assembler	 Version 4.1	    09/23/16 06:55:18	    Page 32
+2.ASM
+
+
+
+2  1718	00000054  90				     nop
+2  1719	00000055  90				     nop
+2  1720	00000056  90				     nop
+2  1721	00000057  90				     nop
+2  1722	00000058  90				     nop
+2  1723	00000059  90				     nop
+2  1724	0000005A  90				     nop
+2  1725	0000005B  90				     nop
+2  1726	0000005C  90				     nop
+2  1727	0000005D  90				     nop
+2  1728	0000005E  90				     nop
+2  1729	0000005F  90				     nop
+2  1730	00000060  90				     nop
+2  1731	00000061  90				     nop
+2  1732	00000062  90				     nop
+2  1733	00000063  90				     nop
+2  1734	00000064  90				     nop
+2  1735	00000065  90				     nop
+2  1736	00000066  90				     nop
+2  1737	00000067  90				     nop
+2  1738	00000068  90				     nop
+2  1739	00000069  90				     nop
+2  1740	0000006A  90				     nop
+2  1741	0000006B  90				     nop
+2  1742	0000006C  90				     nop
+2  1743	0000006D  90				     nop
+2  1744	0000006E  90				     nop
+2  1745	0000006F  90				     nop
+2  1746	00000070  90				     nop
+2  1747	00000071  90				     nop
+2  1748	00000072  90				     nop
+2  1749	00000073  90				     nop
+2  1750	00000074  90				     nop
+2  1751	00000075  90				     nop
+2  1752	00000076  90				     nop
+2  1753	00000077  90				     nop
+2  1754	00000078  90				     nop
+2  1755	00000079  90				     nop
+2  1756	0000007A  90				     nop
+2  1757	0000007B  90				     nop
+2  1758	0000007C  90				     nop
+2  1759	0000007D  90				     nop
+2  1760	0000007E  90				     nop
+2  1761	0000007F  90				     nop
+2  1762	00000080  90				     nop
+2  1763	00000081  90				     nop
+2  1764	00000082  90				     nop
+2  1765	00000083  90				     nop
+2  1766	00000084  90				     nop
+2  1767	00000085  90				     nop
+2  1768	00000086  90				     nop
+2  1769	00000087  90				     nop
+2  1770	00000088  90				     nop
+1  1771	00000089  E2 A4			     loop TASK_3_SLEEP_0
+1  1772	0000008B  66| 8B CB		     mov cx,bx
+1  1773	0000008E  E2 86			 loop TASK_3_LOOP_FILL
+1  1774	00000090  BF 00000368		     mov edi,872
+Turbo Assembler	 Version 4.1	    09/23/16 06:55:18	    Page 33
+2.ASM
+
+
+
+1  1775	00000095  B9 00000025		     mov ecx,37
+1  1776	0000009A			 TASK_3_LOOP_CLEAN:		     ;Цикл по выводу желтой полосы
+1  1777	0000009A  B0 20			     mov al,' '
+1  1778	0000009C  26: 67| 88 05		     mov es:[di],al
+1  1779	000000A0  66| 47		     inc di
+1  1780	000000A2  B0 2E			     mov al,46
+1  1781	000000A4  26: 67| 88 05		     mov es:[di],al
+1  1782	000000A8  66| 83 EF 03		     sub di,3
+1  1783	000000AC  66| 8B D9		     mov bx,cx
+1  1784	000000AF  66| B9 EA60		     mov cx,60000
+1  1785	000000B3			     TASK_3_SLEEP_1:
+1  1786						 rept	 90
+1  1787						     nop
+1  1788						 endm
+2  1789	000000B3  90				     nop
+2  1790	000000B4  90				     nop
+2  1791	000000B5  90				     nop
+2  1792	000000B6  90				     nop
+2  1793	000000B7  90				     nop
+2  1794	000000B8  90				     nop
+2  1795	000000B9  90				     nop
+2  1796	000000BA  90				     nop
+2  1797	000000BB  90				     nop
+2  1798	000000BC  90				     nop
+2  1799	000000BD  90				     nop
+2  1800	000000BE  90				     nop
+2  1801	000000BF  90				     nop
+2  1802	000000C0  90				     nop
+2  1803	000000C1  90				     nop
+2  1804	000000C2  90				     nop
+2  1805	000000C3  90				     nop
+2  1806	000000C4  90				     nop
+2  1807	000000C5  90				     nop
+2  1808	000000C6  90				     nop
+2  1809	000000C7  90				     nop
+2  1810	000000C8  90				     nop
+2  1811	000000C9  90				     nop
+2  1812	000000CA  90				     nop
+2  1813	000000CB  90				     nop
+2  1814	000000CC  90				     nop
+2  1815	000000CD  90				     nop
+2  1816	000000CE  90				     nop
+2  1817	000000CF  90				     nop
+2  1818	000000D0  90				     nop
+2  1819	000000D1  90				     nop
+2  1820	000000D2  90				     nop
+2  1821	000000D3  90				     nop
+2  1822	000000D4  90				     nop
+2  1823	000000D5  90				     nop
+2  1824	000000D6  90				     nop
+2  1825	000000D7  90				     nop
+2  1826	000000D8  90				     nop
+2  1827	000000D9  90				     nop
+2  1828	000000DA  90				     nop
+2  1829	000000DB  90				     nop
+2  1830	000000DC  90				     nop
+2  1831	000000DD  90				     nop
+Turbo Assembler	 Version 4.1	    09/23/16 06:55:18	    Page 34
+2.ASM
+
+
+
+2  1832	000000DE  90				     nop
+2  1833	000000DF  90				     nop
+2  1834	000000E0  90				     nop
+2  1835	000000E1  90				     nop
+2  1836	000000E2  90				     nop
+2  1837	000000E3  90				     nop
+2  1838	000000E4  90				     nop
+2  1839	000000E5  90				     nop
+2  1840	000000E6  90				     nop
+2  1841	000000E7  90				     nop
+2  1842	000000E8  90				     nop
+2  1843	000000E9  90				     nop
+2  1844	000000EA  90				     nop
+2  1845	000000EB  90				     nop
+2  1846	000000EC  90				     nop
+2  1847	000000ED  90				     nop
+2  1848	000000EE  90				     nop
+2  1849	000000EF  90				     nop
+2  1850	000000F0  90				     nop
+2  1851	000000F1  90				     nop
+2  1852	000000F2  90				     nop
+2  1853	000000F3  90				     nop
+2  1854	000000F4  90				     nop
+2  1855	000000F5  90				     nop
+2  1856	000000F6  90				     nop
+2  1857	000000F7  90				     nop
+2  1858	000000F8  90				     nop
+2  1859	000000F9  90				     nop
+2  1860	000000FA  90				     nop
+2  1861	000000FB  90				     nop
+2  1862	000000FC  90				     nop
+2  1863	000000FD  90				     nop
+2  1864	000000FE  90				     nop
+2  1865	000000FF  90				     nop
+2  1866	00000100  90				     nop
+2  1867	00000101  90				     nop
+2  1868	00000102  90				     nop
+2  1869	00000103  90				     nop
+2  1870	00000104  90				     nop
+2  1871	00000105  90				     nop
+2  1872	00000106  90				     nop
+2  1873	00000107  90				     nop
+2  1874	00000108  90				     nop
+2  1875	00000109  90				     nop
+2  1876	0000010A  90				     nop
+2  1877	0000010B  90				     nop
+2  1878	0000010C  90				     nop
+1  1879	0000010D  E2 A4			     loop TASK_3_SLEEP_1
+1  1880	0000010F  66| 8B CB		     mov cx,bx
+1  1881	00000112  E2 86			 loop TASK_3_LOOP_CLEAN
+1  1882	00000114			 TASK_3_END:
+1  1883	00000114  E9 FFFFFEF3		     jmp TASK_3_START
+1  1884	00000119			 TASK_3	 endp
+1  1885		  =0119			 SIZE_CS_3   = ($ - CS_3_BEGIN)
+1  1886	00000119			 CODE_3	 ends
+1  1887	00000000			 STCK_2	 segment para
+1  1888	00000000  1000*(??)			 db	 1000h DUP (?)
+Turbo Assembler	 Version 4.1	    09/23/16 06:55:18	    Page 35
+2.ASM
+
+
+
+1  1889	00001000			 STCK_2	 ends
+1  1890	00000000			 STCK_3	 segment para
+1  1891	00000000  1000*(??)			 db	 1000h DUP (?)
+1  1892	00001000			 STCK_3	 ends
+1  1893
+   1894					 end START
+Turbo Assembler	 Version 4.1	    09/23/16 06:55:18	    Page 36
+Symbol Table
+
+
+
+
+Symbol Name			  Type	 Value
+
+??DATE				  Text	 "09/23/16"
+??FILENAME			  Text	 "2	  "
+??TIME				  Text	 "06:55:17"
+??VERSION			  Number 040A
+@CPU				  Text	 0F8FH
+@CURSEG				  Text	 STCK_3
+@FILENAME			  Text	 2
+@WORDSIZE			  Text	 4
+ACS_CODE			  Number 0098
+ACS_CSEG			  Number 0018
+ACS_DATA			  Number 0092
+ACS_DPL_3			  Number 0060
+ACS_DSEG			  Number 0010
+ACS_IDT				  Alias	 ACS_DATA
+ACS_INT				  Number 008E
+ACS_INT_GATE			  Number 000E
+ACS_PRESENT			  Number 0080
+ACS_READ			  Number 0002
+ACS_STACK			  Number 0092
+ACS_TRAP			  Number 008F
+ACS_TRAP_GATE			  Number 000F
+ACS_TSS				  Number 0089
+ACS_WRITE			  Number 0002
+BACK_TO_RM			  Near	 CODE_RM:0555
+BUFFER_CLEAR			  Near	 CODE_PM:036F
+BUFFER_COUNT			  Byte	 DATA:05A8
+BUFFER_OUTPUT			  Near	 CODE_PM:0389
+BUFFER_SCAN_CODE		  Byte	 DATA:05B1
+BUFFER_TIME			  Byte	 DATA:05BA
+BYTE_TO_HEX			  Near	 CODE_PM:03D8
+CLRSCR				  Near	 CODE_PM:0354
+CODE_PM_BEGIN			  Number CODE_PM:0000
+CODE_PM_DESC			  Number 0030
+CODE_RM_BEGIN			  Number CODE_RM:0000
+CODE_RM_DESC			  Number 0010
+COUNT				  Word	 DATA:05A5
+CS_2_BEGIN			  Number CODE_2:0000
+CS_2_DESC			  Number 0043
+CS_3_BEGIN			  Number CODE_3:0000
+CS_3_DESC			  Number 004B
+DATA_BEGIN			  Number DATA:0000
+DATA_DESC			  Number 001B
+DIGIT_TO_HEX			  Near	 CODE_PM:03CB
+DISABLE_A20			  Near	 CODE_RM:05EF
+DISABLE_INTERRUPTS		  Near	 CODE_RM:0039
+DISABLE_PM			  Near	 CODE_PM:026F
+DTH_END				  Near	 CODE_PM:03D7
+DUMMY_IRQ_MASTER		  Near	 CODE_PM:01D1
+DUMMY_IRQ_SLAVE			  Near	 CODE_PM:01D8
+ENABLE_A20			  Near	 CODE_RM:0029
+ENABLE_INTERRUPTS		  Near	 CODE_RM:05E7
+ENABLE_INTERRUPTS_0		  Near	 CODE_RM:054B
+ENABLE_REAL_MODE		  Near	 CODE_RM:05A2
+ENTER_PM			  Near	 CODE_PM:0000
+Turbo Assembler	 Version 4.1	    09/23/16 06:55:18	    Page 37
+Symbol Table
+
+
+
+ER				  Near	 CODE_RM:0649
+ESP32				  Dword	 DATA:059B
+EXC_00				  Word	 CODE_PM:00F7
+EXC_01				  Word	 CODE_PM:00FD
+EXC_02				  Word	 CODE_PM:0103
+EXC_03				  Word	 CODE_PM:0109
+EXC_04				  Word	 CODE_PM:010F
+EXC_05				  Word	 CODE_PM:0115
+EXC_06				  Word	 CODE_PM:011B
+EXC_07				  Word	 CODE_PM:0121
+EXC_08				  Word	 CODE_PM:0127
+EXC_09				  Word	 CODE_PM:012D
+EXC_0A				  Word	 CODE_PM:0133
+EXC_0B				  Word	 CODE_PM:0139
+EXC_0C				  Word	 CODE_PM:013F
+EXC_0D				  Word	 CODE_PM:0145
+EXC_0E				  Word	 CODE_PM:014B
+EXC_0F				  Word	 CODE_PM:0151
+EXC_10				  Word	 CODE_PM:0157
+EXC_11				  Word	 CODE_PM:015D
+EXC_12				  Word	 CODE_PM:0163
+EXC_13				  Word	 CODE_PM:0169
+EXC_14				  Word	 CODE_PM:016F
+EXC_15				  Word	 CODE_PM:0175
+EXC_16				  Word	 CODE_PM:017B
+EXC_17				  Word	 CODE_PM:0181
+EXC_18				  Word	 CODE_PM:0187
+EXC_19				  Word	 CODE_PM:018D
+EXC_1A				  Word	 CODE_PM:0193
+EXC_1B				  Word	 CODE_PM:0199
+EXC_1C				  Word	 CODE_PM:019F
+EXC_1D				  Word	 CODE_PM:01A5
+EXC_1E				  Word	 CODE_PM:01AB
+EXC_1F				  Word	 CODE_PM:01B1
+EXC_HANDLER			  Near	 CODE_PM:01B7
+EXIT				  Near	 CODE_RM:05F5
+EXIT_FROM_INTERRUPT		  Near	 CODE_PM:00EE
+EXIT_PM				  Near	 CODE_PM:00EC
+FFLUSH				  Near	 CODE_PM:00BF
+FILL_IDT			  Near	 CODE_RM:0190
+GDT				  Word	 DATA:0000
+GDT_0				  Struct DATA:0000 S_DESC
+GDT_BEGIN			  Number DATA:0000
+GDT_CODE_PM			  Struct DATA:0030 S_DESC
+GDT_CODE_RM			  Struct DATA:0010 S_DESC
+GDT_CS_2			  Struct DATA:0040 S_DESC
+GDT_CS_3			  Struct DATA:0048 S_DESC
+GDT_DATA			  Struct DATA:0018 S_DESC
+GDT_GDT				  Struct DATA:0008 S_DESC
+GDT_IDT				  Struct DATA:0038 S_DESC
+GDT_SIZE			  Number 0078
+GDT_SS_2			  Struct DATA:0050 S_DESC
+GDT_SS_3			  Struct DATA:0058 S_DESC
+GDT_STACK			  Struct DATA:0020 S_DESC
+GDT_TEXT			  Struct DATA:0028 S_DESC
+GDT_TSS_2			  Struct DATA:0068 S_DESC
+GDT_TSS_3			  Struct DATA:0070 S_DESC
+Turbo Assembler	 Version 4.1	    09/23/16 06:55:18	    Page 38
+Symbol Table
+
+
+
+GDT_TSS_MAIN			  Struct DATA:0060 S_DESC
+GO				  Near	 CODE_PM:0286
+GO_TO_CODE_PM			  Near	 CODE_RM:0553
+HEX_TAB				  Byte	 DATA:058B
+IDT				  Word	 DATA:0202
+IDTR				  Struct DATA:01FC R_IDTR
+IDT_00				  Struct DATA:0202 I_DESC
+IDT_01				  Struct DATA:020A I_DESC
+IDT_02				  Struct DATA:0212 I_DESC
+IDT_03				  Struct DATA:021A I_DESC
+IDT_04				  Struct DATA:0222 I_DESC
+IDT_05				  Struct DATA:022A I_DESC
+IDT_06				  Struct DATA:0232 I_DESC
+IDT_07				  Struct DATA:023A I_DESC
+IDT_08				  Struct DATA:0242 I_DESC
+IDT_09				  Struct DATA:024A I_DESC
+IDT_0A				  Struct DATA:0252 I_DESC
+IDT_0B				  Struct DATA:025A I_DESC
+IDT_0C				  Struct DATA:0262 I_DESC
+IDT_0D				  Struct DATA:026A I_DESC
+IDT_0E				  Struct DATA:0272 I_DESC
+IDT_0F				  Struct DATA:027A I_DESC
+IDT_10				  Struct DATA:0282 I_DESC
+IDT_11				  Struct DATA:028A I_DESC
+IDT_12				  Struct DATA:0292 I_DESC
+IDT_13				  Struct DATA:029A I_DESC
+IDT_14				  Struct DATA:02A2 I_DESC
+IDT_15				  Struct DATA:02AA I_DESC
+IDT_16				  Struct DATA:02B2 I_DESC
+IDT_17				  Struct DATA:02BA I_DESC
+IDT_18				  Struct DATA:02C2 I_DESC
+IDT_19				  Struct DATA:02CA I_DESC
+IDT_1A				  Struct DATA:02D2 I_DESC
+IDT_1B				  Struct DATA:02DA I_DESC
+IDT_1C				  Struct DATA:02E2 I_DESC
+IDT_1D				  Struct DATA:02EA I_DESC
+IDT_1E				  Struct DATA:02F2 I_DESC
+IDT_1F				  Struct DATA:02FA I_DESC
+IDT_22				  Struct DATA:0312 I_DESC
+IDT_23				  Struct DATA:031A I_DESC
+IDT_24				  Struct DATA:0322 I_DESC
+IDT_25				  Struct DATA:032A I_DESC
+IDT_26				  Struct DATA:0332 I_DESC
+IDT_27				  Struct DATA:033A I_DESC
+IDT_28				  Struct DATA:0342 I_DESC
+IDT_29				  Struct DATA:034A I_DESC
+IDT_2A				  Struct DATA:0352 I_DESC
+IDT_2B				  Struct DATA:035A I_DESC
+IDT_2C				  Struct DATA:0362 I_DESC
+IDT_2D				  Struct DATA:036A I_DESC
+IDT_2E				  Struct DATA:0372 I_DESC
+IDT_2F				  Struct DATA:037A I_DESC
+IDT_BEGIN			  Number DATA:0202
+IDT_DESC			  Number 0038
+IDT_KEYBOARD			  Struct DATA:030A I_DESC
+IDT_TIMER			  Struct DATA:0302 I_DESC
+II1				  Near	 CODE_RM:0623
+Turbo Assembler	 Version 4.1	    09/23/16 06:55:18	    Page 39
+Symbol Table
+
+
+
+II2				  Near	 CODE_RM:0628
+II3				  Near	 CODE_RM:0652
+INPUT				  Near	 CODE_RM:0606
+INPUT_TIME			  Byte	 DATA:05C3
+INTERVAL			  Byte	 DATA:05A7
+INT_MASK_M			  Byte	 DATA:059F
+INT_MASK_S			  Byte	 DATA:05A0
+KEYBOARD_EXIT			  Near	 CODE_PM:0342
+KEYBOARD_HANDLER		  Near	 CODE_PM:02EE
+KEYBOARD_RETURN			  Near	 CODE_PM:034C
+KEY_PRESSED			  Byte	 DATA:05A2
+KEY_SCAN_CODE			  Byte	 DATA:05A1
+KEY_UP				  Near	 CODE_PM:0318
+LOAD_GDT			  Near	 CODE_RM:0041
+LOOP1				  Near	 CODE_PM:03AE
+LOOP2				  Near	 CODE_PM:03C0
+M				  Number 0010
+MSG_ENTER			  Byte	 DATA:055C
+MSG_ERROR			  Byte	 DATA:057B
+MSG_EXC				  Byte	 DATA:054E
+MSG_EXIT			  Byte	 DATA:03D5
+MSG_HELLO			  Byte	 DATA:0382
+MSG_HELLO_PM			  Byte	 DATA:03AE
+MSG_KEYBOARD			  Byte	 DATA:03F2
+MSG_OUTPUT_TASK_1		  Byte	 DATA:0549
+MSG_OUTPUT_TASK_2		  Byte	 DATA:054B
+MSG_TASK_1			  Byte	 DATA:048C
+MSG_TASK_2			  Byte	 DATA:04CB
+MSG_TASK_3			  Byte	 DATA:050A
+MSG_TIME			  Byte	 DATA:0443
+NO_KEY				  Near	 CODE_PM:00EA
+OUTPUT_EXIT			  Near	 CODE_PM:03A0
+OUTPUT_LOOP			  Near	 CODE_PM:0393
+OVERLOAD_CS			  Near	 CODE_RM:0472
+OVERLOAD_SEGMENT_REGISTERS	  Near	 CODE_RM:0477
+PREPARE_RTC			  Near	 CODE_RM:001F
+PREPARE_SEGMENTS		  Near	 CODE_RM:057B
+PREPARE_TO_RETURN		  Near	 CODE_RM:048C
+PREPARE_TSS			  Near	 CODE_RM:049D
+REINITIALIAZE_CONTROLLER_FOR_PM	  Near	 CODE_RM:0527
+REINITIALISE_CONTROLLER		  Near	 CODE_RM:055D
+REPEAIR_MASK			  Near	 CODE_RM:05D9
+SAVE_MASK			  Near	 CODE_RM:002F
+SECOND				  Byte	 DATA:05A3
+SHOW_TIMER			  Near	 CODE_PM:0211
+SIZE_CODE_PM			  Number 03FA
+SIZE_CODE_RM			  Number 0653
+SIZE_CS_2			  Number 0115
+SIZE_CS_3			  Number 0119
+SIZE_DATA			  Number 05CB
+SIZE_IDT			  Number 0180
+SIZE_TSS			  Number 007E
+SKIP_SECOND			  Near	 CODE_PM:028D
+SS_2_DESC			  Number 0053
+SS_3_DESC			  Number 005B
+STACK_DESC			  Number 0020
+START				  Near	 CODE_RM:0000
+Turbo Assembler	 Version 4.1	    09/23/16 06:55:18	    Page 40
+Symbol Table
+
+
+
+TASK_2				  Near	 CODE_2:0000
+TASK_2_END			  Near	 CODE_2:0110
+TASK_2_LOOP_CLEAN		  Near	 CODE_2:0098
+TASK_2_LOOP_FILL		  Near	 CODE_2:0016
+TASK_2_SLEEP_0			  Near	 CODE_2:002D
+TASK_2_SLEEP_1			  Near	 CODE_2:00AF
+TASK_2_START			  Near	 CODE_2:000C
+TASK_3				  Near	 CODE_3:0000
+TASK_3_END			  Near	 CODE_3:0114
+TASK_3_LOOP_CLEAN		  Near	 CODE_3:009A
+TASK_3_LOOP_FILL		  Near	 CODE_3:0016
+TASK_3_SLEEP_0			  Near	 CODE_3:002F
+TASK_3_SLEEP_1			  Near	 CODE_3:00B3
+TASK_3_START			  Near	 CODE_3:000C
+TASK_ADDR			  Pword	 DATA:01F6
+TASK_INDEX			  Word	 DATA:01F4
+TASK_LIST			  Word	 DATA:01EC
+TEXT_DESC			  Number 002B
+TIME				  Byte	 DATA:05A4
+TIMER_HANDLER			  Near	 CODE_PM:01E1
+TIMER_NEXT_TASK			  Near	 CODE_PM:02DA
+TSS_2				  Struct DATA:00F4 S_TSS
+TSS_2_DESC			  Number 0068
+TSS_3				  Struct DATA:0170 S_TSS
+TSS_3_DESC			  Number 0070
+TSS_MAIN			  Struct DATA:0078 S_TSS
+TSS_MAIN_DESC			  Number 0060
+WAITING_ESC			  Near	 CODE_PM:0082
+WORD_TO_DEC			  Near	 CODE_PM:03A3
+WRITE_CODE_PM			  Near	 CODE_RM:00A8
+WRITE_CODE_RM			  Near	 CODE_RM:0068
+WRITE_DATA			  Near	 CODE_RM:0080
+WRITE_GDT			  Near	 CODE_RM:0052
+WRITE_IDT			  Near	 CODE_RM:00C5
+WRITE_STACK			  Near	 CODE_RM:0090
+WRITE_TASK_CODE			  Near	 CODE_RM:00E2
+WRITE_TASK_STACK		  Near	 CODE_RM:011C
+WRITE_TSS			  Near	 CODE_RM:014E
+
+Structure Name			  Type	Offset
+
+I_DESC
+ OFFS_L				  Word	 0000
+ SEL				  Word	 0002
+ PARAM_CNT			  Byte	 0004
+ ACCESS				  Byte	 0005
+ OFFS_H				  Word	 0006
+R_IDTR
+ LIMIT				  Word	 0000
+ IDT_L				  Word	 0002
+ IDT_H				  Word	 0004
+S_DESC
+ LIMIT				  Word	 0000
+ BASE_L				  Word	 0002
+ BASE_M				  Byte	 0004
+ ACCESS				  Byte	 0005
+ ATTRIBS			  Byte	 0006
+Turbo Assembler	 Version 4.1	    09/23/16 06:55:18	    Page 41
+Symbol Table
+
+
+
+ BASE_H				  Byte	 0007
+S_TSS
+ LINK				  Word	 0000
+ ESP0				  Dword	 0004
+ SS0				  Word	 0008
+ ESP1				  Dword	 000C
+ SS1				  Word	 0010
+ ESP2				  Dword	 0014
+ SS2				  Word	 0018
+ R_CR3				  Dword	 001C
+ R_EIP				  Dword	 0020
+ R_EFLAGS			  Dword	 0024
+ R_EAX				  Dword	 0028
+ R_ECX				  Dword	 002C
+ R_EDX				  Dword	 0030
+ R_EBX				  Dword	 0034
+ R_ESP				  Dword	 0038
+ R_EBP				  Dword	 003C
+ R_ESI				  Dword	 0040
+ R_EDI				  Dword	 0044
+ R_ES				  Word	 0048
+ R_CS				  Word	 004C
+ R_SS				  Word	 0050
+ R_DS				  Word	 0054
+ R_FS				  Word	 0058
+ R_GS				  Word	 005C
+ R_LDTR				  Word	 0060
+ TRACE				  Word	 0064
+ IO_MAP_ADDR			  Word	 0066
+ IO_MAP				  Byte	 0068
+
+Groups & Segments		  Bit Size Align  Combine Class
+
+CODE_2				  32  0115 Para	  none
+CODE_3				  32  0119 Para	  none
+CODE_PM				  32  03FA Para	  none
+CODE_RM				  16  0653 Para	  none
+DATA				  16  05CB Para	  none
+STACK_A				  32  1000 Para	  Stack
+STCK_2				  32  1000 Para	  none
+STCK_3				  32  1000 Para	  none
+Turbo Assembler	 Version 4.1	    09/23/16 06:55:18	    Page 42
+Error Summary
+
+
+
+**Error** 2.ASM(191) IRPC(1) Forward reference needs override
+**Error** 2.ASM(191) IRPC(5) Forward reference needs override
+**Error** 2.ASM(191) IRPC(9) Forward reference needs override
+**Error** 2.ASM(191) IRPC(13) Forward reference	needs override
+**Error** 2.ASM(191) IRPC(17) Forward reference	needs override
+**Error** 2.ASM(191) IRPC(21) Forward reference	needs override
+**Error** 2.ASM(191) IRPC(25) Forward reference	needs override
+**Error** 2.ASM(191) IRPC(29) Forward reference	needs override
+**Error** 2.ASM(191) IRPC(33) Forward reference	needs override
+**Error** 2.ASM(191) IRPC(37) Forward reference	needs override
+**Error** 2.ASM(191) IRPC(41) Forward reference	needs override
+**Error** 2.ASM(191) IRPC(45) Forward reference	needs override
+**Error** 2.ASM(191) IRPC(49) Forward reference	needs override
+**Error** 2.ASM(191) IRPC(53) Forward reference	needs override
+**Error** 2.ASM(191) IRPC(57) Forward reference	needs override
+**Error** 2.ASM(191) IRPC(61) Forward reference	needs override
+**Error** 2.ASM(197) IRPC(1) Forward reference needs override
+**Error** 2.ASM(197) IRPC(5) Forward reference needs override
+**Error** 2.ASM(197) IRPC(9) Forward reference needs override
+**Error** 2.ASM(197) IRPC(13) Forward reference	needs override
+**Error** 2.ASM(197) IRPC(17) Forward reference	needs override
+**Error** 2.ASM(197) IRPC(21) Forward reference	needs override
+**Error** 2.ASM(197) IRPC(25) Forward reference	needs override
+**Error** 2.ASM(197) IRPC(29) Forward reference	needs override
+**Error** 2.ASM(197) IRPC(33) Forward reference	needs override
+**Error** 2.ASM(197) IRPC(37) Forward reference	needs override
+**Error** 2.ASM(197) IRPC(41) Forward reference	needs override
+**Error** 2.ASM(197) IRPC(45) Forward reference	needs override
+**Error** 2.ASM(197) IRPC(49) Forward reference	needs override
+**Error** 2.ASM(197) IRPC(53) Forward reference	needs override
+**Error** 2.ASM(197) IRPC(57) Forward reference	needs override
+**Error** 2.ASM(197) IRPC(61) Forward reference	needs override
+**Error** 2.ASM(198) Forward reference needs override
+**Error** 2.ASM(202) Forward reference needs override
+**Error** 2.ASM(211) IRPC(1) Forward reference needs override
+**Error** 2.ASM(211) IRPC(5) Forward reference needs override
+**Error** 2.ASM(211) IRPC(9) Forward reference needs override
+**Error** 2.ASM(211) IRPC(13) Forward reference	needs override
+**Error** 2.ASM(211) IRPC(17) Forward reference	needs override
+**Error** 2.ASM(211) IRPC(21) Forward reference	needs override
+**Error** 2.ASM(217) IRPC(1) Forward reference needs override
+**Error** 2.ASM(217) IRPC(5) Forward reference needs override
+**Error** 2.ASM(217) IRPC(9) Forward reference needs override
+**Error** 2.ASM(217) IRPC(13) Forward reference	needs override
+**Error** 2.ASM(217) IRPC(17) Forward reference	needs override
+**Error** 2.ASM(217) IRPC(21) Forward reference	needs override
+**Error** 2.ASM(217) IRPC(25) Forward reference	needs override
+**Error** 2.ASM(217) IRPC(29) Forward reference	needs override
+**Error** 2.ASM(240) Forward reference needs override
+**Error** 2.ASM(241) Forward reference needs override
+
