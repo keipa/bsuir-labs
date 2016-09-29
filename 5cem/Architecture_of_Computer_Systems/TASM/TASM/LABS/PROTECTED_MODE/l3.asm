@@ -1,3 +1,17 @@
+Delay macro time ;макрос задежки в мкс
+local ext,iter
+push cx
+mov cx,time
+ext:
+push cx
+mov cx,5000
+iter:
+loop iter
+pop cx
+loop ext
+pop cx
+endm
+
 
 IDEAL
 RADIX   16
@@ -124,11 +138,87 @@ PROC    start
 ; Ожидаем нажатия на клавишу <ESC>
 
 charin:
+
+
+; mov ah,01h ;проверка буфера клавиатуры
+; int 16h ;флаг нуля zf=0 если была нажата клавиша
+;
+;
+;
+; jnz keyboard_interrupt
+
+;;;;;;;;;;;;;;;;;;;;;;BEEEEEEEEEEEEEEEEEEEEP
+
+
+
+MOV     DX,2000          ; Number of times to repeat whole routine.
+
+MOV     BX,1             ; Frequency value.
+
+MOV     AL, 10110110B    ; The Magic Number (use this binary number only)
+OUT     43H, AL          ; Send it to the initializing port 43H Timer 2.
+
+NEXT_FREQUENCY:          ; This is were we will jump back to 2000 times.
+
+MOV     AX, BX           ; Move our Frequency value into AX.
+
+OUT     42H, AL          ; Send LSB to port 42H.
+MOV     AL, AH           ; Move MSB into AL
+OUT     42H, AL          ; Send MSB to port 42H.
+
+IN      AL, 61H          ; Get current value of port 61H.
+OR      AL, 00000011B    ; OR AL to this value, forcing first two bits high.
+OUT     61H, AL          ; Copy it to port 61H of the PPI Chip
+                         ; to turn ON the speaker.
+
+MOV     CX, 100          ; Repeat loop 100 times
+DELAY_LOOP:              ; Here is where we loop back too.
+LOOP    DELAY_LOOP       ; Jump repeatedly to DELAY_LOOP until CX = 0
+
+
+INC     BX               ; Incrementing the value of BX lowers
+                         ; the frequency each time we repeat the
+                         ; whole routine
+
+DEC     DX               ; Decrement repeat routine count
+
+CMP     DX, 0            ; Is DX (repeat count) = to 0
+JNZ     NEXT_FREQUENCY   ; If not jump to NEXT_FREQUENCY
+                         ; and do whole routine again.
+
+                         ; Else DX = 0 time to turn speaker OFF
+
+IN      AL,61H           ; Get current value of port 61H.
+AND     AL,11111100B     ; AND AL to this value, forcing first two bits low.
+OUT     61H,AL           ; Copy it to port 61H of the PPI Chip
+                         ; to turn OFF the speaker.
+
+Delay 1000
+
+
+jmp charin
+;;;;;;;;;;;;;;;;;;;;;;
+
+
+  keyboard_interrupt:
+
         int     30h     ; ожидаем нажатия на клавишу
                         ; AX - скан-код клавиши,
                         ; BX - состояние переключающих клавиш
-        cmp     al, 1   ; если <ESC> - выход из цикла
-        jz      continue
+
+
+        cmp     al, 13   ; если <R> - выход из цикла
+        jz      surnamepassed
+        cmp     al, 18   ; если <O> - выход из цикла
+        jz      surnamepassed
+        cmp     al, 2f   ; если <V> - выход из цикла
+        jz      surnamepassed
+        cmp     al, 20   ; если <D> - выход из цикла
+        jz      surnamepassed
+
+        jmp surname_not_passed
+
+        surnamepassed:
 
         push    bx              ; выводим скан-код на экран
         mov     bx, 0301h       ; координаты вывода
@@ -140,6 +230,37 @@ charin:
         mov     bx, 0306h
         call    Print_Word
         pop     bx
+
+        ; mov al, 10110110b
+        ; out 43h, al
+        ; mov al, 2ah
+        ; out 42h, al
+        ; mov al, 4h
+        ; out  42h, al
+        ; in al, 61h
+        ; or  al, 00000011b
+        ; out 61h, al
+        ;
+        ; mov bx,2
+        ; xor ah, ah
+        ; int 1ah
+        ; add  dx, bx
+        ; mov bx, dx
+        ; _m1:
+        ; int 1ah
+        ; cmp dx, bx
+        ; jb _m1
+        ;
+        ; in al, 61h
+        ; and al, 11111100b
+        ; out 61h, al
+
+
+
+
+
+      surname_not_passed:
+
 
         jmp     charin
 
@@ -162,17 +283,17 @@ continue:
         mov     [wrong], al
 
 ; Попытка записи в сегмент кода.
-;       mov     [wrong1], al
+      mov     [wrong1], al
 
 ; Попытка извлечения из пустого стека.
-;       pop     ax
+      pop     ax
 
 ; Загрузка в сегментный регистр неправильного селектора.
-;       mov     ax, 1280h
-;       mov     ds, ax
+      mov     ax, 1280h
+      mov     ds, ax
 
 ; Прямой вызов исключения при помощи команды прерывания.
-;       int     1
+      int     1
 
 
         call    set_rmode       ; установка реального режима
