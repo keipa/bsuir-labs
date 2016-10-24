@@ -16,7 +16,10 @@ package com.example.harwister.player;
     import android.widget.EditText;
     import android.widget.Toast;
 
+    import com.activeandroid.query.Select;
     import com.example.harwister.player.adapters.CategoryAdapter;
+
+    import java.util.List;
 
 
 public class CategoryActivity extends AppCompatActivity {
@@ -40,7 +43,9 @@ public class CategoryActivity extends AppCompatActivity {
         RecyclerView rec = (RecyclerView) findViewById(R.id.CategoriesList);
         rec.setLayoutManager(new LinearLayoutManager(this));
 
-        rec.setAdapter(new CategoryAdapter());
+        List<Category> listcategory = new Select().from(Category.class).orderBy("name").execute();
+        List<Song> listsong = new Select().from(Song.class).execute();
+        rec.setAdapter(new CategoryAdapter(listcategory, listsong,this));
 
     }
 
@@ -57,28 +62,7 @@ public class CategoryActivity extends AppCompatActivity {
 //                        Category newcategory =new Category();
                           EditText category_edit_text =(EditText) findViewById(R.id.category_edit_text);
 //                        newcategory.name = category_edit_text.getText().toString();
-
-
-
-
-
-
-
-
-
                         Toast.makeText(CategoryActivity.this, "Category "+category_edit_text.getText().toString()+" added", Toast.LENGTH_SHORT).show();
-
-
-
-//                sPref = getPreferences(MODE_PRIVATE);
-//                Editor ed = sPref.edit();
-//
-//                ed.putString(SAVED_TEXT, etText.getText().toString());
-//                ed.commit();
-//                Toast.makeText(this, "Text saved", Toast.LENGTH_SHORT).show();
-
-
-
                         Toast.makeText(CategoryActivity.this, "Text saved", Toast.LENGTH_SHORT).show();
                     }
                 })
