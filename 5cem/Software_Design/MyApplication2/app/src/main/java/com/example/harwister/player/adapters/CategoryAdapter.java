@@ -59,18 +59,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (viewType == 0) {
-            View v = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.category_cardview, parent, false);
-            return new CategoryViewHolder(v);
-        } else if (viewType == 1) {
-            View v = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.categories_and_song_separator, parent, false);
-            return new SeparatorViewHolder(v);
-        } else {
-            View v = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.song_cardview, parent, false);
-            return new RecentSongViewHolder(v);
+        switch (viewType){
+            case 0: return new CategoryViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.category_cardview, parent, false));             //category
+            case 1: return new SeparatorViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.categories_and_song_separator, parent, false));//separator
+            default:return new RecentSongViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.song_cardview, parent, false));               //song
         }
 
     }
@@ -83,35 +75,41 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        if (holder.getItemViewType() == 0) {
-            CategoryViewHolder cholder = (CategoryViewHolder) holder;
-            cholder.count.setText(Integer.toString(new Select().from(Song.class).
-                    where("category = ?", list.get(position).getId()).count())+" songs");
-            cholder.name.setText(list.get(position).name);
-        }
-        else if (holder.getItemViewType() == 1) {
-            SeparatorViewHolder cholder = (SeparatorViewHolder) holder;
-        }
-        else {
-            if (songs.size() != 0) {
+        switch (holder.getItemViewType()){
+            case 0:{                //category
+                CategoryViewHolder cholder = (CategoryViewHolder) holder;
+                cholder.count.setText(Integer.toString(new Select().from(Song.class).
+                        where("category = ?", list.get(position).getId()).count())+" songs");
+                cholder.name.setText(list.get(position).name);
+                break;
+            }
+            case 1:{                 //separator
+                SeparatorViewHolder cholder = (SeparatorViewHolder) holder;
+                break;
+            }
+            default:{               //case 2 - song
+                if (songs.size() != 0) {
                 RecentSongViewHolder cholder = (RecentSongViewHolder) holder;
                 cholder.name.setText(songs.get(position).name);
+                break;
+                }
             }
+
         }
+
     }
 
     @Override
-    public int getItemCount() {
-        return list.size() + songs.size() + 1;
-    }
+    public int getItemCount() {return list.size() + songs.size() + 1;}
+
 
     @Override
     public int getItemViewType(int pos) {
         if (pos < list.size()) {
-            return 0; // category
+            return 0;       // category
         } else if (pos == list.size()) {
-            return 1; // separator
+            return 1;       // separator
         }
-        return 2; // songs
+        return 2;           // songs
     }
 }

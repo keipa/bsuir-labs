@@ -15,18 +15,13 @@ package com.example.harwister.player;
     import android.view.MenuItem;
     import android.widget.EditText;
     import android.widget.Toast;
-
-    import com.activeandroid.ActiveAndroid;
     import com.activeandroid.query.Select;
     import com.example.harwister.player.adapters.CategoryAdapter;
     import java.util.List;
 
 
 public class CategoryActivity extends AppCompatActivity {
-
     CategoryAdapter categoryadapter;
-
-
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -34,7 +29,6 @@ public class CategoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_category);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,11 +39,7 @@ public class CategoryActivity extends AppCompatActivity {
         });
         RecyclerView rec = (RecyclerView) findViewById(R.id.CategoriesList);
         rec.setLayoutManager(new LinearLayoutManager(this));
-
-        List<Category> listcategory = new Select().from(Category.class).execute();
-        List<Song> listsong = new Select().from(Song.class).execute();
-        categoryadapter = new CategoryAdapter(listcategory, listsong,this);
-        rec.setAdapter(categoryadapter);
+        SendDataToAdapter(rec);
 
     }
 
@@ -62,19 +52,27 @@ public class CategoryActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         EditText category_edit_text =(EditText)kek.findViewById(R.id.category_edit_text);
+                        AddCategoryDialog(category_edit_text);
                         Toast.makeText(CategoryActivity.this, "Category "+category_edit_text.getText().toString()+" added", Toast.LENGTH_SHORT).show();
-                        Category newcategoty = new Category();
-                        newcategoty.name = category_edit_text.getText().toString();
-                        newcategoty.save();
-                        categoryadapter.addCategory(newcategoty);
                     }
-                })
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                    }
-                });
+                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {public void onClick(DialogInterface dialog, int id) {}});
         builder.setTitle("New Category");
         return builder.create();
+    }
+
+    private void SendDataToAdapter(RecyclerView rec) {
+        List<Category> list_category = new Select().from(Category.class).execute();
+        List<Song> list_song = new Select().from(Song.class).execute();
+        categoryadapter = new CategoryAdapter(list_category, list_song,this);
+        rec.setAdapter(categoryadapter);
+    }
+
+
+    private void AddCategoryDialog(EditText category_edit_text) {
+        Category new_category = new Category();
+        new_category.name = category_edit_text.getText().toString();
+        new_category.save();
+        categoryadapter.addCategory(new_category);
     }
 
 
@@ -86,11 +84,7 @@ public class CategoryActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
+        if (item.getItemId() == R.id.action_settings) return true;
         return super.onOptionsItemSelected(item);
     }
 }
