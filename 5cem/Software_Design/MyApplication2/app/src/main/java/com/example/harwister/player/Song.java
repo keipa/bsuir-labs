@@ -8,18 +8,19 @@ import java.sql.Date;
 
 @Table(name = "songs")
 public class Song extends Model {
-    @Column public String name = "";
-    @Column public String artist = "";
-    @Column public String filepath = "";
-    @Column public String imagepath = "";
-    @Column public Integer duration = 0;
-    @Column public Category category = new Category();
-    @Column public Date date = new Date(0);
+    @Column(name="name") public String name = "";
+    @Column(name="artist") public String artist = "";
+    @Column(name="filepath") public String filepath = "";
+    @Column(name="imagepath") public String imagepath = "";
+    @Column(name="duration") public Integer duration = 0;
+    @Column(name="category") public Category category = new Category();
+    @Column(name="date") public Date date = new Date(0);
 
-    public Song() {}
+    public Song() {super();}
 
     public Song(String name, String artist, String filepath,
                 String imagepath, Integer duration, Category category) {
+        super();
         this.name = name;
         this.artist = artist;
         this.filepath = filepath;

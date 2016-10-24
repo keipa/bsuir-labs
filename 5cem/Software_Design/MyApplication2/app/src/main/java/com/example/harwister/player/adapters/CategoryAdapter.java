@@ -67,19 +67,16 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-//        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.category_cardview, parent, false));
-        View v;
         if (viewType == 0) {
-            v = LayoutInflater.from(parent.getContext())
+            View v = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.category_cardview, parent, false);
-
             return new CategoryViewHolder(v);
         } else if (viewType == 1) {
-            v = LayoutInflater.from(parent.getContext())
+            View v = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.categories_and_song_separator, parent, false);
             return new SeparatorViewHolder(v);
         } else {
-            v = LayoutInflater.from(parent.getContext())
+            View v = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.song_cardview, parent, false);
             return new RecentSongViewHolder(v);
         }
@@ -98,8 +95,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
             SeparatorViewHolder cholder = (SeparatorViewHolder) holder;
         }
         else {
-            RecentSongViewHolder cholder = (RecentSongViewHolder) holder;
-            cholder.name.setText(songs.get(position).name);
+            if (songs.size() != 0) {
+                RecentSongViewHolder cholder = (RecentSongViewHolder) holder;
+                cholder.name.setText(songs.get(position).name);
+            }
         }
     }
 
@@ -112,7 +111,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     public int getItemViewType(int pos) {
         if (pos < list.size()) {
             return 0;
-        } else if (pos == list.size() + 1) {
+        } else if (pos == list.size()) {
             return 1;
         }
         return 2;

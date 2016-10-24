@@ -25,10 +25,10 @@
 
     <TextView
         android:text="Recently played"
-        android:layout_width="137dp"
-        android:layout_below="@+id/textView6"
-        android:layout_alignStart="@+id/textView6"
+        android:layout_width="wrap_content"
         android:id="@+id/textView7"
         android:textSize="12sp"
-        android:layout_height="25dp" />
+        android:layout_height="wrap_content"
+        android:paddingTop="35dp"
+        android:paddingStart="19dp" />
 </android.support.v7.widget.CardView>
