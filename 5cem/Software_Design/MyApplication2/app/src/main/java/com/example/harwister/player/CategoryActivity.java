@@ -23,12 +23,18 @@ package com.example.harwister.player;
 
 
 public class CategoryActivity extends AppCompatActivity {
+
+    CategoryAdapter categoryadapter;
+
+
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,22 +48,25 @@ public class CategoryActivity extends AppCompatActivity {
 
         List<Category> listcategory = new Select().from(Category.class).execute();
         List<Song> listsong = new Select().from(Song.class).execute();
-        rec.setAdapter(new CategoryAdapter(listcategory, listsong,this));
+        categoryadapter = new CategoryAdapter(listcategory, listsong,this);
+        rec.setAdapter(categoryadapter);
 
     }
 
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(CategoryActivity.this);
-
         LayoutInflater inflater = CategoryActivity.this.getLayoutInflater();
-
-        builder.setView(inflater.inflate(R.layout.dialog_create_category, null))
+        final View kek = inflater.inflate(R.layout.dialog_create_category, null);
+        builder.setView(kek)
                 .setPositiveButton("Create", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-                        EditText category_edit_text =(EditText) findViewById(R.id.category_edit_text);
+                        EditText category_edit_text =(EditText)kek.findViewById(R.id.category_edit_text);
                         Toast.makeText(CategoryActivity.this, "Category "+category_edit_text.getText().toString()+" added", Toast.LENGTH_SHORT).show();
-                        Toast.makeText(CategoryActivity.this, "Text saved", Toast.LENGTH_SHORT).show();
+                        Category newcategoty = new Category();
+                        newcategoty.name = category_edit_text.getText().toString();
+                        newcategoty.save();
+                        categoryadapter.addCategory(newcategoty);
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -67,6 +76,7 @@ public class CategoryActivity extends AppCompatActivity {
         builder.setTitle("New Category");
         return builder.create();
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

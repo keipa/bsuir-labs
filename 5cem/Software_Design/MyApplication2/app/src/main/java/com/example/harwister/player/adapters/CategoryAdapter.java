@@ -1,21 +1,15 @@
 package com.example.harwister.player.adapters;
-
-
 import android.app.Activity;
-import android.media.Image;
 import android.support.v7.widget.RecyclerView;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.activeandroid.query.Select;
 import com.example.harwister.player.Category;
 import com.example.harwister.player.R;
 import com.example.harwister.player.Song;
-
 import java.util.List;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
@@ -29,8 +23,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         this.list = categoriesList;
         this.songs = recentSongs;
     }
-
-
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public ViewHolder(View view){
@@ -83,12 +75,18 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
     }
 
+
+    public void addCategory(Category category){
+        list.add(0, category);
+        notifyItemInserted(0);
+    }
+
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         if (holder.getItemViewType() == 0) {
             CategoryViewHolder cholder = (CategoryViewHolder) holder;
             cholder.count.setText(Integer.toString(new Select().from(Song.class).
-                    where("category = ?", list.get(position).getId()).count()));
+                    where("category = ?", list.get(position).getId()).count())+" songs");
             cholder.name.setText(list.get(position).name);
         }
         else if (holder.getItemViewType() == 1) {
@@ -110,10 +108,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     @Override
     public int getItemViewType(int pos) {
         if (pos < list.size()) {
-            return 0;
+            return 0; // category
         } else if (pos == list.size()) {
-            return 1;
+            return 1; // separator
         }
-        return 2;
+        return 2; // songs
     }
 }
