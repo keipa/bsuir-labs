@@ -1,5 +1,7 @@
 package com.example.harwister.player.adapters;
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.activeandroid.query.Select;
 import com.example.harwister.player.Category;
+import com.example.harwister.player.MusicActivity;
 import com.example.harwister.player.R;
 import com.example.harwister.player.Song;
 import java.util.List;
@@ -24,6 +27,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         this.songs = recentSongs;
     }
 
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         public ViewHolder(View view){
             super(view);
@@ -37,6 +41,20 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
             super(v);
             name = (TextView)v.findViewById(R.id.CategoryNameText);
             count = (TextView)v.findViewById(R.id.CountOfCompositionsText);
+
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(activity, MusicActivity.class);
+                    //too bad
+                    long id = 0;
+                    for (Category c: list) {
+                        if(c.name == name.getText().toString()){id = c.getId(); continue;}
+                    }
+                    intent.putExtra("category_id", id);
+                    activity.startActivity(intent);
+                }
+            });
         }
     }
     public class RecentSongViewHolder extends ViewHolder {
