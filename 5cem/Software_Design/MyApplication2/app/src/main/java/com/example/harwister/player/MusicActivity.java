@@ -28,22 +28,22 @@ import java.util.List;
 public class MusicActivity extends AppCompatActivity {
     MusicAdapter musicAdapter;
     List<Song> songs;
-
+    Long categoryId;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_music);
 
-        final Long id = getIntent().getExtras().getLong("category_id");
-        songs = new Select().from(Song.class).where("category = ?", id).execute();
+        categoryId = getIntent().getExtras().getLong("category_id");
+        songs = new Select().from(Song.class).where("category = ?", categoryId).execute();
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_music);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Dialog dialog = onCreateDialog(savedInstanceState);
 
-                ArrayList<Song> songs = findTracks();
+//                ArrayList<Song> songs_on_the_device = findTracks();
 
                 dialog.show();
             }
@@ -62,11 +62,11 @@ public class MusicActivity extends AppCompatActivity {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(MusicActivity.this);
         LayoutInflater inflater = MusicActivity.this.getLayoutInflater();
-        final View view_dialog = inflater.inflate(R.layout.dialog_add_song, null); // set to list of SONGS
+        final View view_dialog = inflater.inflate(R.layout.dialog_add_song, null);
         final List<Integer> mSelectedItems = new ArrayList<>();
-        ArrayList<Song> songs = findTracks();
-        CharSequence[] charSongs = ConvertToCharSequence(songs);
-        boolean[] zeroArraySelectedSongs = new boolean[songs.size()];
+        final ArrayList<Song> songs_on_the_device = findTracks();
+        CharSequence[] charSongs = ConvertToCharSequence(songs_on_the_device);
+        boolean[] zeroArraySelectedSongs = new boolean[songs_on_the_device.size()];
         builder.setView(view_dialog).setMultiChoiceItems(charSongs,zeroArraySelectedSongs,
                 new DialogInterface.OnMultiChoiceClickListener() {
                     @Override
@@ -79,7 +79,19 @@ public class MusicActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int id) {
                 Toast.makeText(MusicActivity.this, "Song added", Toast.LENGTH_SHORT).show();
                 for (int chosenSong:mSelectedItems) {
-                    Song new_song = new Song(); //todo end right there
+                    Song new_song = new Song();
+                    new_song.name = songs_on_the_device.get(chosenSong).name;
+                    new_song.artist = songs_on_the_device.get(chosenSong).artist;
+                    new_song.filepath = songs_on_the_device.get(chosenSong).filepath;
+//                    new_song.name = songs_on_the_device.get(chosenSong).name;
+                    // add fields
+                    //...
+                    //...
+                    //...
+                    new_song.category =(Category) new Select().from(Category.class).where("Id = ?", categoryId).execute().get(0);
+                    new_song.save();
+                    songs.add(new_song);
+                    musicAdapter.notifyItemInserted(songs.size());
                 }
             }
         }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
