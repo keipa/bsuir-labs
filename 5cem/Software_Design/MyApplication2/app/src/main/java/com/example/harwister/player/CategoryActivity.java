@@ -49,6 +49,22 @@ public class CategoryActivity extends AppCompatActivity {
 
     }
 
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Toast.makeText(CategoryActivity.this, "OnStart", Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Toast.makeText(CategoryActivity.this, "onResume", Toast.LENGTH_SHORT).show();
+//        categoryadapter.notify();
+
+    }
+
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(CategoryActivity.this);
         LayoutInflater inflater = CategoryActivity.this.getLayoutInflater();

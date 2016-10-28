@@ -63,7 +63,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.ViewHolder> 
                     //play song
                     Toast.makeText(activity, "playing", Toast.LENGTH_SHORT).show();
                     intent = new Intent(activity, AudioService.class);
-                    intent.putExtra("track", (Song) new Select().from(Song.class).where("name = ?", name).execute().get(0));
+                    intent.putExtra("track", (Song) new Select().from(Song.class).where("name = ?", name.getText().toString()).execute().get(0));
                     serviceConnection = new ServiceConnection() {
                         @Override
                         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
@@ -76,6 +76,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.ViewHolder> 
                             bound = false;
                         }
                     };
+                    //todo add here playing date insertion
 
                 }
             });
@@ -83,6 +84,12 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.ViewHolder> 
                 @Override
                 public boolean onLongClick(View view) {
                     Toast.makeText(activity, "deleting", Toast.LENGTH_SHORT).show();
+                    Song file_to_delete = (Song) new Select().from(Song.class).where("name = ?", name.getText().toString()).execute().get(0);
+
+                    int index = songs.indexOf(file_to_delete);
+                    songs.remove(file_to_delete);
+                    notifyItemRemoved(index);
+                    file_to_delete.delete();
                     return true;
                 }
             });
