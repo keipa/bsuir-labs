@@ -34,7 +34,6 @@ public class MusicActivity extends AppCompatActivity {
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_music);
-
         categoryId = getIntent().getExtras().getLong("category_id");
         songs = new Select().from(Song.class).where("category = ?", categoryId).execute();
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_music);
@@ -42,18 +41,11 @@ public class MusicActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Dialog dialog = onCreateDialog(savedInstanceState);
-
-//                ArrayList<Song> songs_on_the_device = findTracks();
-
                 dialog.show();
             }
         });
-
-
         RecyclerView rec = (RecyclerView) findViewById(R.id.MusicList);
         rec.setLayoutManager(new LinearLayoutManager(this));
-
-
         musicAdapter = new MusicAdapter(songs, this);
         rec.setAdapter(musicAdapter);
     }
@@ -67,28 +59,29 @@ public class MusicActivity extends AppCompatActivity {
         final ArrayList<Song> songs_on_the_device = findTracks();
         CharSequence[] charSongs = ConvertToCharSequence(songs_on_the_device);
         boolean[] zeroArraySelectedSongs = new boolean[songs_on_the_device.size()];
-        builder.setView(view_dialog).setMultiChoiceItems(charSongs,zeroArraySelectedSongs,
+        builder.setView(view_dialog).setMultiChoiceItems(charSongs, zeroArraySelectedSongs,
                 new DialogInterface.OnMultiChoiceClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which, boolean isChecked) {
                         if (isChecked) mSelectedItems.add(which);
-                        else if (mSelectedItems.contains(which)) mSelectedItems.remove(Integer.valueOf(which));
+                        else if (mSelectedItems.contains(which))
+                            mSelectedItems.remove(Integer.valueOf(which));
                     }
-                }).setPositiveButton("Add",new DialogInterface.OnClickListener() {
+                }).setPositiveButton("Add", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
                 Toast.makeText(MusicActivity.this, "Song added", Toast.LENGTH_SHORT).show();
-                for (int chosenSong:mSelectedItems) {
+                for (int chosenSong : mSelectedItems) {
                     Song new_song = new Song();
                     new_song.name = songs_on_the_device.get(chosenSong).name;
                     new_song.artist = songs_on_the_device.get(chosenSong).artist;
                     new_song.filepath = songs_on_the_device.get(chosenSong).filepath;
-//                    new_song.name = songs_on_the_device.get(chosenSong).name;
+                    // new_song.name = songs_on_the_device.get(chosenSong).name;
                     // add fields
                     //...
                     //...
                     //...
-                    new_song.category =(Category) new Select().from(Category.class).where("Id = ?", categoryId).execute().get(0);
+                    new_song.category = (Category) new Select().from(Category.class).where("Id = ?", categoryId).execute().get(0);
                     new_song.save();
                     songs.add(new_song);
                     musicAdapter.notifyItemInserted(songs.size());
@@ -96,14 +89,15 @@ public class MusicActivity extends AppCompatActivity {
             }
         }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int id) {}
+            public void onClick(DialogInterface dialog, int id) {
+            }
         });
         builder.setTitle("New Category");
         return builder.create();
     }
 
     private CharSequence[] ConvertToCharSequence(ArrayList<Song> songs) {
-        CharSequence[] charSongs =  new CharSequence[songs.size()];
+        CharSequence[] charSongs = new CharSequence[songs.size()];
         for (int i = 0; i < songs.size(); i++) charSongs[i] = songs.get(i).name;
         return charSongs;
     }
@@ -111,31 +105,25 @@ public class MusicActivity extends AppCompatActivity {
 
     public ArrayList<Song> findTracks() {
         ArrayList<Song> tracks = new ArrayList<>();
-
         String[] projection = {
                 MediaStore.Audio.Media._ID,
                 MediaStore.Audio.Media.ARTIST,
                 MediaStore.Audio.Media.TITLE,
                 MediaStore.Audio.Media.DATA
         };
-
         Uri uriInternal = MediaStore.Audio.Media.INTERNAL_CONTENT_URI;
-
         ContentResolver contentResolver = getContentResolver();
-
         Cursor cursorInt = contentResolver.query(uriInternal, projection, null, null, null);
 
         if (cursorInt != null) {
             for (int i = 0; i < cursorInt.getCount(); i++) {
                 cursorInt.moveToPosition(i);
-
                 int id = cursorInt.getInt(cursorInt.getColumnIndex(MediaStore.Audio.Media._ID));
                 String title = cursorInt.getString(cursorInt.getColumnIndex(MediaStore.Audio.Media.TITLE));
                 String artist = cursorInt.getString(cursorInt.getColumnIndex(MediaStore.Audio.Media.ARTIST));
                 String data = cursorInt.getString(cursorInt.getColumnIndex(MediaStore.Audio.Media.DATA));
                 Song track = new Song(title, artist, data, data, 100, null);
-                if (!track.artist.equals("<unknown>"))
-                    tracks.add(track);
+                if (!track.artist.equals("<unknown>")) tracks.add(track);
             }
             cursorInt.close();
         }

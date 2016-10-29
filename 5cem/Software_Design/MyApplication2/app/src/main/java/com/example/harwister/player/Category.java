@@ -7,9 +7,12 @@ import com.activeandroid.annotation.Table;
 @Table(name = "category")
 public class Category extends Model {
 
-    @Column(name="name") public String name = "";
+    @Column(name = "name")
+    public String name = "";
 
-    public Category() {super();}
+    public Category() {
+        super();
+    }
 
     public Category(String name) {
         super();

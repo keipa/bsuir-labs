@@ -4,7 +4,7 @@ import com.activeandroid.ActiveAndroid;
 import com.activeandroid.Configuration;
 
 
-public class MyApplication2 extends com.activeandroid.app.Application{
+public class MyApplication2 extends com.activeandroid.app.Application {
     @Override
     public void onCreate() {
         super.onCreate();
