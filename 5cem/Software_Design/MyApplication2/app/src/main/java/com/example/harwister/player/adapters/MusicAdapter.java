@@ -4,6 +4,8 @@ package com.example.harwister.player.adapters;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +19,7 @@ import android.media.MediaPlayer;
 
 import com.activeandroid.query.Select;
 import com.activeandroid.util.Log;
+import com.example.harwister.player.PlayFragment;
 import com.example.harwister.player.R;
 import com.example.harwister.player.Song;
 
@@ -69,6 +72,12 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.ViewHolder> 
                     Log.d("hi", "LOG");
                     Log.w("TAG", String.valueOf(song_to_play.date));
                     //todo add here playing date insertion
+
+//                    FragmentManager fragmentManager = activity.getFragmentManager();
+//                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    PlayFragment fragment = new PlayFragment();
+//                    fragmentTransaction.add(R.id.play_fragment, fragment);
+//                    fragmentTransaction.commit();
                 }
             });
             v.setOnLongClickListener(new View.OnLongClickListener() {

@@ -25,7 +25,7 @@ import com.example.harwister.player.adapters.MusicAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MusicActivity extends AppCompatActivity {
+public class MusicActivity extends AppCompatActivity implements PlayFragment.OnFragmentInteractionListener{
     MusicAdapter musicAdapter;
     List<Song> songs;
     Long categoryId;
@@ -132,5 +132,9 @@ public class MusicActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
 }
 
