@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -15,8 +14,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.activeandroid.query.Select;
@@ -48,6 +45,11 @@ public class MusicActivity extends AppCompatActivity implements PlayFragment.OnF
         rec.setLayoutManager(new LinearLayoutManager(this));
         musicAdapter = new MusicAdapter(songs, this);
         rec.setAdapter(musicAdapter);
+
+//        PlayFragment fragment = new PlayFragment();
+//        fragment.songs = songs;
+//        fragment.current_song = songs.get(0);
+//        fragment.activity = this;
     }
 
 

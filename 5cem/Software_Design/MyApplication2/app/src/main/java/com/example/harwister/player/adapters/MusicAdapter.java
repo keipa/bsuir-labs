@@ -8,6 +8,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -73,11 +74,9 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.ViewHolder> 
                     Log.w("TAG", String.valueOf(song_to_play.date));
                     //todo add here playing date insertion
 
-//                    FragmentManager fragmentManager = activity.getFragmentManager();
-//                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    PlayFragment fragment = new PlayFragment();
-//                    fragmentTransaction.add(R.id.play_fragment, fragment);
-//                    fragmentTransaction.commit();
+
+//                    fragment.setArguments(songs);
+
                 }
             });
             v.setOnLongClickListener(new View.OnLongClickListener() {
