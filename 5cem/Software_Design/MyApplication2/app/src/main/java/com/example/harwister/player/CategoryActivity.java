@@ -11,9 +11,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -50,7 +50,12 @@ public class CategoryActivity extends AppCompatActivity {
     }
 
 
-
+    @Override
+    protected void onStart() {
+        super.onStart();
+        categoryadapter.resetRecentSongs();
+        categoryadapter.notifyDataSetChanged();
+    }
 
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(CategoryActivity.this);
@@ -75,7 +80,7 @@ public class CategoryActivity extends AppCompatActivity {
 
     private void SendDataToAdapter(RecyclerView rec) {
         List<Category> list_category = new Select().from(Category.class).execute();
-//        List<Song> list_song = new Select().from(Song.class).where("song = ?", 0).execute();     //TODO fix when songs playing would done FOR RECENT SONGS
+//        List<Song> list_song = new Select().from(Song.class).where("song = ?", 0).execute();
         List<Song> list_song = new List<Song>() {
             @Override
             public void add(int i, Song song) {
@@ -197,7 +202,7 @@ public class CategoryActivity extends AppCompatActivity {
                 return null;
             }
         };
-        categoryadapter = new CategoryAdapter(list_category, list_song, this);
+        categoryadapter = new CategoryAdapter(list_category, this);
         rec.setAdapter(categoryadapter);
 
     }

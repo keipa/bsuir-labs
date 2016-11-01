@@ -15,20 +15,20 @@
         android:id="@+id/fab_music"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@android:drawable/stat_notify_more"
         android:layout_gravity="bottom|end"
         android:layout_marginBottom="50dp"
-        android:layout_marginEnd="15dp" />
+        android:layout_marginEnd="15dp"
+        app:srcCompat="@android:drawable/stat_notify_more" />
 
-    <fragment
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:name="com.example.harwister.player.PlayFragment"
-        android:id="@+id/play_fragment"
-        android:layout_alignParentTop="false"
-        android:layout_alignParentStart="false"
-        android:layout_gravity="bottom"
-        tools:layout="@layout/fragment_play" />
+    <!--<fragment-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:name="com.example.harwister.player.PlayFragment"-->
+    <!--android:id="@+id/play_fragment"-->
+    <!--android:layout_alignParentTop="false"-->
+    <!--android:layout_alignParentStart="false"-->
+    <!--android:layout_gravity="bottom"-->
+    <!--tools:layout="@layout/fragment_play" />-->
 
 
 </android.support.design.widget.CoordinatorLayout>

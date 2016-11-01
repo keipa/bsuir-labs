@@ -7,10 +7,20 @@ import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 
-import java.sql.Date;
 
 @Table(name = "songs")
 public class Song extends Model implements Parcelable {
+    public static final Creator<Song> CREATOR = new Creator<Song>() {
+        @Override
+        public Song createFromParcel(Parcel in) {
+            return new Song(in);
+        }
+
+        @Override
+        public Song[] newArray(int size) {
+            return new Song[size];
+        }
+    };
     @Column(name = "name")
     public String name = "";
     @Column(name = "artist")
@@ -24,7 +34,7 @@ public class Song extends Model implements Parcelable {
     @Column(name = "category")
     public Category category = new Category();
     @Column(name = "date")
-    public int date = 0;
+    public java.util.Date date;
 
     public Song() {
         super();
@@ -39,6 +49,7 @@ public class Song extends Model implements Parcelable {
         this.imagepath = imagepath;
         this.duration = duration;
         this.category = category;
+        this.date = new java.util.Date();
     }
 
     protected Song(Parcel in) {
@@ -55,18 +66,6 @@ public class Song extends Model implements Parcelable {
         dest.writeString(filepath);
         dest.writeString(imagepath);
     }
-
-    public static final Creator<Song> CREATOR = new Creator<Song>() {
-        @Override
-        public Song createFromParcel(Parcel in) {
-            return new Song(in);
-        }
-
-        @Override
-        public Song[] newArray(int size) {
-            return new Song[size];
-        }
-    };
 
     public int describeContents() {
         return 0;
