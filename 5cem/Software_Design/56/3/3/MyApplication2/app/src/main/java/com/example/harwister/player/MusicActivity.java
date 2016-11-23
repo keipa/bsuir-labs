@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -29,10 +30,12 @@ import com.example.harwister.player.adapters.MusicAdapter;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -49,7 +52,14 @@ public class MusicActivity extends AppCompatActivity implements PlayFragment.OnF
     private GestureDetectorCompat mDetector;
 
     private float mScaleFactor = 1.f;
+    private long ndkDurationSum = 0;
+    private long javaDurationSum = 0;
 
+    static {
+        System.loadLibrary("native_sum");
+    }
+
+    public native long sumNDK(Object[] songs);
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -75,6 +85,8 @@ public class MusicActivity extends AppCompatActivity implements PlayFragment.OnF
         rec.setAdapter(musicAdapter);
 
         mDetector = new GestureDetectorCompat(this, new MyGestureListener());
+
+        ndkDurationSum = sumNDK(songs.toArray());
 
         rec.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -114,6 +126,13 @@ public class MusicActivity extends AppCompatActivity implements PlayFragment.OnF
         return result;
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Toast.makeText(this, "NDK SUM" + this.ndkDurationSum,
+                Toast.LENGTH_LONG).show();
+    }
+
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(MusicActivity.this);
         LayoutInflater inflater = MusicActivity.this.getLayoutInflater();
@@ -134,16 +153,22 @@ public class MusicActivity extends AppCompatActivity implements PlayFragment.OnF
             @Override
             public void onClick(DialogInterface dialog, int id) {
                 Toast.makeText(MusicActivity.this, "Song added", Toast.LENGTH_SHORT).show();
+                MediaMetadataRetriever mmr = new MediaMetadataRetriever();
                 for (int chosenSong : mSelectedItems) {
                     Song new_song = new Song();
                     new_song.name = songs_on_the_device.get(chosenSong).name;
                     new_song.artist = songs_on_the_device.get(chosenSong).artist;
                     new_song.filepath = songs_on_the_device.get(chosenSong).filepath;
-                    new_song.category = (Category) new Select().from(Category.class).where("Id = ?", categoryId).execute().get(0);
+
+                    mmr.setDataSource(new_song.filepath);
+                    String duration = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);
+                    new_song.duration = Long.parseLong(duration) % 60000 / 10000;
+
+                    new_song.category = (Category) new Select().
+                            from(Category.class).where("Id = ?", categoryId).execute().get(0);
                     new_song.imagepath = images[ran.nextInt(images.length - 1)];
 
                     Bitmap kek = downloadBitmap("http://unsplash.it/200/200/?random");
-
                     new_song.save();
                     songs.add(new_song);
                     musicAdapter.notifyItemInserted(songs.size());

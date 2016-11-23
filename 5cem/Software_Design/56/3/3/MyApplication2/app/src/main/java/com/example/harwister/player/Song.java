@@ -30,7 +30,7 @@ public class Song extends Model implements Parcelable {
     @Column(name = "imagepath")
     public int imagepath = 0;
     @Column(name = "duration")
-    public Integer duration = 0;
+    public long duration = 0;
     @Column(name = "category")
     public Category category = new Category();
     @Column(name = "date")
