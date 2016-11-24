@@ -1,4 +1,6 @@
+﻿
 # Дисклеймер
+[![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 Перед тем как пиздить чужой код, подумай, анон. А надо ли оно тебе. Рекомендую разобрать всё самостоятельно, а не катать.
 Автор не несёт ответственности за предоставленные коды.
 
