@@ -12,6 +12,6 @@
 extern "C" {
 JNIEXPORT jlong JNICALL
 Java_com_example_harwister_player_MusicActivity_sumNDK(
-        JNIEnv *env, jclass cls, jobjectArray arr);
+        JNIEnv *env, jclass cls, jlongArray arr);
 };
 #endif //MYAPPLICATION2_NATIVE_SUM_H

@@ -19,25 +19,21 @@ void init(JNIEnv *env) {
     arrGet = env->GetMethodID(arrClass, "get", "(I)Ljava/lang/Object;");
     arrSet = env->GetMethodID(arrClass, "set", "(ILjava/lang/Object;)Ljava/lang/Object;");
 
-    newsClass = static_cast<jclass>(env->NewGlobalRef(
-            env->FindClass("com/example/harwister/player/Song")));
-    duration = env->GetFieldID(newsClass, "duration", "J");
 }
 
-jlong findSum(JNIEnv *env, jobjectArray arr, jsize size) {
+jlong findSum(JNIEnv *env, jlongArray arr, jsize size) {
     jlong sum = 0;
-
-    // for (jsize i = 0; i < size; i++) {
-    jobject a = env->GetObjectArrayElement(arr, size - 1);
-    jlong kek = (jlong)env->GetObjectField(a, duration);
-    env->DeleteLocalRef(a);
-   // }
-    return sum;
+    jlong *elements = env->GetLongArrayElements(arr, false);
+//    for (jsize i = 0; i < size; i++) {
+//        sum += elements[i];
+//    }
+    //env->ReleaseLongArrayElements(arr, elements, 0);
+    return size;
 }
 
 JNIEXPORT jlong
 Java_com_example_harwister_player_MusicActivity_sumNDK(
-        JNIEnv *env, jclass cls, jobjectArray arr) {
+        JNIEnv *env, jclass cls, jlongArray arr) {
 
     init(env);
     jsize size = env->GetArrayLength(arr);

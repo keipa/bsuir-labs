@@ -59,7 +59,7 @@ public class MusicActivity extends AppCompatActivity implements PlayFragment.OnF
         System.loadLibrary("native_sum");
     }
 
-    public native long sumNDK(Object[] songs);
+    public native long sumNDK(Long[] arr);
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -86,7 +86,11 @@ public class MusicActivity extends AppCompatActivity implements PlayFragment.OnF
 
         mDetector = new GestureDetectorCompat(this, new MyGestureListener());
 
-        ndkDurationSum = sumNDK(songs.toArray());
+        Long[] arr = new Long[songs.size()];
+        for (int i = 0; i < songs.size(); i++) {
+            arr[i] = songs.get(i).duration;
+        }
+        ndkDurationSum = sumNDK(arr);
 
         rec.setOnTouchListener(new View.OnTouchListener() {
             @Override
