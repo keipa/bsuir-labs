@@ -34,7 +34,10 @@ public class Song extends Model implements Parcelable {
     @Column(name = "category")
     public Category category = new Category();
     @Column(name = "date")
+
     public java.util.Date date;
+    @Column(name = "picpath")
+    public String picpath = "";
 
     public Song() {
         super();

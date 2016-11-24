@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
@@ -20,27 +21,29 @@ import android.support.v7.widget.RecyclerView;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
-import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.activeandroid.query.Select;
+import com.example.harwister.player.adapters.FileSafeTask;
 import com.example.harwister.player.adapters.MusicAdapter;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Array;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 public class MusicActivity extends AppCompatActivity implements PlayFragment.OnFragmentInteractionListener {
-    MusicAdapter musicAdapter;
+    public MusicAdapter musicAdapter;
     List<Song> songs;
     Long categoryId;
     int[] images = {R.drawable.ima1,
@@ -53,13 +56,14 @@ public class MusicActivity extends AppCompatActivity implements PlayFragment.OnF
 
     private float mScaleFactor = 1.f;
     private long ndkDurationSum = 0;
+    private long durationOfNDKSum = 0;
     private long javaDurationSum = 0;
+    private long durationOfJavaSum = 0;
 
     static {
         System.loadLibrary("native_sum");
     }
 
-    public native long sumNDK(Long[] arr);
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -86,11 +90,6 @@ public class MusicActivity extends AppCompatActivity implements PlayFragment.OnF
 
         mDetector = new GestureDetectorCompat(this, new MyGestureListener());
 
-        Long[] arr = new Long[songs.size()];
-        for (int i = 0; i < songs.size(); i++) {
-            arr[i] = songs.get(i).duration;
-        }
-        ndkDurationSum = sumNDK(arr);
 
         rec.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -110,32 +109,49 @@ public class MusicActivity extends AppCompatActivity implements PlayFragment.OnF
         musicAdapter.playNextSong(imageView);
     }
 
-    private Bitmap downloadBitmap(String src) {
-        Bitmap result = null;
-        if (src != "") {
-            try {
-                URL u = new java.net.URL(src);
-                HttpURLConnection connection = (HttpURLConnection)u.openConnection();
-                connection.setDoInput(true);
-                connection.connect();
-                InputStream input = connection.getInputStream();
-                Bitmap bitmap = BitmapFactory.decodeStream(input);
-                result = bitmap;
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+
+
+    public native long findDurationSumWithNDK(long[] arr);
+
+    protected long findDurationSumWithJava(long[] arr) {
+        long sum = 0;
+        for (int i = 0; i < arr.length; i++) {
+            sum += arr[i];
         }
-        return result;
+        return sum;
+    }
+
+    protected void findDurationSums() throws InterruptedException {
+        long[] arr = new long[songs.size()];
+        for (int i = 0; i < songs.size(); i++) {
+            arr[i] = songs.get(i).duration;
+        }
+
+        this.durationOfNDKSum = System.currentTimeMillis();
+        ndkDurationSum = findDurationSumWithNDK(arr);
+        this.durationOfNDKSum = System.currentTimeMillis() - this.durationOfNDKSum;
+
+        this.durationOfJavaSum = System.currentTimeMillis();
+        Thread.sleep(1,1);
+        javaDurationSum = findDurationSumWithJava(arr);
+        this.durationOfJavaSum = System.currentTimeMillis() - this.durationOfJavaSum;
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        Toast.makeText(this, "NDK SUM" + this.ndkDurationSum,
-                Toast.LENGTH_LONG).show();
+        try {
+            findDurationSums();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Toast.makeText(this, "NDK SUM: " + this.ndkDurationSum
+                + " " + durationOfNDKSum + " Miliseconds", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "JAVA SUM: " + this.javaDurationSum
+                + " " + durationOfJavaSum + " Miliseconds", Toast.LENGTH_LONG).show();
     }
+
+
 
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(MusicActivity.this);
@@ -166,17 +182,17 @@ public class MusicActivity extends AppCompatActivity implements PlayFragment.OnF
 
                     mmr.setDataSource(new_song.filepath);
                     String duration = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);
-                    new_song.duration = Long.parseLong(duration) % 60000 / 10000;
+                    new_song.duration = Long.parseLong(duration);
 
-                    new_song.category = (Category) new Select().
-                            from(Category.class).where("Id = ?", categoryId).execute().get(0);
-                    new_song.imagepath = images[ran.nextInt(images.length - 1)];
+                new_song.category = (Category) new Select().
+                        from(Category.class).where("Id = ?", categoryId).execute().get(0);
 
-                    Bitmap kek = downloadBitmap("http://unsplash.it/200/200/?random");
-                    new_song.save();
-                    songs.add(new_song);
+                songs.add(new_song);
+                FileSafeTask task = new FileSafeTask(new_song, MusicActivity.this);
+                  new_song.save();
+                task.execute();
                     musicAdapter.notifyItemInserted(songs.size());
-                }
+            }
             }
         }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override

@@ -23,16 +23,16 @@ void init(JNIEnv *env) {
 
 jlong findSum(JNIEnv *env, jlongArray arr, jsize size) {
     jlong sum = 0;
-    jlong *elements = env->GetLongArrayElements(arr, false);
-//    for (jsize i = 0; i < size; i++) {
-//        sum += elements[i];
-//    }
-    //env->ReleaseLongArrayElements(arr, elements, 0);
-    return size;
+    jlong *elements = env->GetLongArrayElements(arr, NULL);
+    for (jsize i = 0; i < size; i++) {
+        sum += elements[i];
+    }
+    env->ReleaseLongArrayElements(arr, elements, 0);
+    return sum;
 }
 
 JNIEXPORT jlong
-Java_com_example_harwister_player_MusicActivity_sumNDK(
+Java_com_example_harwister_player_MusicActivity_findDurationSumWithNDK(
         JNIEnv *env, jclass cls, jlongArray arr) {
 
     init(env);
