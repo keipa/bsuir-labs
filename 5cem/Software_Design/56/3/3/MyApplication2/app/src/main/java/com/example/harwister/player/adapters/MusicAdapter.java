@@ -5,6 +5,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.support.v7.widget.CardView;
@@ -44,7 +46,14 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.ViewHolder> 
     public void onBindViewHolder(final MusicAdapter.ViewHolder holder, final int position) {
         final SongViewHolder cholder = (SongViewHolder) holder;
         cholder.name.setText(songs.get(position).name);
-        cholder.image.setImageResource(songs.get(position).imagepath);
+
+        // image setup
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+        Bitmap bitmap = BitmapFactory.decodeFile(songs.get(position).picpath, options);
+        cholder.image.setImageBitmap(bitmap);
+        // image setup
+
         cholder.root.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -118,7 +127,12 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.ViewHolder> 
         Song song_to_play = songs.get(playingSongPosition);
         if (mediaPlayer != null) mediaPlayer.stop();
         mediaPlayer = MediaPlayer.create(activity, Uri.parse(song_to_play.filepath));
-        imageView.setImageResource(song_to_play.imagepath);
+
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+        Bitmap bitmap = BitmapFactory.decodeFile(song_to_play.picpath, options);
+//        selected_photo.setImageBitmap(bitmap);
+        imageView.setImageBitmap(bitmap);
         mediaPlayer.start();
         Date date = new Date();
         song_to_play.date = date;

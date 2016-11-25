@@ -110,7 +110,6 @@ public class MusicActivity extends AppCompatActivity implements PlayFragment.OnF
     }
 
 
-
     public native long findDurationSumWithNDK(long[] arr);
 
     protected long findDurationSumWithJava(long[] arr) {
@@ -132,7 +131,7 @@ public class MusicActivity extends AppCompatActivity implements PlayFragment.OnF
         this.durationOfNDKSum = System.currentTimeMillis() - this.durationOfNDKSum;
 
         this.durationOfJavaSum = System.currentTimeMillis();
-        Thread.sleep(1,1);
+        Thread.sleep(1, 1);
         javaDurationSum = findDurationSumWithJava(arr);
         this.durationOfJavaSum = System.currentTimeMillis() - this.durationOfJavaSum;
     }
@@ -150,7 +149,6 @@ public class MusicActivity extends AppCompatActivity implements PlayFragment.OnF
         Toast.makeText(this, "JAVA SUM: " + this.javaDurationSum
                 + " " + durationOfJavaSum + " Miliseconds", Toast.LENGTH_LONG).show();
     }
-
 
 
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -184,15 +182,15 @@ public class MusicActivity extends AppCompatActivity implements PlayFragment.OnF
                     String duration = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);
                     new_song.duration = Long.parseLong(duration);
 
-                new_song.category = (Category) new Select().
-                        from(Category.class).where("Id = ?", categoryId).execute().get(0);
+                    new_song.category = (Category) new Select().
+                            from(Category.class).where("Id = ?", categoryId).execute().get(0);
 
-                songs.add(new_song);
-                FileSafeTask task = new FileSafeTask(new_song, MusicActivity.this);
-                  new_song.save();
-                task.execute();
+                    songs.add(new_song);
+                    FileSafeTask task = new FileSafeTask(new_song, MusicActivity.this);
+                    new_song.save();
+                    task.execute();
                     musicAdapter.notifyItemInserted(songs.size());
-            }
+                }
             }
         }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
@@ -244,7 +242,7 @@ public class MusicActivity extends AppCompatActivity implements PlayFragment.OnF
 
     }
 
-    public void onSwipeLeft(){
+    public void onSwipeLeft() {
         playNextSong((ImageView) findViewById(R.id.song_imageview));
     }
 
