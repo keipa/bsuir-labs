@@ -57,10 +57,7 @@ public class MusicActivity extends AppCompatActivity implements PlayFragment.OnF
         musicAdapter = new MusicAdapter(songs, this);
         rec.setAdapter(musicAdapter);
 
-//        PlayFragment fragment = new PlayFragment();
-//        fragment.songs = songs;
-//        fragment.current_song = songs.get(0);
-//        fragment.activity = this;
+
     }
 
     public void playNextSong(ImageView imageView){

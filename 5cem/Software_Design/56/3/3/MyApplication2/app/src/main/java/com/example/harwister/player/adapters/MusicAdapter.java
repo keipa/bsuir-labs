@@ -4,11 +4,16 @@ package com.example.harwister.player.adapters;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -66,10 +71,12 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.ViewHolder> 
                 song_to_play.date = date;
                 song_to_play.save();
                 playingSongPosition = position;
+
             }
         });
 
     }
+
 
     public Dialog onCreateDialog(final String song_name) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);

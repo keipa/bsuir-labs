@@ -1,6 +1,9 @@
 package com.example.harwister.player.adapters;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -19,8 +22,10 @@ import com.example.harwister.player.MusicActivity;
 import com.example.harwister.player.R;
 import com.example.harwister.player.Song;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
 
@@ -130,7 +135,45 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
                     activity.startActivity(intent);
                 }
             });
+
+            v.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    Dialog dialog = onCreateDialog(name.getText().toString());
+                    dialog.show();
+                    return true;
+                }
+            });
         }
+    }
+
+    public Dialog onCreateDialog(final String category_name) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        LayoutInflater inflater = activity.getLayoutInflater();
+        final View kek = inflater.inflate(R.layout.dialog_delete_song, null);
+        builder.setView(kek)
+                .setPositiveButton("DELETE", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        Toast.makeText(activity, "deleting", Toast.LENGTH_SHORT).show();
+                        Category file_to_delete = (Category) new Select().from(Category.class).where("name = ?", category_name.toString()).execute().get(0);
+                        int index = list.indexOf(file_to_delete);
+                        list.remove(file_to_delete);
+                        notifyItemRemoved(index);
+                        file_to_delete.delete();
+
+//                        ArrayList<Song> songs_to_delete = (ArrayList<Song>) new Select().from(Song.class).where("category = ?", category_name.toString()).execute().toArray();
+//                        for (Object obj: songs_to_delete) {
+//                            Song elem = (Song)obj;
+//                            elem.delete();
+//                        }
+                    }
+                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+            }
+        });
+        builder.setTitle("Delete category?");
+        return builder.create();
     }
 
     public class RecentSongViewHolder extends ViewHolder {

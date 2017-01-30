@@ -7,20 +7,25 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-
-    <ImageView
-        android:layout_height="100dp"
-        app:srcCompat="@mipmap/ic_launcher"
-        android:id="@+id/song_imageview"
-        android:layout_width="100dp" />
-
     <Button
-        android:text="Next song"
+        android:text="Next composition"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="60dp"
         android:id="@+id/next_song_button"
         android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/song_imageview"
-        android:layout_toRightOf="@+id/song_imageview" />
+        android:layout_toStartOf="@+id/song_imageview"
+        android:elevation="0dp"
+        style="@style/AppTheme" />
+
+    <ImageView
+        android:layout_height="60dp"
+        app:srcCompat="@android:drawable/ic_media_ff"
+        android:id="@+id/song_imageview"
+        android:layout_width="100dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:background="@android:color/background_dark"
+        android:backgroundTint="@color/cardview_shadow_start_color" />
+
 
 </RelativeLayout>
