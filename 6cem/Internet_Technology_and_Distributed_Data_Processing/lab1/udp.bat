@@ -1,2 +1,2 @@
-start cmd.exe /k "py recieve.py"
-start cmd.exe /k "py send.py"
+start cmd.exe /k "py main.py"
+start cmd.exe /k "py main.py"
