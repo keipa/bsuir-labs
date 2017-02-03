@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    </head>
+
+<body>
+
+<br>
+<table align="center" width="60%">
+    <tr>
+        <td>
+            <table>
+                <tr>
+                    <td align="center">
+                        <img src="logo.png">
+                        <h2 style="font-family: cursive;">ISSoft Company<br>
+                            Тренинг по Comic Sans для студентов университета</h2>
+                        <h3>Участие бесплатное. Регистрация на мероприятие обязательна.</h3>
+
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/IU5a0nrW4k8" frameborder="0"
+                                allowfullscreen></iframe>
+                        <br>
+                    </td>
+                </tr>
+            </table>
+            <br>
+
+            <div id="form">
+                <table style="border: 1px solid black; border-collapse: collapse;" align="center">
+                    <tr>
+                        <td width="45%">
+                            <table align="center" width="90%">
+                                <tr>
+                                    <td>
+                                        <h2>Регистрационная форма</h2>
+                                        <br>
+                                        <input name="vuz" type="text" placeholder="Вуз">
+                                        <input name="spec" type="text" placeholder="Специальность">
+                                        <p>
+                                            <table style="border: 1px solid black;border-collapse: collapse;">
+                                                <tr style=" border: 1px solid black;border-collapse: collapse;  ">
+                                                    <th>
+                                        <p><b>Вид производственной практики:</b><Br>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center">
+                                        <br>
+                                        <p><input type="radio" name="pract" value="ie" content="kek">Производственная
+                                        </p>
+                                        <p><input type="radio" name="pract" value="opera"> Преддипломная</p>
+                                        <br>
+                                        <br>
+                                    </td>
+                                </tr>
+                            </table>
+                            <br>
+                            <table style="border: 1px solid black;border-collapse: collapse;">
+                                <tr style=" border: 1px solid black; border-collapse: collapse;  ">
+                                    <th>
+                                        <h4>
+                                            Желаемое время присутствия в офисе компании.
+                                        </h4>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td align="center">
+                                        <br>
+                                        <input type="time" name="time"
+                                        ></p>
+                                        <input type="date" name="date">
+
+                                        <br><br>
+                                    </td>
+                                </tr>
+                            </table>
+                            <h4>Ваши навыки</h4>
+                            <table style="border: 1px solid black;border-collapse: collapse;">
+                                <tr>
+                                    <td><input id="skill1" class="skill" type="checkbox" name="skills" value="first skill">first skill </td>
+                                    <td><input type="radio" name="cool" value="1"> 1</td>
+                                    <td><input type="radio" name="cool" value="2"> 2</td>
+                                    <td><input type="radio" name="cool" value="3"> 3</td>
+                                    <td><input type="radio" name="cool" value="4"> 4</td>
+                                    <td><input type="radio" name="cool" value="5"> 5</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td><input id="skill2" class="skill" type="checkbox" name="skills"
+                                               value="second skill">second
+                                        skill
+                                    </td>
+                                    <td><input type="radio" name="cool" value="1"> 1</td>
+                                    <td><input type="radio" name="cool" value="2"> 2</td>
+                                    <td><input type="radio" name="cool" value="3"> 3</td>
+                                    <td><input type="radio" name="cool" value="4"> 4</td>
+                                    <td><input type="radio" name="cool" value="5"> 5</td>
+                                </tr>
+
+                                <tr>
+                                    <td><input id="skill3" class="skill" type="checkbox" name="skills"
+                                               value="third skill"> third
+                                        skill
+                                    </td>
+                                    <td><input type="radio" name="cool" value="1"> 1</td>
+                                    <td><input type="radio" name="cool" value="2"> 2</td>
+                                    <td><input type="radio" name="cool" value="3"> 3</td>
+                                    <td><input type="radio" name="cool" value="4"> 4</td>
+                                    <td><input type="radio" name="cool" value="5"> 5</td>
+                                </tr>
+
+                                <tr>
+                                    <td><input id="skill4" class="skill" type="checkbox" name="skills"
+                                               value="fourth skill"> fourth
+                                        skill
+                                    </td>
+                                    <td><input type="radio" name="cool" value="1"> 1</td>
+                                    <td><input type="radio" name="cool" value="2"> 2</td>
+                                    <td><input type="radio" name="cool" value="3"> 3</td>
+                                    <td><input type="radio" name="cool" value="4"> 4</td>
+                                    <td><input type="radio" name="cool" value="5"> 5</td>
+                                </tr>
+
+                                <tr>
+                                    <td><input id="skill5" class="skill" type="checkbox" name="skills"
+                                               value="fifth skill">fifth
+                                        skill
+                                    </td>
+                                    <td><input type="radio" name="cool" value="1"> 1</td>
+                                    <td><input type="radio" name="cool" value="2"> 2</td>
+                                    <td><input type="radio" name="cool" value="3"> 3</td>
+                                    <td><input type="radio" name="cool" value="4"> 4</td>
+                                    <td><input type="radio" name="cool" value="5"> 5</td>
+                                </tr>
+                            </table>
+                            <br>
+                            <input type="file" name="datafile" size="40"><br>
+                            <br>
+                            <input id="submit" type="button" value="Send">
+
+
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </td>
+
+    </tr>
+</table>
+</div>
+
+
+<h2 id="thank" style="color: darkgreen;">Спасибо, Ваша заявка отправлена</h2>
+
+
+<table class="mainpage-footer footer">
+    <td>
+        <p class="copyright">© 2017 «ISsoft», Все права защищены</p>
+    </td>
+    <td>
+        <div class="mainpage-footer-address">
+            <p>
+                Минск, ул. Сторожевская, 5, офис 15
+            </p>
+        </div>
+    </td>
+    <td>
+        <div class="mainpage-footer-contact">
+            <p class="phone">+375 11 111 11 11</p>
+        </div>
+    </td>
+    </div>
+</table>
+</td>
+</tr>
+</table>
+
+<script>
+    $("#thank").fadeOut();
+    $("#submit").click(function () {
+        $("#form").fadeOut();
+        $("#thank").fadeIn();
+    })
+
+
+    //    for (i = 0; i < a.length; i++) {
+    //        $(b[i]).fadeOut('fast');
+    //
+    //    }
+
+</script>
+<br>
+
+
+</body>
+</html>
