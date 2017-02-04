@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <p class="navbar-text navbar-right">Тренинг по Javascript для студентов университета </p>
+
+            <a class="navbar-brand" href="#">ISSoft Company</a>
+        </div>
+
+    </div>
+</nav>
+<div class="center-block" style="width: 60%;">
+
+    <h3 class="">Участие бесплатное.
+        <small>Регистрация на мероприятие обязательна.</small>
+    </h3>
+
+
+    <h2>Описание тренинга</h2>
+    <br>
+    Изучаемый материал будет демонстрироваться на едином сквозном примере -- мы будем разрабатывать на языке Java
+    автоматизированные тесты для веб-приложения, используя <b>Selenium WebDriver</b>. Начав с простого теста,
+    записанного
+    “рекордером”, мы будем постепенно усложнять архитектуру тестового набора, добавлять и усиливать проверки в
+    тестах, дополнять тесты генераторами тестовых данных. Основной акцент будет сделан не на алгоритмы, а на
+    изучение различных полезных библиотек и фреймворков, а также шаблонов проектирования, позволяющих организовать
+    код автоматизированных тестов таким образом, чтобы его было легко модифицировать и расширять.
+    <p>
+        Для веб-приложений характерным случаем является использование <i>электронной почты</i> -- отправка ссылки
+        для
+        подтверждения регистрации, восстановление пароля, оповещения о каких-либо событиях. Для тестирования такого
+        рода функциональности мы научимся работать с почтовым сервером из автоматизированных тестов: принимать и
+        отправлять почту, анализировать содержимое почтовых сообщений. Настройка приложения, находящегося на
+        удалённом сервере, может потребовать умения загружать туда файлы по протоколу FTP.
+
+
+    <h2>Пример программ </h2>
+    <class t="">
+            <pre>
+function Fibonacci() {
+    var a = 0, b = 1, c;
+    document.write("Fibonacci");
+    while (b <= 10) {
+        document.write(c);
+        document.write("<br/>");
+        c = a + b;
+        a = b;
+        b = c;
+    }
+}
+
+function Palindrome() {
+    var revStr = "";
+    var str = document.getElementById("str").value;
+    var i = str.length;
+    for (var j = i; j >= 0; j--) {
+        revStr = revStr + str.charAt(j);
+    }
+    if (str == revStr) {
+        alert(str + " is Palindrome");
+    } else {
+        alert(str + " is not a Palindrome");
+    }
+}
+
+            </pre>
+
+    </class>
+
+
+    <h2>Список тем</h2>
+
+    <dl class="dl-horizontal">
+        <dt>1. Основы</dt>
+        <dd> В первом занятии будут рассмотрены базовые конструкции языка программирования Java -- классы и объекты,
+            переменные и функции. Заодно научимся пользоваться отладчиком. Но до создания тестов так и не доберёмся.
+        </dd>
+        <dt>2. Архитектура</dt>
+        <dd> Затем мы сразу совершим “прыжок” -- вместо того, чтобы постепенно усложнять свою первую примитивную
+            программу,
+            мы запишем “рекордером” готовый тест для веб-приложения, перенесём его в среду разработки, подключим все
+            необходимые вспомогательные библиотеки, а потом будем его улучшать.
+        </dd>
+        <dt>3. Управление</dt>
+        <dd> Условный переход (if-then) -- это одна из основных конструкций языка программирования, позволяющая
+            программе
+            вести себя по разному в разных условиях.
+        </dd>
+    </dl>
+
+
+    <h2>План работы</h2>
+
+    <table class="table table-striped">
+        <tr>
+            <th>Время</th>
+            <th>День 1</th>
+            <th>День 2</th>
+            <th>День 3</th>
+        </tr>
+        <tr>
+            <td>10:30</td>
+            <td>Основы программирования</td>
+            <td>Двухуровневая архитектура тестового набора</td>
+            <td>Управление потоком выполнения кода: условный переход</td>
+        </tr>
+        <tr>
+            <td>11:30</td>
+            <td>Тестовые фреймворки и инфраструктура</td>
+            <td>Сетевое программирование: удалённые программные интерфейсы</td>
+            <td>Сетевое программирование: протоколы прикладного уровня</td>
+        </tr>
+        <tr>
+            <td>12:30</td>
+            <td>Работа с файлами</td>
+            <td>Работа со строками</td>
+            <td>Коллекции и циклы</td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>
