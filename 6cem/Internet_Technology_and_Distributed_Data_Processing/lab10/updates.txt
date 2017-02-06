@@ -1,0 +1,16 @@
+Scoping
+Default Parameter Values
+Extended Parameter Handling
+String Interpolation
+Class Definition
+Class Inheritance
+Base Class Access
+Static Members
+Getter/Setter
+Generator Function, Direct Use
+
+
+
+
+Модифицируйте код скриптов, созданных при решении задач из работ
+№№7-9, используя новые синтаксические элементы ECMAScript 2015.
