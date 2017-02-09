@@ -1,0 +1,1 @@
+ps -eo pid,%mem,cpu,user | sort -k 1 -k 2 -nr| head -15 |  grep '4536\|2478'
