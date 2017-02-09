@@ -1,0 +1,15 @@
+USE BOOKREADPEOPLE
+GO
+
+ALTER PROCEDURE deletemyTable
+    @strtable VARCHAR(100),
+    @id    INT
+AS
+  BEGIN
+
+    DECLARE @strsql NVARCHAR(MAX) = 'delete from ';
+    SET @strsql += @strtable + ' where id=' + CASt(@id AS VARCHAR(100)) ;
+    PRINT @strsql
+    EXEC sp_executesql @strsql;
+
+  END

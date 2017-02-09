@@ -1,0 +1,50 @@
+--
+--
+USE BOOKREADPEOPLE
+GO
+
+
+-- INSERT INTO MyTable  (val)
+-- SELECT val
+-- FROM Mytable
+-- WHERE Id = 10255;
+-- SELECT dbo.getStringbyID(10051)
+
+-- EXEC deletemyTable 'MyTable', 20000
+
+-- UPDATE MyTable SET val = 10000 WHERE id = 10000
+
+--
+-- EXEC updateTable 'MyTable', 10255,	1337
+
+-- EXEC insertinTable 'MyTable', 1000/
+
+
+
+
+
+-- SELECT  dbo.eval();
+
+-- DELETE FROM MyTable
+
+
+
+-- DECLARE @tab TABLE  (val int)
+-- DECLARE @records INT = 10000;
+-- WHILE @records>0
+--    BEGIN
+-- DECLARE @min INT = 0;
+-- DECLARE @max INT = 100;
+--    INSERT INTO MyTable (val)
+-- SELECT @min + ROUND(RAND() * (@max - @min), 0);
+--    SET @records = @records-1
+--    END
+-- DECLARE @counter smallint;
+-- SET @counter = 1;
+-- WHILE @counter < 5
+--    BEGIN
+--       SELECT RAND() Random_Number
+--       SET @counter = @counter + 1
+--    END;
+-- GO
+

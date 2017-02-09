@@ -1,0 +1,15 @@
+  USE BOOKREADPEOPLE
+  GO
+
+  ALTER PROCEDURE updateTable
+    @strtable VARCHAR(100),
+    @id       INT,
+    @value    INT
+  AS
+  BEGIN
+
+    DECLARE @strsql NVARCHAR(MAX) = 'Update ';
+    SET @strsql += @strtable + ' SET val = ' + CASt(@value as VARCHAR(100))+ 'where id = ' + CAST(@id as VARCHAR(100));
+    EXEC sp_executesql @strsql;
+
+  END

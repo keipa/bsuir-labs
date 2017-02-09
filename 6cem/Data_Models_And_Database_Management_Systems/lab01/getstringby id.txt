@@ -1,0 +1,11 @@
+CREATE FUNCTION getStringbyID
+  (
+    @id INT
+  )
+  RETURNS VARCHAR(1000)
+AS
+
+  BEGIN
+    DECLARE @str VARCHAR(1000) = 'INSERT INTO MyTable  (val) SELECT val FROM Mytable WHERE Id = ' + CAST(@id AS VARCHAR(10))
+    RETURN @str;
+  END

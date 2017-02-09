@@ -1,0 +1,10 @@
+DECLARE @tab TABLE  (val int)
+DECLARE @records INT = 10000;
+WHILE @records>0
+   BEGIN
+DECLARE @min INT = 0;
+DECLARE @max INT = 100;
+   INSERT INTO MyTable (val)
+SELECT @min + ROUND(RAND() * (@max - @min), 0);
+   SET @records = @records-1
+   END

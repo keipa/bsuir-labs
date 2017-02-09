@@ -1,0 +1,29 @@
+CREATE FUNCTION eval()
+  RETURNS BIT
+
+
+AS
+
+  BEGIN
+    DECLARE @howmucheven INT;
+    DECLARE @howmuchrecords INT;
+    DECLARE @howmuchodd INT;
+    DECLARE @isbig BIT;
+    SELECT @howmuchrecords = count(*)
+    FROM MyTable
+    SELECT @howmucheven = count(val)
+    FROM BOOKREADPEOPLE.dbo.MyTable
+    WHERE val % 2 = 0
+    SET @howmuchodd = @howmuchrecords - @howmucheven;
+    IF @howmucheven > @howmuchodd
+      BEGIN
+        SET @isbig = 0
+
+      END
+    ELSE
+      BEGIN
+        SET @isbig = 1
+      END
+
+    RETURN @isbig
+END
