@@ -21,9 +21,9 @@ def simplex(m, n, A, b, c, x_0, J):
         if not all(_z <= 0 for _z in list(z)):
             print("Нет решений.")
             break
-        for i, _z in zip(J, z):
+        for j, _z in zip(J, z):
             if _z > 0:
-                Theta.append(x_0[i] / _z)
+                Theta.append(x_0[j] / _z)
             else:
                 Theta.append(inf)
         s = argmin(Theta)  # Theta arg equal Jb arg
