@@ -111,27 +111,4 @@ class RC5:
                     text = text.rstrip(b'\x00')
                 out.write(text)
 
-    def encryptBytes(self, data):
-        res, run = b'', True
-        while run:
-            temp = data[:self.w4]
-            if len(temp) != self.w4:
-                data = data.ljust(self.w4, b'\x00')
-                run = False
-            res += self.encryptBlock(temp)
-            data = data[self.w4:]
-            if not data:
-                break
-        return res
 
-    def decryptBytes(self, data):
-        res, run = b'', True
-        while run:
-            temp = data[:self.w4]
-            if len(temp) != self.w4:
-                run = False
-            res += self.decryptBlock(temp)
-            data = data[self.w4:]
-            if not data:
-                break
-        return res.rstrip(b'\x00')
