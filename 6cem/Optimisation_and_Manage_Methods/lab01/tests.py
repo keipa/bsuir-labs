@@ -1,5 +1,7 @@
 import unittest
+
 from numpy import *
+
 import lab1
 
 
@@ -89,7 +91,6 @@ class SimplexTest(unittest.TestCase):
         x_0 = array([4.0, 0.0, 6.0, 0.0, 4.5, 0.0, 0.0, 0.0])
         J = array([1, 3, 5])
         correct_result = ([0.0, 0.75, 0.0, 2.682, 0.0, 0.0, 0.0, 13.432], 38.909090909090907, 3)
-
         assert correct_result == lab1.simplex(m, n, A, b, c, x_0, J)
 
 if __name__ == "__main__":
