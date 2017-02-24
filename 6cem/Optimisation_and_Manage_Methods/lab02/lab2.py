@@ -14,7 +14,7 @@ def double_simplex(m, n, c, b, A, J, y, small_delta):
                 x_0[j] = _chi
             print("Количество итераций : ", iter_count)
             print("Максимальная прибыль : ", c.dot(x_0))
-            print(list(map(lambda _x: round(float(_x), 3), list(x_0))), "- оптимальный план")
+            print(list(map(lambda _x: round(float(_x), 3), list(x_0))), "-  план")
             return x_0, iter_count
         k = argmin(chi)
         j = J[k]

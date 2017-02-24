@@ -1,6 +1,6 @@
+writeln ( data1[i],' ' );
 program Project2;
 
-{$APPTYPE CONSOLE}
 
 
 
@@ -14,12 +14,12 @@ const
 var
   num1:integer;
   i,j, min, tmp:integer;
-  data1:array[1..5000] of integer;
+  data1:array[] of integer;
   f:textfile;
   fOut: TextFile;
 
 type
-  SortedArray = array[1..5000] of integer;
+  SortedArray = array[] of integer;
 
 function bubSort(data: array of integer): SortedArray;
 begin
@@ -37,40 +37,40 @@ begin
      end;
      for i := 1 to num1 do
      begin
-       writeln(data[i],' ');
+       writeln ( data[i],' ' );
      end;
-    AssignFile(fOut, C_FNAME);
-    Rewrite(fOut);
-    CloseFile(fOut);
-    AssignFile(fOut, C_FNAME);
-    append(fOut);
+    AssignFile ( fOut, C_FNAME );
+    Rewrite ( fOut );
+    CloseFile ( fOut );
+    AssignFile ( fOut, C_FNAME );
+    append ( fOut );
     for i := 1 to num1 do
      begin
-       writeln(fOut, data[i]);
+       writeln ( fOut, data[i] );
      end;
-    CloseFile(fOut);
+    CloseFile ( fOut );
 end;
 begin
-  assignFile(f, 'Data1.txt');
-  writeln('Read Data1.txt');
-     reset(f);
-     read (f,num1);
+  assignFile( f, 'Data1.txt' );
+  writeln ( ' Read Data1 ' );
+     reset ( f );
+     read ( f,num1 );
      num1 := 0;
      While Not EOF(f) Do
       Begin
       num1 := num1 + 1;
-      read(f,data1[num1]);
+      read ( f,data1[num1] );
       End;
-     closefile(f);
-     writeln(num1);
+     closefile ( f );
+     writeln ( num1 );
      for i := 1 to num1 do
      begin
-        writeln(data1[i],' ');
+        writeln ( data1[i],' ' );
      end;
   writeln;
-  writeln('Data1.txt successfully read!');
+  writeln ( " Data1 successfully read! " );
   readln;
-  bubSort(data1);
-  writeln('Sorted!');
+  bubSort ( data1 );
+  writeln ( " Sorted! " );
   readln;
 end.
