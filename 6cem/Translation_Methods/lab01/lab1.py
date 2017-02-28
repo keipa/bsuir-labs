@@ -12,7 +12,7 @@ illegal_name = 'ILLEGAL_NAME'
 ans = list()
 
 expr = [
-    (r"\bprogram\s.*", reserved),
+    (r"\bprogram\s.*",reserved),
     (r'{$APPTYPE CONSOLE}', reserved),
     (r'var', reserved),
     (r'program\s\d+;', reserved),
@@ -64,24 +64,26 @@ expr = [
 
 def get_tokens(line, tokens, type, line_number):
     for token in tokens:
-        if token in ('+', '-', '/', '*', '(', ')', '[', ']'):
+        if token in ('+', '-', '/', '*', '(', ')', '[',']'):
             del_string = '\\' + token
         else:
             del_string = token
         line = re.sub(del_string, '', line, 1)
         ans.append((token, type, 'line: ' + str(line_number)))
+
     return line
 
 
 if __name__ == '__main__':
 
+    # f = open("input.txt")
     f = open("Project2.dpr")
 
     code = f.readlines()
     line_number = 0
     illegal_lines = []
     for line in code:
-        # todo multiprocessing
+        # todo multiproc
         current_line = line.strip()
         if current_line == '':
             continue
