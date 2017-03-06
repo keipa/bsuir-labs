@@ -5,7 +5,7 @@ from numpy import *
 import lab2
 
 
-class SimplexTest(unittest.TestCase):
+class DoubleSimplexTest(unittest.TestCase):
     # пример 1 из книги
     def test1(self):
         m = 3
