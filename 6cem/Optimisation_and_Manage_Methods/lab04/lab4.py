@@ -1,20 +1,23 @@
 from numpy import *
 
 
-def add_matrix(C, a, b):
-    if sum(a) > sum(b):
+def balance(C, a, b):
+    if sum(a) > sum(b):  # проверка на сбалансированность
+        print("Задача является открытой (несбалансированной). Приведение к сбалансированной...")
         b = list(b)
         b.append(sum(a) - sum(b))
         new_C = zeros((len(a), len(b)))
         new_C[:, :-1] = C
-        return new_C, a, array(b)
+        print("Задача сбалансирована.")
+        return new_C,  array(b)
     elif sum(a) == sum(b):
-        return C, a, b
-    else:
-        return None
+        print("Задача сбалансирована.")
+        return C,  b
+    else:  # не хватает продукции для восполнения потребности заказчика
+        return Exception()
 
 
-def basis_plan(C, a, b):
+def north_west_corner(C, a, b):
     m, n = C.shape
     r_ind, c_ind = range(m), range(n)
     x = zeros((m, n), dtype=float)
@@ -25,12 +28,12 @@ def basis_plan(C, a, b):
             a[r_ind[0]] -= b[c_ind[0]]
             U.append((r_ind[0], c_ind[0]))
             c_ind = c_ind[1:]
-        else:
+        else:  # добавление недостающих клеток для получения невырожденного плана N=n+m-1
             x[r_ind[0], c_ind[0]] = a[r_ind[0]]
             b[c_ind[0]] -= a[r_ind[0]]
             U.append((r_ind[0], c_ind[0]))
             r_ind = r_ind[1:]
-    return x, U
+    return x, U, m, n
 
 
 def potentials(C, U):
@@ -77,7 +80,6 @@ def create_graph(E):
 
 
 def dfs(G, v, path, finish):
-    # G = list(G)
     path.append(v)
     if v == finish:
         return True, path
@@ -91,25 +93,25 @@ def dfs(G, v, path, finish):
 
 
 def method_of_potentials(C, a, b):
-    prep = add_matrix(C, a, b)
+    prep = balance(C, a, b)
     if prep is None:
         print("No solution")
         return
-    C, a, b = prep
-    m, n = C.shape
-    x, U = basis_plan(C, a, b)
-    while True:
-        u, v = potentials(C, U)
-        dlt = zeros((m, n))
+    C, b = prep
+    x, U, m, n = north_west_corner(C, a, b)  # построение начального плана и базиса
+    iterations = 0
+    while True:  # итерация улучшения плана
+        u, v = potentials(C, U)  # Составим вспомогательную рабочую матрицу затрат
+        deltas = zeros((m, n))
         for i in range(m):
             for j in range(n):
-                dlt[i, j] = u[i] + v[j] - C[i, j]
-        if (dlt <= 0).all():
-            print("The optimal plan is")
-            print(x)
-            print("max = ", sum(array(C) * array(x)))
-            return
-        index = argmax(dlt)
+                deltas[i, j] = C[i, j] - u[i] - v[j]
+        if (deltas >= 0).all():
+            print("Оптимальный план перевозок: \n", x)
+            print("Максимальная издержка = ", sum(array(C) * array(x)))
+            print("Итераций улучшения плана затрачено: ", iterations)
+            return x.tolist(), sum(array(C) * array(x))
+        index = argmin(deltas)
         i0 = int(index / n)
         j0 = index % n
         cycl = cycle(U, (i0, j0), m)
@@ -122,6 +124,6 @@ def method_of_potentials(C, a, b):
                 x[i, j] += theta
             else:
                 x[i, j] -= theta
-
         U.remove((i1, j1))
         U.append((i0, j0))
+        iterations += 1

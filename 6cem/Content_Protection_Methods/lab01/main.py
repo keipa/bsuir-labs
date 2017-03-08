@@ -8,8 +8,8 @@ CONTENT_DECRYPTED = "exampleDEC"
 class RC5:
     def __init__(self, block_size, rounds, key):
         self.block_size = block_size  # block size (32, 64 or 128 bits)
-        self.rounds = rounds  # number of rounds (0 to 255)
-        self.key = key  # key (0 to 2040 bits)
+        self.rounds = rounds          # number of rounds (0 to 255)
+        self.key = key      # key (0 to 2040 bits)
 
         self.T = 2 * (rounds + 1)
         self.w4 = block_size // 4
@@ -22,7 +22,7 @@ class RC5:
         self.init_keys_array()  # Инициализация массива расширенных ключей
         self.shuffle()  # Перемешивание
 
-    def leftshift(self, val, n):   #   операция циклического сдвига на n битов влево
+    def leftshift(self, val, n):   # операция циклического сдвига на n битов влево
         n %= self.block_size
         return ((val << n) & self.mask) | ((val & self.mask) >> (self.block_size - n))
 
@@ -47,7 +47,7 @@ class RC5:
         L = [0] * self.c
         for i in range(self.b - 1, -1, -1):
             L[i // self.w8] = (L[i // self.w8] << 8) + self.key[i]
-        self.L = L  # массива с ключами
+        self.L = L  # массив с ключами
 
     def init_keys_array(self):
         P, Q = self.__const()
