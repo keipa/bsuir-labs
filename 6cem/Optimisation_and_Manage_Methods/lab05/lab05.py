@@ -1,9 +1,13 @@
 from numpy import *
 
 
-def ultimate_method(A, d, B, x0, J0, J):
-    D = B.T.dot(B)
-    c = -d.dot(B)
+def ultimate_method(A, d, B, x0, J0, J, D, c):
+    print("Решение задачи квадратичного программирования конечным методом:")
+    if B is not None and d is not None:
+        D = B.T.dot(B)
+        c = -d.dot(B)
+    if D is None:
+        D = B.T.dot(B)
     J0 -= 1
     J -= 1
     m, n = A.shape
@@ -26,7 +30,7 @@ def ultimate_method(A, d, B, x0, J0, J):
                 print(list(map(lambda _x: round(float(_x), 3), list(x0))), "- оптимальный план")
                 print("max = ", c.dot(x0) + 0.5 * x0.dot(D).dot(x0))
                 print("Количество итераций", iterations)
-                return x0, c.dot(x0) + 0.5 * x0.dot(D).dot(x0), iterations
+                return x0.tolist(), c.dot(x0) + 0.5 * x0.dot(D).dot(x0), iterations
             else:
                 index_0 = (argmin(delta[not_J]))
                 j0 = not_J[index_0]
@@ -61,7 +65,7 @@ def ultimate_method(A, d, B, x0, J0, J):
             j1 = J[j1]
         if isinf(Q_0):
             Q_0 = None
-            print("No solution")
+            print("Нет решений, т.к целевая функция не ограничена снизу на множестве планов")
         # steps_count
         if Q_0 is None:
             break
