@@ -40,15 +40,15 @@ def potentials(C, U):
     m, n = C.shape
     u, v = zeros(m), zeros(n)
     u[1:], v[:] = inf, inf
-    current_U = []
-    while len(current_U) != len(U):
+    _u = []
+    while len(_u) != len(U):
         for i, j in U:
-            if not (i, j) in current_U and not (isinf(u[i]) and isinf(v[j])):
+            if not (i, j) in _u and not (isinf(u[i]) and isinf(v[j])):
                 if isinf(u[i]):
                     u[i] = C[i, j] - v[j]
                 elif isinf(v[j]):
                     v[j] = C[i, j] - u[i]
-                current_U.append((i, j))
+                _u.append((i, j))
     return u, v
 
 
@@ -111,19 +111,20 @@ def method_of_potentials(C, a, b):
             print("Максимальная издержка = ", sum(array(C) * array(x)))
             print("Итераций улучшения плана затрачено: ", iterations)
             return x.tolist(), sum(array(C) * array(x))
-        index = argmin(deltas)
-        i0 = int(index / n)
-        j0 = index % n
-        cycl = cycle(U, (i0, j0), m)
-        m_cycle = cycl[1::2]
+
+        # получение координаты минимального элемента
+        min_deltas_coordinates = unravel_index(deltas.argmin(), deltas.shape)
+
+        cycle_found = cycle(U, min_deltas_coordinates, m)
+        m_cycle = cycle_found[1::2]
         ind = argmin(list(map(lambda _m: x[_m[0], _m[1]], m_cycle)))
         i1, j1 = m_cycle[ind]
         theta = x[i1, j1]
-        for ind, (i, j) in enumerate(cycl):
+        for ind, (i, j) in enumerate(cycle_found):
             if ind % 2 == 0:
                 x[i, j] += theta
             else:
                 x[i, j] -= theta
         U.remove((i1, j1))
-        U.append((i0, j0))
+        U.append(min_deltas_coordinates)
         iterations += 1
