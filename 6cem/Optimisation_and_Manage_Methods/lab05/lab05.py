@@ -13,11 +13,12 @@ def ultimate_method(A, d, B, x0, J0, J, D, c):
     m, n = A.shape
     to_step_3 = False
     iterations = 0
+    j0 = 0
     while True:
         if not to_step_3:
             iterations += 1
             not_J = delete(arange(n), J)
-            #compute grade
+            # compute grade
             _c = c + D.dot(x0)
             A0 = A[:, J0]
             inv_A0 = linalg.inv(A0)
@@ -25,16 +26,15 @@ def ultimate_method(A, d, B, x0, J0, J, D, c):
             delta = u.dot(A) + _c
             # compute grade
             # check_optimality_criterion
-            j0 = 0
             if (delta[not_J] >= 0).all():
                 print(list(map(lambda _x: round(float(_x), 3), list(x0))), "- оптимальный план")
                 print("max = ", c.dot(x0) + 0.5 * x0.dot(D).dot(x0))
                 print("Количество итераций", iterations)
                 return x0.tolist(), c.dot(x0) + 0.5 * x0.dot(D).dot(x0), iterations
             else:
-                index_0 = (argmin(delta[not_J]))
+                index_0 = argmin(delta[not_J])
                 j0 = not_J[index_0]
-            # check_optimality_criterion
+                # check_optimality_criterion
         # the_direction_of_change_plan
         to_step_3 = False
         l = zeros(n)
@@ -50,31 +50,33 @@ def ultimate_method(A, d, B, x0, J0, J, D, c):
         l[J] = v[:len(J)]
         # the_direction_of_change_plan
         # steps_count
-        Q = [-x0[i] / l[i] if l[i] < 0 else inf for i in J]
-        j1 = argmin(Q)
-        k = (l.T).dot(D).dot(l)
-        if abs(k) <= 1.0e-10:
-            Q_j0 = inf
-        elif k > 0:
-            Q_j0 = abs(delta[j0]) / k
-        if Q[j1] >= Q_j0:
+        theta = [-x0[i] / l[i] if l[i] < 0 else inf for i in J]
+        j1 = argmin(theta)
+        small_delta = (l.T).dot(D).dot(l)
+        if abs(small_delta) <= 1.0e-10:
+            theta_j0 = inf
+        elif small_delta > 0:
+            theta_j0 = abs(delta[j0]) / small_delta
+
+        if theta[j1] >= theta_j0:
             j1 = j0
-            Q_0 = Q_j0
+            theta_0 = theta_j0
         else:
-            Q_0 = Q[j1]
+            theta_0 = theta[j1]
             j1 = J[j1]
-        if isinf(Q_0):
-            Q_0 = None
+
+        if isinf(theta_0):
+            theta_0 = None
             print("Нет решений, т.к целевая функция не ограничена снизу на множестве планов")
         # steps_count
-        if Q_0 is None:
+        if theta_0 is None:
             break
-        x0 += Q_0 * l
+        x0 += theta_0 * l
         if j0 == j1:
             J = append(J, j0)
-        elif j1 in J and not j1 in J0:
+        elif not (not (j1 in J) or j1 in J0):
             J = J[J != j1]
-            delta[j0] += Q_0 * k
+            delta[j0] += theta_0 * small_delta
             to_step_3 = True
         else:
             s = J0.tolist().index(j1)
@@ -88,7 +90,7 @@ def ultimate_method(A, d, B, x0, J0, J, D, c):
             if is_plus:
                 J0 = append(J0[J0 != j1], j_plus)
                 J = J[J != j1]
-                delta[j0] += Q_0 * k
+                delta[j0] += theta_0 * small_delta
                 to_step_3 = True
             else:
                 J0 = append(J0[J0 != j1], j0)
