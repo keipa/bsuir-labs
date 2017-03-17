@@ -7,6 +7,7 @@ iterationsCountLabel = "Количество итераций"
 noSolutionsLabel = "Нет решений, т.к целевая функция не ограничена снизу на множестве планов"
 
 
+# конечный метод
 def ultimate_method(A, d, B, x0, J0, J, D, c):
     print(titleLabel)
     if B is not None and d is not None:
@@ -25,9 +26,8 @@ def ultimate_method(A, d, B, x0, J0, J, D, c):
             iterations += 1
             not_J = delete(arange(n), J)
             _c = c + D.dot(x0)
-            A0 = A[:, J0]
-            inv_a0 = linalg.inv(A0)
-            u = -_c[J0].dot(inv_a0)
+            inv_A0 = linalg.inv(A[:, J0])  # inverted matrix A with
+            u = -_c[J0].dot(inv_A0)
             delta = u.dot(A) + _c
             if (delta[not_J] >= 0).all():
                 print(list(map(lambda _x: round(float(_x), 3), list(x0))), optPlanLabel)
@@ -65,7 +65,7 @@ def ultimate_method(A, d, B, x0, J0, J, D, c):
         else:
             s = where(J0 == j1)  # return index of j1 in J0
             e_s = eye(m)[s]
-            case_c_indexes = list(filter(lambda x: e_s.dot(inv_a0).dot(A[:, x]) != 0, set(J)-set(J0)))
+            case_c_indexes = list(filter(lambda i: e_s.dot(inv_A0).dot(A[:, i]) != 0, set(J) - set(J0)))
             if case_c_indexes:  # case c
                 J0 = append(J0[J0 != j1], case_c_indexes[0])
                 J = J[J != j1]
