@@ -111,10 +111,8 @@ def method_of_potentials(C, a, b):
             print("Максимальная издержка = ", sum(array(C) * array(x)))
             print("Итераций улучшения плана затрачено: ", iterations)
             return x.tolist(), sum(array(C) * array(x))
-
         # получение координаты минимального элемента
         min_deltas_coordinates = unravel_index(deltas.argmin(), deltas.shape)
-
         cycle_found = cycle(U, min_deltas_coordinates, m)
         m_cycle = cycle_found[1::2]
         ind = argmin(list(map(lambda _m: x[_m[0], _m[1]], m_cycle)))
