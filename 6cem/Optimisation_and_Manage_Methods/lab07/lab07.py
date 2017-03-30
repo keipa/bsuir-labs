@@ -3,14 +3,7 @@ from sympy.matrices import Matrix
 from numpy import *
 
 
-def admissibility_check(plan_, g, plan):
-    g_plan = array([elem.subs(plan_) for elem in g])
-    if (g_plan <= 0.0).all():
-        tmp = "is plan."
-    else:
-        tmp = "is not plan."
-    print("x =", plan, tmp)
-    return g_plan, tmp
+
 
 
 def d_column_vector(x, I0, g, plan_):
@@ -91,14 +84,20 @@ def check_of_condition(x, plan, a, f, g, l):
     plan_ = []
     for obj in zip(x, plan):
         plan_.append(obj)
-    df = [f.diff(xi) for xi in x]
+
+    # проверка допустимости
+    g_plan = array([elem.subs(plan_) for elem in g])
+    if (g_plan <= 0.0).all():
+        print("x is plan.", plan)
+    else:
+        return
+
+    df = [f.diff(xi) for xi in x]  # дифференцируем по каждому X
     dg = []
     for gi in g:
         dg.append([gi.diff(xi) for xi in x])
-    g_plan, is_not_plan = admissibility_check(plan_, g, plan)
-    if is_not_plan == "is not plan.":
-        return
-    I0 = [i for i, gi in enumerate(g_plan) if gi == 0.0]
+
+    I0 = [i for i, gi in enumerate(g_plan) if gi == 0.0]   # проверка на линейную независимость?
     matrix = d_column_vector(x, I0, g, plan_)
     a0 = check_usual_plan(I0, matrix)
     a_res, dg_ = calculate_differentials(plan_, df, dg, a0, a, g_plan)
