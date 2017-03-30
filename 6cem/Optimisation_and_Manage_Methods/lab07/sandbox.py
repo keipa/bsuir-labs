@@ -12,7 +12,7 @@ plan = [0.0, 1.0, 0.0]
 f = 3 * x2 ** 2 - 11 * x1 - 3 * x2 - x3
 g = [x1 - 7 * x2 + 3 * x3 + 7, 5 * x1 + 2 * x2 - x3 - 2, -x3]
 l = symbols("l1 l2 l3", nonzero=True)
-lab07.check_of_condition(x, plan, a, f, g, l)
+lab07.СheckСonditions(x, plan, a, f, g, l)
 
 # x1, x2, x3, x4, x5 = Symbol("x1"), Symbol("x2"), Symbol("x3"), Symbol("x4"), Symbol("x5")
 # x = [x1, x2, x3, x4, x5]

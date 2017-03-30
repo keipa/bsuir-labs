@@ -16,9 +16,9 @@ class NoLinearTest(unittest.TestCase):
         f = exp(x1 - x2) - x1 - x2
         g = [x1 + x2 - 1, -x1, -x2]
         l = symbols("l1 l2", nonzero=True)
-        lab07.check_of_condition(x, plan, a, f, g, l, '1.1')
+        lab07.СheckСonditions(x, plan, a, f, g, l, '1.1')
         plan = [1.0, 1.0]
-        lab07.check_of_condition(x, plan, a, f, g, l, '1.2')
+        lab07.СheckСonditions(x, plan, a, f, g, l, '1.2')
 
     def test2(self):
         x1, x2 = Symbol("x1"), Symbol("x2")
@@ -29,7 +29,7 @@ class NoLinearTest(unittest.TestCase):
         f = x1 ** 2 + x2 ** 2 - 8 * x1
         g = [x1 ** 2 + (x2 - 9) ** 2 - 9]
         l = symbols("l1 l2", nonzero=True)
-        lab07.check_of_condition(x, plan, a, f, g, l, '2')
+        lab07.СheckСonditions(x, plan, a, f, g, l, '2')
 
     def test3(self):
         x1, x2 = Symbol("x1"), Symbol("x2")
@@ -40,7 +40,7 @@ class NoLinearTest(unittest.TestCase):
         f = 3 * x1 + x2
         g = [-x1 * x2 + 2, x1 ** 2 + x2 ** 2 - 16]
         l = symbols("l1 l2", nonzero=True)
-        lab07.check_of_condition(x, plan, a, f, g, l, '3')
+        lab07.СheckСonditions(x, plan, a, f, g, l, '3')
 
     def test4(self):
         x1, x2, x3 = Symbol("x1"), Symbol("x2"), Symbol("x3")
@@ -51,7 +51,7 @@ class NoLinearTest(unittest.TestCase):
         f = 3 * x2 ** 2 - 11 * x1 - 3 * x2 - x3
         g = [x1 - 7 * x2 + 3 * x3 + 7, 5 * x1 + 2 * x2 - x3 - 2, -x3]
         l = symbols("l1 l2 l3", nonzero=True)
-        lab07.check_of_condition(x, plan, a, f, g, l)
+        lab07.СheckСonditions(x, plan, a, f, g, l)
 
     def test5(self):
         x1, x2 = Symbol("x1"), Symbol("x2")
@@ -62,4 +62,4 @@ class NoLinearTest(unittest.TestCase):
         f = 9 * (x1 - 5) ** 2 + 4 * (x2 - 5) ** 2
         g = [x1 ** 2 - 3 * x2 + 1, x2 - x1 - 1, x1 - x2]
         l = symbols("l1 l2", nonzero=True)
-        lab07.check_of_condition(x, plan, a, f, g, l, '5')
+        lab07.СheckСonditions(x, plan, a, f, g, l, '5')
