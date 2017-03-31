@@ -26,7 +26,7 @@ def d_column_vector(x, I0, g, plan_):
     return matrix
 
 
-def check_usual_plan(I0, matrix):
+def isUsual(I0, matrix):
     if len(I0) == 0 or linalg.matrix_rank(matrix) != len(I0):
         a0 = Symbol("a0", nonnegative=True)
         print(notUsualPlanLabel)
@@ -36,7 +36,7 @@ def check_usual_plan(I0, matrix):
     return a0
 
 
-def calculate_differentials(plan_, df, dg, a0, a, g_plan):
+def lambda_solution(plan_, df, dg, a0, a, g_plan):
     df_ = [elem.subs(plan_) for elem in df]
     dg_ = []
     for dgi in dg:
@@ -55,20 +55,11 @@ def calculate_differentials(plan_, df, dg, a0, a, g_plan):
     return a_res, dg_
 
 
-def search_k(I0_plus, l, dg_, I0_0):
-
-    return K, K_
-
-
-
-
-
 def СheckСonditions(x, plan, a, f, g, l):
     plan_ = []
     for obj in zip(x, plan):
         plan_.append(obj)
 
-    # проверка допустимости
     g_plan = array([elem.subs(plan_) for elem in g])
     if (g_plan <= 0.0).all():
         print(accessedPlanLabel.format(plan))
@@ -76,11 +67,7 @@ def СheckСonditions(x, plan, a, f, g, l):
         raise Exception(errorMessage)
         return
 
-    # дифференцируем по каждому X исходную функцию
-    df = [f.diff(xi) for xi in x]
-    dg = []
-    for gi in g:
-        dg.append([gi.diff(xi) for xi in x])
+
 
     I0 = [i for i, gi in enumerate(g_plan) if gi == 0.0]
 
@@ -97,12 +84,19 @@ def СheckСonditions(x, plan, a, f, g, l):
         a0 = 1.0
         print(usualPlanLabel)
 
+
+
+    df = [f.diff(xi) for xi in x]
+    dg = []
+    for gi in g:
+        dg.append([gi.diff(xi) for xi in x])
+
     # ищем решение уравнения из формулы
-    a_res, dg_ = calculate_differentials(plan_, df, dg, a0, a, g_plan)
-    if a_res:
-        if type(a_res) == list:
-            a_res = a_res[0]
-        if (array(a_res.values()) == 0.0).all():
+    lambdas, dg_ = lambda_solution(plan_, df, dg, a0, a, g_plan)
+    if lambdas:
+        if type(lambdas) == list:
+            lambdas = lambdas[0]
+        if (array(lambdas.values()) == 0.0).all():
             print(necessaryNotPassedLabel)
             return
         print(necessaryPassedLabel)
@@ -111,7 +105,7 @@ def СheckСonditions(x, plan, a, f, g, l):
         return
 
 
-    I0_plus = [ind for ind in I0 if a_res[a[ind]] > 0.0]   #  indexes where lambda greater than zero
+    I0_plus = [ind for ind in I0 if lambdas[a[ind]] > 0.0]   #  indexes where lambda greater than zero
 
     # найдём К
     eqs = []

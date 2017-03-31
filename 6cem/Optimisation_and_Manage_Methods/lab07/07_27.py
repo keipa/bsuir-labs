@@ -186,8 +186,8 @@ def task_5():
     call_check_of_condition(x, plan, a, f, g, l, '5')
 
 
-#task_1()
-#task_2()
-#task_3()
-task_4()
-#task_5()
+# task_1()
+# task_2()
+# task_3()
+# task_4()
+# task_5()
