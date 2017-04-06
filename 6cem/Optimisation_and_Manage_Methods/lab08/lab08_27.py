@@ -12,11 +12,23 @@ def func1(y, tt1, A, b):
     return np.dot(A, y) + b
 
 
-def func2(U, D_new, c_new):
-    return 0.5 * np.dot(np.dot(U.transpose(), D_new), U) + np.dot(c_new.transpose(), U)
+def prepareQuad(B, B0, D, H, N, c, g):
+    D_new = cvx.matrix(np.dot(np.dot(B.transpose(), D), B))
+    A_new = cvx.matrix(np.dot(H, B))
+    c_new = cvx.matrix(np.dot(B.transpose(), c + np.dot(D, B0)))
+    b_new = cvx.matrix(g - np.dot(H, B0))
+    G = np.zeros((2 * int(N), int(N)))
+    for i in xrange(int(N)):
+        G[i][i] = 1
+    for i in xrange(int(N)):
+        G[int(N) + i][i] = -1
+    G = cvx.matrix(G)
+    h = [1.0 for _ in xrange(2 * int(N))]
+    h = cvx.matrix(h)
+    return A_new, D_new, G, b_new, c_new, h
 
 
-def alg(D, A, b, c, x_zv, H, g, t0, t_zv):
+def optimalControl(D, A, b, c, x_zv, H, g, t0, t_zv):
     N = 30
     y = np.zeros(len(A))
     h = (t_zv - t0) / N
@@ -35,25 +47,15 @@ def alg(D, A, b, c, x_zv, H, g, t0, t_zv):
     for i in xrange(int(N)):
         B[:, i] = temp[int(N) - i - 1]
 
-    D_new = cvx.matrix(np.dot(np.dot(B.transpose(), D), B))
-    A_new = cvx.matrix(np.dot(H, B))
-    c_new = cvx.matrix(np.dot(B.transpose(), c + np.dot(D, B0)))
-    b_new = cvx.matrix(g - np.dot(H, B0))
-    G = np.zeros((2 * int(N), int(N)))
+    A_new, D_new, G, b_new, c_new, h = prepareQuad(B, B0, D, H, N, c, g)
 
-    for i in xrange(int(N)):
-        G[i][i] = 1
-    for i in xrange(int(N)):
-        G[int(N) + i][i] = -1
-
-    G = cvx.matrix(G)
-    h = [1.0 for i in xrange(2 * int(N))]
-    h = cvx.matrix(h)
-
-    u = cvx.solvers.qp(D_new, c_new, G, h, A_new.T, b_new)['x']
+    u = cvx.solvers.qp(D_new, c_new, G, h, A_new, b_new)['x']
 
     for i in xrange(0, int(N)):
         tj[i] -= (t_zv - t0) / N
 
     pylab.plot(tj, u)
     pylab.show()
+
+
+
