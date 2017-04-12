@@ -13,4 +13,4 @@
 
 Автор не несёт ответственности за предоставленные коды.
 
-`Cовет: KISS :D `
+_settings.jar_ for Jetbrains IDE setup
