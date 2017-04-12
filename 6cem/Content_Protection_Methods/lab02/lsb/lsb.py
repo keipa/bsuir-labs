@@ -129,25 +129,15 @@ parser = argparse.ArgumentParser(
 
 
 def main(av):
-    bgroup = parser.add_argument_group("Hide binary with steg")
-    bgroup.add_argument('-image', help='Provide the original image')
-    bgroup.add_argument('-binary', help='The binary file to be obfuscated in the image')
-    bgroup.add_argument('-steg-out', help='The resulting steganographic image')
-    bgroup = parser.add_argument_group("Reveal binary")
-    bgroup.add_argument('-steg-image', help='The steganographic image')
-    bgroup.add_argument('-out', help='The original binary')
-
+    parser.add_argument('-e', '--encrypt', action='store_true')
+    parser.add_argument('-r', '--restore', action='store_true')
     args = parser.parse_args(av[1:])
-
-    if len(av) == 7:
-        binary_steg_hide(args.image, args.binary, args.steg_out)
-    elif len(av) == 5:
-        binary_steg_reveal(args.steg_image, args.out)
-    else:
-        print "Usage: '", av[0], "-h' for help", "\n", args
+    if args.encrypt:
+        binary_steg_hide(config.image_input, config.text_input, config.image_output)
+    elif args.restore:
+        binary_steg_reveal(config.image_output, config.text_output)
 
 
 if __name__ == "__main__":
     from sys import argv as av
-
     main(av)
