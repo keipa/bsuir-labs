@@ -1,9 +1,3 @@
-import getpass
-
-CONTENT_INPUT = "example"
-CONTENT_ENCRYPTED = "exampleENC"
-CONTENT_DECRYPTED = "exampleDEC"
-
 # Rivest Cipher, либо Ron's Code
 class RC5:
     def __init__(self, block_size, rounds, key):
@@ -108,20 +102,3 @@ class RC5:
                 if not run:
                     text = text.rstrip(b'\x00')
                 out.write(text)
-
-
-print("RC5 Encrypt Algorithm")
-
-password = bytes(getpass.getpass(), "utf-8")
-
-testRC = RC5(16, 12, password)
-testRC.encrypt_file(CONTENT_INPUT, CONTENT_ENCRYPTED)
-
-passwordDecrypt = bytes(getpass.getpass(), "utf-8")
-
-decryptRC = RC5(16, 12, passwordDecrypt)
-decryptRC.decrypt_file(CONTENT_ENCRYPTED, CONTENT_DECRYPTED)
-
-
-
-

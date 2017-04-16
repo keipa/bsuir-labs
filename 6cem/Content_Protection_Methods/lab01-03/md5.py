@@ -1,6 +1,5 @@
-# coding=utf-8
-# coding=utf-8
-
+from functools import reduce
+from config import *
 
 # Выравнивание потока и добавление длины сообщения
 def alignment(msg):
@@ -8,7 +7,7 @@ def alignment(msg):
     msg.append(0x80)
     while len(msg) % 64 != 56:
         msg += [0]
-    for i in xrange(8):
+    for i in range(8):
         msg.append(msg_len >> i * 8)
     return msg
 
@@ -172,16 +171,16 @@ def calc_md5(data):
     buf[3] = 0x10325476
 
     # поток байт разбиваем на поток слов
-    data_words = range(len(data) / 4)
-    for i in xrange(len(data) / 4):
+    data_words = list(range(int(len(data) / 4)))
+    for i in range(int(len(data) / 4)):
         q = 0
-        for j in xrange(4):
+        for j in range(4):
             q |= data[i * 4 + j] << j * 8
         data_words[i] = q
 
     # Шаг 4: Вычисление в цикле
     # разбиваем поток на блоки по 16 слов
-    for i in xrange(len(data_words) / 16):
+    for i in range(int(len(data_words) / 16)):
         # х блок данных
         x = data_words[i * 16:i*16 + 16]
         buf = rounds(buf, x)
@@ -195,3 +194,39 @@ def calc_md5(data):
         res += "{:08x}".format(to_little_endian(i))
 
     return res
+
+
+def hash_file(raw, hashed):
+    with open(raw, "r") as f:
+        a = reduce(lambda string, item: string + item, f, "")
+    with open(hashed, "w") as text_file:
+        md5hash = calc_md5(a)
+        text_file.write(a+"\n"+md5hash)
+    return md5hash
+
+
+def unhash_file(decrypted_hashed, decrypted):
+    with open(decrypted_hashed, "r") as f:
+        a = f.readlines()
+        md5hash = a[len(a)-1].replace("\x00", "")
+        a.remove(a[len(a)-1])
+        a[len(a)-1] = a[len(a)-1][:2]
+    with open(decrypted, "w") as text_file:
+        text_file.writelines(a)
+    return md5hash
+
+def get_hash(file):
+    with open(file, "r") as f:
+        a = reduce(lambda string, item: string + item, f, "")
+        return calc_md5(a)
+
+
+def check_hashes(hashA, hashB):
+    if str(hashA) == str(hashB):
+        print("Message is not damaged")
+    else:
+        print("Message is corrupted")
+
+# # print(calc_md5("hello_my_frien"))
+# add_hash(CONTENT_INPUT, CONTENT_INPUT_HASHED)
+# get_hash(CONTENT_DECRYPTED_HASHED, CONTENT_DECRYPTED)
