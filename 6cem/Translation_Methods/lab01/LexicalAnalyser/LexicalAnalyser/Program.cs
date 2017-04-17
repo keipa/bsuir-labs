@@ -142,8 +142,7 @@ namespace LexicalAnalyser
                 foreach (var line in errors)
                     Console.WriteLine(line.illegal_line + " :   " + line.illegal_string+ " ---- symbol #"+line.row);
             }
-            Console.ReadKey();
-  
+
 
         }
 
