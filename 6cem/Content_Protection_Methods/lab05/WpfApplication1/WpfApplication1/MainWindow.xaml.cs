@@ -2,7 +2,8 @@
 using System.Data.SQLite;
 using System.Diagnostics;
 using System.Windows;
-
+using System.Collections;
+using System.Collections.Generic;
 
 
 namespace WpfApplication1
@@ -29,6 +30,14 @@ namespace WpfApplication1
             SQLiteCommand command = new SQLiteCommand(sql, conn);
             Debug.WriteLine(sql);
             command.ExecuteNonQuery();
+            var list = new List<int>{3,6,8,9};
+
+            foreach (var kek in list)
+            {
+                var a = '2';
+                string t = "kek";
+                List<string> lol = new List<string>();
+            }
             SQLiteDataReader reader = command.ExecuteReader();
             try
             {
