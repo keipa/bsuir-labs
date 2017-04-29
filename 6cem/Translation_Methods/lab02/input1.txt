@@ -1,0 +1,27 @@
+begin
+    i := 1;
+    repeat
+	write( i );
+	i := i + 1;
+    until i>5;
+    writeln;
+    i := 5;
+    repeat
+        write( i );
+        i := i - 1;
+    until i<1;
+    writeln;
+    i:=1; 
+    j:=r; 
+    repeat
+      while a<x do i:=i+1;
+      while x<a do j:=j-1;
+      if i<=j then
+      begin
+        begin
+          writeln( a );
+        end;
+        i:=i+1; 
+	j:=j-1;
+      end;
+end.

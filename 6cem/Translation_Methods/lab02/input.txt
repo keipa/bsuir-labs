@@ -1,0 +1,29 @@
+var
+  num1:integer;
+  i,f,j, min, data, tmp:integer;
+  data, fOut:string;
+begin
+  writeln(" Read data ");
+     read(f);
+     num1 := 0;
+     num1 := num1 + 1;
+     read(f);
+     writeln(num1);
+     for i := 1 to num1 do
+     begin
+        writeln(data[i]);
+     end;
+  writeln("");
+  writeln(" data successfully read! ");
+
+     for i := 1 to num1 do
+     begin
+       writeln(data[i]);
+     end;
+    for i := 1 to num1 do
+     begin
+       writeln(fOut);
+     end;
+  writeln(" Sorted! ");
+
+end.

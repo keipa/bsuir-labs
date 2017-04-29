@@ -1,0 +1,300 @@
+	declare
+		num1
+			integer
+	declare
+		i
+			integer
+	declare
+		f
+			integer
+	declare
+		j
+			min
+				data
+					tmp
+		integer
+	declare
+		data
+			string
+	declare
+		fOut
+			string
+	begin program
+		writeln
+			" Read data "
+		read
+			f
+		assign num1
+			:=
+				0
+		assign num1
+			:=
+				num1
+					+
+						1.0
+		read
+			f
+		writeln
+			num1
+		for
+			assign i
+				:=
+					1.0
+			to
+				num1
+		do
+			writeln
+				data
+					[]
+						i
+		writeln
+			""
+		writeln
+			" data successfully read! "
+		for
+			assign i
+				:=
+					1.0
+			to
+				num1
+		do
+			writeln
+				data
+					[]
+						i
+		for
+			assign i
+				:=
+					1.0
+			to
+				num1
+		do
+			writeln
+				fOut
+		writeln
+			" Sorted! "
+	declare
+		num1
+			integer
+	declare
+		i
+			integer
+	declare
+		f
+			integer
+	declare
+		j
+			min
+				data
+					tmp
+		integer
+	declare
+		data
+			string
+	declare
+		fOut
+			string
+	begin program
+		writeln
+			" Read data "
+		read
+			f
+		assign num1
+			:=
+				0
+		assign num1
+			:=
+				num1
+					+
+						1.0
+		read
+			f
+		writeln
+			num1
+		for
+			assign i
+				:=
+					1.0
+			to
+				num1
+		do
+			writeln
+				data
+					[]
+						i
+		writeln
+			""
+		writeln
+			" data successfully read! "
+		for
+			assign i
+				:=
+					1.0
+			to
+				num1
+		do
+			writeln
+				data
+					[]
+						i
+		for
+			assign i
+				:=
+					1.0
+			to
+				num1
+		do
+			writeln
+				fOut
+		writeln
+			" Sorted! "
+	declare
+		num1
+			integer
+	declare
+		i
+			integer
+	declare
+		f
+			integer
+	declare
+		j
+			min
+				data
+					tmp
+		integer
+	declare
+		data
+			string
+	declare
+		fOut
+			string
+	begin program
+		writeln
+			" Read data "
+		read
+			f
+		assign num1
+			:=
+				0
+		assign num1
+			:=
+				num1
+					+
+						1.0
+		read
+			f
+		writeln
+			num1
+		for
+			assign i
+				:=
+					1.0
+			to
+				num1
+		do
+			writeln
+				data
+					[]
+						i
+		writeln
+			""
+		writeln
+			" data successfully read! "
+		for
+			assign i
+				:=
+					1.0
+			to
+				num1
+		do
+			writeln
+				data
+					[]
+						i
+		for
+			assign i
+				:=
+					1.0
+			to
+				num1
+		do
+			writeln
+				fOut
+		writeln
+			" Sorted! "
+	declare
+		num1
+			integer
+	declare
+		i
+			integer
+	declare
+		f
+			integer
+	declare
+		j
+			min
+				data
+					tmp
+		integer
+	declare
+		data
+			string
+	declare
+		fOut
+			string
+	begin program
+		writeln
+			" Read data "
+		read
+			f
+		assign num1
+			:=
+				0
+		assign num1
+			:=
+				num1
+					+
+						1.0
+		read
+			f
+		writeln
+			num1
+		for
+			assign i
+				:=
+					1.0
+			to
+				num1
+		do
+			writeln
+				data
+					[]
+						i
+		writeln
+			""
+		writeln
+			" data successfully read! "
+		for
+			assign i
+				:=
+					1.0
+			to
+				num1
+		do
+			writeln
+				data
+					[]
+						i
+		for
+			assign i
+				:=
+					1.0
+			to
+				num1
+		do
+			writeln
+				fOut
+		writeln
+			" Sorted! "
