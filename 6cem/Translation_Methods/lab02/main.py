@@ -5,7 +5,6 @@ from operator import add, sub, mul, truediv, eq, ne, le, ge, gt, lt
 from ply.yacc import YaccSymbol
 from checker import check
 
-print("begin")
 
 consts = dict()
 identifiers = dict()
@@ -15,7 +14,7 @@ def saveToFile(path, string):
     with open(path, "a") as file:
         file.writelines(string)
 
-path = "D:\\LABS\\BSUIR_labs\\6cem\\Translation_Methods\\lab02\\output"
+path = "D:\\LABS\\BSUIR_labs\\6cem\\Translation_Methods\\lab02\\output.txt"
 
 def tree_print(l, i):
     for item in l:
@@ -419,8 +418,8 @@ def p_else(p):
 
 
 def p_error(p):
-    print('Unexpected token {0}'.format(p))
-print("ok")
+    print('Error syntax {0}'.format(p).replace('LexToken',''))
+
 
 
 with open('input.txt', 'r') as fin:
@@ -434,4 +433,4 @@ if len(semantic_errors) > 0:
     for _ in semantic_errors:
         print(_)
 
-print("ok")
+

@@ -2,3 +2,4 @@
 
 
 print("govno")
+import main

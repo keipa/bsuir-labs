@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1AF267C2-E51C-48CB-A9D7-1CE99E49AAF0}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SyntaxAnalyse</RootNamespace>
+    <AssemblyName>SyntaxAnalyse</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Label="YltParsers">
+    <Names>Pascal</Names>
+  </PropertyGroup>
+  <PropertyGroup Label="YltProperties">
+    <YltTools>$(SolutionDir)packages\YaccLexTools.0.2.2\tools\</YltTools>
+    <GplexTool>"$(YltTools)gplex.exe"</GplexTool>
+    <GppgTool>"$(YltTools)gppg.exe"</GppgTool>
+  </PropertyGroup>
+  <PropertyGroup Label="GeneratePascalProperties">
+    <PascalParser>$(ProjectDir)Pascal</PascalParser>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="TreeBulder.cs" />
+    <Compile Include="Tree.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShiftReduceParserCode.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup Label="PascalFiles">
+    <Compile Include="Pascal.Parser.cs">
+      <DependentUpon>Pascal.parser</DependentUpon>
+    </Compile>
+    <Compile Include="Pascal.Parser.Generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Pascal.Language.grammar.y</DependentUpon>
+    </Compile>
+    <Compile Include="Pascal.Scanner.cs">
+      <DependentUpon>Pascal.parser</DependentUpon>
+    </Compile>
+    <Compile Include="Pascal.Scanner.Generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Pascal.Language.analyzer.lex</DependentUpon>
+    </Compile>
+    <None Include="Pascal.Language.analyzer" />
+    <None Include="Pascal.Language.analyzer.lex">
+      <DependentUpon>Pascal.parser</DependentUpon>
+    </None>
+    <None Include="Pascal.Language.grammar" />
+    <None Include="Pascal.Language.grammar.y">
+      <DependentUpon>Pascal.parser</DependentUpon>
+    </None>
+    <None Include="Pascal.parser" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="BeforeBuild" DependsOnTargets="YltBuildGen" />
+  <Target Name="YltBuildGen" DependsOnTargets="GeneratePascal" />
+  <Target Name="GeneratePascal" Inputs="$(PascalParser).Language.analyzer.lex;$(PascalParser).Language.grammar.y" Outputs="$(PascalParser).Scanner.Generated.cs;$(PascalParser).Parser.Generated.cs">
+    <Message Text="Generating scanner for $(PascalParser) ..." />
+    <Exec Command="$(GplexTool) &quot;/out:$(PascalParser).Scanner.Generated.cs&quot; &quot;$(PascalParser).Language.analyzer.lex&quot;" WorkingDirectory="$(ProjectDir)" Outputs="$(GenDir)Scanner.cs">
+      <Output TaskParameter="Outputs" ItemName="PascalScanner" />
+    </Exec>
+    <Message Text="Generating parser for $(PascalParser) ..." />
+    <Exec Command="$(GppgTool) /no-lines /gplex &quot;$(PascalParser).Language.grammar.y&quot; &gt; &quot;$(PascalParser).Parser.Generated.cs&quot;" WorkingDirectory="$(ProjectDir)" Outputs="$(PascalParser).Parser.Generated.cs">
+      <Output TaskParameter="Outputs" ItemName="Pascal" />
+    </Exec>
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -16,7 +16,7 @@ begin
   writeln("");
   writeln(" data successfully read! ");
 
-     for i := 1 to num1 do
+     for i := 1* to num1 do
      begin
        writeln(data[i]);
      end;
