@@ -3,7 +3,7 @@ import unittest
 from numpy import *
 
 import lab1
-
+import lab1bounds
 
 class SimplexTest(unittest.TestCase):
 
@@ -90,8 +90,30 @@ class SimplexTest(unittest.TestCase):
         c = array([-6.0, -9.0, -5.0, 2.0, -6.0, 0.0, 1.0, 3.0])
         x_0 = array([4.0, 0.0, 6.0, 0.0, 4.5, 0.0, 0.0, 0.0])
         J = array([1, 3, 5])
+        d_down = array([0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0])
+        d_up = array([inf, inf, inf, inf, inf, inf, inf, inf])
         correct_result = ([0.0, 0.75, 0.0, 2.682, 0.0, 0.0, 0.0, 13.432], 38.909090909090907, 3)
-        assert correct_result == lab1.simplex(m, n, A, b, c, x_0, J)
+        assert correct_result == lab1bounds.simplex(m, n, A, b, c, x_0, J, d_down, d_up)
+
+
+    def testexam(self):
+        m = 3
+        n = 8
+        df = array([2.0,5.0,-1.0,-1.0,3.0,4.0,5.0,0.0])
+        d_down = array([0.0,0.0,-1.0,-1.0,-1.0,-1.0,-1.0,0.0])
+        d_up = array([6.0,5.0,6.0, 4.0,6.0,5.0,5.0,7.0])
+
+        A = array([
+            [1.0, 3.0, 6.0, 1.0, 0.0, 0.0, -6.0, 2.0],
+            [0.0, -2.0, 3.0, 4.0, 0.0, 1.0, 4.0, -1.0],
+            [1.0, 1.0, -1.0, 3.0, 1.0, 0.0, 3.0, 4.0],
+        ])
+        J = array([1, 5, 6])
+
+        b =  A.dot(df)
+        c = array([2.0, -1.0, 3.0, -4.0, -3.0, 6.0, 6.0, -2.0])
+        lab1bounds.simplex(m, n, A, b, c, df, J, d_down, d_up)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -100,6 +100,8 @@ def method_of_potentials(C, a, b):
     C, b = prep
     x, U, m, n = north_west_corner(C, a, b)  # построение начального плана и базиса
     iterations = 0
+    last = 0
+    zeroIt = 0
     while True:  # итерация улучшения плана
         u, v = potentials(C, U)  # Составим вспомогательную рабочую матрицу затрат
         deltas = zeros((m, n))
@@ -110,6 +112,8 @@ def method_of_potentials(C, a, b):
             print("Оптимальный план перевозок: \n", x)
             print("Максимальная издержка = ", sum(array(C) * array(x)))
             print("Итераций улучшения плана затрачено: ", iterations)
+            print("Нулевых итераций затрачено: ", zeroIt)
+
             return x.tolist(), sum(array(C) * array(x))
         # получение координаты минимального элемента
         min_deltas_coordinates = unravel_index(deltas.argmin(), deltas.shape)
@@ -125,4 +129,7 @@ def method_of_potentials(C, a, b):
                 x[i, j] -= theta
         U.remove((i1, j1))
         U.append(min_deltas_coordinates)
+        if last != sum(array(C) * array(x)):
+            zeroIt +=1
+        last = sum(array(C) * array(x))
         iterations += 1

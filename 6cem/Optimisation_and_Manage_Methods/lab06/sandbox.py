@@ -1,4 +1,4 @@
-import  lab06_27
+import  lab01sci
 from numpy import *
 
 m = 3
@@ -30,4 +30,4 @@ c = array([[0, 60, 80, 0, 0, 0, 40, 0],
 alpha = array([-687.125, -666.625, -349.5938, -254.625, -45.1563])
 x = array([0, 8, 2, 1, 0, 4, 0, 0])
 
-lab06_27.convex(B0, c0, B, c, alpha, x)
+lab01sci.convex(B0, c0, B, c, alpha, x)
