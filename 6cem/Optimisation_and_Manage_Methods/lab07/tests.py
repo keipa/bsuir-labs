@@ -7,16 +7,16 @@ import lab07
 
 class NoLinearTest(unittest.TestCase):
 
-    def test1(self):
-        x1, x2 = Symbol("x1"), Symbol("x2")
-        a1, a2, a3 = Symbol("a1", nonnegative=True), Symbol("a2", nonnegative=True), Symbol("a3", nonnegative=True)
-        a = [a1, a2, a3]
-        plan = [0.0, 1.0]
-        x = [x1, x2]
-        f = exp(x1 - x2) - x1 - x2
-        g = [x1 + x2 -1, -x1, -x2]
-        l = symbols("l1 l2", nonzero=True)
-        lab07.СheckСonditions(x, plan, a, f, g, l)
+    # def test1(self):
+    #     x1, x2 = Symbol("x1"), Symbol("x2")
+    #     a1, a2, a3 = Symbol("a1", nonnegative=True), Symbol("a2", nonnegative=True), Symbol("a3", nonnegative=True)
+    #     a = [a1, a2, a3]
+    #     plan = [0.0, 1.0]
+    #     x = [x1, x2]
+    #     f = exp(x1 - x2) - x1 - x2
+    #     g = [x1 + x2 -1, -x1, -x2]
+    #     l = symbols("l1 l2", nonzero=True)
+    #     lab07.СheckСonditions(x, plan, a, f, g, l)
 
     def test2(self):
         x1, x2 = Symbol("x1"), Symbol("x2")
