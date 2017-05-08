@@ -1,0 +1,1523 @@
+Created by PLY version 3.10 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    CONST
+    TO
+    COMMA
+    FOR
+    AND
+    DOWNTO
+    OR
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> var begin
+Rule 2     var -> VAR declare
+Rule 3     begin -> BEGIN body END POINT
+Rule 4     declare -> declaration declare
+Rule 5     declare -> empty
+Rule 6     block -> BEGIN body END SEMICOLON
+Rule 7     body -> expression
+Rule 8     expression -> assignment expression
+Rule 9     expression -> if expression
+Rule 10    expression -> function expression
+Rule 11    expression -> empty
+Rule 12    expression -> while expression
+Rule 13    declaration -> IDENTIFIER COLON type SEMICOLON
+Rule 14    type -> TYPE_STRING
+Rule 15    type -> TYPE_INTEGER
+Rule 16    type -> TYPE_REAL
+Rule 17    empty -> <empty>
+Rule 18    assignment -> IDENTIFIER ASSIGNMENT arithmetic_expression SEMICOLON
+Rule 19    arithmetic_expression -> IDENTIFIER PLUS arithmetic_expression
+Rule 20    arithmetic_expression -> IDENTIFIER MINUS arithmetic_expression
+Rule 21    arithmetic_expression -> IDENTIFIER MUL arithmetic_expression
+Rule 22    arithmetic_expression -> IDENTIFIER DIV arithmetic_expression
+Rule 23    arithmetic_expression -> NUMBER PLUS arithmetic_expression
+Rule 24    arithmetic_expression -> NUMBER MINUS arithmetic_expression
+Rule 25    arithmetic_expression -> NUMBER MUL arithmetic_expression
+Rule 26    arithmetic_expression -> NUMBER DIV arithmetic_expression
+Rule 27    arithmetic_expression -> NUMBER
+Rule 28    arithmetic_expression -> IDENTIFIER
+Rule 29    arithmetic_expression -> STRING
+Rule 30    function -> WRITELN OPEN_BRACKET arithmetic_expression CLOSE_BRACKET SEMICOLON
+Rule 31    function -> READLN OPEN_BRACKET IDENTIFIER CLOSE_BRACKET SEMICOLON
+Rule 32    function -> INC OPEN_BRACKET IDENTIFIER CLOSE_BRACKET SEMICOLON
+Rule 33    predicate -> IDENTIFIER EQUALITY arithmetic_expression
+Rule 34    predicate -> NUMBER EQUALITY arithmetic_expression
+Rule 35    predicate -> IDENTIFIER NON_EQUALITY arithmetic_expression
+Rule 36    predicate -> NUMBER NON_STRICT_COMPARISON arithmetic_expression
+Rule 37    predicate -> IDENTIFIER NON_STRICT_COMPARISON arithmetic_expression
+Rule 38    predicate -> NUMBER NON_EQUALITY arithmetic_expression
+Rule 39    predicate -> NUMBER COMPARISON arithmetic_expression
+Rule 40    predicate -> NUMBER
+Rule 41    predicate -> IDENTIFIER
+Rule 42    while -> WHILE predicate DO block
+Rule 43    if -> IF predicate THEN block
+Rule 44    if -> IF predicate THEN expression
+
+Terminals, with rules where they appear
+
+AND                  : 
+ASSIGNMENT           : 18
+BEGIN                : 3 6
+CLOSE_BRACKET        : 30 31 32
+COLON                : 13
+COMMA                : 
+COMPARISON           : 39
+CONST                : 
+DIV                  : 22 26
+DO                   : 42
+DOWNTO               : 
+END                  : 3 6
+EQUALITY             : 33 34
+FOR                  : 
+IDENTIFIER           : 13 18 19 20 21 22 28 31 32 33 35 37 41
+IF                   : 43 44
+INC                  : 32
+MINUS                : 20 24
+MUL                  : 21 25
+NON_EQUALITY         : 35 38
+NON_STRICT_COMPARISON : 36 37
+NUMBER               : 23 24 25 26 27 34 36 38 39 40
+OPEN_BRACKET         : 30 31 32
+OR                   : 
+PLUS                 : 19 23
+POINT                : 3
+READLN               : 31
+SEMICOLON            : 6 13 18 30 31 32
+STRING               : 29
+THEN                 : 43 44
+TO                   : 
+TYPE_INTEGER         : 15
+TYPE_REAL            : 16
+TYPE_STRING          : 14
+VAR                  : 2
+WHILE                : 42
+WRITELN              : 30
+error                : 
+
+Nonterminals, with rules where they appear
+
+arithmetic_expression : 18 19 20 21 22 23 24 25 26 30 33 34 35 36 37 38 39
+assignment           : 8
+begin                : 1
+block                : 42 43
+body                 : 3 6
+declaration          : 4
+declare              : 2 4
+empty                : 5 11
+expression           : 7 8 9 10 12 44
+function             : 10
+if                   : 9
+predicate            : 42 43 44
+program              : 0
+type                 : 13
+var                  : 1
+while                : 12
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . var begin
+    (2) var -> . VAR declare
+
+    VAR             shift and go to state 2
+
+    var                            shift and go to state 1
+    program                        shift and go to state 3
+
+state 1
+
+    (1) program -> var . begin
+    (3) begin -> . BEGIN body END POINT
+
+    BEGIN           shift and go to state 5
+
+    begin                          shift and go to state 4
+
+state 2
+
+    (2) var -> VAR . declare
+    (4) declare -> . declaration declare
+    (5) declare -> . empty
+    (13) declaration -> . IDENTIFIER COLON type SEMICOLON
+    (17) empty -> .
+
+    IDENTIFIER      shift and go to state 7
+    BEGIN           reduce using rule 17 (empty -> .)
+
+    declare                        shift and go to state 8
+    empty                          shift and go to state 9
+    declaration                    shift and go to state 6
+
+state 3
+
+    (0) S' -> program .
+
+
+
+state 4
+
+    (1) program -> var begin .
+
+    $end            reduce using rule 1 (program -> var begin .)
+
+
+state 5
+
+    (3) begin -> BEGIN . body END POINT
+    (7) body -> . expression
+    (8) expression -> . assignment expression
+    (9) expression -> . if expression
+    (10) expression -> . function expression
+    (11) expression -> . empty
+    (12) expression -> . while expression
+    (18) assignment -> . IDENTIFIER ASSIGNMENT arithmetic_expression SEMICOLON
+    (43) if -> . IF predicate THEN block
+    (44) if -> . IF predicate THEN expression
+    (30) function -> . WRITELN OPEN_BRACKET arithmetic_expression CLOSE_BRACKET SEMICOLON
+    (31) function -> . READLN OPEN_BRACKET IDENTIFIER CLOSE_BRACKET SEMICOLON
+    (32) function -> . INC OPEN_BRACKET IDENTIFIER CLOSE_BRACKET SEMICOLON
+    (17) empty -> .
+    (42) while -> . WHILE predicate DO block
+
+    IDENTIFIER      shift and go to state 13
+    IF              shift and go to state 18
+    WRITELN         shift and go to state 17
+    READLN          shift and go to state 19
+    INC             shift and go to state 22
+    END             reduce using rule 17 (empty -> .)
+    WHILE           shift and go to state 11
+
+    body                           shift and go to state 15
+    function                       shift and go to state 10
+    assignment                     shift and go to state 16
+    while                          shift and go to state 20
+    expression                     shift and go to state 21
+    empty                          shift and go to state 14
+    if                             shift and go to state 12
+
+state 6
+
+    (4) declare -> declaration . declare
+    (4) declare -> . declaration declare
+    (5) declare -> . empty
+    (13) declaration -> . IDENTIFIER COLON type SEMICOLON
+    (17) empty -> .
+
+    IDENTIFIER      shift and go to state 7
+    BEGIN           reduce using rule 17 (empty -> .)
+
+    declare                        shift and go to state 23
+    empty                          shift and go to state 9
+    declaration                    shift and go to state 6
+
+state 7
+
+    (13) declaration -> IDENTIFIER . COLON type SEMICOLON
+
+    COLON           shift and go to state 24
+
+
+state 8
+
+    (2) var -> VAR declare .
+
+    BEGIN           reduce using rule 2 (var -> VAR declare .)
+
+
+state 9
+
+    (5) declare -> empty .
+
+    BEGIN           reduce using rule 5 (declare -> empty .)
+
+
+state 10
+
+    (10) expression -> function . expression
+    (8) expression -> . assignment expression
+    (9) expression -> . if expression
+    (10) expression -> . function expression
+    (11) expression -> . empty
+    (12) expression -> . while expression
+    (18) assignment -> . IDENTIFIER ASSIGNMENT arithmetic_expression SEMICOLON
+    (43) if -> . IF predicate THEN block
+    (44) if -> . IF predicate THEN expression
+    (30) function -> . WRITELN OPEN_BRACKET arithmetic_expression CLOSE_BRACKET SEMICOLON
+    (31) function -> . READLN OPEN_BRACKET IDENTIFIER CLOSE_BRACKET SEMICOLON
+    (32) function -> . INC OPEN_BRACKET IDENTIFIER CLOSE_BRACKET SEMICOLON
+    (17) empty -> .
+    (42) while -> . WHILE predicate DO block
+
+  ! shift/reduce conflict for IDENTIFIER resolved as shift
+  ! shift/reduce conflict for IF resolved as shift
+  ! shift/reduce conflict for WRITELN resolved as shift
+  ! shift/reduce conflict for READLN resolved as shift
+  ! shift/reduce conflict for INC resolved as shift
+  ! shift/reduce conflict for WHILE resolved as shift
+    IDENTIFIER      shift and go to state 13
+    IF              shift and go to state 18
+    WRITELN         shift and go to state 17
+    READLN          shift and go to state 19
+    INC             shift and go to state 22
+    END             reduce using rule 17 (empty -> .)
+    WHILE           shift and go to state 11
+
+  ! IDENTIFIER      [ reduce using rule 17 (empty -> .) ]
+  ! IF              [ reduce using rule 17 (empty -> .) ]
+  ! WRITELN         [ reduce using rule 17 (empty -> .) ]
+  ! READLN          [ reduce using rule 17 (empty -> .) ]
+  ! INC             [ reduce using rule 17 (empty -> .) ]
+  ! WHILE           [ reduce using rule 17 (empty -> .) ]
+
+    function                       shift and go to state 10
+    assignment                     shift and go to state 16
+    while                          shift and go to state 20
+    expression                     shift and go to state 25
+    empty                          shift and go to state 14
+    if                             shift and go to state 12
+
+state 11
+
+    (42) while -> WHILE . predicate DO block
+    (33) predicate -> . IDENTIFIER EQUALITY arithmetic_expression
+    (34) predicate -> . NUMBER EQUALITY arithmetic_expression
+    (35) predicate -> . IDENTIFIER NON_EQUALITY arithmetic_expression
+    (36) predicate -> . NUMBER NON_STRICT_COMPARISON arithmetic_expression
+    (37) predicate -> . IDENTIFIER NON_STRICT_COMPARISON arithmetic_expression
+    (38) predicate -> . NUMBER NON_EQUALITY arithmetic_expression
+    (39) predicate -> . NUMBER COMPARISON arithmetic_expression
+    (40) predicate -> . NUMBER
+    (41) predicate -> . IDENTIFIER
+
+    IDENTIFIER      shift and go to state 28
+    NUMBER          shift and go to state 27
+
+    predicate                      shift and go to state 26
+
+state 12
+
+    (9) expression -> if . expression
+    (8) expression -> . assignment expression
+    (9) expression -> . if expression
+    (10) expression -> . function expression
+    (11) expression -> . empty
+    (12) expression -> . while expression
+    (18) assignment -> . IDENTIFIER ASSIGNMENT arithmetic_expression SEMICOLON
+    (43) if -> . IF predicate THEN block
+    (44) if -> . IF predicate THEN expression
+    (30) function -> . WRITELN OPEN_BRACKET arithmetic_expression CLOSE_BRACKET SEMICOLON
+    (31) function -> . READLN OPEN_BRACKET IDENTIFIER CLOSE_BRACKET SEMICOLON
+    (32) function -> . INC OPEN_BRACKET IDENTIFIER CLOSE_BRACKET SEMICOLON
+    (17) empty -> .
+    (42) while -> . WHILE predicate DO block
+
+  ! shift/reduce conflict for IDENTIFIER resolved as shift
+  ! shift/reduce conflict for IF resolved as shift
+  ! shift/reduce conflict for WRITELN resolved as shift
+  ! shift/reduce conflict for READLN resolved as shift
+  ! shift/reduce conflict for INC resolved as shift
+  ! shift/reduce conflict for WHILE resolved as shift
+    IDENTIFIER      shift and go to state 13
+    IF              shift and go to state 18
+    WRITELN         shift and go to state 17
+    READLN          shift and go to state 19
+    INC             shift and go to state 22
+    END             reduce using rule 17 (empty -> .)
+    WHILE           shift and go to state 11
+
+  ! IDENTIFIER      [ reduce using rule 17 (empty -> .) ]
+  ! IF              [ reduce using rule 17 (empty -> .) ]
+  ! WRITELN         [ reduce using rule 17 (empty -> .) ]
+  ! READLN          [ reduce using rule 17 (empty -> .) ]
+  ! INC             [ reduce using rule 17 (empty -> .) ]
+  ! WHILE           [ reduce using rule 17 (empty -> .) ]
+
+    function                       shift and go to state 10
+    assignment                     shift and go to state 16
+    while                          shift and go to state 20
+    expression                     shift and go to state 29
+    empty                          shift and go to state 14
+    if                             shift and go to state 12
+
+state 13
+
+    (18) assignment -> IDENTIFIER . ASSIGNMENT arithmetic_expression SEMICOLON
+
+    ASSIGNMENT      shift and go to state 30
+
+
+state 14
+
+    (11) expression -> empty .
+
+    END             reduce using rule 11 (expression -> empty .)
+    IDENTIFIER      reduce using rule 11 (expression -> empty .)
+    IF              reduce using rule 11 (expression -> empty .)
+    WRITELN         reduce using rule 11 (expression -> empty .)
+    READLN          reduce using rule 11 (expression -> empty .)
+    INC             reduce using rule 11 (expression -> empty .)
+    WHILE           reduce using rule 11 (expression -> empty .)
+
+
+state 15
+
+    (3) begin -> BEGIN body . END POINT
+
+    END             shift and go to state 31
+
+
+state 16
+
+    (8) expression -> assignment . expression
+    (8) expression -> . assignment expression
+    (9) expression -> . if expression
+    (10) expression -> . function expression
+    (11) expression -> . empty
+    (12) expression -> . while expression
+    (18) assignment -> . IDENTIFIER ASSIGNMENT arithmetic_expression SEMICOLON
+    (43) if -> . IF predicate THEN block
+    (44) if -> . IF predicate THEN expression
+    (30) function -> . WRITELN OPEN_BRACKET arithmetic_expression CLOSE_BRACKET SEMICOLON
+    (31) function -> . READLN OPEN_BRACKET IDENTIFIER CLOSE_BRACKET SEMICOLON
+    (32) function -> . INC OPEN_BRACKET IDENTIFIER CLOSE_BRACKET SEMICOLON
+    (17) empty -> .
+    (42) while -> . WHILE predicate DO block
+
+  ! shift/reduce conflict for IDENTIFIER resolved as shift
+  ! shift/reduce conflict for IF resolved as shift
+  ! shift/reduce conflict for WRITELN resolved as shift
+  ! shift/reduce conflict for READLN resolved as shift
+  ! shift/reduce conflict for INC resolved as shift
+  ! shift/reduce conflict for WHILE resolved as shift
+    IDENTIFIER      shift and go to state 13
+    IF              shift and go to state 18
+    WRITELN         shift and go to state 17
+    READLN          shift and go to state 19
+    INC             shift and go to state 22
+    END             reduce using rule 17 (empty -> .)
+    WHILE           shift and go to state 11
+
+  ! IDENTIFIER      [ reduce using rule 17 (empty -> .) ]
+  ! IF              [ reduce using rule 17 (empty -> .) ]
+  ! WRITELN         [ reduce using rule 17 (empty -> .) ]
+  ! READLN          [ reduce using rule 17 (empty -> .) ]
+  ! INC             [ reduce using rule 17 (empty -> .) ]
+  ! WHILE           [ reduce using rule 17 (empty -> .) ]
+
+    function                       shift and go to state 10
+    assignment                     shift and go to state 16
+    while                          shift and go to state 20
+    expression                     shift and go to state 32
+    empty                          shift and go to state 14
+    if                             shift and go to state 12
+
+state 17
+
+    (30) function -> WRITELN . OPEN_BRACKET arithmetic_expression CLOSE_BRACKET SEMICOLON
+
+    OPEN_BRACKET    shift and go to state 33
+
+
+state 18
+
+    (43) if -> IF . predicate THEN block
+    (44) if -> IF . predicate THEN expression
+    (33) predicate -> . IDENTIFIER EQUALITY arithmetic_expression
+    (34) predicate -> . NUMBER EQUALITY arithmetic_expression
+    (35) predicate -> . IDENTIFIER NON_EQUALITY arithmetic_expression
+    (36) predicate -> . NUMBER NON_STRICT_COMPARISON arithmetic_expression
+    (37) predicate -> . IDENTIFIER NON_STRICT_COMPARISON arithmetic_expression
+    (38) predicate -> . NUMBER NON_EQUALITY arithmetic_expression
+    (39) predicate -> . NUMBER COMPARISON arithmetic_expression
+    (40) predicate -> . NUMBER
+    (41) predicate -> . IDENTIFIER
+
+    IDENTIFIER      shift and go to state 28
+    NUMBER          shift and go to state 27
+
+    predicate                      shift and go to state 34
+
+state 19
+
+    (31) function -> READLN . OPEN_BRACKET IDENTIFIER CLOSE_BRACKET SEMICOLON
+
+    OPEN_BRACKET    shift and go to state 35
+
+
+state 20
+
+    (12) expression -> while . expression
+    (8) expression -> . assignment expression
+    (9) expression -> . if expression
+    (10) expression -> . function expression
+    (11) expression -> . empty
+    (12) expression -> . while expression
+    (18) assignment -> . IDENTIFIER ASSIGNMENT arithmetic_expression SEMICOLON
+    (43) if -> . IF predicate THEN block
+    (44) if -> . IF predicate THEN expression
+    (30) function -> . WRITELN OPEN_BRACKET arithmetic_expression CLOSE_BRACKET SEMICOLON
+    (31) function -> . READLN OPEN_BRACKET IDENTIFIER CLOSE_BRACKET SEMICOLON
+    (32) function -> . INC OPEN_BRACKET IDENTIFIER CLOSE_BRACKET SEMICOLON
+    (17) empty -> .
+    (42) while -> . WHILE predicate DO block
+
+  ! shift/reduce conflict for IDENTIFIER resolved as shift
+  ! shift/reduce conflict for IF resolved as shift
+  ! shift/reduce conflict for WRITELN resolved as shift
+  ! shift/reduce conflict for READLN resolved as shift
+  ! shift/reduce conflict for INC resolved as shift
+  ! shift/reduce conflict for WHILE resolved as shift
+    IDENTIFIER      shift and go to state 13
+    IF              shift and go to state 18
+    WRITELN         shift and go to state 17
+    READLN          shift and go to state 19
+    INC             shift and go to state 22
+    END             reduce using rule 17 (empty -> .)
+    WHILE           shift and go to state 11
+
+  ! IDENTIFIER      [ reduce using rule 17 (empty -> .) ]
+  ! IF              [ reduce using rule 17 (empty -> .) ]
+  ! WRITELN         [ reduce using rule 17 (empty -> .) ]
+  ! READLN          [ reduce using rule 17 (empty -> .) ]
+  ! INC             [ reduce using rule 17 (empty -> .) ]
+  ! WHILE           [ reduce using rule 17 (empty -> .) ]
+
+    function                       shift and go to state 10
+    assignment                     shift and go to state 16
+    while                          shift and go to state 20
+    expression                     shift and go to state 36
+    empty                          shift and go to state 14
+    if                             shift and go to state 12
+
+state 21
+
+    (7) body -> expression .
+
+    END             reduce using rule 7 (body -> expression .)
+
+
+state 22
+
+    (32) function -> INC . OPEN_BRACKET IDENTIFIER CLOSE_BRACKET SEMICOLON
+
+    OPEN_BRACKET    shift and go to state 37
+
+
+state 23
+
+    (4) declare -> declaration declare .
+
+    BEGIN           reduce using rule 4 (declare -> declaration declare .)
+
+
+state 24
+
+    (13) declaration -> IDENTIFIER COLON . type SEMICOLON
+    (14) type -> . TYPE_STRING
+    (15) type -> . TYPE_INTEGER
+    (16) type -> . TYPE_REAL
+
+    TYPE_STRING     shift and go to state 38
+    TYPE_INTEGER    shift and go to state 40
+    TYPE_REAL       shift and go to state 39
+
+    type                           shift and go to state 41
+
+state 25
+
+    (10) expression -> function expression .
+
+    END             reduce using rule 10 (expression -> function expression .)
+    IDENTIFIER      reduce using rule 10 (expression -> function expression .)
+    IF              reduce using rule 10 (expression -> function expression .)
+    WRITELN         reduce using rule 10 (expression -> function expression .)
+    READLN          reduce using rule 10 (expression -> function expression .)
+    INC             reduce using rule 10 (expression -> function expression .)
+    WHILE           reduce using rule 10 (expression -> function expression .)
+
+
+state 26
+
+    (42) while -> WHILE predicate . DO block
+
+    DO              shift and go to state 42
+
+
+state 27
+
+    (34) predicate -> NUMBER . EQUALITY arithmetic_expression
+    (36) predicate -> NUMBER . NON_STRICT_COMPARISON arithmetic_expression
+    (38) predicate -> NUMBER . NON_EQUALITY arithmetic_expression
+    (39) predicate -> NUMBER . COMPARISON arithmetic_expression
+    (40) predicate -> NUMBER .
+
+    EQUALITY        shift and go to state 45
+    NON_STRICT_COMPARISON shift and go to state 44
+    NON_EQUALITY    shift and go to state 46
+    COMPARISON      shift and go to state 43
+    THEN            reduce using rule 40 (predicate -> NUMBER .)
+    DO              reduce using rule 40 (predicate -> NUMBER .)
+
+
+state 28
+
+    (33) predicate -> IDENTIFIER . EQUALITY arithmetic_expression
+    (35) predicate -> IDENTIFIER . NON_EQUALITY arithmetic_expression
+    (37) predicate -> IDENTIFIER . NON_STRICT_COMPARISON arithmetic_expression
+    (41) predicate -> IDENTIFIER .
+
+    EQUALITY        shift and go to state 48
+    NON_EQUALITY    shift and go to state 47
+    NON_STRICT_COMPARISON shift and go to state 49
+    THEN            reduce using rule 41 (predicate -> IDENTIFIER .)
+    DO              reduce using rule 41 (predicate -> IDENTIFIER .)
+
+
+state 29
+
+    (9) expression -> if expression .
+
+    END             reduce using rule 9 (expression -> if expression .)
+    IDENTIFIER      reduce using rule 9 (expression -> if expression .)
+    IF              reduce using rule 9 (expression -> if expression .)
+    WRITELN         reduce using rule 9 (expression -> if expression .)
+    READLN          reduce using rule 9 (expression -> if expression .)
+    INC             reduce using rule 9 (expression -> if expression .)
+    WHILE           reduce using rule 9 (expression -> if expression .)
+
+
+state 30
+
+    (18) assignment -> IDENTIFIER ASSIGNMENT . arithmetic_expression SEMICOLON
+    (19) arithmetic_expression -> . IDENTIFIER PLUS arithmetic_expression
+    (20) arithmetic_expression -> . IDENTIFIER MINUS arithmetic_expression
+    (21) arithmetic_expression -> . IDENTIFIER MUL arithmetic_expression
+    (22) arithmetic_expression -> . IDENTIFIER DIV arithmetic_expression
+    (23) arithmetic_expression -> . NUMBER PLUS arithmetic_expression
+    (24) arithmetic_expression -> . NUMBER MINUS arithmetic_expression
+    (25) arithmetic_expression -> . NUMBER MUL arithmetic_expression
+    (26) arithmetic_expression -> . NUMBER DIV arithmetic_expression
+    (27) arithmetic_expression -> . NUMBER
+    (28) arithmetic_expression -> . IDENTIFIER
+    (29) arithmetic_expression -> . STRING
+
+    IDENTIFIER      shift and go to state 53
+    NUMBER          shift and go to state 52
+    STRING          shift and go to state 51
+
+    arithmetic_expression          shift and go to state 50
+
+state 31
+
+    (3) begin -> BEGIN body END . POINT
+
+    POINT           shift and go to state 54
+
+
+state 32
+
+    (8) expression -> assignment expression .
+
+    END             reduce using rule 8 (expression -> assignment expression .)
+    IDENTIFIER      reduce using rule 8 (expression -> assignment expression .)
+    IF              reduce using rule 8 (expression -> assignment expression .)
+    WRITELN         reduce using rule 8 (expression -> assignment expression .)
+    READLN          reduce using rule 8 (expression -> assignment expression .)
+    INC             reduce using rule 8 (expression -> assignment expression .)
+    WHILE           reduce using rule 8 (expression -> assignment expression .)
+
+
+state 33
+
+    (30) function -> WRITELN OPEN_BRACKET . arithmetic_expression CLOSE_BRACKET SEMICOLON
+    (19) arithmetic_expression -> . IDENTIFIER PLUS arithmetic_expression
+    (20) arithmetic_expression -> . IDENTIFIER MINUS arithmetic_expression
+    (21) arithmetic_expression -> . IDENTIFIER MUL arithmetic_expression
+    (22) arithmetic_expression -> . IDENTIFIER DIV arithmetic_expression
+    (23) arithmetic_expression -> . NUMBER PLUS arithmetic_expression
+    (24) arithmetic_expression -> . NUMBER MINUS arithmetic_expression
+    (25) arithmetic_expression -> . NUMBER MUL arithmetic_expression
+    (26) arithmetic_expression -> . NUMBER DIV arithmetic_expression
+    (27) arithmetic_expression -> . NUMBER
+    (28) arithmetic_expression -> . IDENTIFIER
+    (29) arithmetic_expression -> . STRING
+
+    IDENTIFIER      shift and go to state 53
+    NUMBER          shift and go to state 52
+    STRING          shift and go to state 51
+
+    arithmetic_expression          shift and go to state 55
+
+state 34
+
+    (43) if -> IF predicate . THEN block
+    (44) if -> IF predicate . THEN expression
+
+    THEN            shift and go to state 56
+
+
+state 35
+
+    (31) function -> READLN OPEN_BRACKET . IDENTIFIER CLOSE_BRACKET SEMICOLON
+
+    IDENTIFIER      shift and go to state 57
+
+
+state 36
+
+    (12) expression -> while expression .
+
+    END             reduce using rule 12 (expression -> while expression .)
+    IDENTIFIER      reduce using rule 12 (expression -> while expression .)
+    IF              reduce using rule 12 (expression -> while expression .)
+    WRITELN         reduce using rule 12 (expression -> while expression .)
+    READLN          reduce using rule 12 (expression -> while expression .)
+    INC             reduce using rule 12 (expression -> while expression .)
+    WHILE           reduce using rule 12 (expression -> while expression .)
+
+
+state 37
+
+    (32) function -> INC OPEN_BRACKET . IDENTIFIER CLOSE_BRACKET SEMICOLON
+
+    IDENTIFIER      shift and go to state 58
+
+
+state 38
+
+    (14) type -> TYPE_STRING .
+
+    SEMICOLON       reduce using rule 14 (type -> TYPE_STRING .)
+
+
+state 39
+
+    (16) type -> TYPE_REAL .
+
+    SEMICOLON       reduce using rule 16 (type -> TYPE_REAL .)
+
+
+state 40
+
+    (15) type -> TYPE_INTEGER .
+
+    SEMICOLON       reduce using rule 15 (type -> TYPE_INTEGER .)
+
+
+state 41
+
+    (13) declaration -> IDENTIFIER COLON type . SEMICOLON
+
+    SEMICOLON       shift and go to state 59
+
+
+state 42
+
+    (42) while -> WHILE predicate DO . block
+    (6) block -> . BEGIN body END SEMICOLON
+
+    BEGIN           shift and go to state 60
+
+    block                          shift and go to state 61
+
+state 43
+
+    (39) predicate -> NUMBER COMPARISON . arithmetic_expression
+    (19) arithmetic_expression -> . IDENTIFIER PLUS arithmetic_expression
+    (20) arithmetic_expression -> . IDENTIFIER MINUS arithmetic_expression
+    (21) arithmetic_expression -> . IDENTIFIER MUL arithmetic_expression
+    (22) arithmetic_expression -> . IDENTIFIER DIV arithmetic_expression
+    (23) arithmetic_expression -> . NUMBER PLUS arithmetic_expression
+    (24) arithmetic_expression -> . NUMBER MINUS arithmetic_expression
+    (25) arithmetic_expression -> . NUMBER MUL arithmetic_expression
+    (26) arithmetic_expression -> . NUMBER DIV arithmetic_expression
+    (27) arithmetic_expression -> . NUMBER
+    (28) arithmetic_expression -> . IDENTIFIER
+    (29) arithmetic_expression -> . STRING
+
+    IDENTIFIER      shift and go to state 53
+    NUMBER          shift and go to state 52
+    STRING          shift and go to state 51
+
+    arithmetic_expression          shift and go to state 62
+
+state 44
+
+    (36) predicate -> NUMBER NON_STRICT_COMPARISON . arithmetic_expression
+    (19) arithmetic_expression -> . IDENTIFIER PLUS arithmetic_expression
+    (20) arithmetic_expression -> . IDENTIFIER MINUS arithmetic_expression
+    (21) arithmetic_expression -> . IDENTIFIER MUL arithmetic_expression
+    (22) arithmetic_expression -> . IDENTIFIER DIV arithmetic_expression
+    (23) arithmetic_expression -> . NUMBER PLUS arithmetic_expression
+    (24) arithmetic_expression -> . NUMBER MINUS arithmetic_expression
+    (25) arithmetic_expression -> . NUMBER MUL arithmetic_expression
+    (26) arithmetic_expression -> . NUMBER DIV arithmetic_expression
+    (27) arithmetic_expression -> . NUMBER
+    (28) arithmetic_expression -> . IDENTIFIER
+    (29) arithmetic_expression -> . STRING
+
+    IDENTIFIER      shift and go to state 53
+    NUMBER          shift and go to state 52
+    STRING          shift and go to state 51
+
+    arithmetic_expression          shift and go to state 63
+
+state 45
+
+    (34) predicate -> NUMBER EQUALITY . arithmetic_expression
+    (19) arithmetic_expression -> . IDENTIFIER PLUS arithmetic_expression
+    (20) arithmetic_expression -> . IDENTIFIER MINUS arithmetic_expression
+    (21) arithmetic_expression -> . IDENTIFIER MUL arithmetic_expression
+    (22) arithmetic_expression -> . IDENTIFIER DIV arithmetic_expression
+    (23) arithmetic_expression -> . NUMBER PLUS arithmetic_expression
+    (24) arithmetic_expression -> . NUMBER MINUS arithmetic_expression
+    (25) arithmetic_expression -> . NUMBER MUL arithmetic_expression
+    (26) arithmetic_expression -> . NUMBER DIV arithmetic_expression
+    (27) arithmetic_expression -> . NUMBER
+    (28) arithmetic_expression -> . IDENTIFIER
+    (29) arithmetic_expression -> . STRING
+
+    IDENTIFIER      shift and go to state 53
+    NUMBER          shift and go to state 52
+    STRING          shift and go to state 51
+
+    arithmetic_expression          shift and go to state 64
+
+state 46
+
+    (38) predicate -> NUMBER NON_EQUALITY . arithmetic_expression
+    (19) arithmetic_expression -> . IDENTIFIER PLUS arithmetic_expression
+    (20) arithmetic_expression -> . IDENTIFIER MINUS arithmetic_expression
+    (21) arithmetic_expression -> . IDENTIFIER MUL arithmetic_expression
+    (22) arithmetic_expression -> . IDENTIFIER DIV arithmetic_expression
+    (23) arithmetic_expression -> . NUMBER PLUS arithmetic_expression
+    (24) arithmetic_expression -> . NUMBER MINUS arithmetic_expression
+    (25) arithmetic_expression -> . NUMBER MUL arithmetic_expression
+    (26) arithmetic_expression -> . NUMBER DIV arithmetic_expression
+    (27) arithmetic_expression -> . NUMBER
+    (28) arithmetic_expression -> . IDENTIFIER
+    (29) arithmetic_expression -> . STRING
+
+    IDENTIFIER      shift and go to state 53
+    NUMBER          shift and go to state 52
+    STRING          shift and go to state 51
+
+    arithmetic_expression          shift and go to state 65
+
+state 47
+
+    (35) predicate -> IDENTIFIER NON_EQUALITY . arithmetic_expression
+    (19) arithmetic_expression -> . IDENTIFIER PLUS arithmetic_expression
+    (20) arithmetic_expression -> . IDENTIFIER MINUS arithmetic_expression
+    (21) arithmetic_expression -> . IDENTIFIER MUL arithmetic_expression
+    (22) arithmetic_expression -> . IDENTIFIER DIV arithmetic_expression
+    (23) arithmetic_expression -> . NUMBER PLUS arithmetic_expression
+    (24) arithmetic_expression -> . NUMBER MINUS arithmetic_expression
+    (25) arithmetic_expression -> . NUMBER MUL arithmetic_expression
+    (26) arithmetic_expression -> . NUMBER DIV arithmetic_expression
+    (27) arithmetic_expression -> . NUMBER
+    (28) arithmetic_expression -> . IDENTIFIER
+    (29) arithmetic_expression -> . STRING
+
+    IDENTIFIER      shift and go to state 53
+    NUMBER          shift and go to state 52
+    STRING          shift and go to state 51
+
+    arithmetic_expression          shift and go to state 66
+
+state 48
+
+    (33) predicate -> IDENTIFIER EQUALITY . arithmetic_expression
+    (19) arithmetic_expression -> . IDENTIFIER PLUS arithmetic_expression
+    (20) arithmetic_expression -> . IDENTIFIER MINUS arithmetic_expression
+    (21) arithmetic_expression -> . IDENTIFIER MUL arithmetic_expression
+    (22) arithmetic_expression -> . IDENTIFIER DIV arithmetic_expression
+    (23) arithmetic_expression -> . NUMBER PLUS arithmetic_expression
+    (24) arithmetic_expression -> . NUMBER MINUS arithmetic_expression
+    (25) arithmetic_expression -> . NUMBER MUL arithmetic_expression
+    (26) arithmetic_expression -> . NUMBER DIV arithmetic_expression
+    (27) arithmetic_expression -> . NUMBER
+    (28) arithmetic_expression -> . IDENTIFIER
+    (29) arithmetic_expression -> . STRING
+
+    IDENTIFIER      shift and go to state 53
+    NUMBER          shift and go to state 52
+    STRING          shift and go to state 51
+
+    arithmetic_expression          shift and go to state 67
+
+state 49
+
+    (37) predicate -> IDENTIFIER NON_STRICT_COMPARISON . arithmetic_expression
+    (19) arithmetic_expression -> . IDENTIFIER PLUS arithmetic_expression
+    (20) arithmetic_expression -> . IDENTIFIER MINUS arithmetic_expression
+    (21) arithmetic_expression -> . IDENTIFIER MUL arithmetic_expression
+    (22) arithmetic_expression -> . IDENTIFIER DIV arithmetic_expression
+    (23) arithmetic_expression -> . NUMBER PLUS arithmetic_expression
+    (24) arithmetic_expression -> . NUMBER MINUS arithmetic_expression
+    (25) arithmetic_expression -> . NUMBER MUL arithmetic_expression
+    (26) arithmetic_expression -> . NUMBER DIV arithmetic_expression
+    (27) arithmetic_expression -> . NUMBER
+    (28) arithmetic_expression -> . IDENTIFIER
+    (29) arithmetic_expression -> . STRING
+
+    IDENTIFIER      shift and go to state 53
+    NUMBER          shift and go to state 52
+    STRING          shift and go to state 51
+
+    arithmetic_expression          shift and go to state 68
+
+state 50
+
+    (18) assignment -> IDENTIFIER ASSIGNMENT arithmetic_expression . SEMICOLON
+
+    SEMICOLON       shift and go to state 69
+
+
+state 51
+
+    (29) arithmetic_expression -> STRING .
+
+    DO              reduce using rule 29 (arithmetic_expression -> STRING .)
+    THEN            reduce using rule 29 (arithmetic_expression -> STRING .)
+    SEMICOLON       reduce using rule 29 (arithmetic_expression -> STRING .)
+    CLOSE_BRACKET   reduce using rule 29 (arithmetic_expression -> STRING .)
+
+
+state 52
+
+    (23) arithmetic_expression -> NUMBER . PLUS arithmetic_expression
+    (24) arithmetic_expression -> NUMBER . MINUS arithmetic_expression
+    (25) arithmetic_expression -> NUMBER . MUL arithmetic_expression
+    (26) arithmetic_expression -> NUMBER . DIV arithmetic_expression
+    (27) arithmetic_expression -> NUMBER .
+
+    PLUS            shift and go to state 70
+    MINUS           shift and go to state 73
+    MUL             shift and go to state 71
+    DIV             shift and go to state 72
+    DO              reduce using rule 27 (arithmetic_expression -> NUMBER .)
+    THEN            reduce using rule 27 (arithmetic_expression -> NUMBER .)
+    SEMICOLON       reduce using rule 27 (arithmetic_expression -> NUMBER .)
+    CLOSE_BRACKET   reduce using rule 27 (arithmetic_expression -> NUMBER .)
+
+
+state 53
+
+    (19) arithmetic_expression -> IDENTIFIER . PLUS arithmetic_expression
+    (20) arithmetic_expression -> IDENTIFIER . MINUS arithmetic_expression
+    (21) arithmetic_expression -> IDENTIFIER . MUL arithmetic_expression
+    (22) arithmetic_expression -> IDENTIFIER . DIV arithmetic_expression
+    (28) arithmetic_expression -> IDENTIFIER .
+
+    PLUS            shift and go to state 74
+    MINUS           shift and go to state 77
+    MUL             shift and go to state 75
+    DIV             shift and go to state 76
+    DO              reduce using rule 28 (arithmetic_expression -> IDENTIFIER .)
+    THEN            reduce using rule 28 (arithmetic_expression -> IDENTIFIER .)
+    SEMICOLON       reduce using rule 28 (arithmetic_expression -> IDENTIFIER .)
+    CLOSE_BRACKET   reduce using rule 28 (arithmetic_expression -> IDENTIFIER .)
+
+
+state 54
+
+    (3) begin -> BEGIN body END POINT .
+
+    $end            reduce using rule 3 (begin -> BEGIN body END POINT .)
+
+
+state 55
+
+    (30) function -> WRITELN OPEN_BRACKET arithmetic_expression . CLOSE_BRACKET SEMICOLON
+
+    CLOSE_BRACKET   shift and go to state 78
+
+
+state 56
+
+    (43) if -> IF predicate THEN . block
+    (44) if -> IF predicate THEN . expression
+    (6) block -> . BEGIN body END SEMICOLON
+    (8) expression -> . assignment expression
+    (9) expression -> . if expression
+    (10) expression -> . function expression
+    (11) expression -> . empty
+    (12) expression -> . while expression
+    (18) assignment -> . IDENTIFIER ASSIGNMENT arithmetic_expression SEMICOLON
+    (43) if -> . IF predicate THEN block
+    (44) if -> . IF predicate THEN expression
+    (30) function -> . WRITELN OPEN_BRACKET arithmetic_expression CLOSE_BRACKET SEMICOLON
+    (31) function -> . READLN OPEN_BRACKET IDENTIFIER CLOSE_BRACKET SEMICOLON
+    (32) function -> . INC OPEN_BRACKET IDENTIFIER CLOSE_BRACKET SEMICOLON
+    (17) empty -> .
+    (42) while -> . WHILE predicate DO block
+
+  ! shift/reduce conflict for IDENTIFIER resolved as shift
+  ! shift/reduce conflict for IF resolved as shift
+  ! shift/reduce conflict for WRITELN resolved as shift
+  ! shift/reduce conflict for READLN resolved as shift
+  ! shift/reduce conflict for INC resolved as shift
+  ! shift/reduce conflict for WHILE resolved as shift
+    BEGIN           shift and go to state 60
+    IDENTIFIER      shift and go to state 13
+    IF              shift and go to state 18
+    WRITELN         shift and go to state 17
+    READLN          shift and go to state 19
+    INC             shift and go to state 22
+    END             reduce using rule 17 (empty -> .)
+    WHILE           shift and go to state 11
+
+  ! IDENTIFIER      [ reduce using rule 17 (empty -> .) ]
+  ! IF              [ reduce using rule 17 (empty -> .) ]
+  ! WRITELN         [ reduce using rule 17 (empty -> .) ]
+  ! READLN          [ reduce using rule 17 (empty -> .) ]
+  ! INC             [ reduce using rule 17 (empty -> .) ]
+  ! WHILE           [ reduce using rule 17 (empty -> .) ]
+
+    function                       shift and go to state 10
+    assignment                     shift and go to state 16
+    while                          shift and go to state 20
+    empty                          shift and go to state 14
+    expression                     shift and go to state 79
+    block                          shift and go to state 80
+    if                             shift and go to state 12
+
+state 57
+
+    (31) function -> READLN OPEN_BRACKET IDENTIFIER . CLOSE_BRACKET SEMICOLON
+
+    CLOSE_BRACKET   shift and go to state 81
+
+
+state 58
+
+    (32) function -> INC OPEN_BRACKET IDENTIFIER . CLOSE_BRACKET SEMICOLON
+
+    CLOSE_BRACKET   shift and go to state 82
+
+
+state 59
+
+    (13) declaration -> IDENTIFIER COLON type SEMICOLON .
+
+    IDENTIFIER      reduce using rule 13 (declaration -> IDENTIFIER COLON type SEMICOLON .)
+    BEGIN           reduce using rule 13 (declaration -> IDENTIFIER COLON type SEMICOLON .)
+
+
+state 60
+
+    (6) block -> BEGIN . body END SEMICOLON
+    (7) body -> . expression
+    (8) expression -> . assignment expression
+    (9) expression -> . if expression
+    (10) expression -> . function expression
+    (11) expression -> . empty
+    (12) expression -> . while expression
+    (18) assignment -> . IDENTIFIER ASSIGNMENT arithmetic_expression SEMICOLON
+    (43) if -> . IF predicate THEN block
+    (44) if -> . IF predicate THEN expression
+    (30) function -> . WRITELN OPEN_BRACKET arithmetic_expression CLOSE_BRACKET SEMICOLON
+    (31) function -> . READLN OPEN_BRACKET IDENTIFIER CLOSE_BRACKET SEMICOLON
+    (32) function -> . INC OPEN_BRACKET IDENTIFIER CLOSE_BRACKET SEMICOLON
+    (17) empty -> .
+    (42) while -> . WHILE predicate DO block
+
+    IDENTIFIER      shift and go to state 13
+    IF              shift and go to state 18
+    WRITELN         shift and go to state 17
+    READLN          shift and go to state 19
+    INC             shift and go to state 22
+    END             reduce using rule 17 (empty -> .)
+    WHILE           shift and go to state 11
+
+    body                           shift and go to state 83
+    function                       shift and go to state 10
+    assignment                     shift and go to state 16
+    while                          shift and go to state 20
+    expression                     shift and go to state 21
+    empty                          shift and go to state 14
+    if                             shift and go to state 12
+
+state 61
+
+    (42) while -> WHILE predicate DO block .
+
+    IDENTIFIER      reduce using rule 42 (while -> WHILE predicate DO block .)
+    IF              reduce using rule 42 (while -> WHILE predicate DO block .)
+    WRITELN         reduce using rule 42 (while -> WHILE predicate DO block .)
+    READLN          reduce using rule 42 (while -> WHILE predicate DO block .)
+    INC             reduce using rule 42 (while -> WHILE predicate DO block .)
+    WHILE           reduce using rule 42 (while -> WHILE predicate DO block .)
+    END             reduce using rule 42 (while -> WHILE predicate DO block .)
+
+
+state 62
+
+    (39) predicate -> NUMBER COMPARISON arithmetic_expression .
+
+    THEN            reduce using rule 39 (predicate -> NUMBER COMPARISON arithmetic_expression .)
+    DO              reduce using rule 39 (predicate -> NUMBER COMPARISON arithmetic_expression .)
+
+
+state 63
+
+    (36) predicate -> NUMBER NON_STRICT_COMPARISON arithmetic_expression .
+
+    THEN            reduce using rule 36 (predicate -> NUMBER NON_STRICT_COMPARISON arithmetic_expression .)
+    DO              reduce using rule 36 (predicate -> NUMBER NON_STRICT_COMPARISON arithmetic_expression .)
+
+
+state 64
+
+    (34) predicate -> NUMBER EQUALITY arithmetic_expression .
+
+    THEN            reduce using rule 34 (predicate -> NUMBER EQUALITY arithmetic_expression .)
+    DO              reduce using rule 34 (predicate -> NUMBER EQUALITY arithmetic_expression .)
+
+
+state 65
+
+    (38) predicate -> NUMBER NON_EQUALITY arithmetic_expression .
+
+    THEN            reduce using rule 38 (predicate -> NUMBER NON_EQUALITY arithmetic_expression .)
+    DO              reduce using rule 38 (predicate -> NUMBER NON_EQUALITY arithmetic_expression .)
+
+
+state 66
+
+    (35) predicate -> IDENTIFIER NON_EQUALITY arithmetic_expression .
+
+    THEN            reduce using rule 35 (predicate -> IDENTIFIER NON_EQUALITY arithmetic_expression .)
+    DO              reduce using rule 35 (predicate -> IDENTIFIER NON_EQUALITY arithmetic_expression .)
+
+
+state 67
+
+    (33) predicate -> IDENTIFIER EQUALITY arithmetic_expression .
+
+    THEN            reduce using rule 33 (predicate -> IDENTIFIER EQUALITY arithmetic_expression .)
+    DO              reduce using rule 33 (predicate -> IDENTIFIER EQUALITY arithmetic_expression .)
+
+
+state 68
+
+    (37) predicate -> IDENTIFIER NON_STRICT_COMPARISON arithmetic_expression .
+
+    THEN            reduce using rule 37 (predicate -> IDENTIFIER NON_STRICT_COMPARISON arithmetic_expression .)
+    DO              reduce using rule 37 (predicate -> IDENTIFIER NON_STRICT_COMPARISON arithmetic_expression .)
+
+
+state 69
+
+    (18) assignment -> IDENTIFIER ASSIGNMENT arithmetic_expression SEMICOLON .
+
+    IDENTIFIER      reduce using rule 18 (assignment -> IDENTIFIER ASSIGNMENT arithmetic_expression SEMICOLON .)
+    IF              reduce using rule 18 (assignment -> IDENTIFIER ASSIGNMENT arithmetic_expression SEMICOLON .)
+    WRITELN         reduce using rule 18 (assignment -> IDENTIFIER ASSIGNMENT arithmetic_expression SEMICOLON .)
+    READLN          reduce using rule 18 (assignment -> IDENTIFIER ASSIGNMENT arithmetic_expression SEMICOLON .)
+    INC             reduce using rule 18 (assignment -> IDENTIFIER ASSIGNMENT arithmetic_expression SEMICOLON .)
+    WHILE           reduce using rule 18 (assignment -> IDENTIFIER ASSIGNMENT arithmetic_expression SEMICOLON .)
+    END             reduce using rule 18 (assignment -> IDENTIFIER ASSIGNMENT arithmetic_expression SEMICOLON .)
+
+
+state 70
+
+    (23) arithmetic_expression -> NUMBER PLUS . arithmetic_expression
+    (19) arithmetic_expression -> . IDENTIFIER PLUS arithmetic_expression
+    (20) arithmetic_expression -> . IDENTIFIER MINUS arithmetic_expression
+    (21) arithmetic_expression -> . IDENTIFIER MUL arithmetic_expression
+    (22) arithmetic_expression -> . IDENTIFIER DIV arithmetic_expression
+    (23) arithmetic_expression -> . NUMBER PLUS arithmetic_expression
+    (24) arithmetic_expression -> . NUMBER MINUS arithmetic_expression
+    (25) arithmetic_expression -> . NUMBER MUL arithmetic_expression
+    (26) arithmetic_expression -> . NUMBER DIV arithmetic_expression
+    (27) arithmetic_expression -> . NUMBER
+    (28) arithmetic_expression -> . IDENTIFIER
+    (29) arithmetic_expression -> . STRING
+
+    IDENTIFIER      shift and go to state 53
+    NUMBER          shift and go to state 52
+    STRING          shift and go to state 51
+
+    arithmetic_expression          shift and go to state 84
+
+state 71
+
+    (25) arithmetic_expression -> NUMBER MUL . arithmetic_expression
+    (19) arithmetic_expression -> . IDENTIFIER PLUS arithmetic_expression
+    (20) arithmetic_expression -> . IDENTIFIER MINUS arithmetic_expression
+    (21) arithmetic_expression -> . IDENTIFIER MUL arithmetic_expression
+    (22) arithmetic_expression -> . IDENTIFIER DIV arithmetic_expression
+    (23) arithmetic_expression -> . NUMBER PLUS arithmetic_expression
+    (24) arithmetic_expression -> . NUMBER MINUS arithmetic_expression
+    (25) arithmetic_expression -> . NUMBER MUL arithmetic_expression
+    (26) arithmetic_expression -> . NUMBER DIV arithmetic_expression
+    (27) arithmetic_expression -> . NUMBER
+    (28) arithmetic_expression -> . IDENTIFIER
+    (29) arithmetic_expression -> . STRING
+
+    IDENTIFIER      shift and go to state 53
+    NUMBER          shift and go to state 52
+    STRING          shift and go to state 51
+
+    arithmetic_expression          shift and go to state 85
+
+state 72
+
+    (26) arithmetic_expression -> NUMBER DIV . arithmetic_expression
+    (19) arithmetic_expression -> . IDENTIFIER PLUS arithmetic_expression
+    (20) arithmetic_expression -> . IDENTIFIER MINUS arithmetic_expression
+    (21) arithmetic_expression -> . IDENTIFIER MUL arithmetic_expression
+    (22) arithmetic_expression -> . IDENTIFIER DIV arithmetic_expression
+    (23) arithmetic_expression -> . NUMBER PLUS arithmetic_expression
+    (24) arithmetic_expression -> . NUMBER MINUS arithmetic_expression
+    (25) arithmetic_expression -> . NUMBER MUL arithmetic_expression
+    (26) arithmetic_expression -> . NUMBER DIV arithmetic_expression
+    (27) arithmetic_expression -> . NUMBER
+    (28) arithmetic_expression -> . IDENTIFIER
+    (29) arithmetic_expression -> . STRING
+
+    IDENTIFIER      shift and go to state 53
+    NUMBER          shift and go to state 52
+    STRING          shift and go to state 51
+
+    arithmetic_expression          shift and go to state 86
+
+state 73
+
+    (24) arithmetic_expression -> NUMBER MINUS . arithmetic_expression
+    (19) arithmetic_expression -> . IDENTIFIER PLUS arithmetic_expression
+    (20) arithmetic_expression -> . IDENTIFIER MINUS arithmetic_expression
+    (21) arithmetic_expression -> . IDENTIFIER MUL arithmetic_expression
+    (22) arithmetic_expression -> . IDENTIFIER DIV arithmetic_expression
+    (23) arithmetic_expression -> . NUMBER PLUS arithmetic_expression
+    (24) arithmetic_expression -> . NUMBER MINUS arithmetic_expression
+    (25) arithmetic_expression -> . NUMBER MUL arithmetic_expression
+    (26) arithmetic_expression -> . NUMBER DIV arithmetic_expression
+    (27) arithmetic_expression -> . NUMBER
+    (28) arithmetic_expression -> . IDENTIFIER
+    (29) arithmetic_expression -> . STRING
+
+    IDENTIFIER      shift and go to state 53
+    NUMBER          shift and go to state 52
+    STRING          shift and go to state 51
+
+    arithmetic_expression          shift and go to state 87
+
+state 74
+
+    (19) arithmetic_expression -> IDENTIFIER PLUS . arithmetic_expression
+    (19) arithmetic_expression -> . IDENTIFIER PLUS arithmetic_expression
+    (20) arithmetic_expression -> . IDENTIFIER MINUS arithmetic_expression
+    (21) arithmetic_expression -> . IDENTIFIER MUL arithmetic_expression
+    (22) arithmetic_expression -> . IDENTIFIER DIV arithmetic_expression
+    (23) arithmetic_expression -> . NUMBER PLUS arithmetic_expression
+    (24) arithmetic_expression -> . NUMBER MINUS arithmetic_expression
+    (25) arithmetic_expression -> . NUMBER MUL arithmetic_expression
+    (26) arithmetic_expression -> . NUMBER DIV arithmetic_expression
+    (27) arithmetic_expression -> . NUMBER
+    (28) arithmetic_expression -> . IDENTIFIER
+    (29) arithmetic_expression -> . STRING
+
+    IDENTIFIER      shift and go to state 53
+    NUMBER          shift and go to state 52
+    STRING          shift and go to state 51
+
+    arithmetic_expression          shift and go to state 88
+
+state 75
+
+    (21) arithmetic_expression -> IDENTIFIER MUL . arithmetic_expression
+    (19) arithmetic_expression -> . IDENTIFIER PLUS arithmetic_expression
+    (20) arithmetic_expression -> . IDENTIFIER MINUS arithmetic_expression
+    (21) arithmetic_expression -> . IDENTIFIER MUL arithmetic_expression
+    (22) arithmetic_expression -> . IDENTIFIER DIV arithmetic_expression
+    (23) arithmetic_expression -> . NUMBER PLUS arithmetic_expression
+    (24) arithmetic_expression -> . NUMBER MINUS arithmetic_expression
+    (25) arithmetic_expression -> . NUMBER MUL arithmetic_expression
+    (26) arithmetic_expression -> . NUMBER DIV arithmetic_expression
+    (27) arithmetic_expression -> . NUMBER
+    (28) arithmetic_expression -> . IDENTIFIER
+    (29) arithmetic_expression -> . STRING
+
+    IDENTIFIER      shift and go to state 53
+    NUMBER          shift and go to state 52
+    STRING          shift and go to state 51
+
+    arithmetic_expression          shift and go to state 89
+
+state 76
+
+    (22) arithmetic_expression -> IDENTIFIER DIV . arithmetic_expression
+    (19) arithmetic_expression -> . IDENTIFIER PLUS arithmetic_expression
+    (20) arithmetic_expression -> . IDENTIFIER MINUS arithmetic_expression
+    (21) arithmetic_expression -> . IDENTIFIER MUL arithmetic_expression
+    (22) arithmetic_expression -> . IDENTIFIER DIV arithmetic_expression
+    (23) arithmetic_expression -> . NUMBER PLUS arithmetic_expression
+    (24) arithmetic_expression -> . NUMBER MINUS arithmetic_expression
+    (25) arithmetic_expression -> . NUMBER MUL arithmetic_expression
+    (26) arithmetic_expression -> . NUMBER DIV arithmetic_expression
+    (27) arithmetic_expression -> . NUMBER
+    (28) arithmetic_expression -> . IDENTIFIER
+    (29) arithmetic_expression -> . STRING
+
+    IDENTIFIER      shift and go to state 53
+    NUMBER          shift and go to state 52
+    STRING          shift and go to state 51
+
+    arithmetic_expression          shift and go to state 90
+
+state 77
+
+    (20) arithmetic_expression -> IDENTIFIER MINUS . arithmetic_expression
+    (19) arithmetic_expression -> . IDENTIFIER PLUS arithmetic_expression
+    (20) arithmetic_expression -> . IDENTIFIER MINUS arithmetic_expression
+    (21) arithmetic_expression -> . IDENTIFIER MUL arithmetic_expression
+    (22) arithmetic_expression -> . IDENTIFIER DIV arithmetic_expression
+    (23) arithmetic_expression -> . NUMBER PLUS arithmetic_expression
+    (24) arithmetic_expression -> . NUMBER MINUS arithmetic_expression
+    (25) arithmetic_expression -> . NUMBER MUL arithmetic_expression
+    (26) arithmetic_expression -> . NUMBER DIV arithmetic_expression
+    (27) arithmetic_expression -> . NUMBER
+    (28) arithmetic_expression -> . IDENTIFIER
+    (29) arithmetic_expression -> . STRING
+
+    IDENTIFIER      shift and go to state 53
+    NUMBER          shift and go to state 52
+    STRING          shift and go to state 51
+
+    arithmetic_expression          shift and go to state 91
+
+state 78
+
+    (30) function -> WRITELN OPEN_BRACKET arithmetic_expression CLOSE_BRACKET . SEMICOLON
+
+    SEMICOLON       shift and go to state 92
+
+
+state 79
+
+    (44) if -> IF predicate THEN expression .
+
+    IDENTIFIER      reduce using rule 44 (if -> IF predicate THEN expression .)
+    IF              reduce using rule 44 (if -> IF predicate THEN expression .)
+    WRITELN         reduce using rule 44 (if -> IF predicate THEN expression .)
+    READLN          reduce using rule 44 (if -> IF predicate THEN expression .)
+    INC             reduce using rule 44 (if -> IF predicate THEN expression .)
+    WHILE           reduce using rule 44 (if -> IF predicate THEN expression .)
+    END             reduce using rule 44 (if -> IF predicate THEN expression .)
+
+
+state 80
+
+    (43) if -> IF predicate THEN block .
+
+    IDENTIFIER      reduce using rule 43 (if -> IF predicate THEN block .)
+    IF              reduce using rule 43 (if -> IF predicate THEN block .)
+    WRITELN         reduce using rule 43 (if -> IF predicate THEN block .)
+    READLN          reduce using rule 43 (if -> IF predicate THEN block .)
+    INC             reduce using rule 43 (if -> IF predicate THEN block .)
+    WHILE           reduce using rule 43 (if -> IF predicate THEN block .)
+    END             reduce using rule 43 (if -> IF predicate THEN block .)
+
+
+state 81
+
+    (31) function -> READLN OPEN_BRACKET IDENTIFIER CLOSE_BRACKET . SEMICOLON
+
+    SEMICOLON       shift and go to state 93
+
+
+state 82
+
+    (32) function -> INC OPEN_BRACKET IDENTIFIER CLOSE_BRACKET . SEMICOLON
+
+    SEMICOLON       shift and go to state 94
+
+
+state 83
+
+    (6) block -> BEGIN body . END SEMICOLON
+
+    END             shift and go to state 95
+
+
+state 84
+
+    (23) arithmetic_expression -> NUMBER PLUS arithmetic_expression .
+
+    DO              reduce using rule 23 (arithmetic_expression -> NUMBER PLUS arithmetic_expression .)
+    THEN            reduce using rule 23 (arithmetic_expression -> NUMBER PLUS arithmetic_expression .)
+    SEMICOLON       reduce using rule 23 (arithmetic_expression -> NUMBER PLUS arithmetic_expression .)
+    CLOSE_BRACKET   reduce using rule 23 (arithmetic_expression -> NUMBER PLUS arithmetic_expression .)
+
+
+state 85
+
+    (25) arithmetic_expression -> NUMBER MUL arithmetic_expression .
+
+    DO              reduce using rule 25 (arithmetic_expression -> NUMBER MUL arithmetic_expression .)
+    THEN            reduce using rule 25 (arithmetic_expression -> NUMBER MUL arithmetic_expression .)
+    SEMICOLON       reduce using rule 25 (arithmetic_expression -> NUMBER MUL arithmetic_expression .)
+    CLOSE_BRACKET   reduce using rule 25 (arithmetic_expression -> NUMBER MUL arithmetic_expression .)
+
+
+state 86
+
+    (26) arithmetic_expression -> NUMBER DIV arithmetic_expression .
+
+    DO              reduce using rule 26 (arithmetic_expression -> NUMBER DIV arithmetic_expression .)
+    THEN            reduce using rule 26 (arithmetic_expression -> NUMBER DIV arithmetic_expression .)
+    SEMICOLON       reduce using rule 26 (arithmetic_expression -> NUMBER DIV arithmetic_expression .)
+    CLOSE_BRACKET   reduce using rule 26 (arithmetic_expression -> NUMBER DIV arithmetic_expression .)
+
+
+state 87
+
+    (24) arithmetic_expression -> NUMBER MINUS arithmetic_expression .
+
+    DO              reduce using rule 24 (arithmetic_expression -> NUMBER MINUS arithmetic_expression .)
+    THEN            reduce using rule 24 (arithmetic_expression -> NUMBER MINUS arithmetic_expression .)
+    SEMICOLON       reduce using rule 24 (arithmetic_expression -> NUMBER MINUS arithmetic_expression .)
+    CLOSE_BRACKET   reduce using rule 24 (arithmetic_expression -> NUMBER MINUS arithmetic_expression .)
+
+
+state 88
+
+    (19) arithmetic_expression -> IDENTIFIER PLUS arithmetic_expression .
+
+    DO              reduce using rule 19 (arithmetic_expression -> IDENTIFIER PLUS arithmetic_expression .)
+    THEN            reduce using rule 19 (arithmetic_expression -> IDENTIFIER PLUS arithmetic_expression .)
+    SEMICOLON       reduce using rule 19 (arithmetic_expression -> IDENTIFIER PLUS arithmetic_expression .)
+    CLOSE_BRACKET   reduce using rule 19 (arithmetic_expression -> IDENTIFIER PLUS arithmetic_expression .)
+
+
+state 89
+
+    (21) arithmetic_expression -> IDENTIFIER MUL arithmetic_expression .
+
+    DO              reduce using rule 21 (arithmetic_expression -> IDENTIFIER MUL arithmetic_expression .)
+    THEN            reduce using rule 21 (arithmetic_expression -> IDENTIFIER MUL arithmetic_expression .)
+    SEMICOLON       reduce using rule 21 (arithmetic_expression -> IDENTIFIER MUL arithmetic_expression .)
+    CLOSE_BRACKET   reduce using rule 21 (arithmetic_expression -> IDENTIFIER MUL arithmetic_expression .)
+
+
+state 90
+
+    (22) arithmetic_expression -> IDENTIFIER DIV arithmetic_expression .
+
+    DO              reduce using rule 22 (arithmetic_expression -> IDENTIFIER DIV arithmetic_expression .)
+    THEN            reduce using rule 22 (arithmetic_expression -> IDENTIFIER DIV arithmetic_expression .)
+    SEMICOLON       reduce using rule 22 (arithmetic_expression -> IDENTIFIER DIV arithmetic_expression .)
+    CLOSE_BRACKET   reduce using rule 22 (arithmetic_expression -> IDENTIFIER DIV arithmetic_expression .)
+
+
+state 91
+
+    (20) arithmetic_expression -> IDENTIFIER MINUS arithmetic_expression .
+
+    DO              reduce using rule 20 (arithmetic_expression -> IDENTIFIER MINUS arithmetic_expression .)
+    THEN            reduce using rule 20 (arithmetic_expression -> IDENTIFIER MINUS arithmetic_expression .)
+    SEMICOLON       reduce using rule 20 (arithmetic_expression -> IDENTIFIER MINUS arithmetic_expression .)
+    CLOSE_BRACKET   reduce using rule 20 (arithmetic_expression -> IDENTIFIER MINUS arithmetic_expression .)
+
+
+state 92
+
+    (30) function -> WRITELN OPEN_BRACKET arithmetic_expression CLOSE_BRACKET SEMICOLON .
+
+    IDENTIFIER      reduce using rule 30 (function -> WRITELN OPEN_BRACKET arithmetic_expression CLOSE_BRACKET SEMICOLON .)
+    IF              reduce using rule 30 (function -> WRITELN OPEN_BRACKET arithmetic_expression CLOSE_BRACKET SEMICOLON .)
+    WRITELN         reduce using rule 30 (function -> WRITELN OPEN_BRACKET arithmetic_expression CLOSE_BRACKET SEMICOLON .)
+    READLN          reduce using rule 30 (function -> WRITELN OPEN_BRACKET arithmetic_expression CLOSE_BRACKET SEMICOLON .)
+    INC             reduce using rule 30 (function -> WRITELN OPEN_BRACKET arithmetic_expression CLOSE_BRACKET SEMICOLON .)
+    WHILE           reduce using rule 30 (function -> WRITELN OPEN_BRACKET arithmetic_expression CLOSE_BRACKET SEMICOLON .)
+    END             reduce using rule 30 (function -> WRITELN OPEN_BRACKET arithmetic_expression CLOSE_BRACKET SEMICOLON .)
+
+
+state 93
+
+    (31) function -> READLN OPEN_BRACKET IDENTIFIER CLOSE_BRACKET SEMICOLON .
+
+    IDENTIFIER      reduce using rule 31 (function -> READLN OPEN_BRACKET IDENTIFIER CLOSE_BRACKET SEMICOLON .)
+    IF              reduce using rule 31 (function -> READLN OPEN_BRACKET IDENTIFIER CLOSE_BRACKET SEMICOLON .)
+    WRITELN         reduce using rule 31 (function -> READLN OPEN_BRACKET IDENTIFIER CLOSE_BRACKET SEMICOLON .)
+    READLN          reduce using rule 31 (function -> READLN OPEN_BRACKET IDENTIFIER CLOSE_BRACKET SEMICOLON .)
+    INC             reduce using rule 31 (function -> READLN OPEN_BRACKET IDENTIFIER CLOSE_BRACKET SEMICOLON .)
+    WHILE           reduce using rule 31 (function -> READLN OPEN_BRACKET IDENTIFIER CLOSE_BRACKET SEMICOLON .)
+    END             reduce using rule 31 (function -> READLN OPEN_BRACKET IDENTIFIER CLOSE_BRACKET SEMICOLON .)
+
+
+state 94
+
+    (32) function -> INC OPEN_BRACKET IDENTIFIER CLOSE_BRACKET SEMICOLON .
+
+    IDENTIFIER      reduce using rule 32 (function -> INC OPEN_BRACKET IDENTIFIER CLOSE_BRACKET SEMICOLON .)
+    IF              reduce using rule 32 (function -> INC OPEN_BRACKET IDENTIFIER CLOSE_BRACKET SEMICOLON .)
+    WRITELN         reduce using rule 32 (function -> INC OPEN_BRACKET IDENTIFIER CLOSE_BRACKET SEMICOLON .)
+    READLN          reduce using rule 32 (function -> INC OPEN_BRACKET IDENTIFIER CLOSE_BRACKET SEMICOLON .)
+    INC             reduce using rule 32 (function -> INC OPEN_BRACKET IDENTIFIER CLOSE_BRACKET SEMICOLON .)
+    WHILE           reduce using rule 32 (function -> INC OPEN_BRACKET IDENTIFIER CLOSE_BRACKET SEMICOLON .)
+    END             reduce using rule 32 (function -> INC OPEN_BRACKET IDENTIFIER CLOSE_BRACKET SEMICOLON .)
+
+
+state 95
+
+    (6) block -> BEGIN body END . SEMICOLON
+
+    SEMICOLON       shift and go to state 96
+
+
+state 96
+
+    (6) block -> BEGIN body END SEMICOLON .
+
+    IDENTIFIER      reduce using rule 6 (block -> BEGIN body END SEMICOLON .)
+    IF              reduce using rule 6 (block -> BEGIN body END SEMICOLON .)
+    WRITELN         reduce using rule 6 (block -> BEGIN body END SEMICOLON .)
+    READLN          reduce using rule 6 (block -> BEGIN body END SEMICOLON .)
+    INC             reduce using rule 6 (block -> BEGIN body END SEMICOLON .)
+    WHILE           reduce using rule 6 (block -> BEGIN body END SEMICOLON .)
+    END             reduce using rule 6 (block -> BEGIN body END SEMICOLON .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for IDENTIFIER in state 10 resolved as shift
+WARNING: shift/reduce conflict for IF in state 10 resolved as shift
+WARNING: shift/reduce conflict for WRITELN in state 10 resolved as shift
+WARNING: shift/reduce conflict for READLN in state 10 resolved as shift
+WARNING: shift/reduce conflict for INC in state 10 resolved as shift
+WARNING: shift/reduce conflict for WHILE in state 10 resolved as shift
+WARNING: shift/reduce conflict for IDENTIFIER in state 12 resolved as shift
+WARNING: shift/reduce conflict for IF in state 12 resolved as shift
+WARNING: shift/reduce conflict for WRITELN in state 12 resolved as shift
+WARNING: shift/reduce conflict for READLN in state 12 resolved as shift
+WARNING: shift/reduce conflict for INC in state 12 resolved as shift
+WARNING: shift/reduce conflict for WHILE in state 12 resolved as shift
+WARNING: shift/reduce conflict for IDENTIFIER in state 16 resolved as shift
+WARNING: shift/reduce conflict for IF in state 16 resolved as shift
+WARNING: shift/reduce conflict for WRITELN in state 16 resolved as shift
+WARNING: shift/reduce conflict for READLN in state 16 resolved as shift
+WARNING: shift/reduce conflict for INC in state 16 resolved as shift
+WARNING: shift/reduce conflict for WHILE in state 16 resolved as shift
+WARNING: shift/reduce conflict for IDENTIFIER in state 20 resolved as shift
+WARNING: shift/reduce conflict for IF in state 20 resolved as shift
+WARNING: shift/reduce conflict for WRITELN in state 20 resolved as shift
+WARNING: shift/reduce conflict for READLN in state 20 resolved as shift
+WARNING: shift/reduce conflict for INC in state 20 resolved as shift
+WARNING: shift/reduce conflict for WHILE in state 20 resolved as shift
+WARNING: shift/reduce conflict for IDENTIFIER in state 56 resolved as shift
+WARNING: shift/reduce conflict for IF in state 56 resolved as shift
+WARNING: shift/reduce conflict for WRITELN in state 56 resolved as shift
+WARNING: shift/reduce conflict for READLN in state 56 resolved as shift
+WARNING: shift/reduce conflict for INC in state 56 resolved as shift
+WARNING: shift/reduce conflict for WHILE in state 56 resolved as shift
