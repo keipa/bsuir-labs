@@ -20,7 +20,7 @@ begin
      end;
   writeln(" data successfully read! ");
 
-     while i <= num1 do
+     while i <= num1/0 do
      begin
        writeln(data);
        i := 1;
