@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WebSocketsClient"
         mc:Ignorable="d"
-        Title="WebSockets Chat" Height="350" Width="778.557">
+        Title="WebSockets Chat" Height="358.787" Width="778.557" ResizeMode="NoResize">
     <Grid>
         <Button Content="Send" HorizontalAlignment="Left" Margin="230,290,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click" Height="22"/>
         <Button Content="Start" HorizontalAlignment="Left" Margin="10,33,0,0" VerticalAlignment="Top" Width="239" Click="Button_Click_1" Height="57"/>
@@ -15,7 +15,7 @@
         <TextBox x:Name="portSend"  HorizontalAlignment="Left" Height="23" Margin="310,67,0,0" TextWrapping="Wrap" Text="80" VerticalAlignment="Top" Width="120"/>
         <ListBox x:Name="DebugList" HorizontalAlignment="Left" Height="217" Margin="310,95,0,0" VerticalAlignment="Top" Width="454" FontSize="10" Background="#FF454545" Foreground="#FF5DFF00"/>
         <ListBox x:Name="ChatList" HorizontalAlignment="Left" Height="192" Margin="10,95,0,0" VerticalAlignment="Top" Width="295"/>
-        <TextBox x:Name="Message" HorizontalAlignment="Left" Height="22" Margin="10,290,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="215"/>
+        <TextBox x:Name="Message" ToolTip="Insert your message here..." HorizontalAlignment="Left" Height="22" Margin="10,290,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="215"/>
 
     </Grid>
 </Window>
