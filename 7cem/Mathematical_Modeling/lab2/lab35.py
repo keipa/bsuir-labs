@@ -13,7 +13,7 @@ def PlotInit():
 
 def ExpInit():
     global _lambda, x_min, x_max, n, x, y
-    _lambda = 1.5
+    _lambda = 2.5
     x_min = 0.0
     x_max = 6.0
     n = 100

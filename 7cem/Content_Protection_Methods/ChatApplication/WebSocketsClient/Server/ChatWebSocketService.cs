@@ -7,6 +7,7 @@ using System.Net.Sockets;
 using WebSockets.Server.WebSocket;
 using WebSockets.Common;
 using System.IO;
+using System.Net;
 
 namespace WebSocketsClient.Server
 {
@@ -22,7 +23,21 @@ namespace WebSocketsClient.Server
 
         protected override void OnTextFrame(string text)
         {
-            string response = "Responce ServerABC: " + text;
+
+            string html = string.Empty;
+            string url = $"http://localhost:58850/api/caesar/{text}/decrypt";
+
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            request.AutomaticDecompression = DecompressionMethods.GZip;
+
+            using (HttpWebResponse httpresponse = (HttpWebResponse)request.GetResponse())
+            using (Stream stream = httpresponse.GetResponseStream())
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                html = reader.ReadToEnd();
+            }
+
+            string response = "Responce ServerABC: " + html;
             base.Send(response);
             _logger.Chat(response);
         }

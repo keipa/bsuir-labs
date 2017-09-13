@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading;
@@ -33,7 +35,22 @@ namespace WebSocketsClient
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
-            TestClient.StartSendThread($"ws://localhost:{portSend.Text}/chat", Message.Text);
+            string html = string.Empty;
+            string url = $"http://localhost:58850/api/caesar/{Message.Text}/encrypt";
+
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            request.AutomaticDecompression = DecompressionMethods.GZip;
+
+            using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+            using (Stream stream = response.GetResponseStream())
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                html = reader.ReadToEnd();
+            }
+
+            //ChatList.Items.Insert(0, html);
+
+            TestClient.StartSendThread($"ws://localhost:{portSend.Text}/chat", html);
             ChatList.Items.Insert(0, Message.Text);
             Message.Text = string.Empty;
         }

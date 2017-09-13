@@ -18,6 +18,7 @@ namespace WebSocketsClient
 
         public void Chat(string format)
         {
+
             ChatList.Dispatcher.Invoke(() => { ChatList.Items.Insert(0, format); });
         }
 

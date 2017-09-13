@@ -4,7 +4,7 @@ from MidSquareMethod import MidSquareMethod
 from MultiplicativeCongruentialMethod import MultiplicativeCongruentialMethod
 
 def GetCorrelation(z, s=3):
-    r = 12 * (1.0 / (len(z) - s)) * sum([z[i] * z[i + s] for i in xrange(len(z) - s)]) - 3.0
+    r = 12 * (1.0 / (len(z) - s)) * sum([z[i] * z[i + s] for i in xrange(len(z) - s)]) - 2.8
     return r
 
 def ShowMathCoeffs(z):
@@ -19,6 +19,18 @@ def ShowPlot(z):
     pyplot.hist(z, color='C2')
     pyplot.show()
 
+def M(arr):
+    return reduce(lambda x,y:x+y,arr)/len(arr)
+
+def D(arr):
+    arr2 = [i for i in map(lambda x:x*x,arr)]
+    return M(arr2)-pow(M(arr),2)
+
+def R(x,y):
+    Mxy = M([i*j for i,j in zip(x,y)])
+    MxMy = M(x)*M(y)
+    DxDy = D(x)*D(y)
+    return (Mxy-MxMy)/(pow(DxDy,0.5))
 
 
 # phase 1
@@ -44,6 +56,9 @@ while True:
     ShowPlot(z)
     ShowMathCoeffs(z)
     print GetCorrelation(z)
+
+defaultConfig = {'m': 2 ** 31, 'k': 987654321, 'A0': 2}
+print R(MultiplicativeCongruentialMethod(1000, defaultConfig), MultiplicativeCongruentialMethod(10000))
 
 
 
