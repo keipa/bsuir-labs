@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
+using System.Net.Http;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Windows.Controls;
@@ -17,6 +19,23 @@ namespace WebSocketsClient
 
         private static string messageToSend;
         private static IWebSocketLogger _logger;
+
+        private static readonly HttpClient client = new HttpClient();
+
+        public static async void TestPost()
+        {
+            var values = new Dictionary<string, string>
+            {
+                { "thing1", "hello" },
+                { "thing2", "world" }
+            };
+
+            var content = new FormUrlEncodedContent(values);
+
+            var response = await client.PostAsync("http://localhost:58850/api/values", content);
+
+            var responseString = await response.Content.ReadAsStringAsync();
+        }
 
         public static void initLogger(ListBox debugList, ListBox chatlist)
         {

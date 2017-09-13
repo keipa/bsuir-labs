@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -31,14 +32,21 @@ namespace WebSocketsClient
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+
             TestClient.StartSendThread($"ws://localhost:{portSend.Text}/chat", Message.Text);
-            ChatList.Items.Insert(0,Message.Text);
+            ChatList.Items.Insert(0, Message.Text);
             Message.Text = string.Empty;
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             TestClient.StartRecieveThread(Convert.ToInt32(portRecieve.Text));
+        }
+        private static readonly HttpClient client = new HttpClient();
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            TestClient.TestPost();
         }
     }
 }
