@@ -1,4 +1,3 @@
-# python27
 from matplotlib import pyplot
 from matplotlib.mlab import frange
 import math

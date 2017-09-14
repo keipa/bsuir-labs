@@ -37,7 +37,7 @@ def R(x,y):
 while True:
     try:
         sourceNumber = int(raw_input('Input source (1994 for check) or type "Q" to exit:'))
-        count = int(raw_input('Input count (20 forfor check) or type "Q" to exit:'))
+        count = int(raw_input('Input count (20 for check) or type "Q" to exit:'))
     except Exception:
         break
     z = MidSquareMethod(sourceNumber, count)
@@ -55,10 +55,10 @@ while True:
     z = MultiplicativeCongruentialMethod(countOfNumbers)
     ShowPlot(z)
     ShowMathCoeffs(z)
-    print GetCorrelation(z)
+    # print GetCorrelation(z)
 
 defaultConfig = {'m': 2 ** 31, 'k': 987654321, 'A0': 2}
-print R(MultiplicativeCongruentialMethod(1000, defaultConfig), MultiplicativeCongruentialMethod(10000))
+print R(MultiplicativeCongruentialMethod(10000, defaultConfig), MultiplicativeCongruentialMethod(10000))
 
 
 
