@@ -1,5 +1,6 @@
 import numpy as np
 from matplotlib import pyplot
+from MultiplicativeCongruentialMethod import MultiplicativeCongruentialMethod
 import math
 
 X = [1.0, 5.0, 9.0]
@@ -7,21 +8,14 @@ Y = [2.0, 8.0, 15.0]
 
 
 def createMatrixDistribution():
-    matrix_distribution = np.array([[0.15, 0.10, 0.83333],
-                                    [0.15, 0.10, 0.83333],
-                                    [0.15, 0.10, 0.83333]])
+    # matrix_distribution = np.array([[0.15, 0.10, 0.83333],
+    #                                 [0.15, 0.10, 0.83333],
+    #                                 [0.15, 0.10, 0.83333]])
+    matrix_distribution = np.array([[0.1, 0.10, 0.1],
+                                    [0.1, 0.10, 0.1],
+                                    [0.1, 0.10, 0.2]])
     m, n = matrix_distribution.shape
     return matrix_distribution, m, n
-
-
-def multiplicativeCongruentialMethod(count, n=25, k=192837465, a0=5):
-    m = 2 ** n
-    A = [a0]
-    Z = []
-    for i in range(1, count + 1):
-        A.append((k * A[i - 1]) % m)
-        Z.append(A[i] / float(m))
-    return Z
 
 
 def getDistributionSeriesForX(matrix_distribution, m, n):
@@ -54,7 +48,7 @@ def getDistributionFunctionForY(p_Y, m, n):
 
 def createEmpericalMatrixDistribution(m, n, F_X, F_Y):
     matrix_distribution_practical = np.zeros((m, n))
-    z = multiplicativeCongruentialMethod(20000)
+    z = MultiplicativeCongruentialMethod(20000)
     k = 0
     l = 0
     for i in range(0, len(z), 2):
