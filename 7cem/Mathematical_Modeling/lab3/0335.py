@@ -2,18 +2,43 @@ import numpy as np
 from matplotlib import pyplot
 from MultiplicativeCongruentialMethod import MultiplicativeCongruentialMethod
 import math
+from functools import reduce
 
 X = [1.0, 5.0, 9.0]
 Y = [2.0, 8.0, 15.0]
+Dist = np.array([[0.1, 0.10, 0.1],
+                 [0.1, 0.10, 0.1],
+                 [0.1, 0.10, 0.2]])
+
+
+def GetMathWait(distr, X, Y):
+    print("M[x]", distr.sum(axis=0).dot(X))
+    print("M[x]", distr.sum(axis=1).dot(Y))
+
+
+def GetDispersion(distr, X, Y):
+    print("D[x]", np.multiply(distr.sum(axis=0), (distr.sum(axis=0))).dot(X))
+    print("D[y]", np.multiply(distr.sum(axis=1), (distr.sum(axis=1))).dot(Y))
+
+
+def M(arr):
+    return reduce(lambda x, y: x + y, arr) / len(arr)
+
+
+def D(arr):
+    arr2 = [i for i in map(lambda x: x * x, arr)]
+    return M(arr2) - pow(M(arr), 2)
+
+
+def GetCorrelationCoeff(x, y):
+    Mxy = M([i * j for i, j in zip(x, y)])
+    MxMy = M(x) * M(y)
+    DxDy = D(x) * D(y)
+    print("R[X,Y]", (Mxy - MxMy) / (pow(DxDy, 0.5)))
 
 
 def createMatrixDistribution():
-    # matrix_distribution = np.array([[0.15, 0.10, 0.83333],
-    #                                 [0.15, 0.10, 0.83333],
-    #                                 [0.15, 0.10, 0.83333]])
-    matrix_distribution = np.array([[0.1, 0.10, 0.1],
-                                    [0.1, 0.10, 0.1],
-                                    [0.1, 0.10, 0.2]])
+    matrix_distribution = Dist
     m, n = matrix_distribution.shape
     return matrix_distribution, m, n
 
@@ -102,14 +127,16 @@ def constructDiagramForY(m, n, X, Y, matrix_distribution_practical, p_X_practica
 
 
 matrix_distribution, m, n = createMatrixDistribution()
-if sum(sum(matrix_distribution)) == 1.0:
-    p_X = getDistributionSeriesForX(matrix_distribution, m, n)
-    F_X = getDistributionFunctionForX(p_X)
-    p_Y = getDistributionSeriesForY(matrix_distribution, m, n, p_X)
-    F_Y = getDistributionFunctionForY(p_Y, m, n)
-    matrix_distribution_practical = createEmpericalMatrixDistribution(m, n, F_X, F_Y)
-    print(matrix_distribution_practical)
-    p_X_practical = constructDiagramForX(m, n, p_X)
-    constructDiagramForY(m, n, X, Y, matrix_distribution_practical, p_X_practical)
-else:
-    print("Sum != 1!")
+if sum(sum(matrix_distribution)) != 1.0: exit("Sum != 1!")
+
+p_X = getDistributionSeriesForX(matrix_distribution, m, n)
+F_X = getDistributionFunctionForX(p_X)
+p_Y = getDistributionSeriesForY(matrix_distribution, m, n, p_X)
+F_Y = getDistributionFunctionForY(p_Y, m, n)
+matrix_distribution_practical = createEmpericalMatrixDistribution(m, n, F_X, F_Y)
+print(matrix_distribution_practical)
+p_X_practical = constructDiagramForX(m, n, p_X)
+constructDiagramForY(m, n, X, Y, matrix_distribution_practical, p_X_practical)
+GetMathWait(matrix_distribution, X, Y)
+GetDispersion(matrix_distribution, X, Y)
+GetCorrelationCoeff(X, Y)
