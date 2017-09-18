@@ -7,9 +7,9 @@ from functools import reduce
 X = [1.0, 5.0, 9.0]
 Y = [2.0, 8.0, 15.0]
 
-Dist = np.array([[0.1, 0.10, 0.1],
-                 [0.1, 0.05, 0.1],
-                 [0.1, 0.15, 0.2]])
+XYProb = np.array([[0.1, 0.10, 0.1],
+                   [0.1, 0.05, 0.1],
+                   [0.1, 0.15, 0.2]])
 
 
 def GetMathWait(distr, X, Y):
@@ -39,7 +39,7 @@ def GetCorrelationCoeff(x, y):
 
 
 def createMatrixDistribution():
-    matrix_distribution = Dist
+    matrix_distribution = XYProb
     m, n = matrix_distribution.shape
     return matrix_distribution, m, n
 
@@ -102,9 +102,9 @@ def constructDiagramForX(m, n, p_X):
     width = 0.1
     p_X_practical = [sum(matrix_distribution_practical[i, j] for i in range(m)) for j in range(n)]
     XX = [X[i] + width for i in range(n)]
-    pyplot.bar(X, p_X, width, color='black')
-    pyplot.bar(XX, p_X_practical, width, color='green')
-    pyplot.title('probability distribution X components')
+    pyplot.bar(X, p_X, width, color='red')
+    pyplot.bar(XX, p_X_practical, width, color='orange')
+    # pyplot.title('probability distribution X components')
     pyplot.show()
     return p_X_practical
 
@@ -112,19 +112,19 @@ def constructDiagramForX(m, n, p_X):
 def constructDiagramForY(m, n, X, Y, matrix_distribution_practical, p_X_practical):
     p_Y_practical = np.array(matrix_distribution_practical)
     for j in range(n):
-        for i in range(m):
+        for i in range(m):git
             p_Y_practical[i, j] /= p_X_practical[j]
 
     width = 0.2
     YY = [Y[i] + width for i in range(m)]
-    pyplot.figure(figsize=(10, 3))
+    #pyplot.figure(figsize=(6, 6))
 
     for k in range(1, n + 1):
-        pyplot.subplot(1, n, k)
-        pyplot.bar(Y, p_Y[:, k - 1], width, color='black')
-        pyplot.bar(YY, p_Y_practical[:, k - 1], width, color='green')
-        pyplot.title('Y for X = {0}'.format(X[k - 1]))
-    pyplot.show()
+        pyplot.subplot(1, 1, 1)
+        pyplot.bar(Y, p_Y[:, k - 1], width, color='red')
+        pyplot.bar(YY, p_Y_practical[:, k - 1], width, color='orange')
+        pyplot.title('для  X = {0}'.format(X[k - 1]))
+        pyplot.show()
 
 
 matrix_distribution, m, n = createMatrixDistribution()
