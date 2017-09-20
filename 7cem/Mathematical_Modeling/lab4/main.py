@@ -1,5 +1,7 @@
 from goto import with_goto
 from MultiplicativeCongruentialMethod import MultiplicativeCongruentialMethod
+import numpy as np
+import matplotlib.pyplot as plt
 
 global TN, ZN, N3, N1, Z3, Z2, Z1, T3, T2, T1, L, TM, TC
 
@@ -27,13 +29,38 @@ class S:
     T3 = ["момент времени когда заявка будет обслужена 3м каналом", 0]
     T2 = ["момент времени когда заявка будет обслужена 2м каналом", 0, 0]
     T1 = ["момент времени когда заявка будет обслужена 1м каналом", 0, 0]
-    L = ["максимальная ёмкость накопителей", 1, 1]
+    L = ["максимальная ёмкость накопителей", 5, 4]
     TM = 0  # момент времени появления след. заявки
     TC = 100  # общее кол-во пришедших заявок
     TT = 100  # общее кол-во пришедших заявок
+    # # plt.ion()
+    # plotUpdate = 0.0005
+    times = []
+    zn1 = []
+    zn2 = []
+    neworder = []
+    z11 = []
+    z12 = []
+    z21 = []
+    z22 = []
+
 
 def OutputResults():
     pass
+
+
+def CollectData():
+    S.times.append(S.TN)
+    S.zn1.append(S.ZN[1])
+    S.zn2.append(S.ZN[2])
+    if S.TM == S.TN:
+        S.neworder.append(0)
+    else:
+        S.neworder.append(-3)
+    S.z11.append(S.Z1[1])
+    S.z12.append(S.Z1[2])
+    S.z21.append(S.Z2[1])
+    S.z22.append(S.Z2[2])
 
 
 def IsModelEnded():
@@ -48,7 +75,8 @@ def ProcessingResults():
     print("Time", S.TN)
     print("Отклонено:", S.N1)
     print("Обработано:", S.N3)
-    print("Заявок осталось в системе:", -S.TC)
+    # print("Заявок осталось в системе:", -S.TC)
+
 
 def ServingOrderThirdPhase():
     if S.Z3[1] == 1:
@@ -208,9 +236,6 @@ def GetOrderOnStarts():
                 goto.five
 
 
-
-
-
 def D():  # получить время новой заявки
     a = next(S.G)
     S.TM = S.TN + a
@@ -221,14 +246,56 @@ def GoToNewTimeSnapshot():
     S.TN += 1
 
 
+def ShowBeautifulPlot():
+    plt.axis([0, S.TN, -2.5, max(S.L[1:])])
+    plt.axhline(y=S.L[1], xmin=0, xmax=1000, c="blue", linewidth=2, zorder=1)  # max ёмкость первой очереди
+    plt.axhline(y=S.L[2], xmin=0, xmax=1000, c="red", linewidth=2, zorder=1)  # max ёмкость второй очереди
+
+    for index, qu in enumerate(S.zn1):
+        plt.bar(index, qu, 1, color='#76a8f7', alpha=0.7)
+    for index, qu in enumerate(S.zn2):
+        plt.bar(index, qu, 1, color='#f77575', alpha=0.7)
+
+    for index, qu in enumerate(S.z11):
+        if qu == 1:
+            plt.scatter(index, -1, c="r", marker="^", alpha=0.5)
+        if qu == 2:
+            plt.scatter(index, -2, c="r", marker="^", alpha=0.5)
+
+    for index, qu in enumerate(S.z12):
+        if qu == 1:
+            plt.scatter(index, -1, c="r", marker="v", alpha=0.5)
+        if qu == 2:
+            plt.scatter(index, -2, c="r", marker="v", alpha=0.5)
+
+    for index, qu in enumerate(S.z21):
+        if qu == 1:
+            plt.scatter(index, -1, c="b", marker="^", alpha=0.5)
+        if qu == 2:
+            plt.scatter(index, -2, c="b", marker="^", alpha=0.5)
+
+    for index, qu in enumerate(S.z22):
+        if qu == 1:
+            plt.scatter(index, -1, c="b", marker="v", alpha=0.5)
+        if qu == 2:
+            plt.scatter(index, -2, c="b", marker="v", alpha=0.5)
+
+
+    plt.plot(S.times, S.neworder, 'go')
+    plt.show()
+    # plt.pause(S.plotUpdate)
+
 
 # TODO: sort methods
 
 print("Enterence")  # 0
+
 while True:
     if IsModelEnded():  # 3 da
         ProcessingResults()  # 11
         OutputResults()  # 12
+        ShowBeautifulPlot()
+
         exit()
     else:  # net
         ServingOrderThirdPhase()  # 4
@@ -238,3 +305,4 @@ while True:
         ServingOrderFisrtPhase()  # 8
         GetOrderOnStarts()  # 9
         GoToNewTimeSnapshot()  # 10
+        CollectData()

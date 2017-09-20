@@ -31,7 +31,7 @@ def ShowDiagramY(m, n, X, Y, practicalMatrix, sumByColumns):
     interval = [Y[i] + width for i in range(m)]
     ShowDiagramForEachColumn(X, Y, interval, n, practY, sumByColumns)
 
-
+1
 def ShowDiagramForEachColumn(X, Y, interval, n, practY, sumByColumns):
     for k in range(1, n + 1):
         pyplot.subplot(1, 1, 1)
