@@ -1,0 +1,98 @@
+﻿<Window x:Class="DES.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="500" Width="800">
+    <ScrollViewer>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Message" Grid.Column="0" Grid.Row="0" />
+            <TextBox Name="messagebox" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3"/>
+            <TextBlock Text="Key" Grid.Column="0" Grid.Row="1"/>
+            <TextBox Name="keybox" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"/>
+            <Button Name="randomKey" Grid.Column="3" Grid.Row="1" Click="randomKey_Click">
+                Random key
+            </Button>
+            <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2">
+                <RadioButton GroupName="type" Name="hexRadio"  IsChecked="True">
+                    Hex value
+                </RadioButton>
+                <RadioButton GroupName="type" Name="stringRadio">
+                    String value
+                </RadioButton>
+            </StackPanel>
+            <TextBlock Text="Rounds" Grid.Column="0" Grid.Row="3"/>
+            <ComboBox Name="roundBox" Grid.Column="1" Grid.Row="3">
+                <ComboBoxItem IsSelected="True">
+                    1
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    2
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    3
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    4
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    5
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    6
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    7
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    8
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    9
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    10
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    11
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    12
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    13
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    14
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    15
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    16
+                </ComboBoxItem>
+            </ComboBox>
+            <TextBox Style="{StaticResource blockMockup}" Name="workText" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="4" />
+            <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                <Button Name="cipherButton" Click="cipherButton_Click">
+                    Cipher
+                </Button>
+                <Button Name="decipherButton" Click="decipherButton_Click">
+                    Decipher
+                </Button>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</Window>

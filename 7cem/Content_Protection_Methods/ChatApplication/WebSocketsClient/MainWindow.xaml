@@ -15,7 +15,7 @@
         <ListBox x:Name="DebugList" HorizontalAlignment="Left" Height="217" Margin="306,42,0,0" VerticalAlignment="Top" Width="454" FontSize="10" Background="#FF454545" Foreground="#FF5DFF00"/>
         <ListBox x:Name="ChatList" HorizontalAlignment="Left" Height="224" Margin="6,10,0,0" VerticalAlignment="Top" Width="295"/>
         <TextBox x:Name="Message" HorizontalAlignment="Left" Height="22" Margin="6,237,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="215"/>
-        <ComboBox x:Name="algorythmBoxS" HorizontalAlignment="Left" Margin="475,10,0,0" VerticalAlignment="Top" Width="120" Height="26"/>
+        <ComboBox x:Name="algorythmBox" HorizontalAlignment="Left" Margin="475,10,0,0" VerticalAlignment="Top" Width="120" Height="26"/>
         <Label Content="using" HorizontalAlignment="Left" Margin="431,10,0,0" VerticalAlignment="Top" Height="27"/>
 
     </Grid>
