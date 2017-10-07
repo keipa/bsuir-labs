@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Diagnostics;
-using System.Net.Sockets;
+﻿using System.Net.Sockets;
 using WebSockets.Server.WebSocket;
 using WebSockets.Common;
 using System.IO;

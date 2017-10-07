@@ -7,21 +7,23 @@ using WebAPI.Encrypt;
 namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
-    public class CaesarController : Controller
+    public class DES3K2Controller : Controller
     {
-        // GET api/values
-        private static readonly Caesar caesar = new Caesar("en", 5);
+       
+
+
+        private static readonly DES3K2 des3k2 = new Encrypt.DES3K2();
 
         private readonly Dictionary<string, Delegate> algorithmType = new Dictionary<string, Delegate>
         {
-            {"encrypt", new Func<string, string>(caesar.Encrypt)},
-            {"decrypt", new Func<string, string>(caesar.Decrypt)}
+            {"encrypt", new Func<string, string>(des3k2.Encrypt)},
+            {"decrypt", new Func<string, string>(des3k2.Decrypt)}
         };
 
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            return new string[] { "Caesar Encryption Algorithm" };
+            return new string[] { "DES 3 with 2 keys round Encryption Algorithm" };
         }
 
         // GET api/values/5
@@ -30,11 +32,13 @@ namespace WebAPI.Controllers
         {
             if (algorithmType.Keys.All(x => x != procedureType))
             {
-                return ($"{procedureType} is not valid procedureType" );
+                return ($"{procedureType} is not valid procedureType");
             }
-            return (string)algorithmType[procedureType].DynamicInvoke(sourceString);   
+            return (string)algorithmType[procedureType].DynamicInvoke(sourceString);
         }
 
-        
+
     }
-}
+
+
+    }

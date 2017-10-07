@@ -1,22 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Convert = System.Convert;
 
 
@@ -25,44 +11,43 @@ namespace WebSocketsClient
 
     public partial class MainWindow : Window
     {
+        private bool _readyTowork = false;
+        private readonly List<string> algorithms = new List<string>{"caesar",
+                                                                    "des",
+                                                                    "des3",
+                                                                    "des3k2",
+                                                                    "gost28147",
+                                                                    "aes",
+                                                                    "rsamd5",
+                                                                    "gost3410",
+                                                                    "deffihelman",
+                                                                    "ECDSA",
+                                                                    "elipticcurves"
+                                                                   };
+        
         public MainWindow()
         {
             InitializeComponent();
             TestClient.initLogger(DebugList, ChatList);
-            InitDropdown();
+            foreach (var algorithm in algorithms) algorythmBox.Items.Add(algorithm);
         }
 
-        private void InitDropdown()
+       private void Button_Click(object sender, RoutedEventArgs e)
         {
-            algorythmBox.Items.Add("caesar");
-            algorythmBox.Items.Add("des");
-            algorythmBox.Items.Add("des3");
-            algorythmBox.Items.Add("des3k2");
-            algorythmBox.Items.Add("gost28147_ECB");
-            algorythmBox.Items.Add("gost28147_CBC");
-            algorythmBox.Items.Add("gost28147_CFB");
-            algorythmBox.Items.Add("gost28147_OFB");
-            algorythmBox.Items.Add("aes");
-            algorythmBox.Items.Add("rsamd5");
-            algorythmBox.Items.Add("gost_3410");
-            algorythmBox.Items.Add("deffihelman");
-            algorythmBox.Items.Add("ECDSA");
-            algorythmBox.Items.Add("elipticcurves");
-        }
-
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
+            if(!_readyTowork)
+            {
+                MessageBox.Show("Press start button");
+                return;
+            }
             string html = string.Empty;
             string url = $"http://localhost:58850/api/{algorythmBox.Text}/{Message.Text}/encrypt";
 
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             request.AutomaticDecompression = DecompressionMethods.GZip;
 
-            using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
-            using (Stream stream = response.GetResponseStream())
-            using (StreamReader reader = new StreamReader(stream))
+            using (var response = (HttpWebResponse)request.GetResponse())
+            using (var stream = response.GetResponseStream())
+            using (var reader = new StreamReader(stream))
             {
                 html = reader.ReadToEnd();
             }
@@ -75,6 +60,7 @@ namespace WebSocketsClient
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             TestClient.StartRecieveThread(Convert.ToInt32(portRecieve.Text));
+            _readyTowork = true;
         }
         private static readonly HttpClient client = new HttpClient();
 
