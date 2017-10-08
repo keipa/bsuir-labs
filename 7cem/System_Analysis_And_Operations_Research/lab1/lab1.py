@@ -19,13 +19,12 @@ def getEstim(estimations, index):
     for we in estimations:
         if we[0] == index:
             return we[1]
-    
+
 
 
 def double_simplex(m, n, c, b, A, J, dmin, dmax):
     iter_count = 1
     J -= 1
-
     not_J = delete(arange(n), J)
     all_j = arange(n)
     B = linalg.inv(A[:, J])  # Step1CalculateB
@@ -91,7 +90,6 @@ def double_simplex(m, n, c, b, A, J, dmin, dmax):
                 if J[k] == index:
                     tmp = sigma0 * jK
                 else:
-
                     tmp = sigma0 * getEstim(estimations,index)
                 deltas[index] += tmp
         # пересчёт плана
@@ -114,65 +112,3 @@ def double_simplex(m, n, c, b, A, J, dmin, dmax):
         B = linalg.inv(A[:, J])  # Step1CalculateB
         not_J = delete(arange(n), J)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        # iter_count = 1
-        # J -= 1
-        # x_0 = [0 for _ in range(n)]
-        # while True:
-        #     not_J = delete(arange(n), J)
-        #     B = linalg.inv(A[:, J])
-        #     chi = B.dot(b)
-        #     if (chi >= 0).all():
-        #         for j, _chi in zip(J, chi):
-        #             x_0[j] = _chi
-        #         print("Количество итераций : ", iter_count)
-        #         print("Максимальная прибыль : ", c.dot(x_0))
-        #         print(list(map(lambda _x: round(float(_x), 3), list(x_0))), "-  план")
-        #         return x_0, iter_count
-        #     k = argmin(chi)
-        #     j = J[k]
-        #     mu = B[k].dot(A)
-        #     sigma = []
-        #     for _not_j in not_J:
-        #         if mu[_not_j] >= 0:
-        #             sigma.append(inf)
-        #         else:
-        #             sigma.append(-small_delta[_not_j] / mu[_not_j])
-        #     sigma_0_ind = not_J[argmin(sigma)]
-        #     sigma_0 = min(sigma)
-        #     if sigma_0 == inf:
-        #         print("Задача не имеет решения, т.к. пусто множество ее допустимых планов.")
-        #         return 1
-        #     y += sigma_0 * B[k]
-        #     small_delta += sigma_0 * mu
-        #     J[k] = sigma_0_ind
-        #     iter_count += 1

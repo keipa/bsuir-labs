@@ -1,6 +1,6 @@
 from numpy import *
 
-import lab2
+import lab1
 
 # #
 # m = 3
@@ -149,4 +149,4 @@ dmin = array([0.0, 0.0, 0.0, 0.0])
 dmax = array([6.0, 6.0, 6.0, 6.0])
 J = array([3, 4])
 correct_result = ([5.0, 3.0, 0.0, 0.0], 1)
-print(lab2.double_simplex(m, n, c, b, A, J, dmin, dmax))
+print(lab1.double_simplex(m, n, c, b, A, J, dmin, dmax))
