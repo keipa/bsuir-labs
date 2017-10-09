@@ -1,19 +1,35 @@
 from numpy import *
 from Simplex import *
 
-A = array([[1.0, -5.0, 3.0, 1.0, 0.0, 0.0],
-           [4.0, -1.0, 1.0, 0.0, 1.0, 0.0],
-           [2.0, 4.0, 2.0, 0.0, 0.0, 1.0]])
-b = array([-8.0, 22.0, 30.0])
 
-c = array([7.0, -2.0, 6.0, 0.0, 5.0, 2.0, ])
+def inputValues(path="input"):
+    m, n, A, b, c, dmin, dmax, J = 0, 0, [], [], [], [], [], []
+    with open(path) as f:
+        m = int(f.readline())
+        n = int(f.readline())
+        for _ in range(m):
+            A.append([float(number) for number in f.readline().split(" ")])
+        A = array(A)
+        b = array([float(number) for number in f.readline().split(" ")])
+        c = array([float(number) for number in f.readline().split(" ")])
+        dmin = array([float(number) for number in f.readline().split(" ")])
+        dmax = array([float(number) for number in f.readline().split(" ")])
+        J = array([int(number) for number in f.readline().split(" ")])
 
-dmin = array([2.0, 1.0, 0.0, 0.0, 1.0, 1.0])
-dmax = array([6.0, 6.0, 5.0, 2.0, 4.0, 6.0])
+    return m, n, A, b, c, dmin, dmax, J
 
-J = array([4, 5, 6])
-m = 3
-n = 6
+
+# m = 3
+# n = 6
+# A = array([[1.0, -5.0, 3.0, 1.0, 0.0, 0.0],
+#            [4.0, -1.0, 1.0, 0.0, 1.0, 0.0],
+#            [2.0, 4.0, 2.0, 0.0, 0.0, 1.0]])
+# b = array([-8.0, 22.0, 30.0])
+# c = array([7.0, -2.0, 6.0, 0.0, 5.0, 2.0, ])
+# dmin = array([2.0, 1.0, 0.0, 0.0, 1.0, 1.0])
+# dmax = array([6.0, 6.0, 5.0, 2.0, 4.0, 6.0])
+# J = array([4, 5, 6])
+m, n, A, b, c, dmin, dmax, J = inputValues()
 
 tasks = [Simplex(m, n, c, b, A, J, dmin, dmax)]
 counter = 0

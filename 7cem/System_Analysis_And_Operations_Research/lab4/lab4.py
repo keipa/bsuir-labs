@@ -1,15 +1,26 @@
 from numpy import *
 
 
+def inputValues(path="input"):
+    N, C, F = 0, 0, []
+    with open(path) as f:
+        N = int(f.readline())
+        C = int(f.readline())
+        for n in range(N):
+            F.append([float(number) for number in f.readline().split(" ")])
+    return N, C, array(F)
+
+
 class Solution:
-    F = array([[0.0, 3.0, 2.0, 5.0, 8.0, 9.0, 10.0],
-               [0.0, 2.0, 3.0, 7.0, 9.0, 12.0, 13.0],
-               [0.0, 1.0, 4.0, 6.0, 11.0, 11.0, 13.0]])
-    N = 3
-    C = 6
+    # F = array([[0.0, 3.0, 2.0, 5.0, 8.0, 9.0, 10.0],
+    #            [0.0, 2.0, 3.0, 7.0, 9.0, 12.0, 13.0],
+    #            [0.0, 1.0, 4.0, 6.0, 11.0, 11.0, 13.0]])
+    # N = 3
+    # C = 6
+    N, C, F = inputValues()
+
     B = zeros((N, C + 1))
     Z = zeros((N, C + 1))
-
 
 
 def output(sol):
@@ -19,7 +30,7 @@ def output(sol):
     s += "\n"
     for i in range(sol.N):
         s += "B\t"
-        for j in range(sol.C+1):
+        for j in range(sol.C + 1):
             s += str(sol.B[i, j]) + "(" + str(sol.Z[i, j]) + ")     "
         s += "\n"
     s += "\nSolution: "
@@ -66,9 +77,5 @@ def resources_allocation():
     return sol
 
 
+inputValues()
 print(output(resources_allocation()))
-
-
-
-
-

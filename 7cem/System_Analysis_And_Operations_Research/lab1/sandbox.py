@@ -137,16 +137,37 @@ import lab1
 # correct_result = ([0, 0, 0, 0.40000000000000002, 0, 0, 2.0000000000000004, 0.39999999999999997], 4)
 # print(lab2.double_simplex(m, n, c, b, A, J, y, lab2.make_small_delta(c, A, y)))
 
-m = 2
-n = 4
-A = array([
-    [1.0, -5.0, 1.0, 0.0],
-    [-3.0, 1.0, 0.0, 1.0]
-])
-b = array([-10.0, -12.0])
-c = array([0.0, -6.0, 1.0, 0.0])
-dmin = array([0.0, 0.0, 0.0, 0.0])
-dmax = array([6.0, 6.0, 6.0, 6.0])
-J = array([3, 4])
-correct_result = ([5.0, 3.0, 0.0, 0.0], 1)
+
+def inputValues(path="input"):
+    m, n, A, b, c, dmin, dmax, J = 0, 0, [], [], [], [], [], []
+    with open(path) as f:
+        m = int(f.readline())
+        n = int(f.readline())
+        for _ in range(m):
+            A.append([float(number) for number in f.readline().split(" ")])
+        A = array(A)
+        b = array([float(number) for number in f.readline().split(" ")])
+        c = array([float(number) for number in f.readline().split(" ")])
+        dmin = array([float(number) for number in f.readline().split(" ")])
+        dmax = array([float(number) for number in f.readline().split(" ")])
+        J = array([int(number) for number in f.readline().split(" ")])
+
+    return m, n, A, b, c, dmin, dmax, J
+# m = 2
+# n = 4
+# A = array([
+#     [1.0, -5.0, 1.0, 0.0],
+#     [-3.0, 1.0, 0.0, 1.0]
+# ])
+# b = array([-10.0, -12.0])
+# c = array([0.0, -6.0, 1.0, 0.0])
+# dmin = array([0.0, 0.0, 0.0, 0.0])
+# dmax = array([6.0, 6.0, 6.0, 6.0])
+# J = array([3, 4])
+
+
+m, n, A, b, c, dmin, dmax, J = inputValues()
+
+
+# correct_result = ([5.0, 3.0, 0.0, 0.0], 1)
 print(lab1.double_simplex(m, n, c, b, A, J, dmin, dmax))
