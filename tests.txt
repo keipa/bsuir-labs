@@ -1,0 +1,11 @@
+Manufacturer: 31 BEK,4World,A4Tech,ACME,ACTIV,ADV.SOUND,Aedle,AfterShokz,Aiaiai,AKAI,AKG
+Appointment: portable, home, gaming, sports, DJ, professional, for travel
+Mount: inside the ear, headband, occipital arch, BTE attachment, on the neck, sports bandage, inside the helmet, Active noise cancellation
+Cable length: less than 1 m, 1 - 1.5 m, 1.8 m, 2 m, 2.2 - 2.5 m, 2.6 - 3 m, 4 - 5 m, 6 m and more
+Color:black, white, silver, gray, beige, red, dark red, pink, burgundy
+Material ear cushions: leather, velor, foam rubber, fabric, polyurethane, silicone, wool
+The diameter of the emitter: less than 9 mm (small), 9-10 mm (medium), 11-15 mm (large), 27-32 mm (small), 40 mm (medium), 50 mm or more (large)
+Support for game consoles: Microsoft Xbox 360,Microsoft Xbox One,Sony PlayStation 3,Sony PlayStation 4,Sony PlayStation Vita,Nintendo Wii
+
+
+
