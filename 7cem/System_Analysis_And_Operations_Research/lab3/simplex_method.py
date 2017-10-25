@@ -1,6 +1,6 @@
 from numpy import *
 
-class SimplexMethodSolver(object):
+class Simplex(object):
   def __init__(self, A, b, c, x = None, basicIndexes = None, nonBasicIndexes = None):
     self.A = A
     self.b = b
@@ -128,26 +128,5 @@ class SimplexMethodSolver(object):
       self.first_phase()
     self.x = self.second_phase(self.A, self.b, self.c, self.x, self.basicIndexes, self.nonBasicIndexes)
     return self 
-
-if __name__ == '__main__':
-  #Variant #2
-  a = array([
-      [0.0, 1.0, 1.0, 1.0, 0.0, -8.0, 1.0, 5.0],
-      [0.0, -1.0, 0.0, -7.5, 0.0, 0.0, 0.0, 2.0],
-      [0.0, 2.0, 1.0, 0.0, -1.0, 3.0, -1.4, 0.0],
-      [1.0, 1.0, 1.0, 1.0, 0.0, 3.0, 1.0, 1.0],
-      [1.0, 1.0, 1.0, 1.0, 0.0, 3.0, 1.0, 1.0]
-  ])
-  b = array([15.0, -45.0, 1.8, 19.0, 19.0])
-  c = array([-6.0, -9.0, -5.0, 2.0, -6.0, 0.0, 1.0, 3.0])
-
-  x = array([4.0, 0.0, 6.0, 6.0, 0.0, 0.0, 3.0, 0.0])
-
-  basicIndexes = [0, 2, 3, 6]
-  nonBasicIndexes = [1, 4, 5, 7]
-
-  res = SimplexMethodSolver(a, b, c).solve()
-  print(res.x)
-  print(res.basicIndexes)
 
 

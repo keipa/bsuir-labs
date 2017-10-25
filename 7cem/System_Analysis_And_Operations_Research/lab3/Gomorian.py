@@ -1,9 +1,7 @@
 from math import floor
-
 from numpy import *
-
 from GomorianExtensions import isInteger, isIntegers, getIndexOfFirstFloat
-from simplex_method import SimplexMethodSolver as sms
+from simplex_method import Simplex as sms
 
 
 class Gomorian(object):
@@ -20,7 +18,6 @@ class Gomorian(object):
         self.A, self.B, self.b, self.c, self.basicIndexes = res.A, res.B, res.b, res.c, res.basicIndexes
         self.nonBasicIndexes, self.n, self.m, self.x = res.nonBasicIndexes, res.n, res.m, res.x
         self.iteration += 1
-
 
 
     def resizeA(self, y):
@@ -40,9 +37,7 @@ class Gomorian(object):
         self.c = append(self.c, [0])
 
     def run(self):
-        iter = 0
         while True:
-
             res = sms(self.A, self.b, self.c).solve()
             self.RefreshParams(res)
             if isIntegers(self.eps, self.x):
@@ -57,28 +52,5 @@ class Gomorian(object):
         return str([round(i) for i in self.x])
 
     def GetBestResult(self):
-        return dot(sol.c, sol.x)
+        return dot(self.c, self.x)
 
-
-
-
-def manualInput(objtype, f):
-    return [objtype(number) for number in f.readline().split()]
-
-
-def inputValues(path="input"):
-    m, n, A, b, c, dmin, dmax, J = 0, 0, [], [], [], [], [], []
-    with open(path) as f:
-        m, n = manualInput(int, f)
-        for _ in range(m):
-            A.append(manualInput(float, f))
-        A = array(A)
-        b = array(manualInput(float, f))
-        c = array(manualInput(float, f))
-    return A, b, c
-
-
-A, b, c = inputValues("01.txt")
-sol = Gomorian(A, b, c).run()
-print(sol.GetBestPlan())
-print(sol.GetBestResult())
