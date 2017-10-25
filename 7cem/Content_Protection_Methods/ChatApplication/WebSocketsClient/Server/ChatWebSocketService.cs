@@ -20,7 +20,7 @@ namespace WebSocketsClient.Server
         {
 
             string html = string.Empty;
-            string url = $"http://localhost:58850/api/caesar/{text}/decrypt";
+            string url = $"http://localhost:58850/api/des/{text}/decrypt";
 
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             request.AutomaticDecompression = DecompressionMethods.GZip;

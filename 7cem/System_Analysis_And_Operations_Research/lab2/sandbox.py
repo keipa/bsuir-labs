@@ -73,8 +73,8 @@ while True:
             j0 = index
             break
 
-    l = floor(solution[j0])  ## mistake
-    if (l < 0 and l > solution[j0]):
+    l = floor(solution[j0])
+    if l < 0 and l > solution[j0]:
         l -= 1
     newdmax = task.dmax
     newdmax[j0] = l

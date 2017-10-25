@@ -27,12 +27,11 @@ def double_simplex(m, n, c, b, A, J, dmin, dmax):
     J -= 1
     not_J = delete(arange(n), J)
     all_j = arange(n)
-    B = linalg.inv(A[:, J])  # Step1CalculateB
-    y_ = c[J].dot(B)  # GetFirstBasePlan
+    B = linalg.inv(A[:, J])
+    y_ = c[J].dot(B)
     deltas = list(map(lambda all_j: y_.dot(A[:, all_j]) - c[all_j], list(all_j)))
     not_JMinus = []
     not_JPlus = []
-    # map(lambda not_j: not_JMinus.append(not_J) if deltas[not_J] < 0 else not_JPlus.append(not_J), list(not_J))
     for _not_J in not_J:
         if deltas[_not_J] < 0:
             not_JMinus.append(_not_J)
@@ -41,9 +40,7 @@ def double_simplex(m, n, c, b, A, J, dmin, dmax):
     while True:
         print("Итерация: ", iter_count)
         iter_count += 1
-        print(y_)
         print("базовые индексы итерации", J)
-        # calculate pseudo plan
         newB = copy(b)
         for _not_J in not_J:
             tmp = dmin[_not_J] if _not_J in not_JPlus else dmax[_not_J]
@@ -63,16 +60,16 @@ def double_simplex(m, n, c, b, A, J, dmin, dmax):
         mJk = 1 if _pseudoPlanB[k] - dmin[J[k]] < 0 else -1
         es = array([0 for _ in range(len(J))])
         es[k] = 1
-        deltaY = multiply(es.dot(B), mJk)  # mistake
-        estimations = []
+        deltaY = multiply(es.dot(B), mJk)
+        mues = []
         for _not_J in not_J:
             mJ = deltaY.dot(A[:, _not_J])
-            estimations.append((_not_J, mJ))
+            mues.append((_not_J, mJ))
         sigma0 = inf
         j0 = -1
-        for mJ in estimations:
+        for mJ in mues:
             if (mJ[0] in not_JPlus and mJ[1] < 0) or (mJ[0] in not_JMinus and mJ[1] > 0):
-                sigma = -deltas[mJ[0]] / mJ[1]
+                sigma = -deltas[mJ[0]] / mJ[1]  # searching for steps
                 if sigma < sigma0:
                     sigma0 = sigma
                     j0 = mJ[0]
@@ -81,7 +78,7 @@ def double_simplex(m, n, c, b, A, J, dmin, dmax):
             return
         print("Sigma0:", sigma0)
         print("правка индекса", j0)
-        # пересчёт коплана
+        # пересчёт оценок
         for index in range(n):
             if index in J and J[k] != index:
                 deltas[index] = 0.0
@@ -90,7 +87,7 @@ def double_simplex(m, n, c, b, A, J, dmin, dmax):
                 if J[k] == index:
                     tmp = sigma0 * jK
                 else:
-                    tmp = sigma0 * getEstim(estimations,index)
+                    tmp = sigma0 * getEstim(mues, index)
                 deltas[index] += tmp
         # пересчёт плана
         J[k] = j0

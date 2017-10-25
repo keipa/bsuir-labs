@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from numpy import *
 
 class SimplexMethodSolver(object):
@@ -13,7 +12,7 @@ class SimplexMethodSolver(object):
     self.eps = finfo(float).eps
 
   def is_zero(self, value):
-    abs(value) < self.eps
+    return abs(value) < self.eps
 
   def normalize(self):
     if (self.b < 0).any():
@@ -27,15 +26,15 @@ class SimplexMethodSolver(object):
     x = append(zeros(self.n, dtype=float64), self.b)
     c = append(zeros(self.n, dtype=float64), -ones(self.m, dtype=float64))
     
-    nonBasicIndexes = range(self.n)
-    basicIndexes = range(self.n, self.n + self.m)
+    nonBasicIndexes = [i for i in range(self.n)]
+    basicIndexes = [i for i in range(self.n, self.n + self.m)]
 
     J = set(nonBasicIndexes)
     Ju = set(basicIndexes)
   
     result_x = self.second_phase(new_A, self.b, c, x, basicIndexes, nonBasicIndexes)
     
-    if not all(abs(result_x[-self.m:])   < self.eps):
+    if not (abs(result_x[-self.m:]) < self.eps).all():
       raise Exception("This task has no solution, because her restrictions is not compatible")
 
     B = linalg.inv(new_A[:, basicIndexes])
@@ -58,7 +57,7 @@ class SimplexMethodSolver(object):
       tmp = dot(ek, B)
       alpha = dot(tmp, new_A[:, lost_indexes])
       
-      if not all(abs(alpha) < self.eps):
+      if not (abs(alpha) < self.eps).all():
         s = list(abs(alpha) > self.eps).index(True)
         js = lost_indexes[s]
         basicIndexes[k] = js
@@ -107,8 +106,8 @@ class SimplexMethodSolver(object):
         raise ValueError("This task has no solution, because her target function is not limited at plans set")
 
       basic_x = x[basicIndexes]
-
-      tetta = [basic_x[j] / z[j] if z[j] > 0 and not self.is_zero(z[j]) else inf for j in xrange(m)]
+      rangem = [i for i in range(m)]
+      tetta = [basic_x[j] / z[j] if z[j] > 0 and not self.is_zero(z[j]) else inf for j in rangem]
       tetta0 = min(tetta)
       s = self.get_index(tetta, tetta0)
       index_tetta0 = basicIndexes[s]
@@ -148,7 +147,7 @@ if __name__ == '__main__':
   nonBasicIndexes = [1, 4, 5, 7]
 
   res = SimplexMethodSolver(a, b, c).solve()
-  print res.x
-  print res.basicIndexes
+  print(res.x)
+  print(res.basicIndexes)
 
 
