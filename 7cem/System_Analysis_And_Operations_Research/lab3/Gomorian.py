@@ -1,7 +1,7 @@
 from math import floor
 from numpy import *
 from GomorianExtensions import isInteger, isIntegers, getIndexOfFirstFloat
-from simplex_method import Simplex as sms
+from Simplex import Simplex as sms
 
 
 class Gomorian(object):
@@ -38,8 +38,7 @@ class Gomorian(object):
 
     def run(self):
         while True:
-            res = sms(self.A, self.b, self.c).solve()
-            self.RefreshParams(res)
+            self.RefreshParams(sms(self.A, self.b, self.c).solve())
             if isIntegers(self.eps, self.x):
                 return self
             eab = dot(eye(self.m)[:, self.basicIndexes.index(getIndexOfFirstFloat(self.eps, self.x))], self.B)
