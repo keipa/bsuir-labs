@@ -20,7 +20,7 @@ def checkIndexes(check):
     return setIndex
 
 
-def findIndexes(graph, mark):
+def findClosedIndex(graph, mark):
     currentIndexes = createCurrentIndexes(graph, mark)
     for elem in currentIndexes:
         check = []
@@ -40,27 +40,34 @@ def findIndexes(graph, mark):
 
 
 def main(graph, mark):
-    if len(mark) == len(graph):
-        return
+    for _ in range(len(graph)):
+        if len(mark) == len(graph):
+            return
 
-    index = findIndexes(graph, mark)
+        index = findClosedIndex(graph, mark)
 
-    if not index:
-        print("No solution")
-    else:
-        mark.append(index)
-        path = []
-        for ind in range(len(vectorB)):
-            if vectorB[ind] != inf and graph[ind][index] != inf:
-                path.append((ind, graph[ind][index]))
-        currentMaxPath = -1
-        currentPath = -1
-        for pairIndexAndPath in path:
-            if vectorB[pairIndexAndPath[0]] > currentMaxPath:
-                currentMaxPath = vectorB[pairIndexAndPath[0]]
-                currentPath = pairIndexAndPath[1]
+        if not index:
+            print("No solution")
+        else:
+            mark.append(index)
 
-        vectorB[index] = currentMaxPath + currentPath
+            path = GetPossibleNodes(graph, index)
+            currentMaxPath = -1
+            currentPath = -1
+            for pairIndexAndPath in path:
+                if vectorB[pairIndexAndPath[0]] > currentMaxPath:
+                    currentMaxPath = vectorB[pairIndexAndPath[0]]
+                    currentPath = pairIndexAndPath[1]
+
+            vectorB[index] = currentMaxPath + currentPath
+
+
+def GetPossibleNodes(graph, index):
+    path = []
+    for ind in range(len(vectorB)):
+        if vectorB[ind] != inf and graph[ind][index] != inf:
+            path.append((ind, graph[ind][index]))
+    return path  # (from which node we can go to index, how it costs)
 
 
 if __name__ == "__main__":
@@ -74,7 +81,6 @@ if __name__ == "__main__":
         vectorB[start] = 0
         mark = [start]
 
-        for count in range(len(graph)):
-            main(graph, mark)
+        main(graph, mark)
 
         print("Max path from", start, "to", finish, "=", vectorB[finish])
