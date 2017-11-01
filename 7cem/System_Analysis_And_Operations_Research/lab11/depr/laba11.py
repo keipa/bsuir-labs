@@ -64,5 +64,5 @@ if __name__ == '__main__':
     [10, 8, 25, 27, inf]
   ]
   res = TravellingSalesmanProblemSolver(c).solve()
-  print res.plan
-  print res.r
+  print(res.plan)
+  print(res.r)

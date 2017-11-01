@@ -1,9 +1,16 @@
-#!/usr/bin/python2.7
 from numpy import inf, copy
 from lab10 import *
+from lab11.lab10 import *
 from functools import reduce
 
-class TravellingSalesmanProblemSolver(object):
+def load_matrix(file_name):
+    matrix = []
+    with open(file_name, 'r') as fin:
+        for line in fin:
+            matrix.append(list(map(float, line.split())))
+    return matrix
+
+class Comivoyager(object):
   def __init__(self, c):
     self.c = c
     self.n = len(c[0])
@@ -30,17 +37,13 @@ class TravellingSalesmanProblemSolver(object):
         self.comp_index += 1
 
   def branch_and_bound(self):
-    try:
-      self.assigment_problem_res = AssignmentProblemSolver(copy(self.c)).solve()
-      r = self.calculate_plan(self.assigment_problem_res)
-      raised = False
-    except ValueError:
-      raised = True
-    if raised or r >= self.r:
+    self.assigment_problem_res = MatchSolve(copy(self.c)).solve()
+    r = self.calculate_plan(self.assigment_problem_res)
+    if r >= self.r:
       return
     self.create_components()
 
-    if (len(self.components) == 1):
+    if len(self.components) == 1:
       self.plan = [c[0] for c in self.components[0]]
       self.plan.append(0)
       self.r = r
@@ -57,14 +60,8 @@ class TravellingSalesmanProblemSolver(object):
     return self
 
 
-if __name__ == '__main__':
-  c = [
-    [inf, 10, 25, 25, 10],
-    [1, inf, 10, 15, 2],
-    [8, 9, inf, 20, 10],
-    [14, 10, 24, inf, 15],
-    [10, 8, 25, 27, inf]
-  ]
-  res = TravellingSalesmanProblemSolver(c).solve()
-  print(res.plan)
-  print(res.r)
+
+c = load_matrix('11')
+res = Comivoyager(c).solve()
+print(res.plan)
+print(res.r)

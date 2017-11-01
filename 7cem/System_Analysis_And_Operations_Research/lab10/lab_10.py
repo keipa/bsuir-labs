@@ -27,12 +27,14 @@ def second_reduction_of_matrix(matrix):
     n, m = matrix.shape
     del_x, del_y = [], []
 
+    # наибольшее
     temp_matrix = np.zeros(matrix.shape)
     for i in range(n):
         for j in range(n):
             if matrix[i, j] == 0:
                 temp_matrix[i, j] = 1
 
+    # максимальное
     while True:
         x, y = np.array([0] * n), np.array([0] * n)
 
@@ -57,14 +59,18 @@ def second_reduction_of_matrix(matrix):
                     temp_matrix[i, arg_max_y] = 0
 
     min_elem = np.min(matrix[list(set(range(n)) - set(del_x))][:, list(set(range(n)) - set(del_y))])
+    alpha_conversion(del_x, del_y, matrix, min_elem, n)
+
+    return matrix
+
+
+def alpha_conversion(del_x, del_y, matrix, min_elem, n):
     for i in list(set(range(n)) - set(del_x)):
         for j in list(set(range(n)) - set(del_y)):
             matrix[i, j] -= min_elem
     for i in del_x:
         for j in del_y:
             matrix[i, j] += min_elem
-
-    return matrix
 
 
 def solve(matrix_c):
@@ -80,7 +86,7 @@ def solve(matrix_c):
                 if matrix[i, j] == 0:
                     c[i, j + n] = 1
 
-        f, v = ford_fulkerson(c, 2 * n, 2 * n + 1)
+        f, v = ford_fulkerson(c, 2 * n, 2 * n + 1)  # если фалкерсон даёт совершенное, то заканчиваем итерецию
         if v == n:
             ans, cost = [], 0
             for i in range(n):
@@ -95,7 +101,6 @@ def solve(matrix_c):
 
 matrix = load_matrix('10')
 ans, cost = solve(matrix)
-
 for i, j in ans:
     print(i, '->', j)
 print('cost =', cost)
