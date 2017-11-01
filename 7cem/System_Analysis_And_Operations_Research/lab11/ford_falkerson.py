@@ -1,5 +1,5 @@
 from numpy import inf, isinf
-import Queue
+from  multiprocessing import  Queue
 
 class FordFalkersonSolver(object):
   def add_values(self, i, j, c, x):
@@ -65,6 +65,7 @@ class FordFalkersonSolver(object):
   def get_x(self):
     return [x for index, [i, j, c, x] in enumerate(self.edges) if index % 2 == 0]
 
+
 if __name__ == '__main__':
   inp = [
     [0, 1, 4],
@@ -82,4 +83,4 @@ if __name__ == '__main__':
   s = 0
   t = 6
   n = 7
-  print FordFalkersonSolver(inp, n, s, t).solve().flow()
+  print(FordFalkersonSolver(inp, n, s, t).solve().flow())
