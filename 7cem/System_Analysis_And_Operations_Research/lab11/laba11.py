@@ -1,6 +1,6 @@
 #!/usr/bin/python2.7
 from numpy import inf, copy
-from laba10 import *
+from lab10 import *
 
 class TravellingSalesmanProblemSolver(object):
   def __init__(self, c):

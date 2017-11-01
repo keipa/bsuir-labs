@@ -1,5 +1,7 @@
 from numpy import inf, isinf
+
 from ford_falkerson import FordFalkersonSolver
+
 
 class AssignmentProblemSolver(object):
   def __init__(self, c):
