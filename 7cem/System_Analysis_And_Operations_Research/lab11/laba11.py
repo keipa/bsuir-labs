@@ -1,16 +1,17 @@
 #!/usr/bin/python2.7
 from numpy import inf, copy
 from lab10 import *
+from functools import reduce
 
 class TravellingSalesmanProblemSolver(object):
   def __init__(self, c):
     self.c = c
     self.n = len(c[0])
-    self.r = reduce(lambda s, x: s + x, [c[i][i+1] for i in xrange(self.n - 1)]) + c[self.n - 1][0]
-    self.plan = range(self.n).append(0)
+    self.r = reduce(lambda s, x: s + x, [c[i][i+1] for i in range(self.n - 1)]) + c[self.n - 1][0]
+    self.plan = list(range(self.n)).append(0)
 
   def calculate_plan(self, res):
-    return reduce(lambda s, x: s + x, [self.c[i][res[i]] for i in xrange(self.n)])
+    return reduce(lambda s, x: s + x, [self.c[i][res[i]] for i in range(self.n)])
 
   def dfs(self, v):
     self.used[v] = True
@@ -19,10 +20,10 @@ class TravellingSalesmanProblemSolver(object):
       self.dfs(self.assigment_problem_res[v])
 
   def create_components(self):
-    self.used = [False for _ in xrange(self.n)]
+    self.used = [False for _ in range(self.n)]
     self.components = []
     self.comp_index = 0
-    for i in xrange(self.n):
+    for i in range(self.n):
       if not self.used[i]:
         self.components.append([])
         self.dfs(i)
@@ -65,5 +66,5 @@ if __name__ == '__main__':
     [10, 8, 25, 27, inf]
   ]
   res = TravellingSalesmanProblemSolver(c).solve()
-  print res.plan
-  print res.r
+  print(res.plan)
+  print(res.r)

@@ -28,15 +28,15 @@ class AssignmentProblemSolver(object):
     self.change_columns()
 
   def create_u1(self):
-    for i in xrange(1, self.n + 1):
+    for i in range(1, self.n + 1):
       self.net.append([0, i, 1])
   def create_u_ast(self):
-    for i in xrange(self.n + 1, 2*self.n + 1):
+    for i in range(self.n + 1, 2*self.n + 1):
       self.net.append([i, 2*self.n + 1, 1])
 
   def create_u0(self):
-    for i in xrange(self.n):
-      for j in xrange(self.n):
+    for i in range(self.n):
+      for j in range(self.n):
         if self.c[i][j] == 0:
           self.net.append([i + 1, j + 1 + self.n, inf])
 
@@ -47,9 +47,9 @@ class AssignmentProblemSolver(object):
     self.create_u0()
 
   def create_answer(self):
-    self.ans = [0 for _ in xrange(self.n)]
+    self.ans = [0 for _ in range(self.n)]
     for i, j, c, x in self.max_flow.edges:
-      if i in xrange(1, self.n + 1) and j in xrange(self.n + 1, 2 * self.n + 1) and x==1:
+      if i in range(1, self.n + 1) and j in range(self.n + 1, 2 * self.n + 1) and x==1:
         self.ans[i - 1] = j - self.n - 1
     return self.ans
 
@@ -69,13 +69,13 @@ class AssignmentProblemSolver(object):
   def calculate_alpha(self):
     self.alpha = inf
     for i in self.N1:
-      for j in xrange(self.n):
+      for j in range(self.n):
         if j not in self.N2 and self.c[i][j] < self.alpha:
           self.alpha = self.c[i][j]
 
   def add_alpha_to_c(self):
-    for i in xrange(self.n):
-      for j in xrange(self.n):
+    for i in range(self.n):
+      for j in range(self.n):
         if i in self.N1 and j not in self.N2:
           self.c[i][j] -= self.alpha
         elif i not in self.N1 and j in self.N2:
@@ -100,4 +100,4 @@ if __name__ == '__main__':
     [13, 14, 16, 11],
     [4, 15, 13, 19]
   ]
-  print AssignmentProblemSolver(c).solve()
+  print(AssignmentProblemSolver(c).solve())
