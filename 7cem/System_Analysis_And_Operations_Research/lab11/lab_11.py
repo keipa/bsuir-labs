@@ -3,7 +3,7 @@ from lab10 import *
 from lab11.lab10 import *
 from functools import reduce
 
-def load_matrix(file_name):
+def inputValues(file_name):
     matrix = []
     with open(file_name, 'r') as fin:
         for line in fin:
@@ -59,9 +59,7 @@ class Comivoyager(object):
     self.branch_and_bound()
     return self
 
-
-
-c = load_matrix('11')
+c = inputValues('11')
 res = Comivoyager(c).solve()
 print(res.plan)
 print(res.r)

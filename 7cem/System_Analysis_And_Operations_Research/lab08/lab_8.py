@@ -42,7 +42,7 @@ def bfs(G, start_v, end_v):
     return path
 
 
-def get_residual_network(c, f):
+def get_network_rest(c, f):
     c_f = c - f
     G_f = defaultdict(list)
 
@@ -56,7 +56,7 @@ def get_residual_network(c, f):
     return G_f, c_f
 
 
-def get_path_in_residual_network(G_f, start_v, end_v):
+def get_path(G_f, start_v, end_v):
     path = bfs(G_f, start_v, end_v)
     if path:
         path = [(path[i + 1], path[i]) for i in range(len(path) - 1)][::-1]
@@ -69,8 +69,8 @@ def ford_fulkerson(c, start_v, end_v):
     f = np.zeros((n, m))
     max_flow = 0
     while True:
-        G_f, c_f = get_residual_network(c, f)
-        path = get_path_in_residual_network(G_f, start_v, end_v)
+        G_f, c_f = get_network_rest(c, f)
+        path = get_path(G_f, start_v, end_v)
         if not path:
             break
 
