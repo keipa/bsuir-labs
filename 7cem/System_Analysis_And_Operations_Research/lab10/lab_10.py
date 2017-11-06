@@ -89,14 +89,19 @@ def solve(matrix_c):
         f, v = ford_fulkerson(c, 2 * n, 2 * n + 1)  # если фалкерсон даёт совершенное, то заканчиваем итерецию
         if v == n:
             ans, cost = [], 0
-            for i in range(n):
-                for j in range(n):
-                    if f[i, j + n] == 1:
-                        ans.append((i, j))
-                        cost += matrix_c[i, j]
+            cost = PrepareAnswer(ans, cost, f, matrix_c, n)
             return ans, cost
         else:
             matrix = second_reduction_of_matrix(matrix)
+
+
+def PrepareAnswer(ans, cost, f, matrix_c, n):
+    for i in range(n):
+        for j in range(n):
+            if f[i, j + n] == 1:
+                ans.append((i, j))
+                cost += matrix_c[i, j]
+    return cost
 
 
 matrix = load_matrix('10')

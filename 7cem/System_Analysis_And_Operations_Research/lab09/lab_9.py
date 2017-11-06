@@ -2,7 +2,7 @@ from numpy import inf, isinf, zeros
 import copy
 
 
-def load_matrix(file_name):
+def inputValues(file_name):
     matrix = []
     with open(file_name, 'r') as fin:
         for line in fin:
@@ -31,25 +31,25 @@ def benchmark(func):
 
 class FloydSolver(object):
     def __init__(self, g):
-        self.g = copy.deepcopy(g)
+        self.weight_map = copy.deepcopy(g)
         self.n = len(g[0])
-        self.p = [[i for i in range(self.n)] for _ in [i for i in range(self.n)]]
+        self.history_map = [[i for i in range(self.n)] for _ in [i for i in range(self.n)]]
 
     @benchmark
     def solve(self):
         for k in range(self.n):
             for i in range(self.n):
-                if not self.g == inf:
+                if not self.weight_map == inf:
                     for j in range(self.n):
-                        if self.g[i][k] < inf and self.g[k][j] < inf:
-                            if self.g[i][j] > self.g[i][k] + self.g[k][j]:
-                                self.g[i][j] = self.g[i][k] + self.g[k][j]
-                                self.p[i][j] = self.p[i][k]
+                        if self.weight_map[i][k] < inf and self.weight_map[k][j] < inf:
+                            if self.weight_map[i][j] > self.weight_map[i][k] + self.weight_map[k][j]:
+                                self.weight_map[i][j] = self.weight_map[i][k] + self.weight_map[k][j]
+                                self.history_map[i][j] = self.history_map[i][k]
         return self
 
 
-g = load_matrix('09')
+g = inputValues('09')
 res = FloydSolver(g).solve()
-pretty(res.g)
+pretty(res.weight_map)
 print('-' * 20)
-pretty(res.p)
+pretty(res.history_map)
