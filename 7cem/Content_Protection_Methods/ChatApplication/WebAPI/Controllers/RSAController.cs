@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 
@@ -38,126 +39,13 @@ namespace WebAPI.Controllers
         static int keysize;
         static BigInteger[] klucz = new BigInteger[2];
         static int bctl;
-        static void Main(string[] args) {
-            Console.WriteLine("chcesz wczytac klucze czy wygenerowac nowe?(w/g)");
-            switch (Console.ReadLine()) {
-                case "w":
-                    readkeys();
-                    break;
-                case "g":
-                    genkeys();
-                    break;
-            }
-            Console.ReadLine();
+        
+       
+
+        
 
 
-        }
-        static void readkeys() {
-            Console.WriteLine("podaj nazwe pliku w ktorym jest klucz");
-            String filename = Console.ReadLine();
-            FileInfo fi = new FileInfo(filename);
-            BinaryReader br = new BinaryReader(File.Open(filename, FileMode.Open));
-            int rozmiar = Convert.ToInt32(fi.Length / 2);
-            klucz[0] = new BigInteger(br.ReadBytes(rozmiar));
-            klucz[1] = new BigInteger(br.ReadBytes(rozmiar));
-            keysize = rozmiar * 8;
-            Console.WriteLine("klucz ma rozmiar {0}b", keysize);
-            if (filename.StartsWith("prv")) {
-                Console.WriteLine("wykryto klucz prywatny, deszyfrowanie");
-                deszyfrowanie();
-            } else if (filename.StartsWith("pub")) {
-                Console.WriteLine("wykryto klucz publiczny, szyfrowanie");
-                szyfrowanie();
-            } else {
-                Console.WriteLine("podany klucz jest prywatny czy publiczny?(r/u)");
-                switch (Console.ReadLine()) {
-                    case "r":
-                        deszyfrowanie();
-                        break;
-                    case "u":
-                        szyfrowanie();
-                        break;
-                }
-            }
-        }
-
-        static void deszyfrowanie() {
-            Console.WriteLine("podaj nazwe pliku do odszyfrowania");
-            string we = Console.ReadLine();
-            string wy = we.Replace(".rsa", "");
-            BinaryReader br = new BinaryReader(File.Open(we, FileMode.Open));
-            BinaryWriter bw = new BinaryWriter(File.Open(wy, FileMode.Create));
-            int blocksize = keysize / 8;
-            long blockcount = (br.BaseStream.Length / blocksize);
-            bctl = blockcount.ToString().Length;
-            for (long i = 0; i < blockcount; i++) {
-                byte[] buf = br.ReadBytes(blocksize);
-                BigInteger bi = new BigInteger(buf);
-                BigInteger bo = decode(bi);
-                buf = bo.getBytes();
-                if (i != (blockcount - 1))
-                    buf = buf.pad(blocksize - 1);
-                bw.Write(buf);
-                //drawTextProgressBar(i, blockcount);
-            }
-            bw.Close();
-            Console.WriteLine("zapisano pod nazwa {0}", wy);
-        }
-
-
-        static void szyfrowanie() {
-            Console.WriteLine("podaj nazwe pliku do zaszyfrowania");
-            string we = Console.ReadLine();
-            string wy = we + ".rsa";
-            BinaryReader br = new BinaryReader(File.Open(we, FileMode.Open));
-            BinaryWriter bw = new BinaryWriter(File.Open(wy, FileMode.Create));
-            int blocksize = (keysize / 8) - 1;
-            long blockcount = (br.BaseStream.Length / blocksize) + 1;
-            bctl = blockcount.ToString().Length;
-            for (long i = 0; i < blockcount; i++) {
-                byte[] buf = br.ReadBytes(blocksize);
-                BigInteger bi = new BigInteger(buf);
-                BigInteger bo = encode(bi);
-                buf = bo.getBytes().pad(blocksize + 1);
-                bw.Write(buf);
-                //drawTextProgressBar(i, blockcount);
-            }
-            bw.Close();
-            Console.WriteLine("zapisano pod nazwa {0}", wy);
-        }
-
-
-        static void genkeys() {
-            int rozmiar = 0;
-            do {
-                Console.WriteLine("podaj dlugosc klucza");
-                String ro = Console.ReadLine();
-                rozmiar = Convert.ToInt32(ro);
-                if (rozmiar > 2048 || rozmiar < 16)
-                    Console.WriteLine("program obsluguje klucze o rozmiarze 16-2048b");
-            } while (rozmiar > 2048 || rozmiar < 16);
-
-            Random r = new Random();
-            BigInteger p = BigInteger.genPseudoPrime(rozmiar / 2, 1, r);
-            BigInteger q = BigInteger.genPseudoPrime(rozmiar / 2, 1, r);
-            BigInteger n = p * q;
-            BigInteger fi = (p - 1) * (q - 1);
-            BigInteger e = fi.genCoPrime(rozmiar, r);
-            BigInteger d = e.modInverse(fi);
-            String prvfname = "prv." + rozmiar.ToString();
-            String pubfname = "pub." + rozmiar.ToString();
-            int bytesize = rozmiar / 8;
-            BinaryWriter prvbw = new BinaryWriter(File.Open(prvfname, FileMode.Create));
-            prvbw.Write(d.getBytes().pad(bytesize));
-            prvbw.Write(n.getBytes().pad(bytesize));
-            prvbw.Close();
-            BinaryWriter pubbw = new BinaryWriter(File.Open(pubfname, FileMode.Create));
-            pubbw.Write(e.getBytes().pad(bytesize));
-            pubbw.Write(n.getBytes().pad(bytesize));
-            pubbw.Close();
-            Console.WriteLine("klucz prywatny zostal zapisany pod nazwa {0} a klucz publiczny pod nazwa {1}", prvfname, pubfname);
-        }
-
+       
         static BigInteger encode(BigInteger x) {
             BigInteger e = klucz[0];
             BigInteger n = klucz[1];
@@ -175,12 +63,9 @@ namespace WebAPI.Controllers
 
     public class BigInteger
     {
-        // maximum length of the BigInteger in uint (4 bytes)
-        // change this to suit the required level of precision.
 
         private const int maxLength = 70;
 
-        // primes smaller than 2000 to test the generated prime number
 
         public static readonly int[] primesBelow2000 = {
         2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97,
@@ -209,9 +94,6 @@ namespace WebAPI.Controllers
         public int dataLength;                 // number of actual chars used
 
 
-        //***********************************************************************
-        // Constructor (Default value for BigInteger is 0
-        //***********************************************************************
 
         public BigInteger()
         {
@@ -220,17 +102,12 @@ namespace WebAPI.Controllers
         }
 
 
-        //***********************************************************************
-        // Constructor (Default value provided by long)
-        //***********************************************************************
 
         public BigInteger(long value)
         {
             data = new uint[maxLength];
             long tempVal = value;
 
-            // copy bytes from long to BigInteger without any assumption of
-            // the length of the long datatype
 
             dataLength = 0;
             while (value != 0 && dataLength < maxLength)
@@ -256,16 +133,11 @@ namespace WebAPI.Controllers
         }
 
 
-        //***********************************************************************
-        // Constructor (Default value provided by ulong)
-        //***********************************************************************
 
         public BigInteger(ulong value)
         {
             data = new uint[maxLength];
 
-            // copy bytes from ulong to BigInteger without any assumption of
-            // the length of the ulong datatype
 
             dataLength = 0;
             while (value != 0 && dataLength < maxLength)
@@ -284,9 +156,6 @@ namespace WebAPI.Controllers
 
 
 
-        //***********************************************************************
-        // Constructor (Default value provided by BigInteger)
-        //***********************************************************************
 
         public BigInteger(BigInteger bi)
         {
@@ -298,31 +167,6 @@ namespace WebAPI.Controllers
                 data[i] = bi.data[i];
         }
 
-
-        //***********************************************************************
-        // Constructor (Default value provided by a string of digits of the
-        //              specified base)
-        //
-        // Example (base 10)
-        // -----------------
-        // To initialize "a" with the default value of 1234 in base 10
-        //      BigInteger a = new BigInteger("1234", 10)
-        //
-        // To initialize "a" with the default value of -1234
-        //      BigInteger a = new BigInteger("-1234", 10)
-        //
-        // Example (base 16)
-        // -----------------
-        // To initialize "a" with the default value of 0x1D4F in base 16
-        //      BigInteger a = new BigInteger("1D4F", 16)
-        //
-        // To initialize "a" with the default value of -0x1D4F
-        //      BigInteger a = new BigInteger("-1D4F", 16)
-        //
-        // Note that string values are specified in the <sign><magnitude>
-        // format.
-        //
-        //***********************************************************************
 
         public BigInteger(string value, int radix)
         {
@@ -379,22 +223,6 @@ namespace WebAPI.Controllers
         }
 
 
-        //***********************************************************************
-        // Constructor (Default value provided by an array of bytes)
-        //
-        // The lowest index of the input byte array (i.e [0]) should contain the
-        // most significant byte of the number, and the highest index should
-        // contain the least significant byte.
-        //
-        // E.g.
-        // To initialize "a" with the default value of 0x1D4F in base 16
-        //      byte[] temp = { 0x1D, 0x4F };
-        //      BigInteger a = new BigInteger(temp)
-        //
-        // Note that this method of initialization does not allow the
-        // sign to be specified.
-        //
-        //***********************************************************************
 
         public BigInteger(byte[] inData)
         {
@@ -431,10 +259,6 @@ namespace WebAPI.Controllers
         }
 
 
-        //***********************************************************************
-        // Constructor (Default value provided by an array of bytes of the
-        // specified length.)
-        //***********************************************************************
 
         public BigInteger(byte[] inData, int inLen)
         {
@@ -474,9 +298,6 @@ namespace WebAPI.Controllers
         }
 
 
-        //***********************************************************************
-        // Constructor (Default value provided by an array of unsigned integers)
-        //*********************************************************************
 
         public BigInteger(uint[] inData)
         {
@@ -497,10 +318,6 @@ namespace WebAPI.Controllers
         }
 
 
-        //***********************************************************************
-        // Overloading of the typecast operator.
-        // For BigInteger bi = 10;
-        //***********************************************************************
 
         public static implicit operator BigInteger(long value)
         {
@@ -522,10 +339,6 @@ namespace WebAPI.Controllers
             return (new BigInteger((ulong)value));
         }
 
-
-        //***********************************************************************
-        // Overloading of addition operator
-        //***********************************************************************
 
         public static BigInteger operator +(BigInteger bi1, BigInteger bi2)
         {
@@ -563,9 +376,6 @@ namespace WebAPI.Controllers
         }
 
 
-        //***********************************************************************
-        // Overloading of the unary ++ operator
-        //***********************************************************************
 
         public static BigInteger operator ++(BigInteger bi1)
         {
@@ -608,9 +418,6 @@ namespace WebAPI.Controllers
         }
 
 
-        //***********************************************************************
-        // Overloading of subtraction operator
-        //***********************************************************************
 
         public static BigInteger operator -(BigInteger bi1, BigInteger bi2)
         {
@@ -657,9 +464,6 @@ namespace WebAPI.Controllers
         }
 
 
-        //***********************************************************************
-        // Overloading of the unary -- operator
-        //***********************************************************************
 
         public static BigInteger operator --(BigInteger bi1)
         {
@@ -704,9 +508,7 @@ namespace WebAPI.Controllers
         }
 
 
-        //***********************************************************************
         // Overloading of multiplication operator
-        //***********************************************************************
 
         public static BigInteger operator *(BigInteger bi1, BigInteger bi2)
         {
@@ -800,9 +602,7 @@ namespace WebAPI.Controllers
 
 
 
-        //***********************************************************************
         // Overloading of unary << operators
-        //***********************************************************************
 
         public static BigInteger operator <<(BigInteger bi1, int shiftVal)
         {
@@ -854,9 +654,7 @@ namespace WebAPI.Controllers
         }
 
 
-        //***********************************************************************
         // Overloading of unary >> operators
-        //***********************************************************************
 
         public static BigInteger operator >>(BigInteger bi1, int shiftVal)
         {
@@ -926,9 +724,7 @@ namespace WebAPI.Controllers
         }
 
 
-        //***********************************************************************
         // Overloading of the NOT operator (1's complement)
-        //***********************************************************************
 
         public static BigInteger operator ~(BigInteger bi1)
         {
@@ -946,9 +742,7 @@ namespace WebAPI.Controllers
         }
 
 
-        //***********************************************************************
         // Overloading of the NEGATE operator (2's complement)
-        //***********************************************************************
 
         public static BigInteger operator -(BigInteger bi1)
         {
@@ -990,9 +784,7 @@ namespace WebAPI.Controllers
         }
 
 
-        //***********************************************************************
         // Overloading of equality operator
-        //***********************************************************************
 
         public static bool operator ==(BigInteger bi1, BigInteger bi2)
         {
@@ -1028,9 +820,7 @@ namespace WebAPI.Controllers
         }
 
 
-        //***********************************************************************
         // Overloading of inequality operator
-        //***********************************************************************
 
         public static bool operator >(BigInteger bi1, BigInteger bi2)
         {
@@ -1096,12 +886,10 @@ namespace WebAPI.Controllers
         }
 
 
-        //***********************************************************************
         // Private function that supports the division of two numbers with
         // a divisor that has more than 1 digit.
         //
         // Algorithm taken from [1]
-        //***********************************************************************
 
         private static void multiByteDivide(BigInteger bi1, BigInteger bi2,
                                             BigInteger outQuotient, BigInteger outRemainder)
@@ -1186,19 +974,11 @@ namespace WebAPI.Controllers
                 }
                 BigInteger yy = kk - ss;
 
-                //Console.WriteLine("ss = " + ss);
-                //Console.WriteLine("kk = " + kk);
-                //Console.WriteLine("yy = " + yy);
 
                 for (int h = 0; h < divisorLen; h++)
                     remainder[pos - h] = yy.data[bi2.dataLength - h];
 
-                /*
-                Console.WriteLine("dividend = ");
-                for(int q = remainderLen - 1; q >= 0; q--)
-                        Console.Write("{0:x2}", remainder[q]);
-                Console.WriteLine("\n************ q_hat = {0:X}\n", q_hat);
-                */
+                
 
                 result[resultPos++] = (uint)q_hat;
 
@@ -1228,10 +1008,6 @@ namespace WebAPI.Controllers
         }
 
 
-        //***********************************************************************
-        // Private function that supports the division of two numbers with
-        // a divisor that has only 1 digit.
-        //***********************************************************************
 
         private static void singleByteDivide(BigInteger bi1, BigInteger bi2,
                                              BigInteger outQuotient, BigInteger outRemainder)
@@ -1251,8 +1027,6 @@ namespace WebAPI.Controllers
             int pos = outRemainder.dataLength - 1;
             ulong dividend = (ulong)outRemainder.data[pos];
 
-            //Console.WriteLine("divisor = " + divisor + " dividend = " + dividend);
-            //Console.WriteLine("divisor = " + bi2 + "\ndividend = " + bi1);
 
             if (dividend >= divisor)
             {
@@ -1294,9 +1068,7 @@ namespace WebAPI.Controllers
         }
 
 
-        //***********************************************************************
         // Overloading of division operator
-        //***********************************************************************
 
         public static BigInteger operator /(BigInteger bi1, BigInteger bi2)
         {
@@ -1337,9 +1109,7 @@ namespace WebAPI.Controllers
         }
 
 
-        //***********************************************************************
         // Overloading of modulus operator
-        //***********************************************************************
 
         public static BigInteger operator %(BigInteger bi1, BigInteger bi2)
         {
@@ -1377,9 +1147,7 @@ namespace WebAPI.Controllers
         }
 
 
-        //***********************************************************************
         // Overloading of bitwise AND operator
-        //***********************************************************************
 
         public static BigInteger operator &(BigInteger bi1, BigInteger bi2)
         {
@@ -1402,9 +1170,7 @@ namespace WebAPI.Controllers
         }
 
 
-        //***********************************************************************
         // Overloading of bitwise OR operator
-        //***********************************************************************
 
         public static BigInteger operator |(BigInteger bi1, BigInteger bi2)
         {
@@ -1427,9 +1193,7 @@ namespace WebAPI.Controllers
         }
 
 
-        //***********************************************************************
         // Overloading of bitwise XOR operator
-        //***********************************************************************
 
         public static BigInteger operator ^(BigInteger bi1, BigInteger bi2)
         {
@@ -1452,9 +1216,7 @@ namespace WebAPI.Controllers
         }
 
 
-        //***********************************************************************
         // Returns max(this, bi)
-        //***********************************************************************
 
         public BigInteger max(BigInteger bi)
         {
@@ -1465,9 +1227,7 @@ namespace WebAPI.Controllers
         }
 
 
-        //***********************************************************************
         // Returns min(this, bi)
-        //***********************************************************************
 
         public BigInteger min(BigInteger bi)
         {
@@ -1479,9 +1239,7 @@ namespace WebAPI.Controllers
         }
 
 
-        //***********************************************************************
         // Returns the absolute value
-        //***********************************************************************
 
         public BigInteger abs()
         {
@@ -1492,9 +1250,7 @@ namespace WebAPI.Controllers
         }
 
 
-        //***********************************************************************
         // Returns a string representing the BigInteger in base 10.
-        //***********************************************************************
 
         public override string ToString()
         {
@@ -1502,7 +1258,6 @@ namespace WebAPI.Controllers
         }
 
 
-        //***********************************************************************
         // Returns a string representing the BigInteger in sign-and-magnitude
         // format in the specified radix.
         //
@@ -1511,7 +1266,6 @@ namespace WebAPI.Controllers
         // If the value of BigInteger is -255 in base 10, then
         // ToString(16) returns "-FF"
         //
-        //***********************************************************************
 
         public string ToString(int radix)
         {
@@ -1561,19 +1315,6 @@ namespace WebAPI.Controllers
         }
 
 
-        //***********************************************************************
-        // Returns a hex string showing the contains of the BigInteger
-        //
-        // Examples
-        // -------
-        // 1) If the value of BigInteger is 255 in base 10, then
-        //    ToHexString() returns "FF"
-        //
-        // 2) If the value of BigInteger is -255 in base 10, then
-        //    ToHexString() returns ".....FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF01",
-        //    which is the 2's complement representation of -255.
-        //
-        //***********************************************************************
 
         public string ToHexString()
         {
@@ -1589,9 +1330,7 @@ namespace WebAPI.Controllers
 
 
 
-        //***********************************************************************
         // Modulo Exponentiation
-        //***********************************************************************
 
         public BigInteger modPow(BigInteger exp, BigInteger n)
         {
@@ -1660,13 +1399,6 @@ namespace WebAPI.Controllers
 
 
 
-        //***********************************************************************
-        // Fast calculation of modular reduction using Barrett's reduction.
-        // Requires x < b^(2k), where b is the base.  In this case, base is
-        // 2^32 (uint).
-        //
-        // Reference [4]
-        //***********************************************************************
 
         private BigInteger BarrettReduction(BigInteger x, BigInteger n, BigInteger constant)
         {
@@ -1747,9 +1479,7 @@ namespace WebAPI.Controllers
         }
 
 
-        //***********************************************************************
         // Returns gcd(this, bi)
-        //***********************************************************************
 
         public BigInteger gcd(BigInteger bi)
         {
@@ -1779,9 +1509,7 @@ namespace WebAPI.Controllers
         }
 
 
-        //***********************************************************************
         // Populates "this" with the specified amount of random bits
-        //***********************************************************************
 
         public void genRandomBits(int bits, Random rand)
         {
@@ -1818,7 +1546,6 @@ namespace WebAPI.Controllers
         }
 
 
-        //***********************************************************************
         // Returns the position of the most significant bit in the BigInteger.
         //
         // Eg.  The result is 0, if the value of BigInteger is 0...0000 0000
@@ -1826,7 +1553,6 @@ namespace WebAPI.Controllers
         //      The result is 2, if the value of BigInteger is 0...0000 0010
         //      The result is 2, if the value of BigInteger is 0...0000 0011
         //
-        //***********************************************************************
 
         public int bitCount()
         {
@@ -1848,26 +1574,6 @@ namespace WebAPI.Controllers
         }
 
 
-        //***********************************************************************
-        // Probabilistic prime test based on Fermat's little theorem
-        //
-        // for any a < p (p does not divide a) if
-        //      a^(p-1) mod p != 1 then p is not prime.
-        //
-        // Otherwise, p is probably prime (pseudoprime to the chosen base).
-        //
-        // Returns
-        // -------
-        // True if "this" is a pseudoprime to randomly chosen
-        // bases.  The number of chosen bases is given by the "confidence"
-        // parameter.
-        //
-        // False if "this" is definitely NOT prime.
-        //
-        // Note - this method is fast but fails for Carmichael numbers except
-        // when the randomly chosen base is a factor of the number.
-        //
-        //***********************************************************************
 
         public bool FermatLittleTest(int confidence)
         {
@@ -1938,26 +1644,6 @@ namespace WebAPI.Controllers
         }
 
 
-        //***********************************************************************
-        // Probabilistic prime test based on Rabin-Miller's
-        //
-        // for any p > 0 with p - 1 = 2^s * t
-        //
-        // p is probably prime (strong pseudoprime) if for any a < p,
-        // 1) a^t mod p = 1 or
-        // 2) a^((2^j)*t) mod p = p-1 for some 0 <= j <= s-1
-        //
-        // Otherwise, p is composite.
-        //
-        // Returns
-        // -------
-        // True if "this" is a strong pseudoprime to randomly chosen
-        // bases.  The number of chosen bases is given by the "confidence"
-        // parameter.
-        //
-        // False if "this" is definitely NOT prime.
-        //
-        //***********************************************************************
 
         public bool RabinMillerTest(int confidence)
         {
@@ -2034,17 +1720,8 @@ namespace WebAPI.Controllers
 
                 BigInteger b = a.modPow(t, thisVal);
 
-                /*
-                Console.WriteLine("a = " + a.ToString(10));
-                Console.WriteLine("b = " + b.ToString(10));
-                Console.WriteLine("t = " + t.ToString(10));
-                Console.WriteLine("s = " + s);
-                */
 
-                bool result = false;
-
-                if (b.dataLength == 1 && b.data[0] == 1)         // a^t mod p = 1
-                    result = true;
+                bool result = false || b.dataLength == 1 && b.data[0] == 1;
 
                 for (int j = 0; result == false && j < s; j++)
                 {
@@ -2064,25 +1741,6 @@ namespace WebAPI.Controllers
         }
 
 
-        //***********************************************************************
-        // Probabilistic prime test based on Solovay-Strassen (Euler Criterion)
-        //
-        // p is probably prime if for any a < p (a is not multiple of p),
-        // a^((p-1)/2) mod p = J(a, p)
-        //
-        // where J is the Jacobi symbol.
-        //
-        // Otherwise, p is composite.
-        //
-        // Returns
-        // -------
-        // True if "this" is a Euler pseudoprime to randomly chosen
-        // bases.  The number of chosen bases is given by the "confidence"
-        // parameter.
-        //
-        // False if "this" is definitely NOT prime.
-        //
-        //***********************************************************************
 
         public bool SolovayStrassenTest(int confidence)
         {
@@ -2159,19 +1817,6 @@ namespace WebAPI.Controllers
         }
 
 
-        //***********************************************************************
-        // Implementation of the Lucas Strong Pseudo Prime test.
-        //
-        // Let n be an odd number with gcd(n,D) = 1, and n - J(D, n) = 2^s * d
-        // with d odd and s >= 0.
-        //
-        // If Ud mod n = 0 or V2^r*d mod n = 0 for some 0 <= r < s, then n
-        // is a strong Lucas pseudoprime with parameters (P, Q).  We select
-        // P and Q based on Selfridge.
-        //
-        // Returns True if number is a strong Lucus pseudo prime.
-        // Otherwise, returns False indicating that number is composite.
-        //***********************************************************************
 
         public bool LucasStrongTest()
         {
@@ -2199,10 +1844,6 @@ namespace WebAPI.Controllers
 
         private bool LucasStrongTestHelper(BigInteger thisVal)
         {
-            // Do the test (selects D based on Selfridge)
-            // Let D be the first element of the sequence
-            // 5, -7, 9, -11, 13, ... for which J(D,n) = -1
-            // Let P = 1, Q = (1-D) / 4
 
             long D = 5, sign = -1, dCount = 0;
             bool done = false;
@@ -2234,14 +1875,6 @@ namespace WebAPI.Controllers
             }
 
             long Q = (1 - D) >> 2;
-
-            /*
-            Console.WriteLine("D = " + D);
-            Console.WriteLine("Q = " + Q);
-            Console.WriteLine("(n,D) = " + thisVal.gcd(D));
-            Console.WriteLine("(n,Q) = " + thisVal.gcd(Q));
-            Console.WriteLine("J(D|n) = " + BigInteger.Jacobi(D, thisVal));
-            */
 
             BigInteger p_add1 = thisVal + 1;
             int s = 0;
@@ -2275,14 +1908,8 @@ namespace WebAPI.Controllers
             constant = constant / thisVal;
 
             BigInteger[] lucas = LucasSequenceHelper(1, Q, t, thisVal, constant, 0);
-            bool isPrime = false;
-
-            if ((lucas[0].dataLength == 1 && lucas[0].data[0] == 0) ||
-               (lucas[1].dataLength == 1 && lucas[1].data[0] == 0))
-            {
-                // u(t) = 0 or V(t) = 0
-                isPrime = true;
-            }
+            bool isPrime = (lucas[0].dataLength == 1 && lucas[0].data[0] == 0) ||
+               (lucas[1].dataLength == 1 && lucas[1].data[0] == 0);
 
             for (int i = 1; i < s; i++)
             {
@@ -2304,8 +1931,6 @@ namespace WebAPI.Controllers
 
             if (isPrime)     // additional checks for composite numbers
             {
-                // If n is prime and gcd(n, Q) == 1, then
-                // Q^((n+1)/2) = Q * Q^((n-1)/2) is congruent to (Q * J(Q, n)) mod n
 
                 BigInteger g = thisVal.gcd(Q);
                 if (g.dataLength == 1 && g.data[0] == 1)         // gcd(this, Q) == 1
@@ -2325,14 +1950,6 @@ namespace WebAPI.Controllers
             return isPrime;
         }
 
-
-        //***********************************************************************
-        // Determines whether a number is probably prime, using the Rabin-Miller's
-        // test.  Before applying the test, the number is tested for divisibility
-        // by primes < 2000
-        //
-        // Returns true if number is probably prime.
-        //***********************************************************************
 
         public bool isProbablePrime(int confidence)
         {
@@ -2354,10 +1971,6 @@ namespace WebAPI.Controllers
                 BigInteger resultNum = thisVal % divisor;
                 if (resultNum.IntValue() == 0)
                 {
-                    /*
-    Console.WriteLine("Not prime!  Divisible by {0}\n",
-                                      primesBelow2000[p]);
-                    */
                     return false;
                 }
             }
@@ -2372,27 +1985,6 @@ namespace WebAPI.Controllers
         }
 
 
-        //***********************************************************************
-        // Determines whether this BigInteger is probably prime using a
-        // combination of base 2 strong pseudoprime test and Lucas strong
-        // pseudoprime test.
-        //
-        // The sequence of the primality test is as follows,
-        //
-        // 1) Trial divisions are carried out using prime numbers below 2000.
-        //    if any of the primes divides this BigInteger, then it is not prime.
-        //
-        // 2) Perform base 2 strong pseudoprime test.  If this BigInteger is a
-        //    base 2 strong pseudoprime, proceed on to the next step.
-        //
-        // 3) Perform strong Lucas pseudoprime test.
-        //
-        // Returns True if this BigInteger is both a base 2 strong pseudoprime
-        // and a strong Lucas pseudoprime.
-        //
-        // For a detailed discussion of this primality test, see [6].
-        //
-        //***********************************************************************
 
         public bool isProbablePrime()
         {
@@ -2462,10 +2054,7 @@ namespace WebAPI.Controllers
 
             // b = a^t mod p
             BigInteger b = a.modPow(t, thisVal);
-            bool result = false;
-
-            if (b.dataLength == 1 && b.data[0] == 1)         // a^t mod p = 1
-                result = true;
+            bool result = b.dataLength == 1 && b.data[0] == 1;
 
             for (int j = 0; result == false && j < s; j++)
             {
@@ -2487,9 +2076,7 @@ namespace WebAPI.Controllers
 
 
 
-        //***********************************************************************
         // Returns the lowest 4 bytes of the BigInteger as an int.
-        //***********************************************************************
 
         public int IntValue()
         {
@@ -2497,9 +2084,7 @@ namespace WebAPI.Controllers
         }
 
 
-        //***********************************************************************
         // Returns the lowest 8 bytes of the BigInteger as a long.
-        //***********************************************************************
 
         public long LongValue()
         {
@@ -2520,10 +2105,8 @@ namespace WebAPI.Controllers
         }
 
 
-        //***********************************************************************
         // Computes the Jacobi Symbol for a and b.
         // Algorithm adapted from [3] and [4] with some optimizations
-        //***********************************************************************
 
         public static int Jacobi(BigInteger a, BigInteger b)
         {
@@ -2577,9 +2160,7 @@ namespace WebAPI.Controllers
 
 
 
-        //***********************************************************************
         // Generates a positive BigInteger that is probably prime.
-        //***********************************************************************
 
         public static BigInteger genPseudoPrime(int bits, int confidence, Random rand)
         {
@@ -2598,10 +2179,8 @@ namespace WebAPI.Controllers
         }
 
 
-        //***********************************************************************
         // Generates a random number with the specified number of bits such
         // that gcd(number, this) = 1
-        //***********************************************************************
 
         public BigInteger genCoPrime(int bits, Random rand)
         {
@@ -2623,10 +2202,8 @@ namespace WebAPI.Controllers
         }
 
 
-        //***********************************************************************
         // Returns the modulo inverse of this.  Throws ArithmeticException if
         // the inverse does not exist.  (i.e. gcd(this, modulus) != 1)
-        //***********************************************************************
 
         public BigInteger modInverse(BigInteger modulus)
         {
@@ -2685,10 +2262,8 @@ namespace WebAPI.Controllers
         }
 
 
-        //***********************************************************************
         // Returns the value of the BigInteger as a byte array.  The lowest
         // index contains the MSB.
-        //***********************************************************************
 
         public byte[] getBytes()
         {
@@ -2705,29 +2280,6 @@ namespace WebAPI.Controllers
             int pos = 0;
             uint tempVal, val = data[dataLength - 1];
 
-           /* if ((tempVal = (val >> 24 & 0xFF)) != 0)
-                result[pos++] = (byte)tempVal;
-            if ((tempVal = (val >> 16 & 0xFF)) != 0)
-                result[pos++] = (byte)tempVal;
-            if ((tempVal = (val >> 8 & 0xFF)) != 0)
-                result[pos++] = (byte)tempVal;
-            if ((tempVal = (val & 0xFF)) != 0)
-                result[pos++] = (byte)tempVal;*/
-
-
-
-        /*    if ((tempVal = (val >> 24 & 0xFF)) != 0)
-                result[pos++] = (byte)tempVal;
-            if ((tempVal = (val >> 16 & 0xFF)) != 0)
-                result[pos++] = (byte)tempVal;
-            else if (pos > 0)
-                pos++;
-            if ((tempVal = (val >> 8 & 0xFF)) != 0)
-                result[pos++] = (byte)tempVal;
-            else if (pos > 0)
-                pos++;
-            if ((tempVal = (val & 0xFF)) != 0)
-                result[pos++] = (byte)tempVal; */
 
 
             bool flag = false;
@@ -2772,10 +2324,8 @@ namespace WebAPI.Controllers
         }
 
 
-        //***********************************************************************
         // Sets the value of the specified bit to 1
         // The Least Significant Bit position is 0.
-        //***********************************************************************
 
         public void setBit(uint bitNum)
         {
@@ -2790,10 +2340,8 @@ namespace WebAPI.Controllers
         }
 
 
-        //***********************************************************************
         // Sets the value of the specified bit to 0
         // The Least Significant Bit position is 0.
-        //***********************************************************************
 
         public void unsetBit(uint bitNum)
         {
@@ -2814,14 +2362,7 @@ namespace WebAPI.Controllers
         }
 
 
-        //***********************************************************************
-        // Returns a value that is equivalent to the integer square root
-        // of the BigInteger.
         //
-        // The integer square root of "this" is defined as the largest integer n
-        // such that (n * n) <= this
-        //
-        //***********************************************************************
 
         public BigInteger sqrt()
         {
@@ -2865,38 +2406,6 @@ namespace WebAPI.Controllers
             return result;
         }
 
-
-        //***********************************************************************
-        // Returns the k_th number in the Lucas Sequence reduced modulo n.
-        //
-        // Uses index doubling to speed up the process.  For example, to calculate V(k),
-        // we maintain two numbers in the sequence V(n) and V(n+1).
-        //
-        // To obtain V(2n), we use the identity
-        //      V(2n) = (V(n) * V(n)) - (2 * Q^n)
-        // To obtain V(2n+1), we first write it as
-        //      V(2n+1) = V((n+1) + n)
-        // and use the identity
-        //      V(m+n) = V(m) * V(n) - Q * V(m-n)
-        // Hence,
-        //      V((n+1) + n) = V(n+1) * V(n) - Q^n * V((n+1) - n)
-        //                   = V(n+1) * V(n) - Q^n * V(1)
-        //                   = V(n+1) * V(n) - Q^n * P
-        //
-        // We use k in its binary expansion and perform index doubling for each
-        // bit position.  For each bit position that is set, we perform an
-        // index doubling followed by an index addition.  This means that for V(n),
-        // we need to update it to V(2n+1).  For V(n+1), we need to update it to
-        // V((2n+1)+1) = V(2*(n+1))
-        //
-        // This function returns
-        // [0] = U(k)
-        // [1] = V(k)
-        // [2] = Q^n
-        //
-        // Where U(0) = 0 % n, U(1) = 1 % n
-        //       V(0) = 2 % n, V(1) = P % n
-        //***********************************************************************
 
         public static BigInteger[] LucasSequence(BigInteger P, BigInteger Q,
                                                  BigInteger k, BigInteger n)
@@ -2945,12 +2454,10 @@ namespace WebAPI.Controllers
         }
 
 
-        //***********************************************************************
         // Performs the calculation of the kth term in the Lucas Sequence.
         // For details of the algorithm, see reference [9].
         //
         // k must be odd.  i.e LSB == 1
-        //***********************************************************************
 
         private static BigInteger[] LucasSequenceHelper(BigInteger P, BigInteger Q,
                                                         BigInteger k, BigInteger n,
@@ -3054,9 +2561,7 @@ namespace WebAPI.Controllers
         }
 
 
-        //***********************************************************************
         // Tests the correct implementation of the /, %, * and + operators
-        //***********************************************************************
 
         public static void MulDivTest(int rounds)
         {
@@ -3139,11 +2644,9 @@ namespace WebAPI.Controllers
         }
 
 
-        //***********************************************************************
         // Tests the correct implementation of the modulo exponential function
         // using RSA encryption and decryption (using pre-computed encryption and
         // decryption keys).
-        //***********************************************************************
 
         public static void RSATest(int rounds)
         {
@@ -3204,12 +2707,10 @@ namespace WebAPI.Controllers
         }
 
 
-        //***********************************************************************
         // Tests the correct implementation of the modulo exponential and
         // inverse modulo functions using RSA encryption and decryption.  The two
         // pseudoprimes p and q are fixed, but the two RSA keys are generated
         // for each round of testing.
-        //***********************************************************************
 
         public static void RSATest2(int rounds)
         {
@@ -3303,9 +2804,7 @@ namespace WebAPI.Controllers
         }
 
 
-        //***********************************************************************
         // Tests the correct implementation of sqrt() method.
-        //***********************************************************************
 
         public static void SqrtTest(int rounds)
         {

@@ -101,13 +101,6 @@ namespace WebAPI.Controllers
                 return ((x << 8) | (x >> 24));
             }
 
-            // Rcon is what the Rijndael documentation calls the exponentiation of 2 to a user-specified 
-            // value. Note that this operation is not performed with regular integers, but in Rijndael's 
-            // finite field. (http://en.wikipedia.org/wiki/Rijndael_key_schedule)
-            // Rcon(0) is 0x8d because 0x8d multiplied by 0x02 is 0x01 in the finite field.
-            // (http://crypto.stackexchange.com/questions/10682/rijndael-explanation-of-rcon-on-wikipedia/10683)
-            // CalcRcon is based on code by Sam Trenholme (http://www.samiam.org/key-schedule.html)
-            // Typically implemented as a lookup table.
             private static byte CalcRcon(byte bin)
             {
                 if (bin == 0)
@@ -125,15 +118,6 @@ namespace WebAPI.Controllers
                 return b1;
             }
 
-            // Key schedule core (http://en.wikipedia.org/wiki/Rijndael_key_schedule)
-            // This operation is used as an inner loop in the key schedule, and is done in the following manner:
-            // The input is a 32-bit word and at an iteration number i. The output is a 32-bit word.
-            // Copy the input over to the output.
-            // Use the above described rotate operation to rotate the output eight bits to the left
-            // Apply Rijndael's S-box on all four individual bytes in the output word
-            // On just the first (leftmost) byte of the output word, exclusive OR the byte with 2 to the power 
-            // of (i-1). In other words, perform the rcon operation with i as the input, and exclusive or the 
-            // rcon output with the first byte of the output word
             private static uint KeyScheduleCore(uint word, int iteration)
             {
                 uint wOut = SubstituteWord(RotateByteLeft(word));
@@ -178,10 +162,6 @@ namespace WebAPI.Controllers
                 for (int i = init; i < numWords; i += count)
                 {
                     uint tmp = expandedKey[i - 1];
-                    // 256 bit keys are a special case.
-                    // This is implemented as making every other pass handle the extra phase and
-                    // doubling the passes for 256 bit keys. Note that iteration only happens on
-                    // the key schedule core pass.
                     if ((keysize == 256) & ((counter % 2) == 1))
                     {
                         tmp = SubstituteWord(tmp);
@@ -202,12 +182,6 @@ namespace WebAPI.Controllers
                 }
                 return expandedKey;
             }
-
-            //
-            // --- Utility Functions ---
-            //
-
-            // Xor bytes of b1 with b2, circling through b2 as many times as necessary
             private static byte[] XorBytes(byte[] b1, byte[] b2)
             {
                 byte[] rb = new byte[b1.Length];
@@ -216,7 +190,6 @@ namespace WebAPI.Controllers
                 return rb;
             }
 
-            // Return 32 bit uint at b[offset]
             private static uint GetWord(byte[] b, int offset = 0)
             {
                 uint ret = 0;
@@ -228,7 +201,6 @@ namespace WebAPI.Controllers
                 return ret;
             }
 
-            // Returns a byte array representing the uint at "index" offset of key.
             private static byte[] GetByteBlock(uint[] key, int offset = 0)
             {
                 return new byte[] {
@@ -239,7 +211,6 @@ namespace WebAPI.Controllers
             };
             }
 
-            // Returns a uint array 4 wide starting at the index "offset" of key.
             private static uint[] GetUIntBlock(uint[] key, int offset = 0)
             {
                 uint[] tmp = new uint[4];
@@ -248,8 +219,6 @@ namespace WebAPI.Controllers
                 return tmp;
             }
 
-            // This will load from a flat array into the state array starting at the 
-            // block of 16 at "offset". 0 for the first block of 16, 1 for the second, 2 for the third, etc...
             private static byte[,] LoadState(byte[] buf, int offset = 0)
             {
                 byte[,] state = new byte[4, 4];
@@ -263,7 +232,6 @@ namespace WebAPI.Controllers
                 return state;
             }
 
-            // Dump state to byte array.
             private static byte[] DumpState(byte[,] state)
             {
                 byte[] b = new byte[16];
@@ -277,7 +245,6 @@ namespace WebAPI.Controllers
                 return b;
             }
 
-            // Get column[index] of state
             private static byte[] GetColumn(byte[,] state, int index)
             {
                 byte[] b = new byte[4];
@@ -286,18 +253,12 @@ namespace WebAPI.Controllers
                 return b;
             }
 
-            // Copy b to column[index] of state
             private static void PutColumn(byte[,] state, byte[] b, int index)
             {
                 for (int i = 0; i < 4; i++)
                     state[i, index] = b[i];
             }
 
-            //
-            // --- The Cipher ---
-            //
-
-            // AddRoundKey xors the state by a block of key data. Inverse is itself.	
             private static void AddRoundKey(byte[,] state, uint[] key)
             {
                 for (int i = 0; i < 4; i++)
@@ -308,7 +269,6 @@ namespace WebAPI.Controllers
                 }
             }
 
-            // Takes the state array and the sbox array. Set invert = true for inverse.
             private static void SubBytes(byte[,] state, bool invert = false)
             {
                 byte[] sb;
@@ -345,7 +305,6 @@ namespace WebAPI.Controllers
                     }
             }
 
-            // Shift rows left n columns where n is the row's index. Set invert = true for inverse.
             private static void ShiftRows(byte[,] state, bool invert = false)
             {
                 if (invert)
@@ -354,8 +313,6 @@ namespace WebAPI.Controllers
                     _ShiftRows(state);
             }
 
-            // Mulitplication in the Galois Field. Typically implemented with lookup tables.
-            // gmul is based on code by Sam Trenholme (http://www.samiam.org/galois.html)
             private static byte gmul(byte a, byte b)
             {
                 byte p = 0;
@@ -404,16 +361,12 @@ namespace WebAPI.Controllers
                 PutColumn(state, col, index);
             }
 
-            // Each byte in the column is indivdually mixed with the other bytes in the column
-            // via Galois Field addition and multiplication.
-            // Set invert = true for inverse.
             private static void MixColumns(byte[,] state, bool invert = false)
             {
                 for (int i = 0; i < 4; i++)
                     MixColumn(state, i, invert);
             }
 
-            // Encrypt a block loaded into a state with expanded key.
             private static void EncryptBlock(byte[,] state, uint[] key, int keysize)
             {
                 int rounds;
@@ -442,7 +395,6 @@ namespace WebAPI.Controllers
                 }
             }
 
-            // Decrypt a block loaded into a state with expanded key.
             private static void DecryptBlock(byte[,] state, uint[] key, int keysize)
             {
                 int rounds;
@@ -470,10 +422,6 @@ namespace WebAPI.Controllers
                         MixColumns(state, Invert);
                 }
             }
-
-            //
-            // --- Public Interface ---
-            //
 
             public static byte[] Encrypt(byte[] buf, byte[] key, Mode mode = Mode.ECB,
                 byte[] iv = null, Padding padding = Padding.PKCS7)
@@ -567,11 +515,6 @@ namespace WebAPI.Controllers
                 return b2;
             }
 
-            //
-            // --- Padding ---
-            //
-
-            // Pads buffer with filler using various padding styles 
             private static byte[] PadBuffer(byte[] buf, int padfrom, int padto, Padding padding = Padding.PKCS7)
             {
                 if ((padto < buf.Length) | ((padto - padfrom) > 255))
@@ -596,17 +539,12 @@ namespace WebAPI.Controllers
                 return b;
             }
 
-            // This pads to an extra block on length % blocksize = 0 for PKCS7 (this is necessary per the standard)
-            // and Zero Padding (this is implementation dependent and deliberate, but really doesn't matter as
-            // no matter how many nulls are added, they will be stripped). 
-            // No extra block will be added on Padding.NONE, but the last block will still be zero filled.
             public static byte[] PadBuffer(byte[] buf, int blocksize, Padding padding = Padding.PKCS7)
             {
                 int extraBlock = (buf.Length % blocksize) == 0 && padding == Padding.NONE ? 0 : 1;
                 return PadBuffer(buf, buf.Length, ((buf.Length / blocksize) + extraBlock) * blocksize, padding);
             }
 
-            // Returns the number of bytes padding at the end of the buffer.
             private static int GetPadCount(byte[] buf, Padding padding = Padding.PKCS7)
             {
                 if (padding == Padding.NONE)
