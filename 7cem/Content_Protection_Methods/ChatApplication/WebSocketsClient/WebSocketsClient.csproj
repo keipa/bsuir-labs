@@ -56,6 +56,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="CustomConsoleTraceListener.cs" />
+    <Compile Include="Encryption\Encryption.cs" />
     <Compile Include="Server\ChatWebSocketService.cs" />
     <Compile Include="Server\ServiceFactory.cs" />
     <Compile Include="TestClient.cs" />
@@ -106,8 +107,6 @@
       <Name>WebSockets</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Encryption\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

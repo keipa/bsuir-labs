@@ -18,7 +18,7 @@ namespace WebSocketsClient
                                                                     "des3k2",
                                                                     "gost28147",
                                                                     "aes",
-                                                                    "rsamd5",
+                                                                    "rsa",
                                                                     "gost3410",
                                                                     "deffihelman",
                                                                     "ECDSA",
@@ -40,7 +40,7 @@ namespace WebSocketsClient
                 return;
             }
             string html = string.Empty;
-            string url = $"http://localhost:58850/api/{algorythmBox.Text}/{Message.Text}/encrypt";
+            string url = Encryption.Encryption.EncAPI(Message.Text);
 
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             request.AutomaticDecompression = DecompressionMethods.GZip;
