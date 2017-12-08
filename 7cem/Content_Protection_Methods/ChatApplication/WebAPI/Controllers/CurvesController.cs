@@ -3,22 +3,21 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using WebAPI.Encrypt;
+
 
 namespace WebAPI.Controllers
 {
+
     [Route("api/[controller]")]
-    public class RSAController : Controller
+    public class CurvesController : Controller
     {
-       
-
-
-
-        private readonly Dictionary<string, Delegate> algorithmType = new Dictionary<string, Delegate>{ };
+        private readonly Dictionary<string, Delegate> algorithmType = new Dictionary<string, Delegate> { };
 
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            return new string[] { "RSA Encryption Algorithm" };
+            return new string[] {"Curves Encryption Algorithm"};
         }
 
         // GET api/values/5
@@ -29,11 +28,9 @@ namespace WebAPI.Controllers
             {
                 return ($"{procedureType} is not valid procedureType");
             }
-            return (string)algorithmType[procedureType].DynamicInvoke(sourceString);
+            return (string) algorithmType[procedureType].DynamicInvoke(sourceString);
+
         }
-
-
     }
-   
-}
 
+}
