@@ -1,20 +1,31 @@
 import socket
+from threading import *
 import config
-from time import sleep
 
-def listening(port):
-    print("TCP target IP:", config.UDP_IP)
-    print("TCP target port:", port)
+serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+host = "127.0.0.1"
+port = config.TCP_PORT
+print(host)
+print(port)
+serversocket.bind((host, port))
 
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock.bind((config.TCP_IP, port))
-    sock.listen(1)
-    conn, addr = sock.accept()
-    print('Connection address:', addr)
-    while True:
-        data = conn.recv(1024)  # buffer size is 1024 bytes
-        if not data: continue
-        print("received data:", data)
-        sleep(5)
+class client(Thread):
+    def __init__(self, socket, address):
+        Thread.__init__(self)
+        self.sock = socket
+        self.addr = address
+        self.start()
 
-listening(int(input("enter your port: ")))
+    def run(self):
+        while 1:
+            data = self.sock.recv(20)
+            if not data:
+                continue
+            print(self.sock.getpeername())
+            print('Client sent:', data.decode())
+
+serversocket.listen(5)
+print('server started and listening')
+while 1:
+    clientsocket, address = serversocket.accept()
+    client(clientsocket, address)
