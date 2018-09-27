@@ -5,12 +5,11 @@ import random
 
 def send():
     username = get_username()
-    port = int(input("enter your friend's port: "))
+    port = config.TCP_PORT # int(input("enter your friend's port: "))
     send_tcp(username + " enters the chat.", port)
     print("\n Chat room is opened. Type something...\n")
     while True:
-        
-        message = input("$")
+        message = input(">>> ")
         send_tcp(username + " says: " + message, port)
 
 
@@ -27,8 +26,8 @@ def send_tcp(message, port):
     #use WITH keyword
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock.connect((config.TCP_IP, port))
+    print(sock.getsockname())
     sock.send(message.encode("utf-8"))
-    print(sock.recv(1024))
     sock.close()
 
 send()
