@@ -3,29 +3,31 @@ from threading import *
 import config
 
 serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-host = "127.0.0.1"
+host = config.TCP_IP
 port = config.TCP_PORT
 print(host)
 print(port)
 serversocket.bind((host, port))
 
-class client(Thread):
+
+class Client(Thread):
     def __init__(self, socket, address):
-        Thread.__init__(self)
         self.sock = socket
         self.addr = address
-        self.start()
 
     def run(self):
-        while 1:
-            data = self.sock.recv(20)
+        while True:
+            data = self.sock.recv(30)
             if not data:
                 continue
-            print(self.sock.getpeername())
-            print('Client sent:', data.decode())
+            print(current_thread())
+            print(str(self.sock.getpeername()[0]) + ' sent:', data.decode())  # processing
+
 
 serversocket.listen(5)
 print('server started and listening')
 while 1:
     clientsocket, address = serversocket.accept()
-    client(clientsocket, address)
+    a = Client(clientsocket, address)
+    t1 = Thread(target=a.run).start()
+
