@@ -13,7 +13,7 @@ namespace Lab1
             Application.Run(CreateMainForm());
         }
 
-        public static Form CreateMainForm()
+        private static Form CreateMainForm()
         {
             var form = new Form
             {
@@ -30,20 +30,20 @@ namespace Lab1
             return form;
         }
 
-        public static IShape GetShape()
+        private static IShape GetShape()
         {
             var context = new DrawingContext();
             return new AggregateShape(new IShape[]
             {
                 new LineShape(new Point(10, 10), new Point(150, 10), context.CreatePenBillet()),
                 new EllipseShape(new Point(10, 40), new Point(150, 80), context.CreatePenBillet()), 
-                new ArcShape(new Rectangle(100, 100, 100, 150), 90, 90, context.CreatePenBillet()), 
+                new ArcShape(new Rectangle(100, 100, 300, 250), 90, 90, context.CreatePenBillet()),
                 new RectangleShape(new Point(10, 80), new Point(150, 120), context.CreatePenBillet()),
-                new StringShape("shaaaapes", new Point(10, 100), context.CreateBrushBillet(), context.CreateFontBillet()),
+                new StringShape("text", new Point(10, 100), context.CreateBrushBillet(), context.CreateFontBillet()),
                 new CurveShape(new []
                 {
                     new Point(10, 120), new Point(80, 150), new Point(150, 120)
-                }, context.CreatePenBillet()), 
+                }, context.CreatePenBillet())
             });
         }
     }
