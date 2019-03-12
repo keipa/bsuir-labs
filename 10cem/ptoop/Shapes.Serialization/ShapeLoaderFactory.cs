@@ -42,8 +42,7 @@ namespace Shapes.Serialization
         {
             var loaders = keys.Select(key =>
             {
-                ShapeLoaderInfo info;
-                shapeLoaders_.TryGetValue(key, out info);
+                shapeLoaders_.TryGetValue(key, out var info);
                 return info;
             }).Where(info => info != null);
             activeLoaders_.Clear();

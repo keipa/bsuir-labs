@@ -11,6 +11,7 @@
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <LangVersion>7</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -86,9 +87,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Shapes.Interpretation\Shapes.Interpretation.csproj">
-      <Project>{0AF0127F-E5E1-4BF0-BDE3-1F0AD75BA840}</Project>
-      <Name>Shapes.Interpretation</Name>
+    <ProjectReference Include="..\Shapes.Interpret\Shapes.Interpret.csproj">
+      <Project>{29c229cb-4345-4e7c-b316-2621b9f329b3}</Project>
+      <Name>Shapes.Interpret</Name>
     </ProjectReference>
     <ProjectReference Include="..\Shapes.Serialization\Shapes.Serialization.csproj">
       <Project>{0452B427-B740-455E-844A-D502F11CD0CA}</Project>
