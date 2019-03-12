@@ -37,7 +37,7 @@ namespace Shapes.Interpretation
                     .ToArray();
                 return Color.FromArgb(numbers[0], numbers[1], numbers[2], numbers[3]);
             }
-            catch (Exception e)
+            catch
             {
                 throw new FormatException(GetErrorMessage(match.Value));
             }

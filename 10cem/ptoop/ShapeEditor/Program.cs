@@ -14,7 +14,6 @@ namespace ShapeEditor
         static void Main()
         {
             // TODO: init by attribute?
-            // attention use visual studio MSBuild to run this 
 
             // NOTE: shapeFactory should be registered as singleton
             var shapeFactory = new ShapeFactory();

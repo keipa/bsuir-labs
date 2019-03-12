@@ -11,6 +11,7 @@
     <AssemblyName>Shapes.Interpretation.ThirdParty</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <LangVersion>7</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -45,9 +46,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Shapes.Interpretation\Shapes.Interpretation.csproj">
-      <Project>{0AF0127F-E5E1-4BF0-BDE3-1F0AD75BA840}</Project>
-      <Name>Shapes.Interpretation</Name>
+    <ProjectReference Include="..\Shapes.Interpret\Shapes.Interpret.csproj">
+      <Project>{29c229cb-4345-4e7c-b316-2621b9f329b3}</Project>
+      <Name>Shapes.Interpret</Name>
     </ProjectReference>
     <ProjectReference Include="..\Shapes\Shapes.csproj">
       <Project>{7E928C2D-00F0-49C6-AFEF-AF63C25126A4}</Project>
