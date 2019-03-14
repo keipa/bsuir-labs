@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shapes", "..\..\ptoop\Shapes\Shapes.csproj", "{7E928C2D-00F0-49C6-AFEF-AF63C25126A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab1", "..\..\ptoop\Lab1\Lab1.csproj", "{ED94EB13-3FA2-4D6C-82B0-A5671BD50937}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7E928C2D-00F0-49C6-AFEF-AF63C25126A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E928C2D-00F0-49C6-AFEF-AF63C25126A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E928C2D-00F0-49C6-AFEF-AF63C25126A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E928C2D-00F0-49C6-AFEF-AF63C25126A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED94EB13-3FA2-4D6C-82B0-A5671BD50937}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED94EB13-3FA2-4D6C-82B0-A5671BD50937}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED94EB13-3FA2-4D6C-82B0-A5671BD50937}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED94EB13-3FA2-4D6C-82B0-A5671BD50937}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

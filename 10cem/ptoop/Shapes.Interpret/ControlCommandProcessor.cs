@@ -6,7 +6,6 @@ namespace Shapes.Interpretation
     {
         private readonly Dictionary<string, IContextUpdater> updaters_ = new Dictionary<string, IContextUpdater>();
 
-        // TODO: API to remove or overwrite
         public bool Register(string commandName, IContextUpdater updater)
         {
             var key = GetKey(commandName);

@@ -3,34 +3,37 @@ using System.Runtime.Serialization;
 
 namespace Shapes
 {
-    /// <summary>
-    /// A line shape.
-    /// </summary>
     [DataContract]
     public class LineShape : IShape
     {
-        [DataMember] private readonly Point start_;
-        [DataMember] private readonly Point end_;
-        [DataMember] private readonly PenBillet penBillet_;
+        [DataMember] 
+        private readonly Point _start;
+        
+        [DataMember] 
+        private readonly Point _end;
+        
+        [DataMember] 
+        private readonly Pen _pen;
 
-        public LineShape(Point start, Point end, PenBillet billet)
+
+        public LineShape(Point start, Point end, Pen billet)
         {
-            start_ = start;
-            end_ = end;
-            penBillet_ = billet;
+            _start = start;
+            _end = end;
+            _pen = billet;
         }
 
-        public Point End => end_.Clone();
+        public Point End => _end.Clone();
 
-        public PenBillet PenBillet => penBillet_;
+        public Pen Pen => _pen;
 
-        public Point Start => start_.Clone();
+        public Point Start => _start.Clone();
 
         public void Draw(Graphics graphics)
         {
-            using (var pen = PenBillet.CreatePen())
+            using (var pen = Pen.CreatePen())
             {
-                graphics.DrawLine(pen, start_, end_);
+                graphics.DrawLine(pen, _start, _end);
             }
         }
     }
