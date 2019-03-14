@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using Shapes;
+using Rectangle = Shapes.Rectangle;
+
 
 namespace Lab1
 {
-    class Program
+    internal class Program
     {
         [STAThread]
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Application.Run(CreateMainForm());
         }
@@ -18,27 +20,24 @@ namespace Lab1
         {
             var form = new Form
             {
-                Size = new Size(400, 400),
+                Size = new Size(400, 400)
             };
             var shapes = GetShape();
-            form.Paint += (o, e) =>
-            {
-                shapes.Draw(e.Graphics);
-            };
+            form.Paint += (o, e) => { shapes.Draw(e.Graphics); };
             return form;
         }
 
         private static IShape GetShape()
         {
             var context = new DrawingContext();
-            return new AggregateShape(new IShape[]
+            return new Aggregation(new List<IShape>
             {
-                new LineShape(new Point(10, 10), new Point(250, 10), context.CreatePen()),
-                new EllipseShape(new Point(300, 40), new Point(150, 80), context.CreatePen()), 
-                new ArcShape(new Rectangle(100, 100, 250, 250), 90, 90, context.CreatePen()),
-                new RectangleShape(new Point(200, 160), new Point(350, 260), context.CreatePen()),
-                new StringShape("Rovdo Nikolay", new Point(10, 60), context.CreateBrush(), context.CreateFont()),
-                new ZidZagShape(new List<Point>
+                new Line(new Point(10, 10), new Point(250, 10), context.CreatePen()),
+                new Ellipse(new Point(300, 40), new Point(150, 80), context.CreatePen()),
+                new Arc(new System.Drawing.Rectangle(100, 100, 250, 250), 90, 90, context.CreatePen()),
+                new Rectangle(new Point(200, 160), new Point(350, 260), context.CreatePen()),
+                new Text("Rovdo Nikolay", new Point(10, 60), context.CreateBrush(), context.CreateFont()),
+                new ZidZag(new List<Point>
                 {
                     new Point(10, 120),
                     new Point(80, 150),

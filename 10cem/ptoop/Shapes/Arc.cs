@@ -1,25 +1,18 @@
 ﻿using System.Drawing;
-using System.Runtime.Serialization;
 
 namespace Shapes
 {
-    [DataContract]
-    public class ArcShape : IShape
+    public class Arc : IShape
     {
-        [DataMember] 
-        private readonly Rectangle _rect;
-        
-        [DataMember] 
-        private readonly float _startAngle;
-        
-        [DataMember] 
         private readonly float _finishAngle;
-        
-        [DataMember] 
+
         private readonly Pen _pen;
+        private readonly System.Drawing.Rectangle _rect;
+
+        private readonly float _startAngle;
 
 
-        public ArcShape(Rectangle rect, float startAngle, float finishAngle, Pen pen)
+        public Arc(System.Drawing.Rectangle rect, float startAngle, float finishAngle, Pen pen)
         {
             _rect = rect;
             _startAngle = startAngle;

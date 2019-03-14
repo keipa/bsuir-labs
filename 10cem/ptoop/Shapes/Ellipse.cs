@@ -1,37 +1,29 @@
 ﻿using System.Drawing;
-using System.Runtime.Serialization;
 
 namespace Shapes
 {
-    [DataContract]
-    public class EllipseShape : IShape
+    public class Ellipse : IShape
     {
-        [DataMember] 
-        private readonly Point _upperLeftCorner;
-        
-        [DataMember] 
-        private readonly Pen _pen;
-        
-        [DataMember] 
         private readonly int _height;
-        
-        [DataMember] 
-        private readonly int _width;
-        
 
-        public EllipseShape(Point upperLeftCorner, Point lowerRightCorner, Pen billet)
+        private readonly Point _upperLeftCorner;
+
+        private readonly int _width;
+
+
+        public Ellipse(Point upperLeftCorner, Point lowerRightCorner, Pen pen)
         {
             _upperLeftCorner = upperLeftCorner;
-            _pen = billet;
+            Pen = pen;
             _width = lowerRightCorner.X - upperLeftCorner.X;
             _height = lowerRightCorner.Y - upperLeftCorner.Y;
         }
 
-        public Pen Billet => _pen;
+        private Pen Pen { get; }
 
         public void Draw(Graphics graphics)
         {
-            using (var pen = Billet.CreatePen())
+            using (var pen = Pen.CreatePen())
             {
                 graphics.DrawEllipse(pen, _upperLeftCorner.X, _upperLeftCorner.Y, _width, _height);
             }

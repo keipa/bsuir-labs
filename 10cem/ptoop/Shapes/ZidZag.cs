@@ -1,22 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Runtime.Serialization;
 
 namespace Shapes
 {
-    [DataContract]
-    public class ZidZagShape : IShape
+    public class ZidZag : IShape
     {
-        [DataMember] 
-        private readonly IEnumerable<Point> _points;
-        
-        [DataMember] 
         private readonly Pen _pen;
-        
-        public ZidZagShape(IEnumerable<Point> points, Pen billet)
+        private readonly IEnumerable<Point> _points;
+
+        public ZidZag(IEnumerable<Point> points, Pen pen)
         {
-            _pen= billet;
+            _pen = pen;
             _points = points;
         }
 

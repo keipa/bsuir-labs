@@ -1,31 +1,18 @@
 ﻿using System.Drawing;
-using System.Runtime.Serialization;
 
 namespace Shapes
 {
-    [DataContract]
     public class Pen
     {
-        [DataMember] 
-        private readonly Color _color;
-        
-        [DataMember] 
-        private readonly int? _width;
-
-        public Pen(Color color)
-        {
-            _color = color;
-        }
-
         public Pen(Color color, int width)
         {
-            _color = color;
-            _width = width;
+            Color = color;
+            Width = width;
         }
 
-        public Color Color => _color;
+        private Color Color { get; }
 
-        public int? Width => _width;
+        private int? Width { get; }
 
         public System.Drawing.Pen CreatePen()
         {
