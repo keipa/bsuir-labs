@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using Shapes;
@@ -17,10 +18,7 @@ namespace Lab1
         {
             var form = new Form
             {
-                Text = "Shapes",
-                Size = new Size(640, 400),
-                FormBorderStyle = FormBorderStyle.FixedDialog,
-                StartPosition = FormStartPosition.CenterScreen
+                Size = new Size(400, 400),
             };
             var shapes = GetShape();
             form.Paint += (o, e) =>
@@ -35,15 +33,18 @@ namespace Lab1
             var context = new DrawingContext();
             return new AggregateShape(new IShape[]
             {
-                new LineShape(new Point(10, 10), new Point(150, 10), context.CreatePenBillet()),
-                new EllipseShape(new Point(10, 40), new Point(150, 80), context.CreatePenBillet()), 
-                new ArcShape(new Rectangle(100, 100, 300, 250), 90, 90, context.CreatePenBillet()),
-                new RectangleShape(new Point(10, 80), new Point(150, 120), context.CreatePenBillet()),
-                new StringShape("text", new Point(10, 100), context.CreateBrushBillet(), context.CreateFontBillet()),
-                new CurveShape(new []
+                new LineShape(new Point(10, 10), new Point(250, 10), context.CreatePen()),
+                new EllipseShape(new Point(300, 40), new Point(150, 80), context.CreatePen()), 
+                new ArcShape(new Rectangle(100, 100, 250, 250), 90, 90, context.CreatePen()),
+                new RectangleShape(new Point(200, 160), new Point(350, 260), context.CreatePen()),
+                new StringShape("Rovdo Nikolay", new Point(10, 60), context.CreateBrush(), context.CreateFont()),
+                new ZidZagShape(new List<Point>
                 {
-                    new Point(10, 120), new Point(80, 150), new Point(150, 120)
-                }, context.CreatePenBillet())
+                    new Point(10, 120),
+                    new Point(80, 150),
+                    new Point(150, 120),
+                    new Point(220, 150)
+                }, context.CreatePen())
             });
         }
     }

@@ -3,39 +3,44 @@ using System.Runtime.Serialization;
 
 namespace Shapes
 {
-    /// <summary>
-    /// A string shape.
-    /// </summary>
     [DataContract]
     public class StringShape : IShape
     {
-        [DataMember] private readonly Point point_;
-        [DataMember] private readonly BrushBillet brushBillet_;
-        [DataMember] private readonly FontBillet fontBillet_;
-        [DataMember] private readonly string text_;
+        [DataMember] 
+        private readonly Point _point;
+        
+        [DataMember] 
+        private readonly BrushBillet _brushBillet;
+        
+        [DataMember] 
+        private readonly Font _font;
+        
+        [DataMember] 
+        private readonly string _text;
+        
 
-        public StringShape(string text, Point point, BrushBillet brushBillet, FontBillet fontBillet)
+        public StringShape(string text, Point point, BrushBillet brushBillet, Font font)
         {
-            text_ = text;
-            point_ = point;
-            brushBillet_= brushBillet;
-            fontBillet_ = fontBillet;
+            _text = text;
+            _point = point;
+            _brushBillet= brushBillet;
+            _font = font;
         }
 
-        public BrushBillet BrushBillet => brushBillet_;
+        public BrushBillet BrushBillet => _brushBillet;
 
-        public FontBillet FontBillet => fontBillet_;
+        public Font Font => _font;
 
-        public Point Point => point_.Clone();
+        public Point Point => _point.Clone();
 
-        public string Text => text_;
+        public string Text => _text;
 
         public void Draw(Graphics graphics)
         {
             using (var brush = BrushBillet.CreateBrush())
-            using (var font = FontBillet.CreateFont())
+            using (var font = Font.CreateFont())
             {
-                graphics.DrawString(Text, font, brush, point_);
+                graphics.DrawString(Text, font, brush, _point);
             }
         }
     }

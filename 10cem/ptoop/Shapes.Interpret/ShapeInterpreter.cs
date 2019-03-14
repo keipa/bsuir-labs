@@ -5,9 +5,6 @@ using System.Text.RegularExpressions;
 
 namespace Shapes.Interpretation
 {
-    /// <summary>
-    /// An interpreter creating shapes from their string representation.
-    /// </summary>
     public class ShapeInterpreter : IShapeInterpreter
     {
         private static readonly Regex ShapeRegex = new Regex(@"^(?<name>\w+)\((?<coords>[^\)]*)\)$");

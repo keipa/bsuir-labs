@@ -3,45 +3,35 @@ using System.Runtime.Serialization;
 
 namespace Shapes
 {
-    /// <summary>
-    /// An arc shape.
-    /// </summary>
     [DataContract]
     public class ArcShape : IShape
     {
-        [DataMember] private readonly Rectangle rect_;
-        [DataMember] private readonly float startAngle_;
-        [DataMember] private readonly float sweepAngle_;
-        [DataMember] private readonly PenBillet penBillet_;
+        [DataMember] 
+        private readonly Rectangle _rect;
+        
+        [DataMember] 
+        private readonly float _startAngle;
+        
+        [DataMember] 
+        private readonly float _finishAngle;
+        
+        [DataMember] 
+        private readonly Pen _pen;
 
-        /// <summary>
-        /// Creates an arc shape.
-        /// </summary>
-        /// <param name="rect">Bounding rectangle of the ellipse the arc belongs to.</param>
-        /// <param name="startAngle"></param>
-        /// <param name="sweepAngle"></param>
-        /// <param name="penBillet"></param>
-        public ArcShape(Rectangle rect, float startAngle, float sweepAngle, PenBillet penBillet)
+
+        public ArcShape(Rectangle rect, float startAngle, float finishAngle, Pen pen)
         {
-            rect_ = rect;
-            startAngle_ = startAngle;
-            sweepAngle_ = sweepAngle;
-            penBillet_ = penBillet;
+            _rect = rect;
+            _startAngle = startAngle;
+            _finishAngle = finishAngle;
+            _pen = pen;
         }
-
-        public Rectangle EllipseRectangle => rect_.Clone();
-
-        public float StartAngle => startAngle_;
-
-        public float SweepAngle => sweepAngle_;
-
-        public PenBillet PenBillet => penBillet_;
 
         public void Draw(Graphics graphics)
         {
-            using (var pen = PenBillet.CreatePen())
+            using (var pen = _pen.CreatePen())
             {
-                graphics.DrawArc(pen, rect_, startAngle_, sweepAngle_);
+                graphics.DrawArc(pen, _rect, _startAngle, _finishAngle);
             }
         }
     }

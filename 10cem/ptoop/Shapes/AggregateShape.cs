@@ -5,25 +5,20 @@ using System.Runtime.Serialization;
 
 namespace Shapes
 {
-    /// <summary>
-    /// A shape combining other shapes.
-    /// </summary>
     [DataContract]
     public class AggregateShape : IShape
     {
         [DataMember]
-        private readonly IShape[] shapes_;
+        private readonly IShape[] _shapes;
 
         public AggregateShape(IEnumerable<IShape> shapes)
         {
-            shapes_ = shapes.ToArray();
+            _shapes = shapes.ToArray();
         }
-
-        public IEnumerable<IShape> Shapes => shapes_;
 
         public void Draw(Graphics graphics)
         {
-            foreach (IShape shape in shapes_)
+            foreach (var shape in _shapes)
             {
                 shape.Draw(graphics);
             }

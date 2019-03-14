@@ -49,7 +49,6 @@
   <ItemGroup>
     <Compile Include="AggregatePluginLoader.cs" />
     <Compile Include="IPluginLoader.cs" />
-    <Compile Include="IShapeLoaderActivator.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

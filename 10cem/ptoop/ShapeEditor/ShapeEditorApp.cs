@@ -28,7 +28,6 @@ namespace ShapeEditor
 
         private void LoadPlugins()
         {
-            // TODO: inject configuration manager to avoid using static
             var fileNames = (ConfigurationManager.AppSettings["pluginDlls"] ?? "")
                 .Split(new[] {';'}, StringSplitOptions.None)
                 .Select(path => path.Trim())
@@ -53,24 +52,14 @@ namespace ShapeEditor
 
         private void LoadPlugins(string dllFileName)
         {
-            // TODO: can be done via UI at runtime
-            try
-            {
-                // TODO: add a plugin manager or smth
-                Assembly assembly = GetAssembly(dllFileName);
-                pluginLoader_.Load(assembly);
-            }
-            catch (Exception e)
-            {
-                // TODO: log
-            }
+            Assembly assembly = GetAssembly(dllFileName);
+            pluginLoader_.Load(assembly);
         }
 
         private void RunMainForm()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            // NOTE: SetCompatibleTextRenderingDefault() has to be called before any form is created => cannot pass the form
             Application.Run(mainFormFactory_());
         }
     }

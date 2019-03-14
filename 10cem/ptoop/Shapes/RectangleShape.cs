@@ -6,32 +6,39 @@ namespace Shapes
     [DataContract]
     public class RectangleShape : IShape
     {
-        [DataMember] private readonly Point upperLeftCorner_;
-        [DataMember] private readonly int height_;
-        [DataMember] private readonly PenBillet penBillet_;
-        [DataMember] private readonly int width_;
-
-        public RectangleShape(Point upperLeftCorner, Point lowerRightCorner, PenBillet billet)
+        [DataMember] 
+        private readonly Point _upperLeftCorner;
+        
+        [DataMember] 
+        private readonly int _height;
+        
+        [DataMember] 
+        private readonly Pen _pen;
+        
+        [DataMember] 
+        private readonly int _width;
+        
+        public RectangleShape(Point upperLeftCorner, Point lowerRightCorner, Pen billet)
         {
-            upperLeftCorner_ = upperLeftCorner;
-            penBillet_ = billet;
-            width_= lowerRightCorner.X - upperLeftCorner.X;
-            height_ = lowerRightCorner.Y - upperLeftCorner.Y;
+            _upperLeftCorner = upperLeftCorner;
+            _pen = billet;
+            _width= lowerRightCorner.X - upperLeftCorner.X;
+            _height = lowerRightCorner.Y - upperLeftCorner.Y;
         }
 
-        public int Height => height_;
+        public int Height => _height;
 
-        public PenBillet PenBillet => penBillet_;
+        public Pen Pen => _pen;
 
-        public Point UpperLeftCorner => upperLeftCorner_.Clone();
+        public Point UpperLeftCorner => _upperLeftCorner.Clone();
 
-        public int Width => width_;
+        public int Width => _width;
 
         public void Draw(Graphics graphics)
         {
-            using (var pen = PenBillet.CreatePen())
+            using (var pen = Pen.CreatePen())
             {
-                graphics.DrawRectangle(pen, upperLeftCorner_.X, upperLeftCorner_.Y, Width, Height);
+                graphics.DrawRectangle(pen, _upperLeftCorner.X, _upperLeftCorner.Y, Width, Height);
             }
         }   
     }

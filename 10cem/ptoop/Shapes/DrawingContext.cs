@@ -2,36 +2,33 @@
 
 namespace Shapes
 {
-    /// <summary>
-    /// A mutable class containing settings for creating shapes.
-    /// </summary>
     public class DrawingContext
     {
-        public BrushType BrushType { get; set; } = BrushType.Solid;
+        private BrushType BrushType { get; } = BrushType.Solid;
 
-        public Color FillColor { get; set; } = Color.Black;
+        private Color FillColor { get; } = Color.Green;
 
-        public string FontFamily { get; set; } = "Arial";
+        private string FontFamily { get; } = "Comic Sans MS";
 
-        public float FontSize { get; set; } = 14;
+        private float FontSize { get; } = 32;
 
-        public int LineWidth { get; set; } = 1;
+        private int LineWidth { get; } = 2;
 
-        public Color LineColor { get; set; } = Color.Black;
+        private Color LineColor { get; } = Color.Red;
 
-        public BrushBillet CreateBrushBillet()
+        public BrushBillet CreateBrush()
         {
             return new BrushBillet(FillColor, BrushType);
         }
 
-        public FontBillet CreateFontBillet()
+        public Font CreateFont()
         {
-            return new FontBillet(FontFamily, FontSize);
+            return new Font(FontFamily, FontSize);
         }
 
-        public PenBillet CreatePenBillet()
+        public Pen CreatePen()
         {
-            return new PenBillet(LineColor, LineWidth);
+            return new Pen(LineColor, LineWidth);
         }
     }
 }
