@@ -4,8 +4,6 @@ namespace Shapes
 {
     public class DrawingContext
     {
-        private BrushType BrushType { get; } = BrushType.Solid;
-
         private Color FillColor { get; } = Color.Green;
 
         private string FontFamily { get; } = "Comic Sans MS";
@@ -16,9 +14,9 @@ namespace Shapes
 
         private Color LineColor { get; } = Color.Red;
 
-        public BrushBillet CreateBrush()
+        public Brush CreateBrush()
         {
-            return new BrushBillet(FillColor, BrushType);
+            return new Brush(FillColor);
         }
 
         public Font CreateFont()

@@ -1,15 +1,9 @@
-﻿using System.Drawing;
-using System.Runtime.Serialization;
-
-namespace Shapes
+﻿namespace Shapes
 {
-    [DataContract]
     public class Font
     {
-        [DataMember] 
         private readonly float _emSize;
-        
-        [DataMember] 
+
         private readonly string _familyName;
 
         public Font(string familyName, float emSize)
