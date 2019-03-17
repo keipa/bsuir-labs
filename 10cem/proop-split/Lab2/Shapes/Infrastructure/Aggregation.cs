@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 
@@ -16,11 +17,6 @@ namespace Shapes
         public void Draw(Graphics graphics)
         {
             foreach (var shape in _shapes) shape.Draw(graphics);
-        }
-
-        public void Draw()
-        {
-            throw new System.NotImplementedException();
         }
     }
 }

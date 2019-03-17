@@ -12,7 +12,6 @@ namespace Shapes
             _drawer = drawer;
         }
 
-
         public void Draw(Graphics graphics)
         {
             _drawer.DrawRectangle(graphics);
