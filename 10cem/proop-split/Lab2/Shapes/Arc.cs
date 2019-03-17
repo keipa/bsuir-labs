@@ -11,7 +11,7 @@ namespace Shapes
         {
             drawer = _drawer;
         }
-        
+
         public void Draw(Graphics graphics)
         {
             drawer.DrawArc(graphics);
