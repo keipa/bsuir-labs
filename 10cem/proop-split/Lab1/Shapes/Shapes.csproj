@@ -43,19 +43,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Aggregation.cs" />
     <Compile Include="Arc.cs" />
     <Compile Include="Brush.cs" />
+    <Compile Include="Infrastructure\Aggregation.cs" />
+    <Compile Include="Infrastructure\DrawingContext.cs" />
+    <Compile Include="Infrastructure\Font.cs" />
+    <Compile Include="Infrastructure\IShape.cs" />
+    <Compile Include="Infrastructure\Pen.cs" />
+    <Compile Include="Infrastructure\ShapeUtils.cs" />
     <Compile Include="ZidZag.cs" />
-    <Compile Include="DrawingContext.cs" />
     <Compile Include="Ellipse.cs" />
-    <Compile Include="Font.cs" />
-    <Compile Include="IShape.cs" />
     <Compile Include="Line.cs" />
-    <Compile Include="Pen.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rectangle.cs" />
-    <Compile Include="ShapeUtils.cs" />
     <Compile Include="Text.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
