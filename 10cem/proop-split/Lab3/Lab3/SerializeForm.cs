@@ -19,6 +19,12 @@ namespace Lab1
         public SerializeForm()
         {
             InitializeComponent();
+            UpdateListView();
+        }
+
+        private void UpdateListView()
+        {
+            listOfShapesView.Items.Clear();
             foreach (var shape in Program._shapes)
             {
                 listOfShapesView.Items.Add($"{shape.Type.ToString()}({shape.X}, {shape.Y})");
@@ -59,6 +65,7 @@ namespace Lab1
         {
             var shapeToEdit = Program._shapes[listOfShapesView.SelectedIndex];
 
+
             _addShapeForm = new Form
             {
                 Size = new Size(200, 200)
@@ -79,7 +86,7 @@ namespace Lab1
                 Size = new Size(200, 100),
                 Location = new Point(0, 50)
             };
-
+            Program._shapes.RemoveAt(listOfShapesView.SelectedIndex);
             shapesListView.ItemActivate += ShapesListViewOnItemActivate;
 
             foreach (var shape in Program.shapeTypes.Select(t => t.Name)) shapesListView.Items.Add(shape);
@@ -89,13 +96,16 @@ namespace Lab1
             _addShapeForm.Show();
         }
 
-        private static void ShapesListViewOnItemActivate(object sender, EventArgs e)
+        private void ShapesListViewOnItemActivate(object sender, EventArgs e)
         {
             var shapeTypeToDraw = Program.shapeTypes.FirstOrDefault(sh => sh.Name == ((ListView)sender).SelectedItems[0].Text);
 
             Program.AddShapeToForm(shapeTypeToDraw, Convert.ToInt32(labelx.Text), Convert.ToInt32(labely.Text));
 
             _addShapeForm.Hide();
+
+            Program.UpdateForm();
+            UpdateListView();
         }
     }
 }
