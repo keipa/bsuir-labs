@@ -1,36 +1,21 @@
 ﻿using System.Drawing;
+using Shapes.Infrastructure;
 
 namespace Shapes
 {
     public class Rectangle : IShape
     {
-        private readonly Point _upperLeftCorner;
+        private readonly ActualDrawer _drawer;
 
-        public Rectangle(Point upperLeftCorner, Point lowerRightCorner, Pen billet)
+        public Rectangle(ActualDrawer drawer)
         {
-            _upperLeftCorner = upperLeftCorner;
-            Pen = billet;
-            Width = lowerRightCorner.X - upperLeftCorner.X;
-            Height = lowerRightCorner.Y - upperLeftCorner.Y;
+            _drawer = drawer;
         }
 
-        private int Height { get; }
-
-        private Pen Pen { get; }
-
-        private int Width { get; }
 
         public void Draw(Graphics graphics)
         {
-            using (var pen = Pen.CreatePen())
-            {
-                graphics.DrawRectangle(pen, _upperLeftCorner.X, _upperLeftCorner.Y, Width, Height);
-            }
-        }
-
-        public void Draw()
-        {
-            throw new System.NotImplementedException();
+            _drawer.DrawRectangle(graphics);
         }
     }
 }

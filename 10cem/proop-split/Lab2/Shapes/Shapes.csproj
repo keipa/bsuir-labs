@@ -44,9 +44,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Arc.cs" />
-    <Compile Include="Brush.cs" />
     <Compile Include="Infrastructure\ActualDrawer.cs" />
     <Compile Include="Infrastructure\Aggregation.cs" />
+    <Compile Include="Infrastructure\Brush.cs" />
     <Compile Include="Infrastructure\DrawingContext.cs" />
     <Compile Include="Infrastructure\Font.cs" />
     <Compile Include="Infrastructure\IShape.cs" />

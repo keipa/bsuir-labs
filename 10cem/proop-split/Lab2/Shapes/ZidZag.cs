@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using Shapes.Infrastructure;
 
 namespace Shapes
 {
@@ -15,17 +16,16 @@ namespace Shapes
             _points = points;
         }
 
+        private readonly ActualDrawer drawer;
+
+        public ZidZag(ActualDrawer _drawer)
+        {
+            drawer = _drawer;
+        }
+        
         public void Draw(Graphics graphics)
         {
-            using (var pen = _pen.CreatePen())
-            {
-                graphics.DrawCurve(pen, _points.ToArray());
-            }
-        }
-
-        public void Draw()
-        {
-            throw new System.NotImplementedException();
+            drawer.DrawZigZag(graphics);
         }
     }
 }

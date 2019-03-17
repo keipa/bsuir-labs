@@ -29,27 +29,19 @@ namespace Shapes
             _end = end;
             Pen = pen;
         }
-
-        public Line(Point start, Point end, Pen billet)
-        {
-            _start = start;
-            _end = end;
-            Pen = billet;
-        }
-
         private Pen Pen { get; }
         
-//        public void Draw(Graphics graphics)
-//        {
-//            drawer.DrawCircle(graphics);
-//        }
-
         public void Draw(Graphics graphics)
         {
-            using (var pen = Pen.CreatePen())
-            {
-                graphics.DrawLine(pen, _start, _end);
-            }
+            drawer.DrawCircle(graphics);
         }
+
+//        public void Draw(Graphics graphics)
+//        {
+//            using (var pen = Pen.CreatePen())
+//            {
+//                graphics.DrawLine(pen, _start, _end);
+//            }
+//        }
     }
 }
