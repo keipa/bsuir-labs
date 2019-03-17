@@ -83,14 +83,15 @@ namespace Lab1
             
             var context = new DrawingContext();
             
-            var line = new Line(new Point(X, Y), context.CreatePen());           
-            _mainForm.Paint += (o, ee) => { line.Draw(ee.Graphics); };
+//            var line = new Line(new Point(X, Y), context.CreatePen());           
+//            _mainForm.Paint += (o, ee) => { line.Draw(ee.Graphics); };
 
-//            _mainForm.Paint += (o, ee) =>
-//            {
-//                var drawer = new ActualDrawer(X,Y, context.CreatePen());
-//                ((IShape) Activator.CreateInstance(shapeTypeToDraw, drawer)).Draw(ee.Graphics);
-//            };
+            var drawer = new ActualDrawer(X,Y, context);
+            var shape = (IShape) Activator.CreateInstance(shapeTypeToDraw, drawer);
+            _mainForm.Paint += (o, ee) =>
+            {
+                shape.Draw(ee.Graphics);
+            };
 //            
             _mainForm.Invalidate(); // update form magic method
             _addShapeForm.Hide();

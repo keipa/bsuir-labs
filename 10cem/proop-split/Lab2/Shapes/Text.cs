@@ -1,7 +1,9 @@
 ﻿using System.Drawing;
+using Shapes.Infrastructure;
 
 namespace Shapes
 {
+
     public class Text : IShape
     {
         private readonly Point _point;
@@ -17,19 +19,17 @@ namespace Shapes
         private Brush Brush { get; }
         private Font Font { get; }
         private string Label { get; }
+        
+        private readonly ActualDrawer drawer;
 
+        public Text(ActualDrawer _drawer)
+        {
+            drawer = _drawer;
+        }
+        
         public void Draw(Graphics graphics)
         {
-            using (var brush = Brush.CreateBrush())
-            using (var font = Font.CreateFont())
-            {
-                graphics.DrawString(Label, font, brush, _point);
-            }
-        }
-
-        public void Draw()
-        {
-            throw new System.NotImplementedException();
+            drawer.DrawText(graphics);
         }
     }
 }
