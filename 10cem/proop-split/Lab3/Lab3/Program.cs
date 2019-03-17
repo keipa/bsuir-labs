@@ -112,6 +112,11 @@ namespace Lab1
                 Y = y
             });
 
+            AddShapeToFormUpdate(type, x, y);
+        }
+
+        public static void AddShapeToFormUpdate(Type type, int x, int y)
+        {
             var context = new DrawingContext();
             var drawer = new ActualDrawer(x, y, context);
             var shape = (IShape)Activator.CreateInstance(type, drawer);
@@ -126,6 +131,17 @@ namespace Lab1
             _mainForm.Invalidate();
             _introLabel.Show();
         }
+
+        public static void UpdateForm()
+        {
+            _mainForm.Paint += (o, ee) => { ee.Graphics.Clear(Color.WhiteSmoke); };
+            _mainForm.Invalidate();
+            foreach (var shape in _shapes)
+            {
+                AddShapeToFormUpdate(shape.Type, shape.X, shape.Y);
+            }
+        }
+
 
         public static void RestoreShapes(IEnumerable<Shape> restoredShapes)
         {
