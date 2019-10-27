@@ -1,6 +1,5 @@
 from numpy import inf, copy
 from lab10 import *
-from lab11.lab10 import *
 from functools import reduce
 
 def inputValues(file_name):
@@ -12,9 +11,9 @@ def inputValues(file_name):
 
 class Comivoyager(object):
   def __init__(self, c):
-    self.c = c
-    self.n = len(c[0])
-    self.r = reduce(lambda s, x: s + x, [c[i][i+1] for i in range(self.n - 1)]) + c[self.n - 1][0]
+    self.c = c # matrix of weights
+    self.n = len(c[0]) # count of cities
+    self.r = reduce(lambda s, x: s + x, [c[i][i+1] for i in range(self.n - 1)]) + c[self.n - 1][0] # record
     self.plan = list(range(self.n)).append(0)
 
   def calculate_plan(self, res):
@@ -59,7 +58,7 @@ class Comivoyager(object):
     self.branch_and_bound()
     return self
 
-c = inputValues('11')
+c = inputValues('11boi')
 res = Comivoyager(c).solve()
 print(res.plan)
 print(res.r)
