@@ -2,6 +2,13 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from tqdm import tqdm
 
+from mpl_toolkits.mplot3d import axes3d
+import matplotlib.pyplot as plt
+import numpy as np
+
+
+plt.style.use('dark_background')
+
 # Task 1
 data = pd.read_csv("lab1/ex1data1.txt", header=None, sep=",", names=['Popularity', 'Profit'])
 
@@ -88,3 +95,25 @@ plt.show()
 plt.plot(range(len(costs)),costs, 'ro')
 
 plt.show()
+
+fig = plt.figure()
+ax = fig.gca(projection='3d')
+ax.set_xlabel('x')
+ax.set_ylabel('y')
+ax.set_zlabel('cost')
+
+
+df = pd.DataFrame({'x': tetha_x, 'y': tetha_y, 'z': costs})
+surf = ax.plot_trisurf(df.x, df.y, df.z,  linewidth=0.1)
+
+
+
+
+# plt.show()
+
+# rotate the axes and update
+for angle in range(0, 360):
+    ax.view_init(30, angle)
+    plt.draw()
+    plt.pause(.001)
+
