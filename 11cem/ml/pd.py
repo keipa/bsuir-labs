@@ -5,9 +5,10 @@ from tqdm import tqdm
 from mpl_toolkits.mplot3d import axes3d
 import matplotlib.pyplot as plt
 import numpy as np
+from matplotlib import cm
 
 
-plt.style.use('dark_background')
+# plt.style.use('dark_background')
 
 # Task 1
 data = pd.read_csv("lab1/ex1data1.txt", header=None, sep=",", names=['Popularity', 'Profit'])
@@ -42,7 +43,7 @@ print("Loss func J(theta)=" + str(round(J, 2)))
 # Task 4
 
 
-alpha = -0.0001
+alpha = -0.01
 tetha = [1, 0]
 tetha_x = []
 tetha_y = []
@@ -96,24 +97,61 @@ plt.plot(range(len(costs)),costs, 'ro')
 
 plt.show()
 
+# fig = plt.figure()
+# ax = fig.gca(projection='3d')
+# ax.set_xlabel('x')
+# ax.set_ylabel('y')
+# ax.set_zlabel('cost')
+
+# print(np.array(tetha_x).shape, np.array(tetha_y).shape)
+x, y = np.array([x for x in np.arange(-10.0,10.0, 0.2)]), np.array([y for y in np.arange(-10.0,10.0, 0.2)])
+
+z = np.zeros(np.meshgrid(x, y)[0].shape)
+
+
+#
+for rowIndex in range(len(z)):
+    for colIndex in range(len(z)):
+        z[rowIndex][colIndex] = cost(x[rowIndex], y[colIndex], data.sort_values(by="Popularity").Popularity,data.sort_values(by="Popularity").Profit)
+
+x, y = np.meshgrid(x, y)
+
 fig = plt.figure()
-ax = fig.gca(projection='3d')
-ax.set_xlabel('x')
-ax.set_ylabel('y')
-ax.set_zlabel('cost')
+ax = plt.axes(projection='3d')
 
+ax.plot_surface(x, y, z, cmap='viridis', edgecolor='none')
 
-df = pd.DataFrame({'x': tetha_x, 'y': tetha_y, 'z': costs})
-surf = ax.plot_trisurf(df.x, df.y, df.z,  linewidth=0.1)
+plt.show()
+# df = pd.DataFrame({'x': tetha_x, 'y': tetha_y, 'z': costs})
+# surf = ax.plot_trisurf(df.x, df.y, df.z, linewidth=0.1)
 
+fig = plt.figure()
+ax = plt.axes(projection='3d')
+cset = ax.contour(x,y,z)
 
+plt.show()
 
+fig, ax = plt.subplots()
+CS = ax.contour(x,y,z)
+ax.clabel(CS, inline=1, fontsize=10)
 
+plt.show()
+
+# fig = plt.figure()
+# ax = fig.gca(projection='3d')
+# ax.set_xlabel('x')
+# ax.set_ylabel('y')
+# ax.set_zlabel('cost')
+#
+#
+# df = pd.DataFrame({'x': tetha_x, 'y': tetha_y, 'z': costs})
+# # countour = ax.contour(df.x, df.y, df.z, cmap=cm.coolwarm)
+# cset = ax.contour(df.x, df.y, df.z, zdir='z', offset=-100, cmap=cm.coolwarm)
+#
 # plt.show()
-
 # rotate the axes and update
-for angle in range(0, 360):
-    ax.view_init(30, angle)
-    plt.draw()
-    plt.pause(.001)
+# for angle in range(0, 360):
+#     ax.view_init(30, angle)
+#     plt.draw()
+#     plt.pause(.001)
 
