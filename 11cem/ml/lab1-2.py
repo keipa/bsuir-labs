@@ -8,6 +8,7 @@ from mpl_toolkits.mplot3d import axes3d
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib import cm
+from matplotlib.animation import FuncAnimation
 
 
 
@@ -87,31 +88,66 @@ def Gradient(data, tetha_start = [1,1,1], alpha = -0.01, iterations = 150):
     plt.show()
     print("koefs")
     print(tethas_history[-1])
-    return tethas_history[-1]
+    return tethas_history
 print("normalized_data cost function")
+
+
+
 tetha = Gradient(normalized_data)
+
 print("denormalized_data cost function")
 Gradient(data, iterations=1500)
 
-def ShowGradientResult(data, feature, tetha, tetha_ind):
-    normalized_data.plot.scatter(x=feature, y='Price', c='DarkBlue')
-    plt.grid()
-    plt.axis('equal')
+def ShowGradientResult(data, feature, tetha, tetha_ind, indicator ='b-'):
+
     x = np.arange(0, 1, 0.01)
     k = tetha[0]
     b = tetha[2]
     y = [i * k + b for i in x]
     print("result linear function model")
-    plt.plot(x, y, 'b-')
+    plt.plot(x, y, indicator)
+
+
+
+
+def ShowAnimatedGradientResult(data, feature, tetha, tetha_ind):
+    fig = plt.figure()
+    ax = plt.axes(xlim=(0, 4), ylim=(-2, 2))
+
+    normalized_data.plot.scatter(x=feature, y='Price', c='DarkBlue')
+    plt.grid()
+    plt.axis('equal')
+    x = np.arange(0, 1, 0.01)
+    k = tetha[0][0]
+    b = tetha[0][2]
+    y = [i * k + b for i in x]
+    print("result linear function model")
+    line, = plt.plot(x, y, 'b-')
+
+    def animate(i):
+        x = np.arange(0, 1, 0.01)
+        k = tetha[i][0]
+        b = tetha[i][2]
+        y = [i * k + b for i in x]
+        line.set_data(x, y)
+        return line,
+
+    anim = FuncAnimation(fig, animate, frames=len(tetha), interval=20, blit=True, repeat=False)
 
     plt.show()
+    plt.cla()
+    plt.clf()
+    plt.close()
 
 
-ShowGradientResult(normalized_data, 'RoomCount', tetha,0)
-ShowGradientResult(normalized_data, 'Area', tetha,1)
+ShowAnimatedGradientResult(normalized_data, 'Area', tetha, 1)
+ShowAnimatedGradientResult(normalized_data, 'RoomCount', tetha, 0)
 
 
 # vectorized descent
+# task 8.2
+# градиентного спуска для случая многомерной линейной регрессии с использованием векторизации.
+
 def VectorizedGradient(X, Y, theta, iterations=150, alpha=-0.01):
     thetas = [theta]
     costs = []
@@ -125,7 +161,7 @@ def VectorizedGradient(X, Y, theta, iterations=150, alpha=-0.01):
     plt.plot(range(len(costs)), costs, 'ro')
     print("costs head(last 5)")
     print(costs[:5])
-    # Покажите, что векторизация дает прирост производительности.
+    # task 9 Покажите, что векторизация дает прирост производительности.
     # сходится быстрее при одинаковых параметрах
     print("costs tail(last 5)")
     print(costs[-5:])
@@ -137,6 +173,37 @@ def VectorizedGradient(X, Y, theta, iterations=150, alpha=-0.01):
 X = np.array(normalized_data.iloc[:, 0:2])
 Y = np.array(normalized_data.Price)
 theta = [1, 1]
+# task 9
+# Покажите, что векторизация дает прирост производительности.
+
 VectorizedGradient(X, Y, theta)
+
+
+# task 10
+# Попробуйте изменить параметр ɑ (коэффициент обучения). Как при этом изменяется график функции потерь в зависимости от числа итераций градиентного спуск? Результат изобразите в качестве графика.
+
+
+Gradient(normalized_data, alpha = -0.01, iterations = 150)
+
+Gradient(normalized_data, alpha = -0.01, iterations = 1500)
+
+Gradient(normalized_data, alpha = -0.1, iterations = 1500)
+
+analytics_tetha = [0.6, 0.95, 0.0]
+normalized_data.plot.scatter(x='RoomCount', y='Price', c='DarkBlue')
+plt.grid()
+plt.axis('equal')
+ShowGradientResult(normalized_data, 'RoomCount', tetha[-1],0)
+ShowGradientResult(normalized_data, 'RoomCount', analytics_tetha,0, indicator='r-')
+plt.show()
+
+
+normalized_data.plot.scatter(x='RoomCount', y='Price', c='DarkBlue')
+plt.grid()
+plt.axis('equal')
+ShowGradientResult(normalized_data, 'Area', tetha[-1],1)
+ShowGradientResult(normalized_data, 'Area', analytics_tetha,1, 'r-')
+plt.show()
+# task 11
 
 
