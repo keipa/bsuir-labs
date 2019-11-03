@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib import cm
 from matplotlib.animation import FuncAnimation
+import scipy.optimize
 
 plt.grid()
 plt.axis('equal')
@@ -30,7 +31,7 @@ def ShowData(data):
     plt.show()
 
 
-# ShowData(normalized_data)
+# ShowData(normalized_data) todo revert before report
 
 
 x = np.array(normalized_data.iloc[:, 0:2])
@@ -134,25 +135,75 @@ tetha = np.array([1.0 for _ in range(combs.shape[1])])
 
 tetha_history = [tetha.copy()]
 cost_history = [get_cost28(tetha, combs, y, features_count)]
+
 for _ in range(iterations):
     h = 1 / (1 + np.exp(-(np.dot(combs, tetha))))
     gradient = combs.T.dot(h - y) / len(y)
     tetha += alpha * gradient
     tetha_history.append(tetha.copy())
     cost_history.append(get_cost28(tetha.copy(), combs, y, features_count))
+
+print("polynom tetha")
 print(tetha_history[-1], cost_history[-1])
-
-
 
 # task 11
 # Реализуйте другие методы оптимизации.
-#
+
+def optimized_function(x, y, lambda_=0.1):
+    m, n = x.shape
+    tetha = np.zeros((n + 1, 1))
+    x = np.hstack((np.ones((m, 1)), x))
+    return scipy.optimize.minimize(regularization, tetha, (x, y, lambda_), method='L-BFGS-B').x
+tetha = optimized_function(combs, y)
+
+print("other functions tetha")
+print(tetha)
+
 # task 12
 # Реализуйте функцию предсказания вероятности прохождения контроля изделием в зависимости от результатов тестов.
 
 
+print("predictions per record")
+print(1 / (1 + np.exp(-np.dot(tetha.copy(), np.hstack((np.ones((combs.shape[0], 1)), combs)).T))))
+
+
+
+
+def sigmoid(x):
+    return
+
+def h(theta, X):
+    return
+
+
+
 # task 13
 # Постройте разделяющую кривую, полученную в результате обучения модели. Совместите прямую с графиком из пункта 7.
-#
+def task13( tetha):
+    XX = np.linspace(-1, 1.5, 100)
+    YY = np.linspace(-1, 1.5, 100)
+    ZZ = np.zeros((len(XX), len(YY)))
+
+    for i in range(len(XX)):
+        for j in range(len(YY)):
+            entry_combs = [1]
+            for poly in range(6 + 1):
+                for p in range(poly + 1):
+                    entry_combs.append((XX[i] ** p) * (YY[j] ** poly))
+            ZZ[i, j] = 1 / (1 + np.exp(-tetha.dot(np.array(entry_combs).T)))
+
+    failedTestResults = normalized_data[normalized_data['IsTestPassed'] == 0]
+    passedTestResults = normalized_data[normalized_data['IsTestPassed'] == 1]
+    plt.plot(failedTestResults.Test1, failedTestResults.Test2, 'ro')
+    plt.plot(passedTestResults.Test1, passedTestResults.Test2, 'go')
+    plt.contour(XX, YY, ZZ, 0)
+
+
+task13( tetha)
+plt.show()
+
+
+
+
 # task 14
 # Попробуйте различные значения параметра регуляризации λ. Как выбор данного значения влияет на вид разделяющей кривой? Ответ дайте в виде графиков.
