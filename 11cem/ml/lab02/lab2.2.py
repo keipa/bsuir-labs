@@ -149,7 +149,8 @@ print(tetha_history[-1], cost_history[-1])
 # task 11
 # Реализуйте другие методы оптимизации.
 
-def optimized_function(x, y, lambda_=0.1):
+def optimized_function(x, y, lambda_=0.00000001):
+    print(lambda_)
     m, n = x.shape
     tetha = np.zeros((n + 1, 1))
     x = np.hstack((np.ones((m, 1)), x))
@@ -167,21 +168,11 @@ print("predictions per record")
 print(1 / (1 + np.exp(-np.dot(tetha.copy(), np.hstack((np.ones((combs.shape[0], 1)), combs)).T))))
 
 
-
-
-def sigmoid(x):
-    return
-
-def h(theta, X):
-    return
-
-
-
 # task 13
 # Постройте разделяющую кривую, полученную в результате обучения модели. Совместите прямую с графиком из пункта 7.
 def task13( tetha):
-    XX = np.linspace(-1, 1.5, 100)
-    YY = np.linspace(-1, 1.5, 100)
+    XX = np.linspace(0, 1, 100)
+    YY = np.linspace(0, 1, 100)
     ZZ = np.zeros((len(XX), len(YY)))
 
     for i in range(len(XX)):
@@ -199,11 +190,19 @@ def task13( tetha):
     plt.contour(XX, YY, ZZ, 0)
 
 
-task13( tetha)
+
+task13(tetha) # 0.1
+task13(tetha)
 plt.show()
-
-
-
 
 # task 14
 # Попробуйте различные значения параметра регуляризации λ. Как выбор данного значения влияет на вид разделяющей кривой? Ответ дайте в виде графиков.
+
+
+tetha = optimized_function(combs, y, lambda_=0.5)
+task13(tetha)
+plt.show()
+
+tetha = optimized_function(combs, y, lambda_=0.0)
+task13(tetha)
+plt.show()
