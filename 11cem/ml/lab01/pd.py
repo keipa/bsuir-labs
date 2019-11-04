@@ -11,7 +11,7 @@ from matplotlib import cm
 # plt.style.use('dark_background')
 
 # Task 1
-data = pd.read_csv("lab1/ex1data1.txt", header=None, sep=",", names=['Popularity', 'Profit'])
+data = pd.read_csv("ex1data1.txt", header=None, sep=",", names=['Popularity', 'Profit'])
 
 print(data.sort_values(by="Profit"))
 
