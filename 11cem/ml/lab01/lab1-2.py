@@ -14,7 +14,7 @@ from matplotlib.animation import FuncAnimation
 
 # task 6
 # Загрузите набор данных ex1data2.txt из текстового файла.
-data = pd.read_csv("lab1/ex1data2.txt", header=None, sep=",", names=['Area','RoomCount', 'Price'])
+data = pd.read_csv("ex1data2.txt", header=None, sep=",", names=['Area','RoomCount', 'Price'])
 
 
 print("data head")
