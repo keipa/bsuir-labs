@@ -150,7 +150,7 @@ print(1 / (1 + np.exp(-np.dot(tetha_history[-1].copy(), x.copy().T))))
 my_tetha = tetha_history[-1]
 print("mead")
 
-mead_theta =scipy.optimize.minimize(get_cost, [1.0, 1.0], method='Nelder-Mead').x
+mead_theta = scipy.optimize.minimize(get_cost, [1.0, 1.0], method='Nelder-Mead').x
 print(mead_theta)
 print("Powell")
 powell_tetha =scipy.optimize.minimize(get_cost, [1.0, 1.0], method='Powell').x
