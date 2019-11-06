@@ -44,9 +44,8 @@ def show_data():
     plt.legend(loc='upper left')
     plt.show()
 
-
+print("Task 1")
 show_data()
-
 
 # task 3
 # Реализуйте функцию стоимости потерь для линейной регрессии с L2-регуляризацией.
@@ -54,9 +53,9 @@ show_data()
 def cost(theta, x, y, lambda_):
     prediction = theta.dot(x.T)
     difference = prediction - y.squeeze()
-    sqareDifference = sum(difference ** 2)
-    l2Parameter = lambda_ * sum(theta ** 2)
-    return (sqareDifference + l2Parameter) / (2 * len(y))
+    square_difference = sum(difference ** 2)
+    l2_regularization = lambda_ * sum(theta ** 2)
+    return (square_difference + l2_regularization) / (2 * len(y))
 
 
 def get_init_data(x, y):
@@ -65,9 +64,9 @@ def get_init_data(x, y):
     return extendedX, theta
 
 
-X, theta = get_init_data(x, y)
-lambda_ = 1
-print(cost(theta, X, y, lambda_))
+# X, theta = get_init_data(x, y)
+# lambda_ = 1
+# print(cost(theta, X, y, lambda_))
 
 
 def line(x, theta):
@@ -77,56 +76,50 @@ def line(x, theta):
 # task 4
 # Реализуйте функцию градиентного спуска для линейной регрессии с L2-регуляризацией.
 
-def grad(theta, x, y, lmbda):
-    predictions = theta.dot(x.T)
-    gradient = np.dot(x.T, (predictions - y))
-    regularization = lmbda * theta
-    return (gradient + regularization) / len(y)
+# normalized
+# x = [
+#     [1,0.232]
+#     [1, 0.232]
+#     [1, 0.232]
+# ...
+# ]
+# normalized
+# y = [
+#     [1]
+#     [0.232]
+#     [0]
+# ...
+# ]
+# theta = [[1],[1]]
 
-print(grad(theta, X, y, lambda_))
+def grad_reg(X, y, theta, alpha=0.01, lambda_ = 1, iterations=1000):
+    m = len(y)
+    for it in range(iterations):
+        prediction = np.dot(X, theta)
+        theta = theta - (1/m) * alpha * (X.T.dot((prediction - y))+ lambda_*theta)
+    return theta
 
-theta = scipy.optimize.minimize(cost, theta, (X, y, 0), method='CG').x
-print(theta)
+def grad(X, y, theta, alpha=0.01, iterations=1000):
+    m = len(y)
+    for it in range(iterations):
+        prediction = np.dot(X, theta)
+        theta = theta - (1/m) * alpha * (X.T.dot((prediction - y)))
+    return theta
 
+def cal_cost(X, y, theta):
+    m = len(y)
+    predictions = X.dot(theta)
+    cost = (1 / 2 * m) * np.sum(np.square(predictions - y))
+    return cost
 
-plt.scatter(x, y)
-plt.plot(x, line(x, theta))
-plt.show()
-
-
-# task 6
-# Постройте график процесса обучения (learning curves) для обучающей и валидационной выборки. По оси абсцисс откладывается число элементов из обучающей выборки, а по оси ординат - ошибка (значение функции потерь) для обучающей выборки (первая кривая) и валидационной выборки (вторая кривая). Какой вывод можно сделать по построенному графику?
-
-def show_learn_progress(theta, x, y, lambda_, style="ro", show_plot=False):
+def show_learn_progress(theta, x, y, lambda_, style="r-", show_plot=False):
     cost_history = []
     for iteration in range(1, len(x)):
-        theta = scipy.optimize.minimize(cost, theta, (x, y, 0), method='CG').x
+        theta = scipy.optimize.minimize(cost, theta, (x, y, lambda_), method='CG').x
         cost_history.append(cost(theta, x[:iteration], y[:iteration], lambda_))
     plt.plot(range(len(cost_history)), cost_history, style)
     if show_plot:
         plt.show()
-
-
-Xval, thetaval = get_init_data(xval, yval)
-
-show_learn_progress(theta, X, y, lambda_, "r-")
-show_learn_progress(thetaval, Xval, yval, lambda_, "b-", show_plot=True)
-
-
-# task 7
-#Реализуйте функцию добавления p - 1 новых признаков в обучающую выборку (X2, X3, X4, …, Xp).
-
-def add_param(x, count):
-    return np.hstack((x, np.zeros((len(x), count-1))))
-
-newX = add_param(x, 2)
-print(newX)
-
-# task 8
-# Поскольку в данной задаче будет использован полином высокой степени,
-# то необходимо перед обучением произвести нормализацию признаков.
-
-# Xnorm = (X - Xmin) / (Xmax - Xmin)
 
 
 def norm(x):
@@ -139,20 +132,67 @@ def norm(x):
         x[:, columnIndex] = normalize_column
     return x
 
+# task 6
+# Постройте график процесса обучения (learning curves) для обучающей и валидационной выборки. По оси абсцисс откладывается число элементов из обучающей выборки, а по оси ординат - ошибка (значение функции потерь) для обучающей выборки (первая кривая) и валидационной выборки (вторая кривая). Какой вывод можно сделать по построенному графику?
 
-norm(newX)
+
+def show_compared_learn_progress(x, y, xval, yval, lambda_, iterations=100, show_plot=False):
+    cost_history_train = []
+    cost_history_valid = []
+    x = norm(x)
+    x = np.c_[np.ones((len(x), 1)), x]
+    y = norm(y)
+    xval = norm(xval)
+    xval = np.c_[np.ones((len(xval), 1)), xval]
+    yval = norm(yval)
+    theta = np.array([[1],[1]])
+    for _ in range(iterations):
+        theta = grad(x,y,theta, iterations=1)
+        cost_history_train.append(cal_cost(x, y, theta,))
+        cost_history_valid.append(cal_cost(xval, yval, theta))
+    plt.plot(range(len(cost_history_train)), cost_history_train, "go", label="train")
+    plt.plot(range(len(cost_history_valid)), cost_history_valid, "ro", label="validation")
+    print("validation cost:"+str(cost_history_valid[-1]))
+    if show_plot:
+        plt.legend(loc='upper right')
+        plt.show()
+
+
+lambda_ = 1
+
+show_compared_learn_progress(x, data["y"], xval, data["yval"], lambda_, show_plot=True)
+
+# task 12
+#Вычислите ошибку (потерю) на контрольной выборке.
+show_compared_learn_progress(x, data["y"], xtest, data["ytest"], lambda_, show_plot=True)
+# task 7
+#Реализуйте функцию добавления p - 1 новых признаков в обучающую выборку (X2, X3, X4, …, Xp).
+
+def add_param(x, count):
+    return np.hstack((x, np.zeros((len(x), count-1))))
+
+
+# print(newX)
+
+# task 8
+# Поскольку в данной задаче будет использован полином высокой степени,
+# то необходимо перед обучением произвести нормализацию признаков.
+
+# Xnorm = (X - Xmin) / (Xmax - Xmin)
 
 # task 9
 # Обучите модель с коэффициентом регуляризации 0 и p = 8.
 
 def model(x, lambda_=0, p=8):
-    newX = add_param(x, 8)
-    norm(newX)
-    extendedNewX, newTheta = get_init_data(newX, y)
-    newTheta = scipy.optimize.minimize(cost, newTheta, (extendedNewX, y, lambda_), method='CG').x
-    return extendedNewX, newTheta
+    x_bs = add_param(x, 8)
+    norm(x_bs)
+    x_bs, theta = get_init_data(x_bs, y)
+    theta = scipy.optimize.minimize(cost, theta, (x_bs, y, lambda_), method='CG').x
+    return x_bs, theta
 
 
+newX = add_param(x, 2)
+norm(newX)
 newX, theta = model(x)
 
 # task 10
@@ -160,29 +200,34 @@ newX, theta = model(x)
 # Какой вывод можно сделать в данном случае?
 
 def train(theta, x, y, lambda_=0):
-    plt.scatter(x[:, 1], y)
-    plt.plot(x, theta.dot(x.T))
+    plt.scatter(x[:, 1], y, label="data")
+    plt.plot(x[:, 1], theta.dot(x.T), "ro", label="model")
+    plt.legend(loc='upper left')
     plt.show()
     show_learn_progress(theta, x, y, lambda_, show_plot=True)
 
-
+print("Task 10: showing l2 reg = 0 plot ")
 train(theta, newX, y)
 
 
 # task 11
 #Постройте графики из пункта 10 для моделей с коэффициентами регуляризации 1 и 100. Какие выводы можно сделать?
 
-newX, theta = model(x, lambda_=1)
-train(theta, newX, y)
+print("Task 11: showing l2 reg = 1 plot: ")
+lambda_ = 1
+newX, theta = model(x, lambda_=lambda_)
+train(theta, newX, y, lambda_=lambda_)
 
-newX, theta = model(x, lambda_=100)
-train(theta, newX, y)
+print("Task 11: showing l2 reg = 100 plot: ")
+lambda_=100
+newX, theta = model(x, lambda_=lambda_)
+train(theta, newX, y, lambda_=lambda_)
 
 # task 12
 # С помощью валидационной выборки подберите коэффиент регуляризации, который позволяет достичь наименьшей ошибки.
 # Процесс подбора отразите с помощью графика (графиков).
 
-lambdas = [10, 1, 0, 0.01, 0.0001]
+lambdas = [10,5,3,2,1, 0, 0.01, 0.0001]
 
 costs = []
 
@@ -190,14 +235,12 @@ for lambda_ in lambdas:
     x, theta = get_init_data(xval, yval)
     costs.append(cost(theta, x, xval, lambda_))
 
-plt.plot(lambdas, costs)
+plt.plot(lambdas, costs, "bo", label="lambda dependency")
+plt.legend(loc='upper left')
 plt.show()
 
+print("optimal lambda is "+str(lambdas[np.argmin(costs)]))
 
-# task 12
-#Вычислите ошибку (потерю) на контрольной выборке.
-
-xResult, thetaResult = get_init_data(xtest, ytest)
-thetaResult = scipy.optimize.minimize(cost, thetaResult, (xResult, ytest, 0), method='CG').x
-print(cost(thetaResult, xResult, ytest, lambda_))
 # Ответы на вопросы представьте в виде отчета.
+
+
