@@ -119,4 +119,6 @@ for x, y_ in zip(X,y):
     cur_y = 0 if y_[0] == 10 else y_[0]
     successfull_predictions += 1 if predictions.index(max(predictions)) == cur_y else 0
 
+
+# from run at 07/11/2019 - prediction: 95.98
 print("prediction: " +str(round(successfull_predictions/len(y)*100,2)))
