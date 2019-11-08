@@ -126,6 +126,7 @@ def spam_check(file_path, model):
     print("Checking file {}...".format(file_path))
     f = open(file_path, "r")
     text = f.read()
+    f.close()
     processor = MailPreprocessor()
     clean_text = processor.filter(text)
     # print(clean_text)
@@ -164,22 +165,6 @@ print("my examples")
 print("Spam: {}".format(model.predict(one_hot_convert(vector_to_message(x_test[0])))[0] == 1))
 my_spam="be below call charset citi commiss commun content do doe don each encod fight fill for form format from go here html httpaddr immedi in increas inform instead insur is iso it keep legal list mail messag mime more multi name nbsp new nextpart not notic now number numberbit numberdnumb or our out part payment per phone plain pleas premium printabl profession quot rang receiv remove"
 print("Spam: {}".format(model.predict(one_hot_convert(my_spam))[0] == 1))
-
-
-
-
-
-# task 23
-# Создайте свой набор данных из оригинального корпуса текстов - http://spamassassin.apache.org/old/publiccorpus/.
-
-# task 24
-# Постройте собственный словарь.
-
-
-
-# task 25
-# Как изменилось качество классификации? Почему?
-# изменилась в лучшую сторону потому что изначаьлная модель не настроена на спам
 
 
 
