@@ -75,7 +75,8 @@ def PCA_m(X,x,y):
 
 _,x,y = get_task_data('data/ex7data1.mat')
 X = np.vstack((x,y))
-PCA_m(X,x,y)
+x_reduced =PCA_m(X,x,y)
 
 
 
+pass

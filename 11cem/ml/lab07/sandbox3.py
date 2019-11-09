@@ -1,5 +1,12 @@
 # -*- coding: utf-8 -*-
 
+# This import registers the 3D projection, but is otherwise unused.
+from mpl_toolkits.mplot3d import Axes3D  # noqa: F401 unused import
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -104,7 +111,7 @@ def PCA_m(X,x,y):
 _,x,y = get_task_data('data/ex7data1.mat')
 X = np.vstack((x,y))
 x_reduced = PCA_m(X,x,y)
-
+pass
 
 
 #task 8
@@ -112,37 +119,5 @@ x_reduced = PCA_m(X,x,y)
 
 
 
-fig = plt.figure()
-# ax = fig.add_subplot(111, projection='3d')
-
-ax = fig.gca(projection='3d')
 
 
-# Plot scatterplot data (20 2D points per colour) on the x and z axes.
-
-# By using zdir='y', the y value of these points is fixed to the zs value 0
-# and the (x,y) points are plotted on the x and z axes.
-ax.scatter(x, y, zs=0)
-
-ax.scatter(x, y, x_reduced)
-for x_i, y_i, z_i in zip(x, y, x_reduced):
-    ax.plot(np.array([x_i,x_i]),np.array([y_i,y_i]),np.array([0,z_i]), c="black")
-
-
-
-
-
-# Make legend, set axes limits and labels
-ax.legend()
-# ax.set_xlim(0, 1)
-# ax.set_ylim(0, 1)
-# ax.set_zlim(0, 1)
-ax.set_xlabel('X')
-ax.set_ylabel('Y')
-ax.set_zlabel('Z')
-
-# Customize the view angle so it's easier to see that the scatter points lie
-# on the plane y=0
-ax.view_init(elev=20., azim=-35)
-
-plt.show()
