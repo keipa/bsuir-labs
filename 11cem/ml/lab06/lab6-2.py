@@ -1,7 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.image as img
-# from scipy.io import loadmat 
 from scipy import misc
 from datetime import datetime
 from tqdm import tqdm
@@ -19,30 +18,32 @@ import scipy.optimize
 import networkx as nx
 import os
 from sklearn import svm
+from scipy.spatial.distance import cdist
 
 
+def show_image(img):
+    plt.imshow(img)
+    plt.show()
 
-def read_image():
+
+def read_mat(path='data/bird_small.mat'):
     # loading the png image as a 3d matrix
-    img = loadmat('data/bird_small.mat')["A"]
+    img = loadmat(path)["A"]
+    show_image(img)
+    # scaling it so that the values are small
+    return img / 255
 
-    # img = misc.imread('bird_small.png')
 
-
-    # uncomment the below code to view the loaded image 
-    # plt.imshow(img) # plotting the image
-    # plt.show()
-
-    # scaling it so that the values are small 
-    img = img / 255
-
-    return img
+def read_png(path='horse.png'):
+    img = misc.imread(path)
+    show_image(img)
+    # uncomment the below code to view the loaded image
+    return img / 255
 
 
 def initialize_means(img, clusters):
     # reshaping it or flattening it into a 2d matrix
-    points = np.reshape(img, (img.shape[0] * img.shape[1],
-                              img.shape[2]))
+    points = np.reshape(img, (img.shape[0] * img.shape[1], img.shape[2]))
     m, n = points.shape
 
     # clusters is the number of clusters 
@@ -51,13 +52,14 @@ def initialize_means(img, clusters):
     # means is the array of assumed means or centroids.  
     means = np.zeros((clusters, n))
 
+    # seed pushing prevents from other results on anoher run
+    np.random.seed(seed=42)
     # random initialization of means.  
     for i in range(clusters):
         rand1 = int(np.random.random(1) * 10)
         rand2 = int(np.random.random(1) * 8)
         means[i, 0] = points[rand1, 0]
         means[i, 1] = points[rand2, 1]
-
     return points, means
 
 
@@ -66,12 +68,10 @@ def initialize_means(img, clusters):
 def distance(x1, y1, x2, y2):
     dist = np.square(x1 - x2) + np.square(y1 - y2)
     dist = np.sqrt(dist)
-
     return dist
 
 
-def k_means(points, means, clusters):
-    iterations = 10  # the number of iterations
+def k_means(points, centroids, clusters, iterations = 10):
     m, n = points.shape
 
     # these are the index values that 
@@ -79,77 +79,81 @@ def k_means(points, means, clusters):
     # which each pixel belongs to. 
     index = np.zeros(m)
 
-    # k-means algorithm. 
-    while (iterations > 0):
+    # k-means algorithm.
+    centroids_history = [centroids]
+    index_history = [index]
+    for _ in tqdm(range(iterations)):
 
-        for j in tqdm(range(len(points))):
-
+        for j in range(len(points)):
             # initialize minimum value to a large value 
             minv = 1000
-            temp = None
-
             for k in range(clusters):
 
-                x1 = points[j, 0]
-                y1 = points[j, 1]
-                x2 = means[k, 0]
-                y2 = means[k, 1]
+                x_p = points[j, 0]
+                y_p = points[j, 1]
+                x_c = centroids[k, 0]
+                y_c = centroids[k, 1]
 
-                if (distance(x1, y1, x2, y2) < minv):
-                    minv = distance(x1, y1, x2, y2)
-                    temp = k
+                dist = distance(x_p, y_p, x_c, y_c)
+                if dist < minv:
+                    minv = dist
                     index[j] = k
 
         for k in range(clusters):
-
             sumx = 0
             sumy = 0
             count = 0
-
             for j in range(len(points)):
-
-                if (index[j] == k):
+                if index[j] == k:
                     sumx += points[j, 0]
                     sumy += points[j, 1]
                     count += 1
+            count = 1 if count == 0 else count
+            centroids[k, 0] = float(sumx / count)
+            centroids[k, 1] = float(sumy / count)
 
-            if (count == 0):
-                count = 1
-
-            means[k, 0] = float(sumx / count)
-            means[k, 1] = float(sumy / count)
-
-        iterations -= 1
-
-    return means, index
+        centroids_history.append(centroids)
+        index_history.append(index)
+    return centroids_history, index_history
 
 
-def compress_image(means, index, img):
+def show_result(means, index, img):
     # recovering the compressed image by
     # assigning each pixel to its corresponding centroid. 
     centroid = np.array(means)
-    recovered = centroid[index.astype(int), :]
-
-    # getting back the 3d matrix (row, col, rgb(3)) 
-    recovered = np.reshape(recovered, (img.shape[0], img.shape[1],
-                                       img.shape[2]))
-
+    plt.plot(centroid[:,0]*128, centroid[:,1]*128, "wX")
     # plotting the compressed image. 
-    plt.imshow(recovered)
+    meshx, meshy = np.meshgrid(np.arange(128), np.arange(128))
+    plt.axis('equal')
+    plt.axis('off')
+    plt.scatter(meshx, -(meshy - 128), c=100 * (index.reshape(128, 128) + 1) / clusters, cmap='inferno', marker=',')
     plt.show()
 
-    # saving the compressed image. 
-    misc.imsave('compressed_' + str(clusters) +
-                '_colors.png', recovered)
 
 
-# Driver Code 
-if __name__ == '__main__':
-    img = read_image()
+# task 7
+img = read_mat()
 
-    clusters = 16
-    # clusters = int(input('Enter the number of colors in the compressed image. default = 16\n'))
+# task 10
+# Реализуйте алгоритм K-средних на другом изображении.
 
-    points, means = initialize_means(img, clusters)
-    means, index = k_means(points, means, clusters)
-    compress_image(means, index, img)
+# img = read_png()
+# task 8
+# С помощью алгоритма K-средних используйте 16 цветов для кодирования пикселей.
+
+clusters = 4
+
+
+
+# task 9
+# Насколько уменьшился размер изображения? Как это сказалось на качестве?
+print("Исходный размер {} байт".format((256*3)*128*128/1024))
+
+
+points, centroid = initialize_means(img, clusters)
+
+centroid, index = k_means(points, centroid, clusters)
+print("Размер после кластеризации {} байт".format((16*3)*128*128/1024))
+print("размер уменьшился в {} раз".format(256/clusters))
+print("качествно уменьшено")
+show_result(centroid[-1], index[-1], img)
