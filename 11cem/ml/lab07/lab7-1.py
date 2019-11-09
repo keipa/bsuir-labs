@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.image as img
@@ -70,13 +73,38 @@ plt.axis('equal')
 plt.show()
 
 
+# task 7
+# Реализуйте функцию вычисления обратного преобразования.
+
+def restore(X_reduced,X, vec, m, element_number=9):
+    Xrestored = np.dot(X_reduced[element_number], vec) + m
+    print 'Restored: ', Xrestored
+    print 'Original: ', X[:, element_number]
+
+
 # task 6
 # Реализуйте функцию проекции из пространства большей размерности в пространство меньшей размерности с помощью метода главных компонент.
 
+# return vals
+# x reduced features dataset
+# restored x with losses
+def PCA_m(X,x,y):
+    Xcentered = (X[0] - x.mean(), X[1] - y.mean())
+    m = (x.mean(), y.mean())
+    covmat = get_covariation_matrix(Xcentered)
+    _, vecs = np.linalg.eig(covmat)
+    Xnew = np.dot(-vecs[:, 1], Xcentered)
+    # example of restored x with losses
+    restore(Xnew,X, -vecs[:, 1],m )
+    return Xnew
 
 
-# task 7
-# Реализуйте функцию вычисления обратного преобразования.
+
+
+_,x,y = get_task_data('data/ex7data1.mat')
+X = np.vstack((x,y))
+x_reduced = PCA_m(X,x,y)
+
 
 
 #task 8
