@@ -129,6 +129,7 @@ def get_task_data():
     plt.scatter(X0, X1, cmap=plt.cm.coolwarm, s=20, edgecolors='k')
     plt.show()
     return X
+
 X = get_task_data()
 learn(X)
 
