@@ -78,8 +78,8 @@ plt.show()
 
 def restore(X_reduced,X, vec, m, element_number=9):
     Xrestored = np.dot(X_reduced[element_number], vec) + m
-    print 'Restored: ', Xrestored
-    print 'Original: ', X[:, element_number]
+    print('Restored: ', Xrestored)
+    print('Original: ', X[:, element_number])
 
 
 # task 6
