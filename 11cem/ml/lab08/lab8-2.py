@@ -190,7 +190,7 @@ for x0, x1 in zip(x0_val, x1_val):
 
 _, ax = plt.subplots()
 
-ax.scatter(x0_train,x1_train,c=y_pred.squeeze())
+ax.scatter(x0_train,x1_train,c=y_pred)
 ax.set_title("Trained")
 
 plt.show()
