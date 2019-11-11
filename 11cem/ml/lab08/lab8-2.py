@@ -108,11 +108,93 @@ pass
 # task 6
 # Подберите значение порога для обнаружения аномалий на основе валидационной выборки. В качестве метрики используйте F1-меру.
 
+from sklearn import metrics
+#F1 = 2 * (precision * recall) / (precision + recall)
+
+def f1(ypred,yact):
+    tp=0.
+    tn=0.
+    fp=0.
+    fn=0.
+    for yp,ya in zip(ypred, yact):
+        if ya==1 and yp==1:
+            tp+=1
+        if ya==0 and yp==0:
+            tn+=1
+        if yp==0 and ya==1:
+            fn+=1
+        if yp==1 and ya==0:
+            fp+=1
+    precision = tp/(tp+fp)
+    recall = tp/(tp+fn)
+    f1 = 2 * (precision * recall) / (precision + recall)
+    return f1
+
+# equal
+print(metrics.f1_score([1,1,1], [1,0,1]))
+print(f1([1,1,1], [1,0,1]))
+
+
+
+x0_val = Xval[:,0]
+x0_val_std = x0_val.std()
+x0_val_mean = x0_val.mean()
+
+x1_val = Xval[:,1]
+x1_val_std = x1_val.std()
+x1_val_mean = x1_val.mean()
+
+limit =0
+f1_history = []
+limit_history= []
+
+while limit<10:
+    y_pred = []
+    # Z-оценка и уточненный метод Iglewicz и Hoaglin
+    for x0, x1 in zip(x0_val, x1_val):
+        y_pred.append(1 if abs(x0- x0_val_mean)/x0_val_std > limit or abs(x1- x1_val_mean)/x1_val_std > limit else 0)
+    limit_history.append(limit)
+    f1_history.append(metrics.f1_score(y_pred, yval))
+    limit+=0.001
+
+
+limit = limit_history[np.argmax(f1_history)]
+print(limit)
+print(max(f1_history))
+
+# 3.075
+# 0.8750000000000001
+
 
 
 
 # task 7
 # Выделите аномальные наблюдения на графике из пункта 5 с учетом выбранного порогового значения.
+
+x0_train = X[:,0]
+x0_train_std = x0_train.std()
+x0_train_mean = x0_train.mean()
+
+x1_train= Xval[:,1]
+x1_train_std = x1_train.std()
+x1_train_mean = x1_train.mean()
+
+
+y_pred = []
+# Z-оценка и уточненный метод Iglewicz и Hoaglin
+for x0, x1 in zip(x0_val, x1_val):
+    y_pred.append(1 if abs(x0 - x0_val_mean)/x0_val_std > limit or abs(x1- x1_val_mean)/x1_val_std > limit else 0)
+
+
+
+
+_, ax = plt.subplots()
+
+ax.scatter(x0_train,x1_train,c=y_pred.squeeze())
+ax.set_title("Trained")
+
+plt.show()
+
 
 
 
