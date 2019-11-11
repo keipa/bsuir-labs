@@ -7,6 +7,7 @@ import matplotlib.image as img
 from scipy import misc
 from datetime import datetime
 from tqdm import tqdm
+import seaborn as sns
 import pandas as pd
 import matplotlib.pyplot as plt
 from tqdm import tqdm
@@ -60,9 +61,11 @@ def show_data(x_n):
     ax.scatter(x_n[:,0],x_n[:,1])
     plt.show()
 
-# show_data(x_n)
-# show_data(xval_n)
+# show_data(x_n) #todo uncomment
+# show_data(xval_n) #todo uncomment
 
+
+# x = normalized x
 def get_stats(x):
     for i in range(x.shape[1]):
         math_expect = x[:, i].mean()
@@ -84,17 +87,31 @@ get_stats(x_n)
 get_stats(xval_n)
 
 
+# task 5
+# Постройте график плотности распределения получившейся случайной величины в виде изолиний, совместив его с графиком из пункта 2.
 
+
+
+def show_isolines(x):
+    with sns.axes_style('white'):
+        sns.jointplot(x[:, 0], x[:, 1]).plot_joint(sns.kdeplot)
+    plt.show()
+
+show_isolines(X)
+show_isolines(x_n)
 
 pass
 
 
 
-# task 5
-# Постройте график плотности распределения получившейся случайной величины в виде изолиний, совместив его с графиком из пункта 2.
+
+
 
 # task 6
 # Подберите значение порога для обнаружения аномалий на основе валидационной выборки. В качестве метрики используйте F1-меру.
+
+
+
 
 # task 7
 # Выделите аномальные наблюдения на графике из пункта 5 с учетом выбранного порогового значения.
