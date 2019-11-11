@@ -144,7 +144,7 @@ x1_val = Xval[:,1]
 x1_val_std = x1_val.std()
 x1_val_mean = x1_val.mean()
 
-limit =0
+limit = 0
 f1_history = []
 limit_history= []
 
