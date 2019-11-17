@@ -99,7 +99,6 @@ print("denormalized_data cost function")
 Gradient(data, iterations=1500)
 
 def ShowGradientResult(data, feature, tetha, tetha_ind, indicator ='b-'):
-
     x = np.arange(0, 1, 0.01)
     k = tetha[0]
     b = tetha[2]
