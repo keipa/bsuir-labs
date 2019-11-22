@@ -28,7 +28,6 @@ from scipy import stats
 from sklearn.tree import *
 from sklearn.ensemble import *
 
-from dtreeviz.trees import dtreeviz
 
 
 import math
