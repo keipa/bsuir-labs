@@ -92,7 +92,6 @@ def create_vocab(file_paths):
     f.close()
 
 
-
 spam_emails=['20021010_spam.tar/20021010_spam/spam/0000.7b1b73cf36cf9dbc3d64e3f2ee2b91f1',
 '20021010_spam.tar/20021010_spam/spam/0001.bfc8d64d12b325ff385cca8d07b84288',
 '20021010_spam.tar/20021010_spam/spam/0002.24b47bb3ce90708ae29d0aec1da08610',
