@@ -46,6 +46,7 @@ np.random.seed(42)
 
 
 
+from __future__ import division
 
 
 def boston():
@@ -55,6 +56,19 @@ def boston():
     x = boston["data"]
     y = boston["target"]
     return x,y
+
+T = [{Insert your function here}]
+P = [0 0 1 1; 0 1 0 1];
+
+
+net = feedforwardnet(10, 'traingdm');
+net.biases{1,1}.learnFcn='learngdm';
+net.biases{2,1}.learnFcn='learngdm';
+net.layerWeights{2,1}.learnFcn='learngdm';
+net.inputWeights{1,1}.learnFcn='learngdm';
+net.layerWeights{2,1}.learnParam.lr=0.2;
+net.adaptParam.passes=300;
+tic, net=train(net,p,t); toc
 
 
 
