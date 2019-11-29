@@ -172,21 +172,17 @@ def expect():
             img = denormalize_image(img)
             show_image(img)
 
-# expect()
+expect()
 
-trained_tetha_1, trained_tetha_2 = revert_error_spread_train(rects, rand_tetha_1, rand_tetha_2, rects)
-print(trained_tetha_1)
-print(trained_tetha_2)
-predictions = predict(rects, trained_tetha_1, trained_tetha_2)
-# initial output
-img = rect_join(predictions)
-img = denormalize_image(img)
-show_image(img)
-    # except:
-    #     print()
-# img = rect_join(rects)
+# trained_tetha_1, trained_tetha_2 = revert_error_spread_train(rects, rand_tetha_1, rand_tetha_2, rects)
+# print(trained_tetha_1)
+# print(trained_tetha_2)
+# predictions = predict(rects, trained_tetha_1, trained_tetha_2)
+# # initial output
+# img = rect_join(predictions)
 # img = denormalize_image(img)
 # show_image(img)
+#
 
 
 # 0
