@@ -39,7 +39,7 @@ def denormalize_image(img):
     # return ((img + 1)*255/2).astype('int32')
     return (img * 255).astype('int32')
 
-def read_png(path='horse.png'):
+def read_png(path='roadpng.png'):
     img = misc.imread(path).astype('int32')
     # show_image(img)
     # uncomment the below code to view the loaded image
