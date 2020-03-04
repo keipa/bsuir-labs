@@ -1,0 +1,1 @@
+C:\Users\keipa\miniconda3\condabin\conda.bat run -n tensorflow python getClass.py C:/Users/keipa/AppData/Local/Temp

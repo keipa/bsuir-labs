@@ -1,0 +1,46 @@
+﻿<!DOCTYPE HTML>
+<html>
+
+<body>
+
+<head>
+    <meta charset="utf-8">
+</head>
+<form name="upload">
+    <input type="file" name="myfile">
+    <input type="submit" value="Загрузить">
+</form>
+
+<div id="log">Прогресс загрузки</div>
+<script>
+    function log(html) {
+        document.getElementById('log').innerHTML = html;
+    }
+
+    document.forms.upload.onsubmit = function() {
+        var file = this.elements.myfile.files[0];
+        if (file) {
+            upload(file);
+        }
+        return false;
+    }
+
+    function upload(file) {
+        var xhr = new XMLHttpRequest();
+        xhr.onload = xhr.onerror = function() {
+            if (this.status == 200) {
+                log(this.responseText);
+            } else {
+                log("error " + this.status);
+            }
+        };
+        xhr.upload.onprogress = function(event) {
+            log(event.loaded + ' / ' + event.total);
+        }
+        xhr.open("POST", "image", true);
+        xhr.send(file);
+    }
+</script>
+</body>
+
+</html>
